@@ -1,0 +1,6 @@
+这是现在的收款后台 
+http://4sscrm.com/app/index.php?i=10&c=entry&op=in&do=index&m=j_money 
+用户名E01  
+密码666666
+
+
