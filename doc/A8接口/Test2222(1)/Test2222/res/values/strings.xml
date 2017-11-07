@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Test2222</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+     <string-array name="transListHasData">
+	    <item name="sale">消费</item>
+		<item name="dragonpay">龙支付</item>
+		<item name="special_consumption">特惠消费</item>
+	    <item name="revoke">撤销</item>
+	    <item name="refund">退货</item>
+		<item name="dragonrefund">龙支付退货</item>
+		<item name="dragonquery">龙支付异常查询</item>
+	    <item name="preAuth">预授权</item>
+	    <item name="preAuthVoid">预授权撤销</item>
+	    <item name="preAuthComplete">预授权完成</item>
+	    <item name="preAuthCompleteCancel">预授权完成撤销</item>
+	    <item name="queryByVoucherNo">按凭证号查询</item>
+	    <item name="queryByLsOrderNo">按联盛订单号查询</item>
+	    <item name="installment">商场分期</item>
+	    <item name="installmentCancel">分期付款撤销</item>
+	    <item name="installmentRefund">分期付款退货</item>
+	    <item name="installmentQuery">分期额度查询</item>
+	    <item name="getMerPara">商户参数查询</item>
+	    <item name="getCardNo">读取卡号</item>
+	    <item name="daydayDiscount">天天惠消费</item>
+	    <item name="reprint">重打印任意一笔</item>
+    </string-array>
+
+</resources>

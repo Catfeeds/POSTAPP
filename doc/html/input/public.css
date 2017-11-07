@@ -1,0 +1,373 @@
+@import "reset.css";
+/*引入css文件的一种方式*/
+/*
+
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#99ffffff,endColorstr=#99ffffff)";
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99ffffff,endColorstr=#99ffffff);
+background:rgba(255,255,255,.8);
+
+
+filter:alpha(opacity=40); 针对 IE8 以及更早的版本 */
+body{
+	font-size: 16Px;
+	user-select:none;
+}
+:root{
+	--bg:#3099ff;
+}
+.header{
+	position: relative;
+	padding: 34px 15px 0;
+	display: flex;
+	justify-content: space-between;
+	background: var(--bg);
+	.left-nav,
+	.right-nav{
+		a{
+			display: block;
+			padding-left: 30px;
+			font-size: 22px;
+			color: #fff;
+			line-height: 28px;
+			background:url(../img/hico1.png) left center/18px 24px no-repeat;
+		}
+	}
+	.logo{
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		a,img{
+			display: block;
+			height: 28px;
+		}
+	}
+	.right-nav{
+		a{
+			background-image: url(../img/hico2.png);
+			background-size: 22px 22px;
+		}
+	}
+}
+.footer-none{
+	height: 81px;
+}
+.footer{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	padding: 0 15px;
+	border: 1Px solid #e8e8e8;
+	border-bottom: none;
+	background: #fff;
+	a{
+		padding: 8px 0;
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		align-items: center;
+		&:hover,
+		&.active{
+			.text{
+				color:var(--bg);
+			}
+		}
+		.text{
+			padding-top: 10px;
+			font-size: 20px;
+			color: #949494;
+			line-height: 1;
+			transition: 0.2s;
+		}
+		.pic{
+			width: 37px;
+			height: 34px;
+			transition: 0.2s;
+			background:url() center center/100% 100% no-repeat;
+		}
+		&.center{
+			.wrap.poa{
+				position: absolute;
+				visibility: visible;
+				top: -43px;
+				width: 64px;
+				height: 64px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: 10px solid #fff;
+				background: #b4b4b4;
+				transition: 0.2s;
+				.pic{
+					background-image: url(../img/hico8.png);
+				}
+				&:after{
+					content:'';
+					position: absolute;
+					left: -10px;
+					right: -10px;
+					bottom: -10px;
+					top: -10px;
+					/*background: green;*/
+					border: 1Px solid transparent;
+					border-top-color: #e8e8e8;
+					border-left-color: #e8e8e8;
+					border-radius: 50%;
+					transform: rotate(45deg);
+				};
+			}
+			&:hover .wrap.poa,
+			&.active .wrap.poa{
+				background: var(--bg);
+				.pic{
+					background-image: url(../img/hico8-white.png);
+				}
+			};
+		}
+		&.vip{
+			&:hover,
+			&.active{
+				.pic{
+					background-image: url(../img/hico7-blue.png);
+				}
+			}
+			.pic{
+				background-image: url(../img/hico7.png);
+			}
+		}
+		&.set{
+			&:hover,
+			&.active{
+				.pic{
+					background-image: url(../img/hico11.png);
+				}
+			}
+			.pic{
+				background-image: url(../img/hico9.png);
+			}
+		}
+	}
+}
+
+.main{
+	background: #f0f0f0;
+	.payment-menthod{
+		padding: 35px 0 60px;
+		display: flex;
+		background: var(--bg);
+		justify-content: space-around;
+		.pay{
+			cursor: pointer;
+			&.active{
+				.pic{
+					opacity: 0.7;
+				}
+			}
+			.pic{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 84px;
+				height: 67px;
+				box-sizing: border-box;
+				background: #fff;
+				border-radius: 3px;
+				border: 2Px solid #9acdff;
+			}
+			.text{
+				padding-top: 15px;
+				font-size: 20px;
+				color: #fff;
+				line-height: 1;
+				text-align: center;
+			}
+		}
+		.union{
+			img{
+				display: block;
+				max-width: 60px;
+				width: 100%;
+			}
+		}
+		.mobile{
+			img{
+				display: block;
+				max-width: 73px;
+				width: 100%;
+			}
+		}
+	}
+	.amount-collected{
+		padding: 0 25px;
+		box-sizing: border-box;
+		border-radius: 10px;
+		background: #fff;
+		margin: -25px 30px 30px;
+		.title{
+			height: 60px;
+			display: flex;
+			align-items: center;
+			font-size: 18px;
+			color: #707070;
+			img{
+				display: block;
+				width: 60px;
+				margin-right: 12px;
+			}
+		}
+		.money{
+			padding: 5px 0 19px;
+			height: 34px;
+			border-bottom: 1Px solid #f0f0f0;
+			font-size: 34px;
+			color: #3099ff;
+			line-height: 1;
+			cursor: text;
+			display: flex;
+			align-items: center;
+			&.active{
+				span.cursor{
+					animation: cursor 1s linear infinite;
+				}
+			}
+			span.cursor{
+				display: inline-block;
+				width: 1Px;
+				height: 100%;
+				background: rgba(0,0,0,0);
+				vertical-align: middle;
+			}
+			&:after{
+				padding-left: 10px;
+				font-size: 16px;
+				color: #b6b6b6;
+				content:attr(data-after);
+				align-self: flex-end;
+			};
+			&:before{
+				font-size: 34px;
+				line-height: 1;
+				content:attr(data-before);
+
+			};
+		}
+		.total{
+			display: flex;
+			justify-content: space-between;
+			.text{
+				font-size: 18px;
+				color: #333;
+				line-height: 50px;
+				&+.text{
+					color: #ff7f7f;
+					font-size: 26px;
+				}
+			}
+		}
+	}
+}
+
+
+.input-control{
+	table{
+		width: 100%;
+		&,tr,td,th{
+			border: 1Px solid #f0f0f0;
+			text-align: center;
+			background: #fff;
+			font-size: 42px;
+			color: #333;
+			font-weight: bold;
+		}
+		td{
+			height: 80px;
+			transition: 0.2s;
+			&:active{
+				background: #ccc;
+			}
+		}
+		img{
+			display: block;
+			margin: 0 auto;
+			max-width: 50px;
+			width: 100%;
+		}
+		.bgff7f7f{
+			background: #ff7f7f;
+		}
+		.bg3099ff{
+			font-size: 26px;
+			color: #fff;
+			line-height: 1.5;
+			font-weight: normal;
+			background: #3099ff;
+		}
+	}
+}
+@keyframes cursor{
+	0%,50%{
+		background: #3099ff;
+	}
+	51%,100%{
+		background: rgba(0,0,0,0);
+	}
+}
+
+
+.input-control.safe-password{
+	table td{
+		height: 80px;
+	}
+}
+
+
+.hcl-pay{
+	padding: 30px 0;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background: #f7f7f7;
+	a,img{
+		display: block;
+	}
+	img{
+		max-width: 146px;
+	}
+	a+a{
+		img{
+			width: 156px;
+		}
+	}
+}
+.hcl-pay-over{
+	padding: 0 15px;
+	background: #f7f7f7;
+	&>div{
+		border-radius: 10Px;
+		background: #fff;
+		h3{
+			margin: 20px 0 00px;
+			display: inline-block;
+			font-size: 20px;
+			color: #fff;
+			line-height: 2;
+			background: #3099ff;
+			padding:0 20px 0 10px;
+			border-radius: 0 20px 20px 0;
+		}
+		.wrap{
+			overflow: hidden;
+			img{
+				display: block;
+				margin: 40px auto;
+				max-width: 420px;
+			}
+		}
+	}
+}
+
+.bgf7f7f7{
+	background: #f7f7f7;
+}

@@ -1,0 +1,40 @@
+{
+  "spos": [
+    {
+      "pay_type": "wxpay",
+      "pay_num": "",
+      "pay_fee": "",
+      "refound_num": "",
+      "refound_fee": "",
+      "total_num": "",
+      "total_fee": ""
+    },
+    {
+      "pay_type": "alipay",
+      "pay_num": "",
+      "pay_fee": "",
+      "refound_num": "",
+      "refound_fee": "",
+      "total_num": "",
+      "total_fee": ""
+    },
+    {
+      "pay_type": "qqpay",
+      "pay_num": "",
+      "pay_fee": "",
+      "refound_num": "",
+      "refound_fee": "",
+      "total_num": "",
+      "total_fee": ""
+    },
+    {
+      "pay_type": "jdpay",
+      "pay_num": "",
+      "pay_fee": "",
+      "refound_num": "",
+      "refound_fee": "",
+      "total_num": "",
+      "total_fee": ""
+    }
+  ]
+}

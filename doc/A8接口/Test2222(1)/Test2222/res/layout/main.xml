@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#555555"
+    android:orientation="vertical"
+    android:scrollbars="vertical" >
+
+    <TextView
+        android:id="@+id/hello"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="富掌柜三方外调demo"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/result"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="3"
+            android:background="#ffffff"
+            android:editable="false"
+            android:gravity="top"
+            android:hint="返回结果显示"
+            android:minLines="3"
+            android:paddingTop="5dp"
+            android:scrollbars="vertical"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <ListView
+            android:id="@+id/transList"
+            style="@android:style/Theme.Translucent"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffffff"
+            android:cacheColorHint="#00000000"
+            android:fadeScrollbars="false"
+            android:fadingEdge="none"
+            android:paddingLeft="8dp"
+            android:scrollbarFadeDuration="0" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>
