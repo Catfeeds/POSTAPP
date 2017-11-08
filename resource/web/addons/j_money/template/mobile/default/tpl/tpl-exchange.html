@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="line-box">
+      <h2>收银员：{$user['realname']}<span class="pull-right">{php echo date("Y-m-d H:i",$startTime)}——{php echo date("H:i")}</span></h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="line-box">
+      <h2>销售金额<b class="pull-right red2">{php echo sprintf('%.2f',($feeAry['all']['fee']*0.01))} | {php echo $feeAry['all']['count']}</b></h2>
+      <div>
+      	{if $feeAry[0]['fee']}
+      	<p>微信：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($feeAry[0]['fee']*0.01))}</span> <span class="label label-info">{php echo $feeAry[0]['count']}</span></span></p>
+        {/if}
+        {if $feeAry[1]['fee']}
+      	<p>支付宝：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($feeAry[1]['fee']*0.01))}</span> <span class="label label-info">{php echo $feeAry[1]['count']}</span></span></p>
+        {/if}
+        {if $feeAry[2]['fee']}
+      	<p>现金：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($feeAry[2]['fee']*0.01))}</span> <span class="label label-info">{php echo $feeAry[2]['count']}</span></span></p>
+        {/if}
+        {if $feeAry[3]['fee']}
+      	<p>银行卡：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($feeAry[3]['fee']*0.01))}</span> <span class="label label-info">{php echo $feeAry[3]['count']}</span></span></p>
+        {/if}
+        {if $feeAry[4]['fee']}
+      	<p>会员卡：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($feeAry[4]['fee']*0.01))}</span> <span class="label label-info">{php echo $feeAry[4]['count']}</span></span></p>
+        {/if}
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="line-box">
+      <h2>会员充值<b class="pull-right red2">{php echo sprintf('%.2f',($chargeAry['all']['fee']*0.01))} | {php echo $chargeAry['all']['count']}</b></h2>
+      <div>
+        {if $chargeAry[2]['fee']}
+      	<p>微信：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($chargeAry[2]['fee']*0.01))}</span> <span class="label label-info">{php echo $chargeAry[2]['count']}</span></span></p>
+        {/if}
+        {if $chargeAry[3]['fee']}
+      	<p>支付宝：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($chargeAry[3]['fee']*0.01))}</span> <span class="label label-info">{php echo $chargeAry[3]['count']}</span></span></p>
+        {/if}
+        {if $chargeAry[0]['fee']}
+      	<p>现金：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($chargeAry[0]['fee']*0.01))}</span> <span class="label label-info">{php echo $chargeAry[0]['count']}</span></span></p>
+        {/if}
+        {if $chargeAry[1]['fee']}
+      	<p>银行卡：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($chargeAry[1]['fee']*0.01))}</span> <span class="label label-info">{php echo $chargeAry[1]['count']}</span></span></p>
+        {/if}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="line-box exchangebox_3">
+      <h2>应有现金<b class="pull-right red2">{php echo sprintf('%.2f',(($feeAry[2]['fee']+$chargeAry[0]['fee'])*0.01))}</b></h2>
+      <div>
+      	<p>销售：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($feeAry[2]['fee']*0.01))}</span></span></p>
+        <p>充值：<span class="pull-right"><span class="label label-warning">{php echo sprintf('%.2f',($chargeAry[0]['fee']*0.01))}</span></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div>&nbsp;</div>

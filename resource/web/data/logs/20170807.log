@@ -1,0 +1,21 @@
+2017-08-07 09:47:42 SQL Error :
+------------
+String:
+SQL: <br/>SELECT `founder_groupid` FROM `ims_users` WHERE `uid` =  :__uid_1  LIMIT 1<hr/>Params: <br/>array (
+  ':__uid_1' => '',
+)<hr/>SQL Error: <br/>Unknown column 'founder_groupid' in 'field list'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/class/db.class.php; line: 259; <br />file: /framework/function/pdo.func.php; line: 61; <br />file: /framework/model/user.mod.php; line: 83; <br />file: /framework/model/user.mod.php; line: 97; <br />file: /web/index.php; line: 209; <br />
+
+2017-08-07 09:48:17 SQL Error :
+------------
+String:
+SQL: <br/>SELECT `founder_groupid` FROM `ims_users` WHERE `uid` =  :__uid_1  LIMIT 1<hr/>Params: <br/>array (
+  ':__uid_1' => '',
+)<hr/>SQL Error: <br/>Unknown column 'founder_groupid' in 'field list'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/class/db.class.php; line: 259; <br />file: /framework/function/pdo.func.php; line: 61; <br />file: /framework/model/user.mod.php; line: 83; <br />file: /framework/model/user.mod.php; line: 97; <br />file: /web/index.php; line: 209; <br />
+
+2017-08-07 09:53:05 SQL Error :
+------------
+String:
+SQL: <br/>SELECT `founder_groupid` FROM `ims_users` WHERE `uid` =  :__uid_1  LIMIT 1<hr/>Params: <br/>array (
+  ':__uid_1' => '',
+)<hr/>SQL Error: <br/>Unknown column 'founder_groupid' in 'field list'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/class/db.class.php; line: 259; <br />file: /framework/function/pdo.func.php; line: 61; <br />file: /framework/model/user.mod.php; line: 83; <br />file: /framework/model/user.mod.php; line: 97; <br />file: /web/index.php; line: 209; <br />
+

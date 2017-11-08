@@ -1,0 +1,194 @@
+﻿<!doctype html>
+<html>
+<head design-width="720">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+	<title>Demo</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" /><!--样式-->
+	<link rel="stylesheet" type="text/css" href="css/animate.min.css" /><!--CSS3动画库-->
+	<script type="text/javascript" src="js/auto-size.js"></script><!--设置字体大小-->
+</head>
+<body class="bj1">
+	<div class="mobile_wrap center bj">
+		<div class="header">
+        	<!-- <i>
+        		<a href="#"><img src="img/ico0.png" alt=""></a>
+        	</i> -->
+        	<h2 class="two">在线付款</h2>
+        </div><!-- header -->
+        
+        <div class="logo dt">
+        	<div class="wid">
+        		<i><img src="img/logo-1.png" alt=""></i>
+        		
+        		<div class="text">
+        			<p>提示：本店单日消费<span>5000</span>元以下<span>免服务费</span>，超出部分按千分之<span>6</span>收取服务费，您当日已累计支付<span>0.00</span>元。</p>
+        		</div>
+        	</div>
+        </div><!-- logo -->
+
+        <div class="sum">
+        	<ul class="wid">
+        		<li>
+        			<p>消费金额：</p>
+        			<div class="cost-wrap "><i class="gb"></i><span class="cost red size">0.00</span><span class="fr red size"  style="margin-right: 0">￥</span></div>
+        		</li>
+        		<li>
+        			<p>服务费：</p>
+        			<span>0元</span>
+        		</li>
+        	</ul>
+        </div><!-- sum -->
+
+        <div class="sum two">
+        	<ul class="wid">
+        		<li>
+        			<p>服务类型：</p>
+        			<span class="op">保养维修</span>
+        		</li>
+        		<li class="zhub switch">
+        			<p>车牌号：</p>
+        			<input type="text" placeholder="如沪A12345">
+        		</li>
+        		<li class="dsb switch hide">
+        			<p>备注信息：</p>
+        			<input type="text" placeholder="如购买人信息等">
+        		</li>
+        	</ul>
+        </div><!-- sum -->
+
+        <div class="login wid">
+        	<input type="submit" value="确认支付">
+        </div><!-- login -->
+
+        <div class="footer">
+        	<div class="wid"><p>请仔细核对车牌号和金额信息</p></div>
+        </div><!-- footer -->
+
+        <div class="pop-box">
+        	<div class="pop-up">
+        		<p>本次支付总金额为：<span>8888.58</span>元，其中包含<span>3.35</span>元服务费，请您确认后进行支付。</p>
+        		<div class="bottom">
+        			<ul>
+        				<li class="qiut">
+        					<span>取消</span>
+        				</li>
+        				<li>
+        					<span>确认</span>
+        				</li>
+        			</ul>
+        		</div>
+        	</div><!-- pop-up -->
+        </div><!-- pop-box -->
+
+        <div class="pop-box2">
+        	<ul>
+        		<!-- 	<li><i><img src="img/ico_5.png" alt=""></i></li> -->
+        		<li data-control='zhub'><p><span>保养维修</span></p></li>
+        		<!-- <li><p><span>新车购买</span></p></li> -->
+        		<li data-control='dsb'><p><span>新车定金</span></p></li>
+        		<li data-control='zhub'><p><span>保险续保</span></p></li>
+        		<!-- <li><p><span>卡券购买</span></p></li> -->
+        		<li data-control='dsb'><p><span>其他服务</span></p></li>
+        	</ul>
+        </div><!-- pop-box2 -->
+    </div><!--mobile_wrap-->
+    <div class="layer-content slideDown">
+    	<div class="form_edit clearfix">
+    		<div class="num">1</div>
+    		<div class="num">2</div>
+    		<div class="num">3</div>
+    		<div class="num">4</div>
+    		<div class="num">5</div>
+    		<div class="num">6</div>
+    		<div class="num">7</div>
+    		<div class="num">8</div>
+    		<div class="num">9</div>
+    		<div class="num" id="c_point">.</div>
+    		<div class="num">0</div>
+    		<div id="remove">删除</div>
+    	</div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script><!--jQ库-->
+<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script><!--轮播库-->
+<script type="text/javascript" src="js/version-3.2.8.js"></script><!--封装函数-->
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+	$(".login input").click(function(event) {
+		$(".pop-box").fadeIn();
+	});
+
+	$(".qiut").click(function(event) {
+		$(".pop-box").fadeOut();
+	});
+
+	$(".op").click(function(event) {
+		$(".pop-box2").fadeIn();
+		
+	});
+	$(".pop-box2").click(function(event) {
+		$(".pop-box2").fadeOut();
+	});
+
+	$('.pop-box2 ul li').on('click', function() {
+		$('.sum.two ul li span.op').text($(this).find('span').text());
+
+		// var class_name = $(this).attr('data-control')
+		// $.each($('.sum.two li.switch'), function(index, val) {
+		// 	$(val).hasClass(class_name) ? $(val).removeClass('hide') : $(val).addClass('hide');
+		// });
+	});
+
+
+
+	$('.mobile_wrap').on('click', function() {
+		$('.layer-content').addClass('slideDown');
+		$('.cost-wrap').removeClass('animation')
+
+	});
+
+	$('.cost-wrap').on('click', function() {
+		$('.layer-content').removeClass('slideDown');
+		$('.cost-wrap').addClass('animation')
+		return false;
+	});
+
+
+
+	$('.form_edit .num').on(window.a,function(){
+		if (this.innerHTML=='.'&&this.data_switch != 0) {
+			return false;
+		}else{
+			this.data_switch = 1;
+		}
+		if ($('.cost').text()=='0.00') {
+			$('.cost').text(this.innerHTML);
+		}else{
+			$('.cost').text($('.cost').text()+this.innerHTML);
+		}
+	})
+	document.getElementById('c_point').data_switch = 0 ;
+	$('#remove').on(window.a,function(){
+		var oDiv = $('.cost')[0];
+		var oDivHtml = oDiv.innerHTML;
+		if (oDiv.innerHTML!='0.00') {
+			oDiv.innerHTML = oDivHtml.substring(0,oDivHtml.length-1);
+		}
+		if (oDiv.innerHTML=='') {
+			oDiv.innerHTML='0.00';
+			document.getElementById('c_point').data_switch = 0 ;
+		}
+	});
+	// $('#c_point').click(function() {
+	// 	if (this.data_switch == 0){
+	// 		this.data_switch = 1
+	// 	}
+	// });
+
+</script>
+</html>

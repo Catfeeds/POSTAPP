@@ -1,0 +1,360 @@
+2017-09-11 14:45:15 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1505112314</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412892016</MenuId>
+</xml>
+
+2017-09-11 14:45:15 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1505112314',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412892016',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1505112314',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-11 14:45:15 response :
+------------
+
+2017-09-11 14:53:03 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1505112783</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412892016</MenuId>
+</xml>
+
+2017-09-11 14:53:03 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1505112783',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412892016',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1505112783',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-11 14:53:03 response :
+------------
+
+2017-09-11 14:53:06 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1505112785</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412892016</MenuId>
+</xml>
+
+2017-09-11 14:53:06 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1505112785',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412892016',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1505112785',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-11 14:53:06 response :
+------------
+
+2017-09-11 15:36:01 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1505115361</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412892016</MenuId>
+</xml>
+
+2017-09-11 15:36:01 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1505115361',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412892016',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1505115361',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-11 15:36:01 response :
+------------
+
+2017-09-11 15:42:56 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsCO53_LRoiYXQYyqMZr6lo]]></FromUserName>
+<CreateTime>1505115775</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412892016</MenuId>
+</xml>
+
+2017-09-11 15:42:56 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsCO53_LRoiYXQYyqMZr6lo',
+    'createtime' => '1505115775',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412892016',
+    'from' => 'oNjw9wsCO53_LRoiYXQYyqMZr6lo',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1505115775',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-11 15:42:56 response :
+------------
+
+2017-09-11 16:11:00 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1505117460</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=17]]></EventKey>
+<MenuId>412892016</MenuId>
+</xml>
+
+2017-09-11 16:11:00 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1505117460',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=17',
+    'menuid' => '412892016',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1505117460',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=17',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-11 16:11:00 response :
+------------
+
+2017-09-11 16:18:26 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1505117905</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=17]]></EventKey>
+<MenuId>412892016</MenuId>
+</xml>
+
+2017-09-11 16:18:26 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1505117905',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=17',
+    'menuid' => '412892016',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1505117905',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=17',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-11 16:18:26 response :
+------------
+
+2017-09-11 17:20:26 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsCO53_LRoiYXQYyqMZr6lo]]></FromUserName>
+<CreateTime>1505121625</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412892016</MenuId>
+</xml>
+
+2017-09-11 17:20:26 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsCO53_LRoiYXQYyqMZr6lo',
+    'createtime' => '1505121625',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412892016',
+    'from' => 'oNjw9wsCO53_LRoiYXQYyqMZr6lo',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1505121625',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-11 17:20:26 response :
+------------
+
+2017-09-11 19:28:59 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1505129338</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412892016</MenuId>
+</xml>
+
+2017-09-11 19:28:59 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1505129338',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412892016',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1505129338',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-11 19:28:59 response :
+------------
+

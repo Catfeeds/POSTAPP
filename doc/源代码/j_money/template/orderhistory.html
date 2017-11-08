@@ -1,0 +1,285 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+  <li class="active"><a href="javascript:closeMenu()">隐藏菜单</a></li>
+  <li><a href="{php echo $this->createWebUrl('history',array('op'=>'display','shopid'=>$shopid))}">收银记录</a></li>
+  <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('orderhistory', array('op'=>'display','shopid'=>$shopid))}">订单记录</a></li>
+  {if $operation == 'post'}<li class="active"><a href="#">订单详情</a></li>{/if}
+</ul>
+<script>
+function closeMenu(){
+	$(".big-menu").toggle(
+		function(){
+			if($(this).is(":visible")){
+				$(this).siblings().attr("class","col-xs-12 col-sm-9 col-lg-10");
+			}else{
+				$(this).siblings().attr("class","col-xs-12 col-sm-12 col-lg-12");
+			}
+		}
+	);
+	
+}
+require(['bootstrap'],function($){
+	$('.btn,.tips').hover(function(){
+		$(this).tooltip('show');
+	},function(){
+		$(this).tooltip('hide');
+	});
+});
+</script> 
+{if $operation == 'display'}
+<style>
+.label{ margin-bottom:5px;}
+.numbers{ font-size:30px;margin-bottom:10px;text-align:left;}
+.numbers2{ font-size:14px;color:#C00;}
+.numbers3{ font-size:14px;color:#999;}
+.numbers3 span{color:#C00;}
+p{line-height:26px;}
+p .pull-right{ padding-top:5px; margin-top:5px}
+</style>
+<div class="main">
+  <div>
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">总收入</div>
+          <div class="panel-body">
+            <div class="numbers">{php echo sprintf('%.2f',($payAll*0.01))}<span class="pull-right">{php echo $payAllcount}</span></div>
+            <div class="numbers2">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">微信</div>
+          <div class="panel-body">
+            <div class="numbers">￥{php echo sprintf('%.2f',($payAry[0]['total']*0.01))}</div>
+            <div class="numbers2">{php echo sprintf('%.2f',($payAry[0]['total']/$payAll)*100)}% </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">支付宝</div>
+          <div class="panel-body">
+            <div class="numbers">￥{php echo sprintf('%.2f',($payAry[1]['total']*0.01))}</div>
+            <div class="numbers2">{php echo sprintf('%.2f',($payAry[1]['total']/$payAll)*100)}%</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">现金</div>
+          <div class="panel-body">
+            <div class="numbers">￥{php echo sprintf('%.2f',($payAry[2]['total']*0.01))}</div>
+            <div class="numbers2">{php echo sprintf('%.2f',($payAry[2]['total']/$payAll)*100)}%</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">银行卡</div>
+          <div class="panel-body">
+            <div class="numbers">￥{php echo sprintf('%.2f',($payAry[3]['total']*0.01))}</div>
+            <div class="numbers2">{php echo sprintf('%.2f',($payAry[3]['total']/$payAll)*100)}%</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="panel panel-info">
+          <div class="panel-heading">余额</div>
+          <div class="panel-body">
+            <div class="numbers">￥{php echo sprintf('%.2f',($payAry[4]['total']*0.01))}</div>
+            <div class="numbers2">{php echo sprintf('%.2f',($payAry[4]['total']/$payAll)*100)}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="category">
+    <form action="" class="form-horizontal form">
+      <input type="hidden" name="c" value="site" />
+      <input type="hidden" name="a" value="entry" />
+      <input type="hidden" name="m" value="j_money" />
+      <input type="hidden" name="do" value="orderhistory" />
+      <input type="hidden" name="isexplode" id="isexplode" value="0" />
+      <input type="hidden" name="token" value="{$_W['token']}" />
+      <div class="panel panel-info">
+        <div class="panel-body table-responsive">
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+            <div class="col-sm-9 form-inline">
+              <div class="input-group"> <span class="input-group-addon">关键字</span>
+                <input type="text" name="keyword" class="form-control" value="{$_GPC['keyword']}" />
+              </div>
+              <select name="shopid" id="shopid"  class="form-control" onChange="changeGroup()">
+                <option value="0">全部门店</option>
+                
+                    {loop $grouplist $row}
+                
+                <option value="{$row['id']}" {if $row['id']==$_GPC['shopid']}selected{/if}>{$row['companyname']}</option>
+                
+                    {/loop}
+              
+              </select>
+              <select name="userid" id="userid" class="form-control">
+                <option value="0">全部人员</option>
+              </select>
+              {php echo tpl_form_field_daterange('search', array('start'=>$starttime,'end'=>$end),false)} </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+            <div class="col-sm-9 form-inline">
+              <input type="submit" class="btn btn-info" value="搜索"/>
+              <input type="submit" class="btn btn-danger" onClick="$('#isexplode').val(1)" name="explode" value="导出数据"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-info">
+        <div class="panel-body table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width:140px;">单号</th>
+                <th>收银员</th>
+                <th>商品</th>
+                <th>金额</th>
+                <th>优惠</th>
+                <th>结算金额</th>
+                <th>日期</th>
+                <th>状态</th>
+                <th style="text-align:right">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            
+            {loop $list $row}
+            <tr>
+              <td><p><span class="label label-info">{$row['out_trade_no']}</span></p>
+                <span class="label label-success">单日顺序号：{$row['serialnum']}</span></td>
+              <td><p><span class="label label-info">{php echo $groupids[$row['groupid']]}</span></p>
+                <span class="label label-primary">{php echo $userList2[$row['userid']]}</span></td>
+              <td>
+              <p><span class="label label-info">{$row['species']}种</span></p>
+              <p><span class="label label-primary">{$row['num']}件</span></p>
+              </td>
+              <td><p><span class="label label-default">总金额</span><span class="label label-warning pull-right">{php echo sprintf('%.2f',($row['order_fee']*0.01))}</span></p>
+                <p><span class="label label-default">优惠</span><span class="label label-warning pull-right">{php echo sprintf('%.2f',($row['discount_fee']/100))}</span></p>
+                <p><span class="label label-default">应付</span><span class="label label-danger pull-right">{php echo sprintf('%.2f',($row['total_fee']*0.01))}</span></p>
+                <p><span class="label label-default">实付</span><span class="label label-success pull-right">{php echo sprintf('%.2f',($row['paid_fee']*0.01))}</span></p></td>
+              <td>
+              {if $row['discounttype']==1} <span class="label label-primary">系统满减</span> 
+              {elseif $row['discounttype']==2} <span class="label label-primary">会员折扣</span> 
+              {elseif $row['discounttype']==3} <span class="label label-primary">微信卡券</span> 
+              {elseif $row['discounttype']==4} <span class="label label-danger">其他</span> 
+              {/if} </td>
+              <td>
+              {if $row['paytype']==0}<img src="{MODULE_URL}template/img/wechart.gif" width="21"/> 
+              {elseif $row['paytype']==1}<img src="{MODULE_URL}template/img/alipay.gif" width="21"/> 
+              {elseif $row['paytype']==2}<img src="{MODULE_URL}template/img/cash.gif" width="21"/> 
+              {elseif $row['paytype']==3}<img src="{MODULE_URL}template/img/credit.gif" width="21"/> 
+              {elseif $row['paytype']==4}<img src="{MODULE_URL}template/img/menbercard.gif" width="21"/> 
+              {/if}
+              {if $row['paid_fee']}<span class="label label-warning">{php echo sprintf('%.2f',($row['total_fee']*0.01))}</span>{else}<span class="label label-default">0</span>{/if} </td>
+              <td>{php echo date("m-d H:i",$row['createtime'])}</td>
+              <td>{if $row['status']==1}<span class="label label-success"><i class="fa fa-check"/></i></span> {elseif $row['status']==2}<span class="label label-danger"><i class="fa fa-recycle"/></i></span> {else}<span class="label label-danger"><i class="fa fa-times"/></i></span> {/if} </td>
+              <td style="text-align:right">
+              <a href="javascript:getView({$row['out_trade_no']})" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="详情"><i class="fa fa-file-text-o"></i></a>&nbsp;
+              {if $row['paytype']==0 || $row['paytype']==1} <a href="javascript:recheckpay({$row['paytype']},{$row['id']})"  class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="重新获取订单"><i class="fa fa-refresh"></i></a> 
+              {if $row['status']==0} <a href="javascript:checkpay({$row['paytype']},{$row['id']})"  class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="删除"><i class="fa fa-times"></i></a> {/if} 
+                {/if} </td>
+            </tr>
+            {/loop}
+              </tbody>
+          </table>
+        </div>
+        <div align="center">{$pager}</div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal fade" id="modal_orderview" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        订单详情<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-danger pull-left">退款</button>
+        <button type="button" class="btn btn-info" id="orderview_print" onClick="">打印</button>
+        
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+{/if}
+<iframe id="print_iframe" style="position:absolute; z-index:0; width:1px; height:1px;"></iframe>
+<script language="javascript">
+var userlist='{php echo $userList}';
+changeGroup();
+function changeGroup(){
+	var groupid=parseInt($("#shopid option:selected").val());
+	if(userlist.length>4){
+		var userList=eval("("+userlist+")");
+		var temp=userList[groupid];
+		$("#userid").empty().append("<option value='0'>全部人员</option>");
+		for(i in temp){
+			temptxt=temp[i].split('#');
+			$("#userid").append("<option value='"+temptxt[0]+"'>"+temptxt[1]+"</option>");
+		}
+	}
+}
+
+function recheckpay(paytype,id){
+	var url="{php echo $this->createWebUrl('wajax',array('op'=>'check_orderpay'))}";
+	$.post(url,{"id":id},function(datas){
+		console.log(datas);
+		var data=eval("("+datas+")");
+		if(data.success){
+			alert("支持成功");
+			location.reload();
+		}else{
+			alert(data.msg);
+		}
+	});
+}
+function checkpay(paytype,id){
+	if(!confirm("确认删除？删除后不可恢复"))return;
+	if(paytype==0 || paytype==1){
+		var url="{php echo $this->createWebUrl('wajax',array('op'=>'check_orderpay'))}";
+		$.post(url,{"id":id},function(data){
+			if(data.success){
+				alert("支持成功");
+				location.reload();
+			}else{
+				location.href="{php echo $this->createWebUrl('orderhistory', array('op' => 'delete'))}&id="+id;
+			}
+		},'json');
+	}else{
+		
+		location.href="{php echo $this->createWebUrl('orderhistory', array('op' => 'delete'))}&id="+id;
+	}
+	
+}
+function historyOrder_print(ordersn){
+	if(!confirm("确认打印？"))return;
+	$("#print_iframe").removeAttr("src").attr("src","{$_W['siteroot']}app/index.php?i=$_W['uniacid']}&c=entry&printtype=0&m=j_money&do=printnew&ordersn="+ordersn+"&second=0");
+}
+function getView(ordersn){
+	$.ajax({
+		type: "POST",
+		url: "{php echo $this->createWebUrl('wajax',array('op'=>'getorderview'))}",
+		data:{"keyword":ordersn},
+		success: function(result){
+			$("#modal_orderview .modal-body").html(result);
+			$("#modal_orderview").modal("show");
+			$("#orderview_print").attr("onclick","historyOrder_print("+ordersn+")");
+		}
+	});
+}
+</script> 
+{template 'common/footer'} 

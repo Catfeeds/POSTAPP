@@ -1,0 +1,289 @@
+2017-08-10 10:51:59 SQL Error :
+------------
+String:
+SQL: <br/>select t1.*,t2.name,t3.title as regionname,t5.src from`ims_xcommunity_fled`t1 left join`ims_xcommunity_category`t2 on t1.category=t2.id left join`ims_xcommunity_region`t3 on t1.regionid = t3.id left join`ims_xcommunity_fled_images`t4 on t1.id = t4.fledid left join`ims_xcommunity_images`t5 on t5.id= t4.thumbid where t1.uniacid=:uniacid and t1.black=0 and t1.enable=0 AND t1.regionid='1' AND t1.cate = '2' group by t1.id order by t1.createtime asc  LIMIT 0,500<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't1.cate' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/fled.inc.php; line: 77; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-10 10:52:01 SQL Error :
+------------
+String:
+SQL: <br/>select t1.*,t2.name,t3.title as regionname,t5.src from`ims_xcommunity_fled`t1 left join`ims_xcommunity_category`t2 on t1.category=t2.id left join`ims_xcommunity_region`t3 on t1.regionid = t3.id left join`ims_xcommunity_fled_images`t4 on t1.id = t4.fledid left join`ims_xcommunity_images`t5 on t5.id= t4.thumbid where t1.uniacid=:uniacid and t1.black=0 and t1.enable=0 AND t1.regionid='1' AND t1.cate = '3' group by t1.id order by t1.createtime asc  LIMIT 0,500<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't1.cate' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/fled.inc.php; line: 77; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-10 11:01:29 SQL Error :
+------------
+String:
+SQL: <br/>select t1.*,t2.name,t3.title as regionname,t5.src from`ims_xcommunity_fled`t1 left join`ims_xcommunity_category`t2 on t1.category=t2.id left join`ims_xcommunity_region`t3 on t1.regionid = t3.id left join`ims_xcommunity_fled_images`t4 on t1.id = t4.fledid left join`ims_xcommunity_images`t5 on t5.id= t4.thumbid where t1.uniacid=:uniacid and t1.black=0 and t1.enable=0 AND t1.regionid='1' AND t1.cate = '2' group by t1.id order by t1.createtime asc  LIMIT 0,500<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't1.cate' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/fled.inc.php; line: 77; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-10 11:01:33 SQL Error :
+------------
+String:
+SQL: <br/>select t1.*,t2.name,t3.title as regionname,t5.src from`ims_xcommunity_fled`t1 left join`ims_xcommunity_category`t2 on t1.category=t2.id left join`ims_xcommunity_region`t3 on t1.regionid = t3.id left join`ims_xcommunity_fled_images`t4 on t1.id = t4.fledid left join`ims_xcommunity_images`t5 on t5.id= t4.thumbid where t1.uniacid=:uniacid and t1.black=0 and t1.enable=0 AND t1.regionid='1' AND t1.cate = '3' group by t1.id order by t1.createtime asc  LIMIT 0,500<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't1.cate' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/fled.inc.php; line: 77; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-10 11:01:42 SQL Error :
+------------
+String:
+SQL: <br/>select t1.*,t2.name,t3.title as regionname,t5.src from`ims_xcommunity_fled`t1 left join`ims_xcommunity_category`t2 on t1.category=t2.id left join`ims_xcommunity_region`t3 on t1.regionid = t3.id left join`ims_xcommunity_fled_images`t4 on t1.id = t4.fledid left join`ims_xcommunity_images`t5 on t5.id= t4.thumbid where t1.uniacid=:uniacid and t1.black=0 and t1.enable=0 AND t1.regionid='1' AND t1.cate = '2' group by t1.id order by t1.createtime asc  LIMIT 0,500<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't1.cate' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/fled.inc.php; line: 77; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-10 11:01:44 SQL Error :
+------------
+String:
+SQL: <br/>select t1.*,t2.name,t3.title as regionname,t5.src from`ims_xcommunity_fled`t1 left join`ims_xcommunity_category`t2 on t1.category=t2.id left join`ims_xcommunity_region`t3 on t1.regionid = t3.id left join`ims_xcommunity_fled_images`t4 on t1.id = t4.fledid left join`ims_xcommunity_images`t5 on t5.id= t4.thumbid where t1.uniacid=:uniacid and t1.black=0 and t1.enable=0 AND t1.regionid='1' AND t1.cate = '3' group by t1.id order by t1.createtime asc  LIMIT 0,500<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't1.cate' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/fled.inc.php; line: 77; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-10 11:45:09 SQL Error :
+------------
+String:
+SQL: <br/>select t1.*,t2.name,t3.title as regionname,t5.src from`ims_xcommunity_fled`t1 left join`ims_xcommunity_category`t2 on t1.category=t2.id left join`ims_xcommunity_region`t3 on t1.regionid = t3.id left join`ims_xcommunity_fled_images`t4 on t1.id = t4.fledid left join`ims_xcommunity_images`t5 on t5.id= t4.thumbid where t1.uniacid=:uniacid and t1.black=0 and t1.enable=0 AND t1.regionid='1' AND t1.cate = '3' group by t1.id order by t1.createtime asc  LIMIT 0,500<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't1.cate' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/fled.inc.php; line: 77; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-10 15:21:26 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1502349685</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-10 15:21:26 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1502349685',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1502349685',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-10 15:21:26 response :
+------------
+
+2017-08-10 15:22:57 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1502349776</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-10 15:22:57 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1502349776',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1502349776',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-10 15:22:57 response :
+------------
+
+2017-08-10 15:28:18 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1502350098</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-10 15:28:18 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1502350098',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1502350098',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-10 15:28:18 response :
+------------
+
+2017-08-10 15:28:28 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1502350107</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-10 15:28:28 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1502350107',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1502350107',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-10 15:28:28 response :
+------------
+
+2017-08-10 19:30:28 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1502364627</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-10 19:30:28 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1502364627',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1502364627',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-10 19:30:28 response :
+------------
+
+2017-08-10 19:31:08 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1502364667</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-10 19:31:08 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1502364667',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1502364667',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-10 19:31:08 response :
+------------
+

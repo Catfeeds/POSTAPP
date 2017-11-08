@@ -1,0 +1,207 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+  {if $operation == 'post'}<li class="active"><a href="{php echo $this->createWebUrl('membercard', array('op' => 'post', 'groupid' => $_GPC['shopid']))}">编辑会员</a></li>{/if}
+  <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('membercard', array('op' => 'display', 'groupid' => $groupid))}">管理会员</a></li>
+  <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('membercharge', array('op' => 'display', 'shopid' => $_GPC['shopid']))}">充值活动</a></li>
+  <li><a href="{php echo $this->createWebUrl('group', array('op' => 'display'))}">店铺设置</a></li>
+</ul>
+<script>
+require(['bootstrap'],function($){
+	$('.btn').hover(function(){
+		$(this).tooltip('show');
+	},function(){
+		$(this).tooltip('hide');
+	});
+});
+</script> 
+{if $operation == 'post'}
+<div class="main">
+  <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{php echo $id}" />
+    <div class="panel panel-default">
+      <div class="panel-heading"> 收银员管理 </div>
+      <div class="panel-body"> 
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">状态</label>
+          <div class="col-sm-9 form-inline">
+             <label class="radio-inline">
+              <input type="radio" name="status" value="0" {if $item['status'] == 0 || empty($item['status'])}checked{/if} />
+              关闭</label>
+            <label class="radio-inline">
+              <input type="radio" name="status" value="1" {if $item['status'] == 1}checked{/if} />
+              开启</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">工号</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <input type="text" name="useracount" maxlength="10" class="form-control" value="{$item['useracount']}" {if $id}disabled{/if}/>
+            <div class="help-block">【提交后不可更改】工号的作用是用于登录使用，不能以0开头。如果工号前面有是0，请在前面加上字母如“A01”</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">所属店铺</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <select name="pcate" class="form-control">
+            	<option value="0">请选择</option>
+                {loop $list $row}
+                <option value="{$row['id']}" {if $row['id']==$item['pcate']} selected{/if}>{$row['companyname']}</option>
+                {/loop}
+            </select>
+            <div class="help-block">此内容可用于多门店，或者是不同地区收款时，作为统计时使用</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">角色权限</label>
+          <div class="col-sm-9 form-inline">
+             <label class="radio-inline">
+              <input type="radio" name="permission" value="1" {if $item['permission'] == 1 || empty($item['permission'])}checked{/if} />
+              收银员</label>
+            <label class="radio-inline">
+              <input type="radio" name="permission" value="2" {if $item['permission'] == 2}checked{/if} />
+              财务</label>
+            <label class="radio-inline">
+              <input type="radio" name="permission" value="3" {if $item['permission'] == 3}checked{/if} />
+              店长</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">openid</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="text" name="openid" class="form-control" value="{$item['openid']}" />
+            <div class="help-block">请在粉丝列表中查找-<a href="./index.php?c=mc&a=fans">粉丝列表</a></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">姓名</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="text" name="realname" class="form-control" value="{$item['realname']}" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">电话</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="text" name="mobile" class="form-control" value="{$item['mobile']}" autocomplete="off" />
+            <div class="help-block"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">权限设置</label>
+          <div class="col-sm-9 form-inline">
+             <label class="radio-inline">
+              <input type="checkbox" name="login_pc" value="1" {if $item['login_pc'] == 1}checked{/if} />
+              电脑端登录</label>
+            <label class="radio-inline">
+              <input type="checkbox" name="login_m" value="1" {if $item['login_m'] == 1}checked{/if} />
+              手机登陆</label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">输入密码</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="password" name="password" class="form-control" autocomplete="off"/>
+            <div class="help-block">不少于6位英文、数字、符号</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">确认密码</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="password" name="password2" class="form-control" autocomplete="off"/>
+            <div class="help-block"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-xs-12">
+      <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" onclick="return checkform();return false" />
+      <input type="hidden" name="token" value="{$_W['token']}" />
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+function checkform(){
+	var temp=$("input[name='useracount']").val();
+	if(!temp){
+		alert("请填写工号，且不能是0");
+		return false;
+	}
+	temp=$("input[name='password']").val();
+	if(temp.length<6 && temp.length>0){
+		alert("密码不能少于6位");
+		return false;
+	}
+	var temp2=$("input[name='password2']").val();
+	if(temp!=temp2 && temp.length>0){
+		alert("两次输入的密码不一样");
+		return false;
+	}
+	return true;
+}
+</script> 
+
+{elseif $operation == 'display'}
+<div class="main">
+  <div class="category">
+    <form action="" class="form-horizontal form">
+    <input type="hidden" name="c" value="site" />
+    <input type="hidden" name="a" value="entry" />
+    <input type="hidden" name="m" value="j_money" />
+    <input type="hidden" name="do" value="membercard" />
+    <input type="hidden" name="op" value="display" />
+    <div class="panel panel-info">
+      <div class="panel-body table-responsive">
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+          <div class="col-sm-9 form-inline"> 
+            <select name="groupid" id="groupid"  class="form-control" onChange="changeGroup(1)">
+              <option value="0">全部团队</option>  
+                  {loop $grouplist $row}
+              <option value="{$row['id']}" {if $row['id']==$_GPC['groupid']}selected{/if}>{$row['companyname']}</option>
+                  {/loop}
+            </select>
+            <input type="text" class="form-control" name="keyword" value="{$_GPC['keyword']}" placeholder="姓名/电话"/>
+            <input type="submit" class="btn btn-info" value="搜索"/>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="panel panel-default">
+        <div class="panel-body table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width:80px;">头像</th>
+                <th>卡号</th>
+                <th>姓名</th>
+                <th>电话</th>
+                <th>余额</th>
+                <th>状态</th>
+                <th style="text-align:right">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            {loop $list $row}
+            <tr>
+              <td><img src="{$row['headimgurl']}" height="60" onerror="this.src='{MODULE_URL}template/img/heading.jpg'"/></td>
+              <td>{$row['wxcardno']}</td>
+              <td>{$row['realname']}</td>
+              <td>{$row['mobile']}</td>
+              <td><span class="label label-success">￥ {php echo sprintf('%.2f',($row['cash']*0.01))}</span></td>
+              <td>{if $row['status']}<span class="label label-info">正常</span>{else}<span class="label label-default">未激活</span>{/if}</td>
+              <td style="text-align:right">
+              
+              <a href="{php echo $this->createWebUrl('membercard', array('op' => 'delete', 'id' => $row['id'], 'groupid' => $groupid))}" onclick="return confirm('确实删除吗？');return false;"  class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="删除"><i class="fa fa-times"></i></a>
+              </td>
+            </tr>
+            {/loop}
+              </tbody>
+          </table>
+          <div align="center">{$pager}</div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{/if}
+{template 'common/footer'} 

@@ -1,0 +1,1661 @@
+2017-09-04 11:18:51 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1504495131</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 11:18:51 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1504495131',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504495131',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 11:18:51 response :
+------------
+
+2017-09-04 11:19:15 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1504495154</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 11:19:15 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1504495154',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504495154',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 11:19:15 response :
+------------
+
+2017-09-04 11:19:21 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170904',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-09-04 11:19:21 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170904',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-09-04 11:19:29 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170904',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-09-04 11:19:29 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170904',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-09-04 11:19:34 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1504495174</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 11:19:34 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1504495174',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504495174',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 11:19:34 response :
+------------
+
+2017-09-04 11:34:38 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1504496077</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 11:34:38 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1504496077',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504496077',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 11:34:38 response :
+------------
+
+2017-09-04 17:32:36 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1504517555</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 17:32:36 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1504517555',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504517555',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 17:32:36 response :
+------------
+
+2017-09-04 19:28:27 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1504524507</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 19:28:27 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1504524507',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504524507',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 19:28:27 response :
+------------
+
+2017-09-04 19:28:31 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170904',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-09-04 19:28:31 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170904',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:42:59 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:00 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 185; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 2 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 187; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 189; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 4 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 191; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 5 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 193; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=2 and type = 6 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 195; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 231; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504454400,
+  ':endtime' => 1504540800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 233; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 231; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504368000,
+  ':endtime' => 1504454400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 233; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 231; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504281600,
+  ':endtime' => 1504368000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 233; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 231; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504195200,
+  ':endtime' => 1504281600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 233; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 231; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504108800,
+  ':endtime' => 1504195200,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 233; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 231; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1504022400,
+  ':endtime' => 1504108800,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 233; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 231; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503936000,
+  ':endtime' => 1504022400,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 233; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 231; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503849600,
+  ':endtime' => 1503936000,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 233; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 1 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 231; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:43:10 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_send_log`where uniacid=:uniacid and cid=1 and type = 3 AND createtime >= :createtime AND createtime <= :endtime  ORDER BY createtime ASC<hr/>Params: <br/>array (
+  ':uniacid' => 2,
+  ':createtime' => 1503763200,
+  ':endtime' => 1503849600,
+)<hr/>SQL Error: <br/>Unknown column 'createtime' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/data.inc.php; line: 233; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 19:47:49 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1504525668</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 19:47:49 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1504525668',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504525668',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 19:47:49 response :
+------------
+
+2017-09-04 20:03:21 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1504526600</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 20:03:21 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1504526600',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504526600',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 20:03:21 response :
+------------
+
+2017-09-04 20:03:34 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1504526613</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=12]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 20:03:34 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1504526613',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=12',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504526613',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=12',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 20:03:34 response :
+------------
+
+2017-09-04 20:04:11 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1504526651</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=4]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 20:04:11 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1504526651',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=4',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504526651',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=4',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 20:04:11 response :
+------------
+
+2017-09-04 20:06:56 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_xcommunity_member_address` SET `area` =  :area_1 , `build` =  :build_2 , `unit` =  :unit_3 , `room` =  :room_4 , `memberid` =  :memberid_5 , `status` =  :status_6 , `createtime` =  :createtime_7 , `enable` =  :enable_8 , `license` =  :license_9 , `uniacid` =  :uniacid_10 , `address` =  :address_11 , `code` =  :code_12<hr/>Params: <br/>array (
+  ':area_1' => '1',
+  ':build_2' => '',
+  ':unit_3' => '',
+  ':room_4' => '',
+  ':memberid_5' => '5',
+  ':status_6' => 4,
+  ':createtime_7' => 1504526816,
+  ':enable_8' => 0,
+  ':license_9' => '',
+  ':uniacid_10' => 2,
+  ':address_11' => '1',
+  ':code_12' => 26841484,
+)<hr/>SQL Error: <br/>Unknown column 'uniacid' in 'field list'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /addons/feng_community/class/model_user.class.php; line: 157; <br />file: /addons/feng_community/inc/web/member.inc.php; line: 258; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 20:08:39 SQL Error :
+------------
+String:
+SQL: <br/>select count(*) from`ims_xcommunity_room`where status=2 and uniacid = 2<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_xcommunity_room' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 140; <br />file: /framework/function/pdo.func.php; line: 36; <br />file: /addons/feng_community/inc/web/member.inc.php; line: 576; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 20:08:39 SQL Error :
+------------
+String:
+SQL: <br/>select distinct regionid from`ims_xcommunity_room`where status=2 and uniacid = 2<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_xcommunity_room' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/web/member.inc.php; line: 577; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-09-04 20:17:53 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1504527472</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-09-04 20:17:53 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1504527472',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1504527472',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-09-04 20:17:53 response :
+------------
+

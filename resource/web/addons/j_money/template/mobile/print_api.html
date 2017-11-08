@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>收银台</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="{MODULE_URL}image/css/bootstrap.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/font-awesome.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/common.css" rel="stylesheet">
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+<script language="javascript" src="{MODULE_URL}template/js/LodopFuncs.js"></script>
+<script src="{MODULE_URL}template/js/sweetalert.min.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/sweetalert.css"/>
+</head>
+<body>
+{php echo $htmlprint}
+
+<script>
+var printMission;
+var LODOP;
+var printMachine=-1;
+var printnum=parseInt("{$_GPC['printnum']}");
+var printpagewidth=parseInt("{$pagewidth}") ? parseInt("{$pagewidth}") : 57;
+var print_num=0;
+$(document).ready(function(e) {
+	prn1_print();
+});
+function prn1_print() {
+	LODOP=getLodop();
+	{php echo $printDoc}
+	LODOP.SET_PRINTER_INDEXA(printMachine);
+	LODOP.SET_PRINT_PAGESIZE(3,printpagewidth,50,"");
+	LODOP.SET_PRINT_MODE("CATCH_PRINT_STATUS",true);
+	//LODOP.PREVIEW();
+	printMission=LODOP.PRINT();
+	var isInlist=LODOP.GET_VALUE('PRINT_STATUS_EXIST',printMission);
+	print_num++;
+	if(isInlist && print_num<printnum){
+		
+	}
+};
+</script>

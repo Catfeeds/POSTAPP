@@ -1,0 +1,138 @@
+2017-08-11 08:44:58 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wqOZStEvbG6suK3aaeJO2wI]]></FromUserName>
+<CreateTime>1502412297</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-11 08:44:58 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wqOZStEvbG6suK3aaeJO2wI',
+    'createtime' => '1502412297',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wqOZStEvbG6suK3aaeJO2wI',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1502412297',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-11 08:44:58 response :
+------------
+
+2017-08-11 09:03:39 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wqOZStEvbG6suK3aaeJO2wI]]></FromUserName>
+<CreateTime>1502413418</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-11 09:03:39 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wqOZStEvbG6suK3aaeJO2wI',
+    'createtime' => '1502413418',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wqOZStEvbG6suK3aaeJO2wI',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1502413418',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-11 09:03:39 response :
+------------
+
+2017-08-11 16:18:12 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wqOZStEvbG6suK3aaeJO2wI]]></FromUserName>
+<CreateTime>1502439491</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-11 16:18:12 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wqOZStEvbG6suK3aaeJO2wI',
+    'createtime' => '1502439491',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wqOZStEvbG6suK3aaeJO2wI',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1502439491',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-11 16:18:12 response :
+------------
+
+2017-08-11 16:22:32 SQL Error :
+------------
+String:
+SQL: <br/>select t1.*,t5.name as category,t4.id as rid from`ims_xcommunity_report`t1 left join`ims_xcommunity_member_address`t2 on t2.id=t1.addressid left join`ims_xcommunity_member`t3 on t3.id=t2.memberid left join`ims_xcommunity_rank`t4 on t4.rankid = t1.id left join`ims_xcommunity_category`t5 on t5.id=t1.cid where t3.uid=:uid and t1.type=1 and t3.regionid=:regionid AND status=:status order by t1.createtime desc limit 0,10<hr/>Params: <br/>array (
+  ':uid' => '2',
+  ':regionid' => '1',
+  ':status' => 1,
+)<hr/>SQL Error: <br/>Column 'status' in where clause is ambiguous<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/repair.inc.php; line: 222; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-11 16:22:33 SQL Error :
+------------
+String:
+SQL: <br/>select t1.*,t5.name as category,t4.id as rid from`ims_xcommunity_report`t1 left join`ims_xcommunity_member_address`t2 on t2.id=t1.addressid left join`ims_xcommunity_member`t3 on t3.id=t2.memberid left join`ims_xcommunity_rank`t4 on t4.rankid = t1.id left join`ims_xcommunity_category`t5 on t5.id=t1.cid where t3.uid=:uid and t1.type=1 and t3.regionid=:regionid AND status=:status order by t1.createtime desc limit 0,10<hr/>Params: <br/>array (
+  ':uid' => '2',
+  ':regionid' => '1',
+  ':status' => 2,
+)<hr/>SQL Error: <br/>Column 'status' in where clause is ambiguous<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/repair.inc.php; line: 222; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+

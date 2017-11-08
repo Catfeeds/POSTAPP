@@ -1,0 +1,55 @@
+<!--//0没有优惠，1为满减，2为会员卡折扣，3为微信卡券，4其他优惠//-->
+{loop $list $row}
+<div class="panel {if $row['status']==1}panel-success{else}panel-danger{/if}">
+  <div class="panel-heading"><span class="pull-right"> <span class="label label-default">{php echo date('Y-m-d H:i',$row['createtime'])}</span> <span class="label label-default">收银：{php echo $userList[$row['userid']]}</span></span><span class="label label-success">No：{$row['out_trade_no']}</span></div>
+  <div class="panel-body">
+    <table class="historybox">
+      <tr>
+        <td style="width:100px">￥{php echo sprintf('%.2f',($row['order_fee']/100))}</td>
+        <td style="width:90px">{$row['discount']}</td>
+        <td style="width:110px"><p><span class="label label-info">店铺:￥{php echo sprintf('%.2f',($row['discount_fee']/100))}</span></p>
+          <span class="label label-primary">系统:￥{php echo sprintf('%.2f',($row['coupon_fee']/100))}</span></td>
+        <td style="width:100px">￥{php echo sprintf('%.2f',($row['total_fee']/100))}</td>
+        <td style="width:100px">￥{php echo sprintf('%.2f',($row['paid_fee']/100))}</td>
+        <td style="width:100px">￥{php echo sprintf('%.2f',($row['total_fee']/100))}</td>
+        <td style="width:100px">
+        {if $row['paytype']==0}<img src="{MODULE_URL}template/img/wechart.gif" width="21"/>
+        {elseif $row['paytype']==1}<img src="{MODULE_URL}template/img/alipay.gif" width="21"/> 
+        {elseif $row['paytype']==2}<img src="{MODULE_URL}template/img/cash.gif" width="21"/>
+        {elseif $row['paytype']==3}<img src="{MODULE_URL}template/img/credit.gif" width="21"/>
+        {elseif $row['paytype']==4}<img src="{MODULE_URL}template/img/menbercard.gif" width="21"/>
+        {/if}
+        
+        {if $row['status']==1}<span class="label label-success"><i class="fa fa-check"/></i></span>
+        {elseif $row['status']==2}<span class="label label-danger"><i class="fa fa-recycle"/></i></span>
+        {else}<span class="label label-danger"><i class="fa fa-times"/></i></span>
+        {/if}
+        </td>
+        <td style="text-align:right">
+        {if ($row['paytype']==0 || $row['paytype']==1) && !$row['status']}
+        <a href="javascript:recheckpay({$row['paytype']},{$row['id']})" class="btn btn-danger"><i class="fa fa-refresh"></i></a>
+        {/if}
+        {if $row['status']}
+        <a href="javascript:historyOrder_print({$row['out_trade_no']})" class="btn btn-info"><i class="fa fa-print"></i></a>
+        {/if}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="panel-footer">
+      {if $row['memberno']}<span class="label label-primary">会员卡：<span class="member_idary">{$row['memberno']}</span></span>{/if} &nbsp;
+      {if $row['remark']}<span class="label label-default">备注：{$row['remark']}</span>{/if}
+      <span class="pull-right">
+        <span class="label label-info">{php echo $discountAry[$row['discounttype']]}</span>
+      </span> 
+  </div>
+</div>
+{/loop}
+<div class="panel panel-default">
+  <div class="panel-body text-center">
+    	<button type="button" {if 1<$pindex}onclick="history_page(0)" {else}disabled{/if} class="btn btn-default">上一页</button>
+        <button type="button"  class="btn btn-default">{php echo $pindex}/{php echo $allpage}</button>
+        <button type="button" {if $pindex<$allpage} onclick="history_page(1)" {else}disabled{/if} class="btn btn-default">下一页</button>
+  </div>
+</div>
+<input type="hidden" value="{php echo $pindex}" id="history_pageindex"/>

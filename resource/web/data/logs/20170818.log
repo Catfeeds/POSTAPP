@@ -1,0 +1,228 @@
+2017-08-18 11:06:28 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:29 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:29 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:29 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:29 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:29 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:29 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:32 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:32 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:32 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:32 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:32 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:32 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:32 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:32 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:33 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+
+2017-08-18 11:06:58 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_modules_plugin`where name in(feng_community_plugin_adv,eng_community_plugin_lift)<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'feng_community_plugin_adv' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/upgrade.php; line: 649; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 154; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/source/site/entry.ctrl.php; line: 81; <br />file: /web/index.php; line: 201; <br />
+

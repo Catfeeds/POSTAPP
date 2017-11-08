@@ -1,0 +1,480 @@
+{template 'common/header'} 
+<script language="javascript" src="../addons/j_money/template/js/highcharts.js"></script>
+<style>
+.jtopbox h2{ font-size:16px; margin:0; line-height:24px; text-align:center; padding:0; color:#999}
+.jnum{font-family:Arial; font-size:26px; text-align:center; line-height:80px;}
+.red{color:#F30}
+.green{ color:#0C0}
+</style>
+<div style="padding:10px;">
+  <ul class="nav nav-tabs">
+    <li><a href="javascript:closeMenu()">隐藏菜单</a></li>
+    <li class="active"><a href="{php echo $this->createWebUrl('statistics', array('shopid' => $shopid))}">{$shop['companyname']}数据统计</a></li>
+  </ul>
+  {if $operation == 'display'}
+  <div class="main">
+  	<form action="" class="form-horizontal form">
+    <input type="hidden" name="c" value="site" />
+    <input type="hidden" name="shopid" value="{$_GPC['shopid']}" />
+    <input type="hidden" name="a" value="entry" />
+    <input type="hidden" name="m" value="j_money" />
+    <input type="hidden" name="do" value="statistics" />
+    <input type="hidden" name="op" value="post" />
+    <div class="panel panel-success">
+      <div class="panel-body">
+        <div class="form-group form-inline" style="padding-left:20px;">
+        	{php echo tpl_form_field_daterange('gametime', array('start' => date('Y-m-d', $start),'end'=>date('Y-m-d', $end)),false)} <input type="submit" class="btn btn-info" value="搜索"/>
+        </div>
+      </div>
+    </div>
+    </form>
+    <div class="panel panel-success jtopbox" id="top_box">
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="col-sm-2">
+            <h2>销售额</h2>
+            <div class="jnum">{php echo $today['orderfee']*0.01;}</div>
+            <div>与昨天对比：<span class="jnum2">{php echo ($today['orderfee']-$yestoday['orderfee'])*0.01;}</span></div>
+            <div>与上周对比：<span class="jnum2">{php echo ($today['orderfee']-$lastweek['orderfee'])*0.01;}</span></div>
+          </div>
+          <div class="col-sm-2">
+            <h2>实收金额</h2>
+            <div class="jnum">{php echo $today['totalfee']*0.01;}</div>
+            <div>与昨天对比：<span class="jnum2">{php echo ($today['totalfee']-$yestoday['totalfee'])*0.01;}</span></div>
+            <div>与上周对比：<span class="jnum2">{php echo ($today['totalfee']-$lastweek['totalfee'])*0.01;}</span></div>
+          </div>
+          <div class="col-sm-2">
+            <h2>销售量</h2>
+            <div class="jnum">{php echo $today['goodnum']}</div>
+            <div>与昨天对比：<span class="jnum2">{php echo ($today['goodnum']-$yestoday['goodnum']);}</span></div>
+            <div>与上周对比：<span class="jnum2">{php echo ($today['goodnum']-$lastweek['goodnum']);}</span></div>
+          </div>
+          <div class="col-sm-2">
+            <h2>消费人数</h2>
+            <div class="jnum">{php echo $today['num']}</div>
+            <div>与昨天对比：<span class="jnum2">{php echo ($today['num']-$yestoday['num']);}</span></div>
+            <div>与上周对比：<span class="jnum2">{php echo ($today['num']-$lastweek['num']);}</span></div>
+          </div>
+          <div class="col-sm-2">
+            <h2>平均客单价</h2>
+            <div class="jnum">{php echo sprintf('%.2f',($today['orderfee']*0.01/$today['num']))}</div>
+            <div>与昨天对比：<span class="jnum2">{php echo ($today['orderfee']*0.01/$today['num']-$yestoday['orderfee']*0.01/$yestoday['num']);}</span></div>
+            <div>与上周对比：<span class="jnum2">{php echo ($today['orderfee']*0.01/$today['num']-$lastweek['orderfee']*0.01/$yestoday['num']);}</span></div>
+          </div>
+          <div class="col-sm-2">
+            <h2>平均购买量</h2>
+            <div class="jnum">{php echo sprintf('%.1f',($today['goodnum']/$today['num']))}</div>
+            <div>与昨天对比：<span class="jnum2">{php echo sprintf('%.1f',($today['goodnum']/$today['num']-$yestoday['goodnum']/$yestoday['num']));}</span></div>
+            <div>与上周对比：<span class="jnum2">{php echo sprintf('%.1f',($today['goodnum']/$today['num']-$lastweek['goodnum']/$lastweek['num']))}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 本日-支付方式 </div>
+      <div class="panel-body">
+        <div class="col-sm-6">
+          <div id="container2"></div>
+        </div>
+        <div class="col-sm-6">
+          <div id="container3"></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 销售金额 </div>
+      <div class="panel-body">
+        <div id="container1"></div>
+      </div>
+    </div>
+  </div>
+<script>
+$(document).ready(function(e) {
+    //closeMenu();
+	$(".jnum").each(function(index, element) {
+        var n=$(this).attr("n");
+		var num=$(this).text();
+		if(n>0){
+			$(this).text(fmoney(num,n));
+		}
+    });
+	$(".jnum2").each(function(index, element) {
+		var txt=$(this).text();
+        var num=parseFloat(txt);
+		var temp="";
+		if(num>0){
+			temp='<span><i class="fa fa-long-arrow-up red"></i><span>';
+		}else{
+			temp='<span><i class="fa fa-long-arrow-down green"></i></span>';
+		}
+		$(this).html(temp+" "+txt);
+    });
+	map1();
+	map2();
+});
+
+function map1(){
+	$('#container1').highcharts({
+			chart: {
+				type: 'area'
+			},
+			title: {text: '本周与上周销售对比'},
+			xAxis: {categories: ['日','一','二','三','四','五','六']},
+			yAxis: {min: 0,title: {text:'单位-元'}},
+			tooltip: {
+				pointFormat: '{series.name} 销售： <b>{point.y:.2f}</b>'
+			},
+			plotOptions: {
+				column: {
+					pointPadding: 0.2,
+					borderWidth: 0
+				}
+			},
+			series: [{
+				name: '上周',
+				data: [{php echo implode(",",$tempAry1)}]
+			}, {
+				name: '本周',
+				data: [{php echo implode(",",$tempAry2)}]
+		}]
+	});
+}
+function map2(){
+	$('#container2').highcharts({
+			chart: {
+				type: 'pie',
+				options3d: {
+					enabled: true,
+					alpha: 45
+				}
+			},
+			title: {text: '支付金额对比'},
+			plotOptions: {
+				pie: {
+					innerSize: 100,
+					depth: 45
+				}
+			},
+			series: [{
+				name: '支付金额占比',
+				data: [
+					['现金', {php echo sprintf('%.2f',$today['paytype'][2]['fee']*0.01)}],
+					['银行卡', {php echo sprintf('%.2f',$today['paytype'][3]['fee']*0.01)}],
+					['会员', {php echo sprintf('%.2f',$today['paytype'][4]['fee']*0.01)}],
+					['微信', {php echo sprintf('%.2f',$today['paytype'][0]['fee']*0.01)}],
+					['支付宝', {php echo sprintf('%.2f',$today['paytype'][1]['fee']*0.01)}],
+				]
+			}
+		]
+	});
+	$('#container3').highcharts({
+			chart: {
+				type: 'pie',
+				options3d: {
+					enabled: true,
+					alpha: 45
+				}
+			},
+			title: {text: '支付笔数对比'},
+			plotOptions: {
+				pie: {
+					innerSize: 100,
+					depth: 45
+				}
+			},
+			series: [{
+				name: '支付笔数对比',
+				data: [
+					['现金', {php echo intval($today['paytype'][2]['num'])}],
+					['银行卡', {php echo intval($today['paytype'][3]['num'])}],
+					['会员', {php echo intval($today['paytype'][4]['num'])}],
+					['微信', {php echo intval($today['paytype'][0]['num'])}],
+					['支付宝', {php echo intval($today['paytype'][1]['num'])}],
+				]
+			}
+		]
+	});
+}
+</script>
+{elseif $operation == 'post'}
+  <div class="main">
+  	<form action="" class="form-horizontal form">
+    <input type="hidden" name="c" value="site" />
+    <input type="hidden" name="shopid" value="{$_GPC['shopid']}" />
+    <input type="hidden" name="a" value="entry" />
+    <input type="hidden" name="m" value="j_money" />
+    <input type="hidden" name="do" value="statistics" />
+    <input type="hidden" name="op" value="post" />
+    <div class="panel panel-success">
+      <div class="panel-body">
+        <div class="form-group form-inline" style="padding-left:20px;">
+        	{php echo tpl_form_field_daterange('gametime', array('start' => date('Y-m-d', $start),'end'=>date('Y-m-d', $end)),false)} <input type="submit" class="btn btn-info" value="搜索"/>
+        </div>
+      </div>
+    </div>
+    </form>
+    <div class="panel panel-success jtopbox">
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="col-sm-2">
+            <h2>销售额</h2>
+            <div class="jnum">{php echo $item['fee1']*0.01;}</div>
+          </div>
+          <div class="col-sm-2">
+            <h2>实收金额</h2>
+            <div class="jnum">{php echo $item['fee2']*0.01;}</div>
+          </div>
+          <div class="col-sm-2">
+            <h2>销售量</h2>
+            <div class="jnum">{php echo $item['num2']}</div>
+          </div>
+          <div class="col-sm-2">
+            <h2>消费人数</h2>
+            <div class="jnum">{php echo $item['num1']}</div>
+          </div>
+          <div class="col-sm-2">
+            <h2>平均客单价</h2>
+            <div class="jnum">{php echo sprintf('%.2f',($item['fee1']*0.01/$item['num1']))}</div>
+          </div>
+          <div class="col-sm-2">
+            <h2>平均购买量</h2>
+            <div class="jnum">{php echo sprintf('%.1f',($item['num2']/$item['num1']))}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-success jtopbox">
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="col-sm-2">
+            <h2>会员消费</h2>
+            <div class="jnum">{php echo sprintf('%.2f',($memberPay['fee1']*0.01))}</div>
+            <div>占比：<span class="jnum2">￥{php echo sprintf('%.2f',($memberPay['fee1']/$item['fee1'])*100)}%</span></div>
+          </div>
+          <div class="col-sm-2">
+            <h2>非会员消费</h2>
+            <div class="jnum">{php echo ($item['fee1']-$memberPay['fee1'])*0.01;}</div>
+            <div>占比：<span class="jnum2">￥{php echo sprintf('%.2f',(1-$memberPay['fee1']/$item['fee1'])*100)}%</span></div>
+          </div>
+          
+          <div class="col-sm-2">
+            <h2>会员客单价</h2>
+            <div class="jnum">{php echo sprintf('%.2f',($memberPay['fee1']*0.01/$memberPay['num1']))}</div>
+          </div>
+          <div class="col-sm-2">
+            <h2>非会员客单价</h2>
+            <div class="jnum">{php echo sprintf('%.2f',(($item['fee1']-$memberPay['fee1'])*0.01/($item['num1']-$memberPay['num1'])))}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading"> 销售金额 </div>
+      <div class="panel-body">
+        <div id="container1"></div>
+      </div>
+    </div>
+    <div class="panel panel-success jtopbox">
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="col-sm-3">
+            <h2>现金消费</h2>
+            <div class="jnum">{php echo sprintf('%.2f',$paytypeAry[2]['fee'])}</div>
+            <div>客单价：<span class="jnum2">￥{php echo sprintf('%.1f',$paytypeAry[2]['fee']/$paytypeAry[2]['num'])}</span></div>
+          </div>
+          <div class="col-sm-3">
+            <h2>银行卡消费</h2>
+            <div class="jnum">{php echo sprintf('%.2f',$paytypeAry[3]['fee'])}</div>
+            <div>客单价：<span class="jnum2">￥{php echo sprintf('%.1f',$paytypeAry[3]['fee']/$paytypeAry[3]['num'])}</span></div>
+          </div>
+          <div class="col-sm-3">
+            <h2>余额</h2>
+            <div class="jnum">{php echo sprintf('%.2f',$paytypeAry[4]['fee'])}</div>
+            <div>客单价：<span class="jnum2">￥{php echo sprintf('%.1f',$paytypeAry[4]['fee']/$paytypeAry[4]['num'])}</span></div>
+          </div>
+          <div class="col-sm-3">
+            <h2>电子支付</h2>
+            <div class="jnum">{php echo sprintf('%.2f',($paytypeAry[1]['fee']+$paytypeAry[0]['fee']))}</div>
+            <div>客单价：<span class="jnum2">￥{php echo sprintf('%.1f',($paytypeAry[1]['fee']+$paytypeAry[0]['fee'])/($paytypeAry[1]['num']+$paytypeAry[0]['num']))}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading"> 支付方式 </div>
+      <div class="panel-body">
+        <div class="col-sm-6">
+          <div id="container2"></div>
+        </div>
+        <div class="col-sm-6">
+          <div id="container3"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading"> 商品销售 </div>
+      <div class="panel-body">
+        <div id="container4"></div>
+      </div>
+    </div>
+  </div>
+ {/if}
+ <script>
+ $(document).ready(function(e) {
+    //closeMenu();
+	$(".jnum").each(function(index, element) {
+        var n=$(this).attr("n");
+		var num=$(this).text();
+		if(n>0){
+			$(this).text(fmoney(num,n));
+		}
+    });
+	map1();
+	map2();
+	map3();
+});
+
+function map1(){
+	$('#container1').highcharts({
+			chart: {
+				type: 'area'
+			},
+			title: {text: "{php echo date('Y-m-d', $start)} 至 {php echo date('Y-m-d', $end)}销售情况"},
+			xAxis: {categories: ['{php echo implode("','",$dateAry)}']},
+			yAxis: {min: 0,title: {text:'单位-元'}},
+			tooltip: {
+				pointFormat: '{series.name} 销售： <b>{point.y:.2f}</b>'
+			},
+			plotOptions: {
+				column: {
+					pointPadding: 0.2,
+					borderWidth: 0
+				}
+			},
+			series: [{
+				name: '销售金额',
+				data: [{php echo implode(",",$valueAry['fee1'])}]
+			},{
+				name: '实收金额',
+				data: [{php echo implode(",",$valueAry['fee2'])}]
+			},{
+				name: '消费人数',
+				data: [{php echo implode(",",$valueAry['fee3'])}]
+			},{
+				name: '销售商品数量',
+				data: [{php echo implode(",",$valueAry['fee4'])}]
+			}],
+	});
+}
+function map2(){
+	$('#container2').highcharts({
+			chart: {
+				type: 'pie',
+				options3d: {
+					enabled: true,
+					alpha: 45
+				}
+			},
+			title: {text: '支付金额对比'},
+			plotOptions: {
+				pie: {
+					innerSize: 100,
+					depth: 45
+				}
+			},
+			series: [{
+				name: '支付金额占比',
+				data: [
+					['现金', {php echo sprintf('%.2f',$paytypeAry[2]['fee'])}],
+					['银行卡', {php echo sprintf('%.2f',$paytypeAry[3]['fee'])}],
+					['余额', {php echo sprintf('%.2f',$paytypeAry[4]['fee'])}],
+					['微信', {php echo sprintf('%.2f',$paytypeAry[0]['fee'])}],
+					['支付宝', {php echo sprintf('%.2f',$paytypeAry[1]['fee'])}],
+				]
+			}
+		]
+	});
+	$('#container3').highcharts({
+			chart: {
+				type: 'pie',
+				options3d: {
+					enabled: true,
+					alpha: 45
+				}
+			},
+			title: {text: '支付笔数对比'},
+			plotOptions: {
+				pie: {
+					innerSize: 100,
+					depth: 45
+				}
+			},
+			series: [{
+				name: '支付笔数对比',
+				data: [
+					['现金', {php echo intval($paytypeAry[2]['num'])}],
+					['银行卡', {php echo intval($paytypeAry[3]['num'])}],
+					['余额', {php echo intval($paytypeAry[4]['num'])}],
+					['微信', {php echo intval($paytypeAry[0]['num'])}],
+					['支付宝', {php echo intval($paytypeAry[1]['num'])}],
+				]
+			}
+		]
+	});
+}
+function map3(){
+	$('#container4').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {text: "{php echo date('Y-m-d', $start)} 至 {php echo date('Y-m-d', $end)}商品销售情况"},
+			xAxis: {categories: ['{php echo implode("','",$goodstil)}']},
+			yAxis: {
+				allowDecimals: false,
+				min: 0,
+				title: {
+					text: ''
+				}
+			},
+			tooltip: {
+				pointFormat: '{series.name} 销售： <b>{point.y:.2f}</b>'
+			},
+			series: [
+			{loop $goodslist $row}
+			{
+				name: '{$row["title"]}',
+				data: [{php echo $row['fee1']*0.01}]
+			},
+			{/loop}
+			],
+	});
+}
+ </script>
+</div>
+
+<script>
+function closeMenu(){
+	$(".big-menu").toggle(
+		function(){
+			if($(this).is(":visible")){
+				$(this).siblings().attr("class","col-xs-12 col-sm-9 col-lg-10");
+			}else{
+				$(this).siblings().attr("class","col-xs-12 col-sm-12 col-lg-12");
+			}
+		}
+	);
+}
+function fmoney(s,n){
+	s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";  
+	var l = s.split(".")[0].split("").reverse(),  
+	r = s.split(".")[1];  
+	t = "";  
+	for(i = 0; i < l.length; i ++ ){  
+	  t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");  
+	}  
+	return t.split("").reverse().join("") + "." + r;  
+}
+</script>

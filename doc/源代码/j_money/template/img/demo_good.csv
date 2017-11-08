@@ -1,0 +1,3 @@
+goodsn,pcate,title,thumb,unitname,productprice,marketprice,status,
+1001,2,商品名称,,份,99,100,1,*导入时请将此行删除
+商品唯一辨识号，如10001,商品分类,标题,图片,单位,成本价,销售价,0下架，1上架,*导入时请将此行删除

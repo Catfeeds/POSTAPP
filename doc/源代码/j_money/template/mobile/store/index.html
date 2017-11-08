@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{$shop['companyname']}收银台</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="{MODULE_URL}image/css/bootstrap.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/font-awesome.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/common.css" rel="stylesheet">
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{MODULE_URL}image/js/lib/bootstrap.min.js"></script>
+<script src="{MODULE_URL}template/js/sweetalert.min2.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/sweetalert.css"/>
+<script src="{MODULE_URL}template/js/jquery.transit.js"></script>
+<script src="{MODULE_URL}template/mobile/store/jetsum.fun.min.js"></script>
+
+<script src="{MODULE_URL}template/js/idangerous.swiper.min.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/idangerous.swiper.css"/>
+<script src="{MODULE_URL}template/js/JKeyboard.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/JKeyboard.css"/>
+<script src="{MODULE_URL}template/js/jedate/jedate.min.js"></script>
+<script src="{MODULE_URL}template/js/md5.js"></script>
+</head>
+<body>
+{if $operation=='display'}
+<style>
+html{ height:100%;}
+body{height:100%; overflow:hidden; background:url({php echo $shop['bg'] ? tomedia($shop['bg']): tomedia($cfg['bg'])}); background-size:100% 100%;}
+.login_body{display:table; width:80%; margin:0 auto; text-align:center}
+.jrow{ display:table-row;}
+.jcell{ display:table-cell; width:100%;vertical-align:middle; text-align:center; height:100%; text-align:center;}
+.logo{ margin-bottom:40px;}
+.logo img{ height:100%}
+.font24{ font-size:24px;color:#FFF}
+.btns{ display:inline-block;width:210px; margin-top:20px}
+.progress{ width:200px; margin:0 auto; opacity:0;}
+.keyboardbtn{ position:absolute; z-index:33; border:1px solid #CCC; box-shadow:0px 0px 2px #FFF; padding:10px; border-radius:8px;right:20px; bottom:20px;background:#FFF; color:#09F;}
+.keyboardon{color:#FFF; background:#09F;}
+</style>
+<!--登录-->
+<div class="login_body">
+  <div class="jcell">
+    <div class="logo"><img src="{php echo tomedia($_GPC['cookie_logo'])}" onerror="this.style.display='none'"/></div>
+    <div class="form-inline">
+      <div class="input-group" id="box_user"> <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" class="form-control" name="username" />
+      </div>
+      <span class="font24">&middot;</span><span class="font24">&middot;</span><span class="font24">&middot;</span> <img src="{php echo tomedia($_GPC['cookie_headimg'])}" onerror="this.src='{MODULE_URL}template/img/head.jpg'" style="vertical-align:middle" class="img-circle img-thumbnail logohead"/> <span class="font24">&middot;</span><span class="font24">&middot;</span><span class="font24">&middot;</span>
+      <div class="input-group" id="box_pass">
+        <input type="password" class="form-control" name="pwds" />
+        <span class="input-group-addon"><i class="fa fa-key"></i></span> </div>
+    </div>
+    <div class="submitbtn">
+      <button type="button" class="btn btn-primary btns" onClick="checkUpdate()" ><i class="fa fa-unlock"></i> 登陆</button>
+    </div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped active" role="progressbar"> <span class="sr-only"></span> </div>
+    </div>
+  </div>
+</div>
+<div class="keyboardbtn"><i class="fa fa-keyboard-o fa-2x"></i></div>
+<script language="javascript">
+$(document).ready(function(e) {
+    var _h=$(document).height();
+	$(".jcell").height(_h);
+});
+$(".keyboardbtn").on('click',function(){
+	if($(this).hasClass('keyboardon')){
+		$(this).removeClass('keyboardon');
+		$('input[name="username"]').unbind('click');
+		$('input[name="pwds"]').unbind('click');
+		$(this).JKeyboard({'show':false})
+	}else{
+		$(this).addClass('keyboardon');
+		$('input[name="username"]').bind('click',function(){
+			$('input[name="username"]').JKeyboard({'type':1,'val':'','tips':'请输入账号'});
+		})
+		$('input[name="pwds"]').bind('click',function(){
+			$('input[name="pwds"]').JKeyboard({'type':1,'val':'','tips':'请输入密码'});
+		})
+	}
+})
+
+function checkUpdate(){
+	var userid=$("input[name='username']").val();
+	var pwd=$("input[name='pwds']").val();
+	if(userid.length<1){
+		msgShow("用户名不能为空");
+		return false;
+	}
+	if(pwd.length<6){
+		msgShow("密码长度不正确");
+		return false;
+	}
+	jetsumpay.logIn({
+		"uniacid":"{$_W[uniacid]}","siteroot":"{$_W[siteroot]}","userid":userid,"pwd":pwd,
+		"success":function(result){
+			$("#box_user").transition({ x:30,opacity:0 });
+			$("#box_pass").transition({ x:-30,opacity:0 });
+			$(".btns").transition({opacity:0});
+			$(".logohead").transition({ y:-20,});
+			$(".progress").transition({opacity:1,y:-50}, function(){
+			  $(".progress-bar").transition({width:'100%'}, function(){
+				  location.href="{php echo $this->createMobileUrl('index',array('op'=>'in'))}";
+			  });
+			});
+			
+		},
+		"falsed":function(result){
+			swal(result);
+		}
+	});
+	return false;
+}
+</script>
+{else}
+<!--登录成功-->
+<style>
+ul,li{list-style:none; padding:0; margin:0;}
+html{ height:100%;}
+body{height:100%; background:#F1F1F1;color:#333}
+.jtable{ display:table; width:100%;}
+.jrow{ display:table-row;}
+.jcell{ display:table-cell;}
+.jbox{display:-webkit-box;display:box;}
+.fx1{-webkit-box-flex:1;box-flex:1;}
+.fx2{-webkit-box-flex:2;box-flex:2;}
+.fx3{-webkit-box-flex:3;box-flex:3;}
+.fx3{-webkit-box-flex:4;box-flex:4;}
+.fx3{-webkit-box-flex:5;box-flex:5;}
+.fx6{-webkit-box-flex:6;box-flex:6;}
+.fx7{-webkit-box-flex:7;box-flex:7;}
+.fx8{-webkit-box-flex:8;box-flex:8;}
+.fx9{-webkit-box-flex:9;box-flex:9;}
+.fx10{-webkit-box-flex:10;box-flex:10;}
+.fx11{-webkit-box-flex:11;box-flex:11;}
+.red{color:#F00}
+.warning{ color:#F90}
+.hiden{ display:none;}
+.sweet-counter-box{ text-align:left;}
+.sweet-counter-box ul { position:relative;}
+.sweet-counter-box ul li{display:inline-block;width:24.3%; margin:2px 0.2%; text-align:center; line-height:40px; border:1px solid #CCC; border-radius:4px; font-size:18px; cursor:pointer;}
+.sweet-counter-box .sweet-counter-c{position:absolute; z-index:2; height:134px;padding-top:46px}
+.sweet-counter-box .sweet-counter-0{width:48.8%}
+.sweet-counter-box ul li:hover,.sweet-counter-box ul li:active{ background:#CCC;}
+.body_top{ height:56px; overflow:hidden; line-height:56px; border-bottom:1px solid #CCC; background:#000; color:#FFF;}
+.body_top_logo{ padding:0 0 0 10px; display:inline-block; margin-right:20px;}
+.body_top_logo img{ max-height:50px;}
+a.btntop{ display:inline-block; line-height:56px; text-align:center; min-width:56px; padding:0 8px; font-size:14px; background:#303641; color:#FFF;}
+a.btntop:active{ background:#FFF; color:#303641;}
+
+.body-main{ width:100%; overflow:hidden;}
+.main-left{ display:table-cell; vertical-align:top; width:340px;min-width:260px; position:relative;}
+.main-middle{display:table-cell; vertical-align:top;padding:10px 10px 0 10px;text-align:center; width:100px;}
+.main-right{display:table-cell; vertical-align:top;padding:10px 10px 10px 0;}
+.search-box{ height:60px;text-align:left; padding:10px 0 10px 10px; position:relative;}
+.search-box input,.search-box button{ height:44px;}
+.select-box{ position:absolute; z-index:3; width:330px;background:#FFF; border:1px solid #CCC; display:none;}
+.select-box ul{}
+.select-box ul li{border-bottom:1px solid #CCC;padding:5px;cursor:pointer;}
+.select-box ul li h3{font-size:16px; margin:0 0 5px 0; padding:0; text-align:left; width:100%;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+.select-box ul li .good-sn{ font-size:12px; line-height:20px; color:#666;}
+.select-box ul li .good-price{ font-size:14px; text-align:right; color:#F90; font-weight:bold}
+.select-box ul li:active{ background:#EEE;}
+
+.list-box ul,.list-box ul li{ list-style:none; margin:0; padding:0}
+.list-box ul li{ padding:10px;}
+.list-box ul.til li{ border-bottom:1px solid #CCC; background:#FFF; font-size:16px;}
+#txt_order_fee{ color:#F90; font-size:20px; font-weight:bold;}
+ul.menu-list{ position:absolute; width:100%; top:0;}
+ul.menu-list li{display:-webkit-box;display:box; border-bottom:1px solid #CCC}
+ul.menu-list li .fx1{ max-width:50px; text-align:left; line-height:57px;}
+ul.menu-list li .fx11{ padding:0 5px;}
+ul.menu-list li h3{ font-size:16px; font-weight:bold; width:100%; max-width:270px;margin:0 0 3px 0; padding:0;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+ul.menu-list li .a1{line-height:20px; height:20px;}
+.menu_num{ font-size:14px;}
+.menu_price,.menu_totalfee{ color:#F90; font-weight:bold; font-size:16px;}
+.menu_oprice{ color:#333; font-weight:bold; font-size:14px; margin-left:10px}
+ul.menu-list li.active{ background:#09F; color:#FFF;}
+.menu-list-box{height:100%; overflow:hidden;border-right:1px solid #CCC; position:relative; background:#F7F7F7}
+.menu-list-btn{position:absolute;width:100%; bottom:0;height:40px; background:#666; text-align:center; line-height:40px;}
+.menu-list-btn div{ padding-top:5px; color:#FFF;}
+.menu-list-btn div:active{ background:#FFF; color:#333}
+.menu-list-btn div:first-child{ border-right:1px solid #FFF;}
+.btn-list{ position:relative;}
+.btn-list .mainbtn1{ height:50px; margin-bottom:10px;font-size:16px; font-weight:bold;}
+.btn-list .mainbtn2{ height:35px;margin-bottom:10px;font-size:16px;font-weight:bold;}
+.cate-list-box{display:table; width:100%;}
+.cate-list-box .cate-list-btn{max-width:60px;width:60px;height:60px;display:table-cell;padding:0; vertical-align:middle;}
+.cate-list-box .cate-list-btn .btn{height:60px;}
+.cate-list-box .cate-list-content{display:table-cell;padding:0 5px; position:relative}
+.cate-list-outer{padding:0 5px;width:100%;position:relative;height:60px;overflow:hidden;white-space:nowrap;}
+ul.cate-list{height:60px; width:2299px; position:absolute;left:0;}
+ul.cate-list li{margin-right:1px; width:99px; float:left;height:60px;text-align:center;font-size:16px;background:#fff;display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-box-align:center;-webkit-align-items: center;align-items: center; white-space:normal; word-break:break-all; padding:0 5px; cursor:pointer;}
+ul.cate-list li.active{ background:#09F;color:#FFF;}
+.good-list-box{ margin-top:10px;}
+ul.good-list{ overflow:scroll-y;}
+ul.good-list li{display:inline-block; width:23.3%; margin:0 0.5% 10px 0; border:1px solid #CCC; padding:5px; background:#F8F5EF; max-width:160px;cursor:pointer;}
+ul.good-list li h3{ font-size:16px; margin:0 0 5px 0; padding:0; text-align:left; width:100%;text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+ul.good-list li .good-sn{ font-size:12px; line-height:20px; color:#666;}
+ul.good-list li .good-price{ font-size:14px; text-align:right; color:#F90; font-weight:bold}
+ul.good-list li:active{ background:#FFF;}
+.good-list::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);border-radius:10px;background-color:#F5F5F5;}
+.good-list::-webkit-scrollbar{width: 12px;background-color: #F5F5F5;}
+.good-list::-webkit-scrollbar-thumb{border-radius:10px;-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);background-color:#555;}
+.masker{position:absolute;z-index:3;width:100%;left:0; right:0; top:0; bottom:0; background:rgba(0,0,0,0.5); display:none;}
+.masker2{position:absolute;z-index:10;width:100%;left:0; right:0; top:0; bottom:0; background:rgba(0,0,0,0.1); display:none;}
+.pay-box{position:absolute; width:700px; background:#EEE; border-radius:4px; padding:5px; z-index:4; display:none;}
+.pay-box-out{ display:table; width:100%; background:#FFF;}
+.pay-box-left{ display:table-cell; vertical-align:top; width:340px; padding:0 10px 0 0; position:relative;}
+.pay-show-box{padding:10px;}
+ul.paylist1 li{ font-size:16px; font-weight:bold; margin-bottom:10px;}
+ul.paylist1 li.til{font-size:20px; line-height:50px;}
+ul.paylist1 li.sinfo{font-weight:normal; text-indent:30px;}
+ul.paylist1 li.active{color:#09F;}
+.pay-box-right{ display:table-cell; vertical-align:top; padding:10px 10px 10px 0}
+.pay-show-btn{display:-webkit-box;display:box; padding:10px; position:absolute; width:100%; bottom:5px;}
+.pay-show-btn div{-webkit-box-flex:3;box-flex:3; padding:0 5px 0 0; width:25%;}
+.pay-show-btn div .btn{ height:50px; font-size:14px; font-weight:bold;}
+.pay-show-btn div:last-child{ padding:0}
+.pay-show-btn1{display:-webkit-box;display:box; margin-bottom:10px}
+.pay-show-btn1 div{-webkit-box-flex:3;box-flex:3; padding:0 5px 0 0; width:25%;}
+.pay-show-btn1 div .btn{height:50px; font-size:14px; font-weight:bold;}
+.pay-show-btn1 div:last-child{ padding:0}
+.pay-input-box{margin-bottom:10px;position:relative; height:40px;}
+.pay-input-box .input{height:40px; line-height:40px; border:1px solid #CCC; font-size:20px;font-weight:bold;position:absolute; width:100%; z-index:4; text-indent:10px;}
+.pay-input-box button{ background:#FFF; border:none;height:38px;position:absolute;width:60px; z-index:5;top:1px;right:2px;}
+.pay-show-btn2{display:-webkit-box;display:box; margin-bottom:5px}
+.pay-show-btn2 div{-webkit-box-flex:4;box-flex:4;padding:0 5px 0 0; width:110px;}
+.pay-show-btn2 div .btn{height:50px; font-size:16px; font-weight:bold;}
+.pay-show-btn2 div:last-child{ padding:0}
+.modal .form-group{ min-height:34px; height:34px;margin-bottom:10px;}
+ul.radio li{ display:inline-block; padding:5px 0; width:74px; text-align:center; margin:0 10px 10px 0;border:1px solid #CCC; border-radius:4px; cursor:pointer}
+ul.radio li i{ font-size:30px;}
+ul.radio li.checked{ border-color:#ffc107; background:#ffc107; color:#FFF;}
+.history{position:absolute;top:50px; left:0;display:none;width:70%;min-width:750px;z-index:20;overflow-x:hidden;}
+.history .panel-body{min-height:400px;}
+.history-bar{padding:10px;}
+.list-order{width:100%; border-top:1px solid #CCC;}
+.list-order th{font-size:16px;text-align:center;height:50px;border-bottom:1px solid #CCC; background:#FFF;}
+.list-order tbody tr td{height:50px;border-bottom:1px solid #CCC;font-size:16px;text-align:center}
+.list-order tbody tr.active td{background:#489AFE;color:#FFF;}
+.history-view-box{position:absolute;display:none;padding:10px;height:100%;width:480px;right:-20px;overflow-y:scroll; background:#FFF;box-shadow:-2px 0 2px #EEE,0 0 0 rgba(0,0,0,0),-2px 0 2px #EEE,0 0 0 rgba(0,0,0,0); bottom:0; }
+.line-box{border:1px solid #6CADD1; margin:5px 0; border-radius:4px;}
+.line-box h2{ border-top-left-radius:4px;border-top-right-radius:4px; text-align:left; font-size:14px; border-bottom:1px solid #6CADD1;padding:10px; margin:0;}
+.line-box div{padding:10px;color:#23BAB5}
+</style>
+<div class="body_top">
+  <div class="body_top_logo"><img src="{php echo tomedia($shop['logo'])}" onerror="this.style.display='none'"/></div>
+  {$shop['companyname']}
+  <span class="pull-right">
+  	<span class="label label-info">当班：</span> {$user['realname']}
+    <a class="btntop" href="javascript:exchange()" onClick="testPrint()"><i class="fa fa-print"></i> 测试打印</a>
+    <a class="btntop" href="javascript:exchange()"><i class="fa fa-times"></i> 退出</a>
+  </span> 
+</div>
+<div class="body-main jtable">
+	<div class="main-left">
+    	<div class="search-box">
+          <form>
+        	<div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="fa fa-keyboard-o"></i></button>
+              </span>
+              <input type="text" class="form-control" id="search_key" autocomplete="off" placeholder="条码/首字母/价格(1-100)"/>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit" onclick="return searchEvent();return false;"><i class="fa fa-long-arrow-left"></i></button>
+              </span>
+            </div>
+          </form>
+          <div class="select-box">
+          	<ul></ul>
+          </div>
+        </div>
+        <div class="list-box">
+          <ul class="til">
+          	<li>收银员：<b>{$user['realname']}</b></li>
+            <li>合计：<span class="pull-right" id="txt_order_fee">0</span></li>
+          </ul>
+          <div class="menu-list-box">
+            <ul class="menu-list"></ul>
+          </div>
+          <div class="menu-list-btn jbox">
+          	<div class="fx6" onClick="menuPage(0)"><i class="fa fa-angle-up fa-2x"></i></div>
+            <div class="fx6" onClick="menuPage(1)"><i class="fa fa-angle-down fa-2x"></i></div>
+          </div>
+        </div>
+    </div>
+    <div class="main-middle">
+    	<div class="btn-list">
+    	<button type="button" onClick="toPay()" class="btn btn-warning btn-block mainbtn1">结算</button>
+        <button type="button" onClick="btn_addgood(0)" class="btn btn-success btn-block mainbtn1">+</button>
+        <button type="button" onClick="btn_addgood(1)" class="btn btn-danger btn-block mainbtn1">-</button>
+        <button type="button" onClick="btn_changenum()" class="btn btn-default btn-block mainbtn2">数量</button>
+        <button type="button" onClick="btn_deletegood()" class="btn btn-default btn-block mainbtn2">删除</button>
+        <button type="button" onClick="btn_changeprice(0)" class="btn btn-default btn-block mainbtn2">折扣</button>
+        <button type="button" onClick="btn_changeprice(1)" class="btn btn-default btn-block mainbtn2">改价</button>
+        <button type="button" onClick="btn_handup()" class="btn btn-default btn-block mainbtn2">挂单</button>
+        <button type="button" onClick="btn_getback()" class="btn btn-default btn-block mainbtn2">取回</button>
+        <button type="button" onClick="memberCard()" class="btn btn-default btn-block mainbtn2">会员</button>
+        <button type="button" onClick="showHistoryBox()" class="btn btn-default btn-block mainbtn2">查单</button>
+        </div>
+    </div>
+    <div class="main-right">
+    	<div class="cate-list-box">
+        	<div class="cate-list-btn"><button type="button" class="btn btn-block btn-default btn-left"><i class="fa fa-angle-left fa-2x"></i></button></div>
+            <div class="cate-list-content">
+            	<div class="cate-list-outer">
+                	<ul class="cate-list">
+                    <li cid="0" onClick="class_select(0)">未归类商品</li>
+                    {loop $category $row}
+                    <li cid="{$row['id']}" onClick="class_select({$row['id']})">{$row['title']}</li>
+                    {/loop}
+                    </ul>
+                </div>
+            </div>
+            <div class="cate-list-btn"><button type="button" class="btn btn-block btn-default btn-right"><i class="fa fa-angle-right fa-2x"></i></button></div>
+        </div>
+        <div class="good-list-box">
+        	<ul class="good-list">
+            </ul>
+        </div>
+    </div>
+</div>
+<!---->
+<div class="modal fade" id="modal_getback" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        取回挂单<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body  table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th style="text-align:right">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<tr rowid="" content=''>
+              <td>时间</td>
+              <td>应收金额</td>
+              <td style="text-align:right">取回</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal_newgood" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        新增商品<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">商品名称</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="text" id="new_good_title" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">分类</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <select name="new_good_pcate" class="form-control">
+              <option value="0">未归类</option>
+                {loop $category $row}
+              <option value="{$row['id']}">{$row['title']}</option>
+                {/loop}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">货号</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="text" id="new_good_goodsn" readonly class="form-control" />
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">销售价格</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <input type="text" id="new_good_marketprice" class="form-control" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">进货价</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <input type="text" id="new_good_productprice" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-info" onClick="addNewGood()">新增商品</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="masker"></div>
+<div class="pay-box" id="paybox">
+  <div class="pay-box-out">
+  	<div class="pay-box-left">
+    	<div class="pay-show-box">
+        	<ul class="paylist1">
+            	<li class="til" style="border-bottom:1px dashed #CCC">应收金额<span class="pull-right red" id="pay_order_fee">0.00</span></li>
+                <div id="member">
+                	<li>会员<span class="pull-right"></span><input type="hidden" id="memberid" value="0"/></li>
+                </div>
+                <div id="dicount">
+                	
+                </div>
+                <li style="border-top:1px dashed #CCC; padding-top:10px;">合计<span class="pull-right " id="pay_sum_fee">0.00</span></li>
+                <li>已收<span class="pull-right warning" id="pay_paid_fee">0.00</span></li>
+                <li>找零<span class="pull-right red" id="pay_change_fee">0.00</span></li>
+            </ul>
+        </div> 
+        <div class="pay-show-btn">
+        	<div><button type="button" onClick="payboxClose()" class="btn btn-danger btn-block">关闭</button></div>
+            <div></div>
+            <div></div>
+            <div><button type="button" onClick="cancleOrder()" class="btn btn-default btn-block">取消订单</button></div>
+        </div>
+    </div>
+    <div class="pay-box-right">
+    	<div class="pay-show-btn1">
+        	<div><button type="button" onClick="seachCard()" class="btn btn-default btn-block">优惠券</button></div>
+            <div><button type="button" onClick="seachmembercard()" class="btn btn-default btn-block">会员卡</button></div>
+            <div><button type="button" onClick="editPrice()" class="btn btn-default btn-block">折扣</button></div>
+            <div><button type="button" class="btn btn-default btn-block">-</button></div>
+        </div>
+        <div class="pay-show-btn1" id="paybtngtoup">
+        	<div><button type="button" onClick="selectPay(0)" class="btn btn-danger btn-block">现金</button></div>
+            <div><button type="button" onClick="selectPay(1)" class="btn btn-info btn-block">银行卡</button></div>
+            <div><button type="button" onClick="selectPay(2)" class="btn btn-info btn-block">余额</button></div>
+            <div><button type="button" onClick="selectPay(3)" class="btn btn-info btn-block">电子支付</button><input type="hidden" id="qrcode"/></div>
+        </div>
+        <input type="hidden" id="pay_type"/>
+        <div class="pay-input-box">
+        	<div class="input" id="pay_input_fee">9999</div><button type="button" onClick="Counter('B','#pay_input_fee')"><i class="fa fa-arrow-left"></i></button>
+        </div>
+        <div class="pay-show-btn2">
+        	<div><button type="button" onClick="Counter(7,'#pay_input_fee')" class="btn btn-default btn-block">7</button></div>
+            <div><button type="button" onClick="Counter(8,'#pay_input_fee')" class="btn btn-default btn-block">8</button></div>
+            <div><button type="button" onClick="Counter(9,'#pay_input_fee')" class="btn btn-default btn-block">9</button></div>
+        </div>
+        <div class="pay-show-btn2">
+        	<div><button type="button" onClick="Counter(4,'#pay_input_fee')" class="btn btn-default btn-block">4</button></div>
+            <div><button type="button" onClick="Counter(5,'#pay_input_fee')" class="btn btn-default btn-block">5</button></div>
+            <div><button type="button" onClick="Counter(6,'#pay_input_fee')" class="btn btn-default btn-block">6</button></div>
+        </div>
+        <div class="pay-show-btn2">
+        	<div><button type="button" onClick="Counter(1,'#pay_input_fee')" class="btn btn-default btn-block">1</button></div>
+            <div><button type="button" onClick="Counter(2,'#pay_input_fee')" class="btn btn-default btn-block">2</button></div>
+            <div><button type="button" onClick="Counter(3,'#pay_input_fee')" class="btn btn-default btn-block">3</button></div>
+        </div>
+        <div class="pay-show-btn2">
+        	<div><button type="button" onClick="Counter(0,'#pay_input_fee')" class="btn btn-default btn-block">0</button></div>
+            <div><button type="button" onClick="Counter('.','#pay_input_fee')" class="btn btn-default btn-block">.</button></div>
+            <div><button type="button" onClick="payall()" class="btn btn-success btn-block">确定</button></div>
+        </div>
+    </div>
+  </div>
+</div>
+<div style="display:none;" id="shopdiscount">
+{loop $marketList $row}
+<li onclick="changeDiscount(this)" cost="{php echo sprintf('%.2f',($row['condition_fee']*0.01))}" discount="{$row['favorable']}" discounttype="1" memberid="{$row['condition_member']}" memberstr="{$row['memberstr']}" marketid="{$row['id']}"><span class="pull-right">0</span><b><i class="fa fa-square-o"></i></b> {$row['title']}</li>
+{/loop}
+</div>
+<div class="modal fade" id="modal_memberinfo" tabindex="-1" role="dialog" aria-hidden="true">
+  <form method="post" id="form_memberinfo" onSubmit="return false;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"> 会员信息
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="col-sm-12 form-inline">
+              <div class="input-group" style="margin-left:17px;">
+                <input type="text" id="memberinfo_keyword" class="form-control"/>
+                <span class="input-group-btn"><button type="submit" onClick="return searchmemberinfo();" class="btn btn-default">搜索</button></span>
+              </div>
+              <input type="hidden" id="memberinfo_id" class="form-control"/>
+              <button type="button" onClick="newCard()" class="btn btn-info">新开卡</button>
+              <button type="button" onClick="chargeCard()" id="btn_recharge" class="btn btn-info">充值</button>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">实体卡号</span>
+                    <input type="text" id="memberinfo_cardno" class="form-control" readonly/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">微信卡号</span>
+                    <input type="text" id="memberinfo_wxcardno" class="form-control" readonly/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">姓名</span>
+                    <input type="text" id="memberinfo_wxcardno" class="form-control" readonly/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">电话</span>
+                    <input type="text" id="memberinfo_wxcardno" class="form-control" readonly/>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">等级</span>
+                    <input type="text" id="memberinfo_level" class="form-control" readonly/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">余额</span>
+                    <input type="text" id="memberinfo_cash" class="form-control" readonly/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <div class="input-group">
+                    <span class="input-group-addon">积分</span>
+                    <input type="text" id="memberinfo_credit" class="form-control" readonly/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+        </div>
+        <div class="modal-footer" style="clear:left;">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <!--<button type="submit" class="btn btn-primary" id="memberinfo_submitbtn" onClick="return memberinfo_submit();">新开卡</button>-->
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="modal_membernew" tabindex="-1" role="dialog" aria-hidden="true">
+  <form method="post" id="form_membernew" onSubmit="return false;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        新开卡<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+         <div class="form-group">
+            <div class="col-sm-12">
+            	<div class="input-group"><span class="input-group-addon">卡号</span><input type="text" id="newcard_cardno" class="form-control"/><span class="input-group-addon" onClick="$('#newcard_cardno').JKeyboard({'type':1,'tips':'请输入卡号'});"><i class="fa fa-keyboard-o"></i></span></div>
+            </div>
+            <div style="clear:left"></div>
+         </div>
+         <div class="form-group">
+            <div class="col-sm-12">
+            	<div class="input-group"><span class="input-group-addon">微信卡号</span><input type="text" id="newcard_wxcardno" class="form-control"/></div>
+            </div>
+            <div style="clear:left"></div>
+         </div>
+         <div class="form-group">
+            <div class="col-sm-12">
+            <div class="input-group"><span class="input-group-addon">姓名</span><input type="text" id="newcard_realname" class="form-control"/></div>
+            </div>
+            <div style="clear:left"></div>
+         </div>
+         <div class="form-group">
+            <div class="col-sm-12">
+            	<div class="input-group"><span class="input-group-addon">电话</span><input type="tel" id="newcard_mobile" class="form-control"/><span class="input-group-addon" onClick="$('#newcard_mobile').JKeyboard({'type':0,'tips':'请输入电话'});"><i class="fa fa-keyboard-o"></i></span></div>
+            </div>
+            <div style="clear:left"></div>
+         </div>
+         <div class="form-group">
+            <div class="col-sm-12">
+              {php $groupAry=mc_groups()}
+              <select class="form-control" id="newcard_gid">
+                {loop $groupAry $row}
+              	<option value="{$row['groupid']}" {if $row['isdefault']}selected{/if}>{$row['title']}</option>
+                {/loop}
+              </select>
+            </div>
+            <div style="clear:left"></div>
+         </div>
+         <div class="form-group">
+            <div class="col-sm-12">
+              <div class="input-group"><span class="input-group-addon">密码</span><input type="password" id="newcard_password" class="form-control"/></div>
+            </div>
+            <div style="clear:left"></div>
+         </div>
+         <div class="form-group">
+            <div class="col-sm-12">
+              <div class="input-group"><span class="input-group-addon">重复</span><input type="password" id="newcard_password2" class="form-control"/></div>
+            </div>
+            <div style="clear:left"></div>
+         </div>
+         
+      </div>
+      <div class="modal-footer" style="clear:left;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary" id="newcard_submitbtn" onClick="return newcard_submit();">新开卡</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<div class="modal fade" id="modal_memberrecharge" tabindex="-1" role="dialog" aria-hidden="true">
+  <form method="post" id="form_memberrecharge" onSubmit="return false;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        会员卡充值<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+         <div class="form-group">
+         	<label class="col-xs-12 col-sm-3 col-md-2 control-label">卡号</label>
+            <div class="col-sm-9">
+            	<div class="input-group"><input type="text" id="recharge_cardno" class="form-control"/><span class="input-group-addon" onClick="$('#recharge_cardno').JKeyboard({'type':1,'tips':'请输入卡号'});"><i class="fa fa-keyboard-o"></i></span></div>
+            <div>&nbsp;</div>
+            </div>
+            <div class="help-block"></div>
+         </div>
+         <div class="form-group">
+         	<label class="col-xs-12 col-sm-3 col-md-2 control-label">充值金额</label>
+            <div class="col-sm-9">
+            	<div class="input-group"><input type="text" id="recharge_totalfee" class="form-control"/><span class="input-group-addon" onClick="$('#recharge_totalfee').JKeyboard({'type':0,'tips':'请输入充值金额'});"><i class="fa fa-keyboard-o"></i></span></div>
+             <div>&nbsp;</div>
+            </div>
+            <div class="help-block"></div>
+         </div>
+         <div class="form-group">
+         	<label class="col-xs-12 col-sm-3 col-md-2 control-label">支付方式</label>
+            <div class="col-sm-9 form-inline">
+            <input type="hidden" id="recharge_paytype" value="0" class="form-control" />
+            <ul class="radio">
+            	<li class="checked">现金支付</li><li>银行卡</li><li>微信</li><li>支付宝</li>
+            </ul>
+            </div>
+            <div class="help-block"></div>
+         </div>
+         <div class="form-group" id="recharge_other">
+         	<label class="col-xs-12 col-sm-3 col-md-2 control-label">银行卡后四位</label>
+            <div class="col-sm-9">
+            <div class="input-group"><input type="text" id="recharge_code" class="form-control"/><span class="input-group-addon" onClick="$('#recharge_code').JKeyboard({'type':0});"><i class="fa fa-keyboard-o"></i></span></div>
+            <div>&nbsp;</div>
+            </div>
+            <div class="help-block"></div>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary" id="newcard_submitbtn" onClick="return recharge_submit();">充值</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<div class="history" id="history_box">
+	<div class="panel panel-default">
+      <div class="panel-heading"> <b>订单管理</b> <button type="button" class="close" onClick="histroyboxHide()"><span aria-hidden="true">&times;</span></button></div>
+      <div class="panel-body">
+        <div class="history-bar form-inline">
+        	<div class="input-group"> 
+                <input type="text" placeholder="请输入单号" id="keyno" class="form-control"/>
+                <span class="input-group-addon" onclick="$('#keyno').JKeyboard({'type':1,'tips':'请输入单号'});"><i class="fa fa-keyboard-o"></i></span>
+            </div>
+            <div class="input-group"> 
+                <span class="input-group-addon">时间</span>
+                <input class="form-control" id="datestart" type="text" style="width:120px" placeholder="请选择时间" readonly  onClick="jeDate({dateCell:'#datestart',isTime:false,format:'YYYY-MM-DD'})" value="{php echo date('Y-m-d')}"/>
+                <span class="input-group-addon">至</span> 
+                 <input class="datainp form-control" id="dateend" style="width:120px" type="text" placeholder="请选择时间" readonly onClick="jeDate({dateCell:'#dateend',isTime:false,format:'YYYY-MM-DD'})" value="{php echo date('Y-m-d')}"/>
+                <span class="input-group-addon"></span>
+            </div>
+            <button type="button" class="btn btn-info" onClick="historyOrder_search()"><i class="fa fa-search"></i> 搜索</button>
+        </div>
+        <div class="history-list">
+        	<table class="list-order">
+              <thead>
+                  <tr>
+                      <th>单号</th>
+                      <th>方式</th>
+                      <th>金额</th>
+                      <th>优惠</th>
+                      <th>实付</th>
+                      <th>时间</th>
+                      <th>状态</th>
+                      <th>操作</th>
+                  </tr>
+              </thead>
+              <tbody id="history_listbox">
+                
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+    <div class="history-view-box" id="history_veiw">
+    
+    </div>
+</div>
+<div class="modal fade" id="modal_exchange" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"> 交接班
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="newcard_submitbtn" onClick="return exchange_submit();">确认交班并退出</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="remark"/>
+<iframe id="print_iframe" style="position:absolute; z-index:0; width:1px; height:1px;"></iframe>
+<script type="text/javascript">
+/*退出登录*/
+function logout(){
+	swal({   
+		title: "确认退出登录？",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonText: "确定",
+		cancelButtonText: "取消",
+		}, function(isConfirm){
+			if (isConfirm){
+				$.post("{php echo $this->createMobileUrl('ajax',array('op'=>'logout'))}","",function(data){
+					location.href="{php echo $this->createMobileUrl('index')}";
+				});
+			}
+		}
+	);
+}
+//全局参数
+var uniacid="{$_W['uniacid']}";
+var siteroot="{$_W['siteroot']}";
+var global_printnum=0;
+var global_print=parseInt("{$shop['printnum']}");
+var keyCodeAry1=[96,97,98,99,100,101,102,103,104,105,110];
+var keyCodeAry2=["0","1","2","3","4","5","6","7","8","9","."];
+var keyCodeAry=[];
+var fouce=false;
+$(document).ready(function(e){
+	var _h=$(document).height();
+	var _mainH=_h-70;
+	$(".main-middle").height(_mainH);
+	$(".menu-list-box").height(_mainH-$("ul.til").height()-$(".search-box").height()-40);
+	$("li[cid='0']").click();
+	for(i=0;i<keyCodeAry1.length;i++){
+		keyCodeAry[keyCodeAry1[i]]=keyCodeAry2[i];
+	}
+	$("#pay_input_fee").bind('DOMNodeInserted', function(e){
+		var _value=$(this).text().length>0 ? parseFloat($(this).text()) : 0;
+		$("#pay_paid_fee").text(parseFloat(_value).toFixed(2));
+		sum_payorder();
+	});
+	$(document).on('keydown',function (event) {
+		switch(event.keyCode){
+			case 8:
+				if($(":focus").prop("tagName")=="INPUT"){
+					
+				}else{
+					if($("#paybox:visible"))Counter("B",'#pay_input_fee');
+					return false;
+				}
+			break;
+			case 96 : case 97 : case 98 : case 99 : case 100 : case 101 : case 102 : case 103 : case 104 : case 105 : case 110 :
+				if($("#paybox:visible") && $("input:focus").prop("tagName")!="INPUT")Counter(keyCodeAry[event.keyCode],'#pay_input_fee');
+			break;
+			case 116:
+				swal({   
+					title: "刷新页面？",
+					showCancelButton: true,
+					confirmButtonText: "确定",
+					cancelButtonText: "取消",
+					}, function(isConfirm){
+						if (isConfirm){
+							location.reload();
+						}
+					}
+				);
+				return false;
+			break;
+		}
+	});
+	//----
+});
+function testPrint(){
+	swal("如果不能打印，请重启浏览器");
+	jetsumpay.printOrder({"uniacid":uniacid,"siteroot":siteroot,"printtype":5});
+}
+function menuPage(obj){
+	var pageSize=$(".menu-list-box").height();
+	var allPos=$(".menu-list").height();
+	var nowPos=parseInt($(".menu-list").css("y"));
+	if(allPos<=pageSize)return;
+	if(obj==0){
+		if(nowPos>=0)return;
+		$(".menu-list").transition({y:(nowPos+pageSize)});
+	}else{
+		if(Math.abs(nowPos)+pageSize>=allPos)return;
+		$(".menu-list").transition({y:(nowPos-pageSize)});
+	}
+}
+function chooseMenuGood(obj){
+	if($(obj).hasClass("active"))return;
+	$(obj).addClass("active").siblings().removeClass("active");
+}
+$(".btn-left").on('click',function(){
+	if($(".cate-list-outer").width()>=$(".cate-list").width())return;
+	var _outer=$(".cate-list-outer").width();
+	var _w=$(".cate-list li").size()*100;
+	$(".cate-list").width(_w);
+	var _left=parseInt($(".cate-list").css("left"));
+	if(_left>=0)return;
+	_left+=100;
+	$(".cate-list").css("left",_left);
+})
+$(".btn-right").on('click',function(){
+	if($(".cate-list-outer").width()>=$(".cate-list").width())return;
+	var _outer=$(".cate-list-outer").width();
+	var _w=$(".cate-list li").size()*100;
+	$(".cate-list").width(_w);
+	var _left=parseInt($(".cate-list").css("left"));
+	if(_w-Math.abs(_left)<=$(".cate-list-outer").width())return;
+	_left-=100;
+	$(".cate-list").css("left",_left);
+})
+function searchEvent(){
+	var _val=$("#search_key").val();
+	$("#search_key").val("");
+	if(_val.length==0)return false;
+	if(!isNaN(parseInt(_val))){
+		if(_val.length>5 && _val.indexOf(".")==-1){
+			seachGoods(_val);
+			return false;
+		}else{
+			//金额
+			addGood2Menu("无条码商品",0,"","",_val);
+			return false;
+		}
+	}else{
+		seachGoods(_val);
+		return false;
+	}
+	return false;
+}
+function addGood2Menu(title,id,goodsn,num,price){
+	var order=$(".menu-list li").size();
+	num=parseInt(num) ? parseInt(num) : 1;
+	var _total=(parseFloat(price)*num).toFixed(2);
+	order++;
+	if(id!=0 && $(".menu-list li[goodid='"+id+"']").size()>0){
+		num=parseInt($(".menu-list li[goodid='"+id+"'] .menu_num").text().replace("x",""));
+		num++;
+		_total=(parseFloat(price)*num).toFixed(2);
+		$(".menu-list li[goodid='"+id+"'] .menu_num").text("x"+num);
+		$(".menu-list li[goodid='"+id+"'] .menu_totalfee").text("￥"+_total);
+		$(".menu-list li[goodid='"+id+"']").click();
+	}else{
+		var temp='<li onClick="chooseMenuGood(this)" goodid="'+id+'" price="'+price+'" goodsn="'+goodsn+'"><div class="fx1">'+order+'</div><div class="fx11">';
+		temp+='<h3>'+title+'</h3>';
+		temp+='<div class="a1"><span>SN:</span><span class="menu_goodsn">'+goodsn+'</span>';
+		temp+='<span class="pull-right menu_num">x1</span></div>';
+		temp+='<div class="a2"><span class="menu_price">￥'+price+'</span>';
+		temp+='<span class="pull-right menu_totalfee">￥'+_total+'</span></div></div></li>';
+		if($(".menu-list li").size()==0){
+			$(".menu-list").append(temp);
+		}else{
+			$(".menu-list li:eq(0)").before(temp);
+		}
+		$(".menu-list li:eq(0)").click();
+	}
+	sumMenu();
+}
+function class_select(obj){
+	var _this=$("li[cid='"+obj+"']");
+	if(_this.hasClass("active"))return;
+	_this.addClass('active').siblings().removeClass("active");
+	$(".good-list").html("加载中");
+	jetsumpay.getGoods({'siteroot':siteroot,'uniacid':uniacid,'pcate':obj,'success':function(data){
+		var tmp='';
+		for(i in data){
+			tmp+='<li onclick="goodAdd(this)" goodid="'+data[i].id+'" price="'+data[i].marketprice+'" goodsn="'+data[i].goodsn+'"><h3>'+data[i].title+'</h3><div class="good-sn">'+data[i].goodsn+'</div><div class="good-price">￥'+data[i].marketprice+'</div></li>';
+		};
+		var tmp2=$(tmp).css("opacity",0);
+		$(".good-list").html(tmp2);
+		$(tmp2).transition({opacity:1});
+	}});
+}
+function goodAdd(obj){
+	var id=$(obj).attr("goodid");
+	var price=$(obj).attr("price");
+	var sn=$(obj).attr("goodsn");
+	var title=$(obj).find("h3").text();
+	addGood2Menu(title,id,sn,1,price);
+}
+function sumMenu(){
+	var totalfee=0;
+	$(".menu-list-box .menu_totalfee").each(function(index, element) {
+        totalfee+=parseFloat($(this).text().replace("￥",""));
+    });
+	$("#txt_order_fee").text(parseFloat(totalfee).toFixed(2));
+}
+function seachGoods(obj){
+	jetsumpay.getGoods({'siteroot':siteroot,'uniacid':uniacid,'keyword':obj,'success':function(data){
+		if(data.length==1){
+			addGood2Menu(data[0].title,data[0].id,data[0].goodsn,1,data[0].marketprice);
+		}else if(data==""){
+			if(obj.length>5 && !isNaN(parseInt(obj))){
+				swal({
+					title: "货号："+obj+"商品不存在，是否新增商品？",
+					showCancelButton: true,
+					closeOnCancel: false,
+					confirmButtonText: "确定",
+					cancelButtonText: "取消",
+					}, function(isConfirm){
+						if (isConfirm){
+							$("#new_good_title").val("");
+							$("#new_good_pcate").val(0);
+							$("#new_good_goodsn").val(obj);
+							$("#new_good_marketprice").val(0);
+							$("#new_good_productprice").val(0);
+							$("#modal_newgood").modal("show");
+						}else{
+							swal({
+							  title:"请输入价格"+"<img src='../addons/j_money/template/img/bank.png' onload='showCounter();'/>",
+							  type: "input",
+							  html:true,
+							  closeOnConfirm: true,
+							  showCancelButton: true,
+							  confirmButtonText: "确认",
+							  cancelButtonText: "关闭",
+							  inputPlaceholder: "请填写大于0数字"
+							  }, function(inputValue){
+								  $('.sweet-counter-box').addClass("hide");
+								  if (inputValue === false)return false;
+								  if (inputValue === "" || parseFloat(inputValue)<=0 || isNaN(parseFloat(inputValue))){
+									  swal.showInputError("请填写大于0数字");
+									  $('.sweet-counter-box').removeClass("hide");
+									  return false
+								  }
+								  addGood2Menu("临时商品","0",obj,1,inputValue);
+							  })
+						}
+					}
+				);
+			}
+		}else if(data.length>1){
+			$(".select-box ul").empty();
+			
+			for(var i in data){
+				var tmp='<li onclick="searchResult(this);" goodid="'+data[i].id+'" price="'+data[i].marketprice+'" goodsn="'+data[i].goodsn+'">';
+				tmp+='<h3>'+data[i].title+'</h3>';
+				tmp+='<div class="good-sn">'+data[i].goodsn+'</div><div class="good-price">￥'+data[i].marketprice+'</div></li>';
+				$(".select-box ul").append(tmp);
+			}
+			$(".select-box").show();
+		}
+	}});
+	return false;
+}
+function searchResult(obj){
+	goodAdd(obj);
+	$(".select-box").hide();
+}
+function addNewGood(){
+	if($("#new_good_title").val().length==0){
+		msgShow("请填写标题");
+		return;
+	}
+	if($("#new_good_goodsn").val().length==0){
+		msgShow("请填写货号");
+		return;
+	}
+	if(parseFloat($("#new_good_marketprice").val())<=0 || isNaN(parseFloat($("#new_good_marketprice").val()))){
+		msgShow("销售价格必须为数字");
+		return;
+	}
+	var title=$("#new_good_title").val();
+	var pcate=$("#new_good_pcate option:selected").val();
+	var goodsn=$("#new_good_goodsn").val();
+	var marketprice=$("#new_good_marketprice").val();
+	var productprice=$("#new_good_productprice").val();
+	
+	jetsumpay.newGoods({'siteroot':siteroot,'uniacid':uniacid,
+		'title':title,'pcate':pcate,'goodsn':goodsn,'marketprice':marketprice,'productprice':productprice,
+		'success':function(data){
+			$("#modal_newgood").modal("hide");
+			$("li[cid='"+pcate+"']").click();
+			seachGoods(goodsn);
+	}});
+}
+function btn_addgood(obj){
+	if($(".menu-list li").size()==0)return;
+	var _this=$(".menu-list .active");
+	num=parseInt(_this.find(".menu_num").text().replace("x",""));
+	if(obj==0){
+		if(num>=99){
+			num=99;
+		}else{
+			num++;
+		}
+	}else if(obj==1){
+		if(num<=1){
+			num=1;
+		}else{
+			num--;
+		}
+	}
+	if(arguments.length>1){
+		num=parseInt(arguments[1]);
+	}
+	_this.find(".menu_num").text("x"+num);
+	var price=parseFloat(_this.find(".menu_price").text().replace("￥",""));
+	_this.find(".menu_totalfee").text("￥"+(parseFloat(price*num)).toFixed(2));
+	sumMenu();
+}
+function btn_deletegood(){
+	if($(".menu-list li").size()==0)return;
+	if($(".menu-list .active").size()==0)return;
+	if(!confirm("确认删除商品？"))return ;
+	$(".menu-list .active").transition({opacity:0},function(){$(".menu-list .active").remove();})
+	sumMenu();
+}
+function btn_changenum(){
+	if($(".menu-list li").size()==0)return;
+	if($(".menu-list .active").size()==0)return;
+	num=parseInt($(".menu-list .active").find(".menu_num").text().replace("x",""));
+	swal({
+		title:"修改商品数量"+"<img src='../addons/j_money/template/img/bank.png' onload='showCounter();'/>",
+		text:"当前数量：<b class='red'>"+num+"</b>",
+		type: "input",
+		html:true,
+		showLoaderOnConfirm: true,
+		closeOnConfirm: true,
+		showCancelButton: true,
+		confirmButtonText: "确认",
+		cancelButtonText: "关闭",
+		inputPlaceholder: "请填写大于0数字"
+		}, function(inputValue){
+			$('.sweet-counter-box').addClass("hide");
+			if (inputValue === false)return false;
+			if (inputValue === "" || parseInt(inputValue)<=0 || isNaN(parseInt(inputValue))){
+				swal.showInputError("请填写大于0数字");
+				$('.sweet-counter-box').removeClass("hide");
+				return false
+			}
+			var nums=Math.abs(parseInt(inputValue));
+			if(nums>99)nums=99;
+			if(isNaN(nums))nums=1;
+			btn_addgood('',nums);
+		}
+	)
+}
+function btn_changeprice(obj){
+	if($(".menu-list li").size()==0)return;
+	if($(".menu-list .active").size()==0)return;
+	var num=parseInt($(".menu-list .active").find(".menu_num").text().replace("x",""));
+	var price=parseFloat($(".menu-list .active").find(".menu_price").text().replace("￥",""));
+	var oprice=parseFloat($(".menu-list .active").find(".menu_oprice").text().replace("原：￥",""));
+	var showPrice=price;
+	if(!isNaN(oprice)){
+		showPrice=oprice;
+	}
+	//
+	if(obj==0){
+		swal({
+			title:"修改商品单价折扣"+"<img src='../addons/j_money/template/img/bank.png' onload='showCounter();'/>",
+			text:"当前价格：<b class='red'>"+price+"</b>",
+			type: "input",
+			html:true,
+			showLoaderOnConfirm: true,
+			closeOnConfirm: true,
+			showCancelButton: true,
+			confirmButtonText: "确认",
+			cancelButtonText: "关闭",
+			inputPlaceholder: "请填写0-100"
+			}, function(inputValue){
+				$('.sweet-counter-box').addClass("hide");
+				if (inputValue === false)return false;
+				if (inputValue === "" || parseInt(inputValue)<=0 || isNaN(parseInt(inputValue))){
+					swal.showInputError("请填写大于0数字");
+					$('.sweet-counter-box').removeClass("hide");
+					return false
+				}
+				var nums=Math.abs(parseInt(inputValue));
+				if(isNaN(nums))nums=100;
+				if(nums>100)nums=100;
+				var newPrice=price*nums*0.01;
+				if(!isNaN(oprice))newPrice=oprice*nums*0.01;
+				if(newPrice<0.01){
+					swal("价格不能低于0.01");
+					return false;
+				}
+				$(".menu-list .active").find(".menu_price").text("￥"+parseFloat(newPrice).toFixed(2));
+				if($(".menu-list .active .menu_oprice").size()==0)$(".menu-list .active .menu_price").after(' <span class="menu_oprice"></span>');
+				$(".menu-list .active .menu_oprice").text("原：￥"+parseFloat(showPrice).toFixed(2));
+				$(".menu-list .active .menu_totalfee").text("￥"+parseFloat(newPrice*num).toFixed(2));
+				sumMenu();
+			}
+		)
+	}else{
+		swal({
+			title:"修改商品单价"+"<img src='../addons/j_money/template/img/bank.png' onload='showCounter();'/>",
+			text:"当前价格：<b class='red'>"+price+"</b>",
+			type: "input",
+			html:true,
+			showLoaderOnConfirm: true,
+			closeOnConfirm: true,
+			showCancelButton: true,
+			confirmButtonText: "确认",
+			cancelButtonText: "关闭",
+			inputPlaceholder: "请填写不小于0的数字"
+			}, function(inputValue){
+				$('.sweet-counter-box').addClass("hide");
+				if (inputValue === false)return false;
+				if (inputValue === "" || parseFloat(inputValue)<=0 || isNaN(parseFloat(inputValue))){
+					swal.showInputError("请填写大于0数字");
+					$('.sweet-counter-box').removeClass("hide");
+					return false
+				}
+				var nums=Math.abs(parseFloat(inputValue));
+				var newPrice=nums;
+				if(newPrice<0.01){
+					swal("价格不能低于0.01");
+					return false;
+				}
+				$(".menu-list .active").find(".menu_price").text("￥"+parseFloat(newPrice).toFixed(2));
+				if($(".menu-list .active .menu_oprice").size()==0)$(".menu-list .active .menu_price").after(' <span class="menu_oprice"></span>');
+				$(".menu-list .active .menu_oprice").text("原：￥"+parseFloat(showPrice).toFixed(2));
+				$(".menu-list .active .menu_totalfee").text("￥"+parseFloat(newPrice*num).toFixed(2));
+				sumMenu();
+			}
+		)
+	}
+}
+function btn_handup(){
+	if($(".menu-list li").size()==0)return;
+	var parama=[];
+	$(".menu-list li").each(function(index, element) {
+        var temp=[];
+		var title=$(this).find("h3").text();
+		var goodid=$(this).attr("goodid");
+		var goodsn=$(this).attr("goodsn");
+		var oprice=$(this).attr("price");
+		var num=$(this).find(".menu_num").text().replace("x","");
+		var price=parseFloat($(this).find(".menu_price").text().replace("￥",""));
+		temp=[goodid,title,goodsn,price,num,oprice];
+		parama.push(temp.join("|*|"));
+    });
+	jetsumpay.handUp({'siteroot':siteroot,'uniacid':uniacid,'parama':parama,'success':function(data){
+		$(".menu-list").empty();
+		sumMenu();
+	}});
+}
+function btn_getback(){
+	if($(".menu-list li").size()>0){
+		swal("请先处理当前订单，再进行取回");
+		return;
+	}
+	jetsumpay.getBack({"uniacid":uniacid,"siteroot":siteroot,"success":function(data){
+		var temp="";
+		var keynum=0;
+		for(var i in data){
+			temp+='<tr rowid="'+keynum+'" content="'+data[i].parama+'"><td>'+data[i].sn+'</td><td style="text-align:right"><button class="btn btn-info" type="button" onclick="getbackorder(\''+keynum+'\')">取回</button></td></tr>';
+			keynum++;
+		}
+		if(keynum==0){
+			swal("没有挂单哦");
+			return;
+		}
+		$("#modal_getback tbody").html(temp);
+		$("#modal_getback").modal("show");
+	}});
+}
+function getbackorder(key){
+	var content=$("tr[rowid='"+key+"']").attr("content");
+	var list=content.split(",");
+	var order=1;
+	for(i in list){
+		var data=list[i].split("|*|");
+		var temp='<li onClick="chooseMenuGood(this)" goodid="'+data[0]+'" price="'+data[5]+'" goodsn="'+data[2]+'"><div class="fx1">'+order+'</div><div class="fx11">';
+		temp+='<h3>'+data[1]+'</h3>';
+		temp+='<div class="a1"><span>SN:</span><span class="menu_goodsn">'+data[2]+'</span>';
+		temp+='<span class="pull-right menu_num">x'+data[4]+'</span></div>';
+		temp+='<div class="a2"><span class="menu_price">￥'+data[3]+'</span>';
+		if(parseFloat(data[3])!=parseFloat(data[5])){
+			temp+='<span class="menu_oprice">原：￥'+data[5]+'</span>';
+		}
+		
+		temp+='<span class="pull-right menu_totalfee">￥'+(parseInt(data[4])*parseFloat(data[3])).toFixed(2)+'</span></div></div></li>';
+		$(".menu-list").append(temp);
+		order++;
+	}
+	sumMenu();
+	$("#modal_getback").modal("hide");
+	jetsumpay.delhandupsave({"uniacid":uniacid,"siteroot":siteroot,"key":key,"success":function(data){}});
+}
+function toPay(){
+	if($(".menu-list li").size()==0){
+		msgShow("请先选择商品");
+		return;
+	}
+	var fee=parseFloat($("#txt_order_fee").text());
+	$("#pay_order_fee").text(fee);
+	$("#pay_paid_fee,#pay_input_fee").text(0);
+	$("#member").empty().append('<li>会员<span class="pull-right">-</span></li>');
+	$("#dicount").empty().html($("#shopdiscount").html());
+	
+	$("#paybtngtoup button").eq(0).click();
+	sum_payorder();
+	var _h=$(document).width();
+	$(".masker").show();
+	$("#paybox").css({"left":_h*0.5-350,"top":150}).show();
+}
+function msgShow(msg){
+	if(msg.length==0)return;
+	var num=parseInt(Math.random()*100);
+	var tmp='<div style="position:absolute;max-width:400px;opacity:0;border-radius:4px; background:rgba(0,0,0,0.8);color:#FFF; font-size:24px; text-align:center; padding:10px;z-index:40000" id="msg_show'+num+'">'+msg+'</div>';
+	$("body").append(tmp);
+	_this=$("#msg_show"+num);
+	var _h=$(document).height();
+	var _w=$(document).width();
+	var _sw=_this.width();
+	var _sh=_this.height();
+	_this.css({"left":(_w*0.5-_sw*0.5),"top":(_h*0.5-_sh*0.5)+50});
+	var timer=400;
+	_this.transition({y:-10,opacity:1}).transition({opacity:1},timer).transition({y:-20,opacity:0},function(){
+		_this.remove();
+	})
+}
+function sum_payorder(){
+	var total_price=parseFloat($("#pay_order_fee").text());
+	var discount_fee=0;
+	if($("#dicount li").size()>0){
+		$("#dicount li").each(function(index, element){
+            var _dis_type=$(this).attr("discounttype");
+			if(_dis_type==1){
+				var _discount=$(this).attr("discount");
+				var fee=0;
+				if(_discount.indexOf("%")>-1){
+					_discount=parseFloat(_discount.replace("%",""))*0.01;
+					fee=_discount*total_price;
+				}else{
+					fee=_discount;
+				}
+				$(this).find("span").text("-"+parseFloat(fee).toFixed(2));
+			}else if(_dis_type==2){
+				var _discount=parseFloat($(this).attr("discount"));
+				var fee=total_price*(1-_discount);
+				$(this).find("span").text("-"+parseFloat(fee).toFixed(2));
+			}else if(_dis_type==3){
+				var _discount=parseFloat($(this).attr("discount"));
+				var _distype=parseInt($(this).attr("cardtype"));
+				var fee=0;
+				if(_distype){
+					fee=total_price*(1-_discount);
+				}else{
+					fee=_discount;
+				}
+				$(this).find("span").text("-"+parseFloat(fee).toFixed(2));
+			}else if(_dis_type==4){
+				var _discount=$(this).attr("discount");
+				_discount=parseFloat(_discount.replace("%",""))*0.01;
+				var fee=(1-_discount)*total_price;
+				$(this).find("span").text("-"+parseFloat(fee).toFixed(2));
+			}
+			if($(this).hasClass("active")){
+				discount_fee=parseFloat($(this).find("span").text().replace("￥","").replace("-","").replace(" ",""));
+			}
+        });
+	}
+	var sum_fee=total_price-discount_fee;
+	var pai_fee=0;
+	$("#pay_sum_fee").text(parseFloat(sum_fee).toFixed(2));
+	var pai_fee=parseFloat($("#pay_paid_fee").text());
+	var change_fee=parseFloat(pai_fee-sum_fee);
+	$("#pay_change_fee").text(parseFloat(change_fee).toFixed(2));
+}
+function payboxClose(){
+	$("#paybox").hide();
+	$(".masker").hide();
+}
+function seachmembercard(){
+	payInputBox({"title":"请输入会员卡号","text":"请输入会员卡号","success":function(cardno){
+		if(!cardno)return;
+		swal("请稍后，查询中...");
+		jetsumpay.seachMembercard({"uniacid":uniacid,"siteroot":siteroot,"keyword":cardno,"success":function(data){
+			swal.close();
+			$("#member").empty();
+			var temp='<li memberid="'+data['id']+'" >'+data['leveltxt']+'<span class="pull-right">';
+			if(data['password'].length>1)temp+='<span class="label label-info">密码<input type="hidden" id="member_opassowrd" value="'+data['password']+'"/><input type="hidden" id="member_passowrd"/></span> ';
+			var no=data['cardno'] ? data['cardno'] : data['wxcardno'];
+			temp+=no+'</span><input type="hidden" id="memberid" value="'+data['id']+'"/></li>';
+			$("#member").append(temp);
+			$("#member").append('<li class="sinfo">余额:<span id="member_cash">'+data['cash']+'<span> 积分：'+data['credit']+'</li>');
+			if($("#dicount li[discounttype='2']").size()>0)$("#dicount li[discounttype='2']").remove();
+			if(parseFloat(data['discount'])==0 || parseFloat(data['discount'])==1)return;
+			var temp='<li onclick="changeDiscount(this)" '+(data['password'].length>1 ? "ispass='1'":"")+' discount="'+data['discount']+'" discounttype="2" memberid="'+data['id']+'"><span class="pull-right">0</span><b><i class="fa fa-square-o"></i></b> '+data['leveltxt']+data['discount']+'%折扣</li>';
+			$("#dicount").append(temp);
+			$("#dicount li[discounttype='2']").click();
+		}});
+	}})
+}
+function changeDiscount(obj){
+	var discounttype=parseInt($(obj).attr("discounttype"));
+	if(discounttype==3 && !parseInt($(obj).attr("cardtype"))){
+		var _leastcost=parseFloat($(obj).attr("cost"));
+		var _totalfee=parseFloat($("#order_fee").text());
+		if(_totalfee<_leastcost){
+			swal("该卡券必须满￥"+_leastcost+"元方可使用");
+			return false;
+		}
+	}else if(discounttype==1){
+		var _leastcost=parseFloat($(obj).attr("cost"));
+		var _totalfee=parseFloat($("#order_fee").text());
+		if(_totalfee<_leastcost){
+			swal("必须满￥"+_leastcost+"元方可使用");
+			return false;
+		}
+		var _memberid=$(obj).attr("memberid");
+		if(_memberid){
+			var _memberstr=$(obj).attr("memberstr");
+			if($(".pay-left li:eq(1) span").text().length<2){
+				swal("必须是"+_memberstr+"方可使用");
+				return false;
+			}
+			if(_memberstr.indexOf($(".pay-left li:eq(2) span").text())==-1){
+				swal("必须是"+_memberstr+"方可使用");
+				return false;
+			}
+		}	
+	}
+	$(obj).addClass('active').siblings().removeClass("active");
+	$(obj).find("b").html('<i class="fa fa-check-square"></i>');
+	$(obj).siblings().find("b").html('<i class="fa fa-square-o"></i>');
+	sum_payorder();
+}
+function seachCard(){
+	payInputBox({"title":"请输入微信卡号","text":"请输入微信卡号","success":function(cardid){
+		if($("#dicount li[discountid='"+cardid+"']").size()){
+			$("#dicount li[discountid='"+cardid+"']").click();
+			swal.close();
+			return;
+		}
+		swal("请稍后，查询中...");
+		jetsumpay.checkCard({"uniacid":uniacid,"siteroot":siteroot,"code":cardid,'success':function(cardinfo){
+			swal.close();
+			if(cardinfo["type"]=="discount" || cardinfo["type"]=="cash"){
+				if(parseFloat($("#pay_order_fee").text())*100==0){
+					msgShow("使用代金券/折扣券时，请先输入应收金额");
+					return false;
+				}
+				var _totalfee=parseFloat($("#pay_order_fee").text());
+				var _least_cost=parseInt(cardinfo['least_cost']) ? parseInt(cardinfo['least_cost']) : 0;
+				var _discount=parseInt(cardinfo['discount']);
+				var cardtype=cardinfo["type"]=="discount" ? 1 : 0;
+				var _til="";
+				if(cardinfo["type"]=="discount"){
+					_til="折扣券-微";
+				}else{
+					_til="代金券-微";
+				}
+				$("#dicount").append('<li onclick="changeDiscount(this)" cost="'+(_least_cost*0.01).toFixed(2)+'" cardtype="'+cardtype+'" discount="'+(_discount*0.01)+'" discounttype="3" discountid="'+cardinfo['code']+'"><span class="pull-right">0</span><b><i class="fa fa-square-o"></i></b> '+_til+'</li>');
+				$("#dicount li[discountid='"+cardinfo['code']+"']").click();
+			}else{
+				msgShow("支付时只能用代金券或折扣券");
+			}
+		}});
+	}});
+}
+function editPrice(){
+	payInputBox({"title":"请输入折扣","text":"请输入1-100","success":function(disnum){
+		if(parseInt(disnum)>100 || parseInt(disnum)<1 )disnum=100;
+		if($("#dicount li[discounttype='4']").size()>0)$("#dicount li[discounttype='4']").remove();
+		var temp='<li onclick="changeDiscount(this)" discount="'+disnum+'" discounttype="4" "><span class="pull-right">0</span><b><i class="fa fa-square-o"></i></b> 手动折扣'+disnum+'%折</li>';
+		$("#dicount").append(temp);
+		$("#dicount li[discounttype='4']").click();
+		swal.close();
+	}});
+}
+function selectPay(type){
+	switch(type){
+		case 0:
+			$("#pay_input_fee").text(0);
+			$("#paybtngtoup button").removeClass("btn-danger").addClass("btn-info");
+			$("#paybtngtoup button").eq(type).removeClass("btn-info").addClass("btn-danger");
+			$("#pay_type").val(type);
+		break;
+		case 1:
+			$("#pay_input_fee").text($("#pay_sum_fee").text());
+			$("#paybtngtoup button").removeClass("btn-danger").addClass("btn-info");
+			$("#paybtngtoup button").eq(type).removeClass("btn-info").addClass("btn-danger");
+			$("#pay_type").val(type);
+		break;
+		case 2:
+			if(!parseInt($("#memberid").val())){
+				msgShow("请刷会员卡");
+				return false;
+			}
+			if(parseFloat($("#member_cash").text())<parseFloat($("#pay_sum_fee").text())){
+				msgShow("会员卡余额不足，请先充值");
+				return false;
+			}
+			if($("#member_passowrd").size()>0){
+				payInputBox({"title":"请输入密码","text":"","password":1,"success":function(txt){
+					swal.close();
+					var opass=$("#member_opassowrd").val();
+					if(opass!=MD5(txt)){
+						msgShow("密码错误");
+						return false;
+					}
+					$("#member_passowrd").val(txt);
+					$("#pay_input_fee").text($("#pay_sum_fee").text());
+					$("#paybtngtoup button").removeClass("btn-danger").addClass("btn-info");
+					$("#paybtngtoup button").eq(type).removeClass("btn-info").addClass("btn-danger");
+					$("#pay_type").val(type);
+				}});
+			}else{
+				$("#pay_input_fee").text($("#pay_sum_fee").text());
+				$("#paybtngtoup button").removeClass("btn-danger").addClass("btn-info");
+				$("#paybtngtoup button").eq(type).removeClass("btn-info").addClass("btn-danger");
+				$("#pay_type").val(type);
+			}
+		break;
+		case 3:
+			payInputBox({"title":"请扫描客户支付码","text":"","success":function(txt){
+				swal.close();
+				$("#qrcode").val(txt);
+				$("#pay_input_fee").text($("#pay_sum_fee").text());
+				$("#paybtngtoup button").removeClass("btn-danger").addClass("btn-info");
+				$("#paybtngtoup button").eq(type).removeClass("btn-info").addClass("btn-danger");
+				$("#pay_type").val(type);
+			}});
+		break;
+	}
+}
+function payall(){
+	if(parseFloat($("#pay_paid_fee").text())<=0){
+		msgShow("请输入收款金额");
+		return false;
+	}
+	if(parseFloat($("#pay_change_fee").text())<0){
+		msgShow("收款金额不足");
+		return false;
+	}
+	if($("#paybtngtoup .btn-danger").size()==0){
+		msgShow("请选择收款方式");
+		return false;
+	}
+	jconfirm({"title":"确认收款？","success":function(){
+		swal({title:"系统处理中",showConfirmButton:false});
+		var goodslist=[];
+		$('.menu-list li').each(function(index, element) {
+			var goodid=$(this).attr("goodid");
+			var goodsn=$(this).attr("goodsn");
+			var oprice=$(this).attr("price");
+			var price=$(this).find(".menu_price").text().replace("￥","");
+			var goodfee=$(this).find(".menu_totalfee").text().replace("￥","");
+			var num=$(this).find(".menu_num").text().replace("x","");
+			var temp=[goodid,goodsn,oprice,price,num,goodfee];
+			goodslist.push(temp);
+		});
+		var orderfee=parseFloat($("#pay_order_fee").text());
+		var totalfee=parseFloat($("#pay_sum_fee").text());
+		var paidfee=parseFloat($("#pay_paid_fee").text());
+		if(paidfee<totalfee){
+			swal.close();
+			msgShow("支付金额不足");
+			return ;
+		}
+		var changefee=parseFloat($("#pay_change_fee").text());
+		var discountfee=parseFloat($("#dicount li.active span").text().replace("-",""));
+		var discounttype=$("#dicount li.active").attr("discounttype") ? $("#dicount li.active").attr("discounttype") :0;
+		var cardid=parseInt($("#dicount li.active").attr("discountid"));
+		var marketid=parseInt($("#dicount li.active").attr("marketid")) ? parseInt($("#dicount li.active").attr("marketid")) : 0;
+		var discount=1;
+		if(discounttype==2 || discounttype==4){
+			discount=$("#dicount li.active").attr("discount");
+		}else if(discounttype==3){
+			if(parseInt($("#dicount li.active").attr("cardtype"))){
+				discount=$("#dicount li.active").attr("discount");
+			}
+		}
+		var qrcode=$("#qrcode").val();
+		var paytype=$("#pay_type").val();
+		var payAry=[2,3,4,0];
+		var pay_type=payAry[paytype];
+		if(pay_type==0 && qrcode){
+			var _temp=qrcode.substr(0,1);
+			if(_temp==2){pay_type=1;}
+		}
+		var memberno=$("#memberid").size() ? $("#memberid").val() : 0;
+		jetsumpay.payAll({"uniacid":uniacid,"siteroot":siteroot,
+			"goods":goodslist,
+			"paytype":pay_type,
+			"password":$("#member_password").val(),
+			"orderfee":orderfee,
+			"couponfee":discountfee,
+			"discount":discount,
+			"totalfee":totalfee,
+			"paidfee":paidfee,
+			"change":changefee,
+			"cardid":cardid,
+			"memberno":memberno,
+			"code":$("#qrcode").val(),
+			"discounttype":discounttype,
+			"marketid":marketid,
+			"remark":$("#remark").val(),
+			"success":function(data){
+				jetsumpay.printOrder({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":data});
+				jetsumpay.paySuccess({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":data,"success":function(ordernum){
+					swal({title:"收款成功",showConfirmButton:false});
+					setTimeout(function(){
+						swal({title:"收款成功"},function(){
+							location.reload();
+						});
+					},2000);
+				}});
+			}
+		});
+	}})
+}
+function cancleOrder(){
+	jconfirm({title:"取消此订单？",'success':function(){
+		location.reload();
+	}})
+}
+function memberCard(){
+	$("#modal_memberinfo").modal("show");
+}
+function searchmemberinfo(){
+	if($("#memberinfo_keyword").val().length<1){
+		msgShow("请输入卡号");
+		$("#memberinfo_cardno").focus();
+		return ;
+	}
+	var keyword=$("#memberinfo_keyword").val();
+	document.getElementById("form_memberinfo").reset(); 
+	jetsumpay.seachMembercard({"uniacid":uniacid,"siteroot":siteroot,"keyword":keyword,"success":function(data){
+		$("#memberinfo_id").val(data['id']);
+		$("#memberinfo_level").val(data['leveltxt']);
+		$("#memberinfo_cardno").val(data['cardno']);
+		$("#memberinfo_wxcardno").val(data['wxcardno']);
+		$("#memberinfo_cash").val(data['cash']);
+		$("#memberinfo_credit").val(data['credit']);
+	}});
+	return false;
+}
+function newCard(){
+	document.getElementById("form_membernew").reset();
+	$('#modal_membernew').modal("show");
+}
+function newcard_submit(){
+	var _cardno=$("#newcard_cardno").val();
+	var _wxcardno=$("#newcard_wxcardno").val();
+	var _realname=$("#newcard_realname").val();
+	var _mobile=$("#newcard_mobile").val();
+	var _gid=$("#newcard_gid option:selected").val();
+	var _password=$("#newcard_password").val();
+	var _password2=$("#newcard_password2").val();
+	if(_cardno.length<5){
+		msgShow('请填写卡号');
+		return false;
+	}
+	if(_realname.length<1){
+		msgShow('请填写姓名');
+		return false;
+	}
+	if(_mobile.length!=11){
+		msgShow('请正确填写手机号码，否则将无法绑定会员卡');
+		return false;
+	}
+	if(_password.length>0 && _password!=_password2){
+		msgShow("两次输入的密码不一致");
+		return false;
+	}
+	jetsumpay.newCard({"uniacid":uniacid,"siteroot":siteroot,
+		"cardno":_cardno,
+		"wxcardno":_wxcardno,
+		"realname":_realname,
+		"mobile":_mobile,
+		"gid":_gid,
+		"password":_password,
+		'success':function(data){
+			$('#modal_membernew').modal("hide").on('hidden.bs.modal',function (e) {
+				swal({   
+					title: "开卡成功，是否进行充值？",
+					showCancelButton: true,
+					confirmButtonText: "确定",
+					cancelButtonText: "取消",
+					}, function(isConfirm){
+						if (isConfirm){
+							$("#recharge_cardno").val(_cardno)
+							$("#btn_recharge").click();
+						}
+					}
+				);
+			});
+			
+		}
+	});
+	return false;
+}
+function chargeCard(){
+	$('#modal_memberrecharge').modal("show").on('shown.bs.modal', function (e) {
+	$("#recharge_other").hide();
+	$("#form_memberrecharge .radio li").bind('click',function(){
+		if($(this).hasClass('checked'))return;
+		$(this).siblings().removeClass('checked').end().addClass('checked');
+		switch($(this).index()){
+			case 0:
+				$("#recharge_other label").text("");
+				$("#recharge_other").hide();
+			break;
+			case 1:
+				$("#recharge_other label").text("银行卡后四位数字");
+				$("#recharge_other").show();
+				$("#recharge_code").focus();
+			break;
+			case 2:
+				$("#recharge_other label").text("微信付款码");
+				$("#recharge_other").show();
+				$("#recharge_code").focus();
+			break;
+			case 3:
+				$("#recharge_other label").text("支付宝付款码");
+				$("#recharge_other").show();
+				$("#recharge_code").focus();
+			break;
+		}
+		$('#recharge_code').val('');
+		$('#recharge_paytype').val($(this).index());
+	})
+  }).on('hide.bs.modal', function (e) {
+	$("#recharge_other").hide();
+	$("#form_memberrecharge .radio li").unbind('click');
+	$('#recharge_cardno,#recharge_totalfee,#recharge_code').val('');
+	$("#form_memberrecharge .radio li").removeClass("checked").eq(0).addClass("checked");
+	$('#recharge_paytype').val('0');
+  });
+}
+function recharge_submit(){
+	var _cardno=$("#recharge_cardno").val();
+	var _fee=$("#recharge_totalfee").val();
+	var _paytype=parseInt($("#recharge_paytype").val());
+	var _code=$("#recharge_code").val();
+	if(_cardno.length<5){
+		msgShow('请填写卡号');
+		return false;
+	}
+	if(parseInt(_fee)<1){
+		msgShow('充值金额必须为大于1的整数');
+		return false;
+	}
+	if(_paytype>0 && _code.length<1){
+		msgShow("请输入相关内容");
+		return false;
+	}
+	jetsumpay.rechargeCard({"uniacid":uniacid,"siteroot":siteroot,
+		"cardno":_cardno,
+		"fee":_fee,
+		"paytype":_paytype,
+		"code":_code,
+		'success':function(data){
+			var result=eval("("+data+")");
+			jetsumpay.printOrder({"uniacid":uniacid,"siteroot":siteroot,"printtype":2,"out_trade_no":result.ordersn});
+			$('#modal_memberrecharge').modal("hide").on('hidden.bs.modal',function (e) {
+				swal({
+					title:"充值成功￥"+_fee+"元",
+					text:"账户余额：￥<b class='red'>"+(parseInt(result.item.cash)*0.01).toFixed(2)+"</b>元",
+					html:true,
+				});
+			});
+		}
+	});
+	return false;
+}
+function showHistoryBox(){
+	$(".masker").show();
+	var _left=($(document).width()-$("#history_box").width())*0.5;
+	$("#history_box .panel-body").height($(document).height()-170);
+	$("#history_box").css({"left":_left}).show();
+}
+function histroyboxHide(){
+	$(".masker").hide();
+	$("#history_box").hide();
+}
+function historyOrder_print(ordersn){
+	jconfirm({"title":"是否打印订单？","success":function(){
+		jetsumpay.printOrder({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":ordersn});
+	}});
+}
+function historyOrder_search(){
+	var _keyword=$('#keyno').val();
+	var _ds=parseInt($('#datestart').val().split("-").join(""));
+	var _de=parseInt($('#dateend').val().split("-").join(""));
+	if(_de<_ds){
+		msgShow("结束时间不能小于开始时间");
+		return;
+	}
+	_ds=$('#datestart').val();
+	_de=$('#dateend').val();
+	if($("#history_veiw:visible"))$('#history_veiw').transition({right:'-20px',opacity:0},200,function(){$(this).hide()});
+	jetsumpay.getOrder({"uniacid":uniacid,"siteroot":siteroot,"keyword":_keyword,'ds':_ds,'de':_de,'success':function(data){
+		$("#history_listbox").html(data);
+	}});
+}
+function historyOrder_page(num){
+	var _keyword=$('#keyno').val();
+	var _ds=$('#datestart').val();
+	var _de=$('#dateend').val();
+	var _page=$("#history_pageindex").val();
+	if(parseInt(num)){
+		_page++;
+	}else if(num==3){
+		_page=_page;
+	}else{
+		_page--;
+	}
+	if($("#history_veiw:visible"))$('#history_veiw').transition({right:'-20px',opacity:0},200,function(){$(this).hide()});
+	jetsumpay.getOrder({"uniacid":uniacid,"siteroot":siteroot,"keyword":_keyword,'ds':_ds,'de':_de,'page':_page,"psize":8,'success':function(data){
+		$("#history_listbox").html(data);
+	}});
+}
+function select_order(obj){
+	if($("#history_veiw:visible"))$('#history_veiw').transition({right:'-20px',opacity:0},200);
+	$(obj).addClass("active").siblings().removeClass("active");
+	var ordersn=$(obj).attr("ordersn");
+	jetsumpay.getOrderView({"uniacid":uniacid,"siteroot":siteroot,"keyword":ordersn,"success":function(html){
+		$("#history_veiw").html(html).css({"right":"-20px","bottom":"20px","height":$("#history_box").height()-130,"opacity":0,"display":"block"}).transition({right:0,opacity:1},200);
+	}});
+}
+function checkpay(ordersn){
+	if(!ordersn)return false;
+	swal({title:"系统处理中",showConfirmButton:false});
+	jetsumpay.reCheckPay({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":ordersn,'success':function(data){
+		swal("支付成功");
+		historyOrder_page(3);
+	}});
+}
+function exchange(){
+	jetsumpay.doExchange({"uniacid":uniacid,"siteroot":siteroot,"success":function(html){
+		$("#modal_exchange .modal-body").html(html);
+		$("#modal_exchange").modal("show");
+	}});
+}
+function exchange_submit(){
+	jetsumpay.printOrder({"uniacid":uniacid,"siteroot":siteroot,"printtype":3});
+	$.post("{php echo $this->createMobileUrl('ajax',array('op'=>'logout'))}","",function(data){
+		location.href="{php echo $this->createMobileUrl('index')}";
+	});
+}
+</script>
+
+{/if} 

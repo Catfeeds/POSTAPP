@@ -1,0 +1,174 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+  
+  <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('charge', array('op'=>'display','shopid' => $shopid))}">充值情况</a></li>
+  {if $operation == 'post'}<li class="active"><a href="#">充值</a></li>{/if}
+</ul>
+<script>
+require(['bootstrap'],function($){
+	$('.btn').hover(function(){
+		$(this).tooltip('show');
+	},function(){
+		$(this).tooltip('hide');
+	});
+});
+</script> 
+{if $operation == 'post'}
+
+{elseif $operation == 'display'}
+
+<div class="main">
+  <div class="category">
+    <form action="" class="form-horizontal form">
+      <input type="hidden" name="c" value="site" />
+      <input type="hidden" name="a" value="entry" />
+      <input type="hidden" name="m" value="j_money" />
+      <input type="hidden" name="shopid" value="{$_GPC['shopid']}" />
+      <input type="hidden" name="do" value="charge" />
+      <input type="hidden" name="isexplode" id="isexplode" value="0" />
+      <input type="hidden" name="token" value="{$_W['token']}" />
+      <div class="panel panel-info">
+      <div class="panel-body table-responsive">
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+            <div class="col-sm-9 form-inline">
+                <div class="input-group"> <span class="input-group-addon">关键字</span>
+                	<input type="text" name="keyword" class="form-control" value="{$_GPC['keyword']}" />
+                </div>
+                {php echo tpl_form_field_daterange('search', array('start'=>$starttime,'end'=>$endtime),false)}
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+            <div class="col-sm-9 form-inline">
+                <select name="paytype" class="form-control">
+                  <option value="-1">充值方式</option>
+                  <option value="1" {if 1==$_GPC['paytype']}selected{/if}>现金</option>
+                  <option value="2" {if 2==$_GPC['paytype']}selected{/if}>银行卡</option>
+                  <option value="3" {if 3==$_GPC['paytype']}selected{/if}>微信</option>
+                  <option value="4" {if 4==$_GPC['paytype']}selected{/if}>支付宝</option>
+                </select>
+                
+                <select name="status" class="form-control">
+                  <option value="-1">状态</option>
+                  <option value="2" {if 2==$_GPC['status']}selected{/if}>成功</option>
+                  <option value="1" {if 1==$_GPC['status']}selected{/if}>失败</option>
+                </select>
+            </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+              <div class="col-sm-9 form-inline">
+                <input type="submit" class="btn btn-info" value="搜索"/>
+                <input type="submit" class="btn btn-danger" onClick="$('#isexplode').val(1)" name="explode" value="导出数据"/>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="panel panel-info">
+        <div class="panel-body table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width:140px;">单号</th>
+                <th>卡号</th>
+                <th>充值金额</th>
+                <th>赠送金额</th>
+                <th>实付金额</th>
+                <th>支付方式</th>
+                <th>操作员</th>
+                <th>状态</th>
+                <th style="text-align:right">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            {loop $list $row}
+            <tr>
+              <td><span class="label label-default">{$row['out_trade_no']}</span></td>
+              <td>{$row['cardno']}</td>
+              <td><span class="label label-info">￥{php echo sprintf('%.2f',($row['cash']/100))}</td>
+              <td><span class="label label-success">￥{php echo sprintf('%.2f',($row['gift']/100))}</td>
+              <td><span class="label label-danger">￥{php echo sprintf('%.2f',(($row['cash']-$row['gift'])/100))}</td>
+               <td>
+              {if $row['paytype']==0} <img src="{MODULE_URL}template/img/pay_2.png" width="21"/>
+              {elseif $row['paytype']==1} <img src="{MODULE_URL}template/img/pay_3.png" width="21"/>
+              {elseif $row['paytype']==2} <img src="{MODULE_URL}template/img/pay_0.png" width="21"/>
+              {elseif $row['paytype']==3} <img src="{MODULE_URL}template/img/pay_1.png" width="21"/>
+              {/if}</td>
+              <td>
+              	<p>
+                {if $row['groupid']}
+                <span class="label label-default">{php echo $groupids[$row['groupid']]}</span>
+                {else}
+                <span class="label label-warning">后台</span>
+                {/if}
+                </p>
+                {if $row['userid']}
+                <span class="label label-default">{php echo $userList[$row['userid']]}</span>
+                {else}
+                <span class="label label-warning">后台</span>
+                {/if}
+              </td>
+              <td>
+              {if $row['status']==1} <span class="label label-success"><i class="fa fa-check"/></i></span>
+              {elseif $row['status']==2}<span class="label label-danger"><i class="fa fa-recycle"/></i></span>
+              {else}<span class="label label-danger"><i class="fa fa-times"/></i></span>{/if} 
+              </td>
+              <td style="text-align:right">
+              {if $row['paytype']==2 || $row['paytype']==3}
+                <a href="javascript:recheckchargepay({$row['id']},{$row['paytype']})"  class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="重新获取订单"><i class="fa fa-refresh"></i></a>
+              {/if}
+              {if $row['status']==0}
+              <a href="{php echo $this->createWebUrl('charge', array('op'=>'delete','id'=>$row['id'],'shopid'=>$shopid))}" onclick="return deleteOrder({$row['id']},{$row['paytpye']});return false;" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="删除"><i class="fa fa-times"></i></a>
+              {/if}
+                </td>
+            </tr>
+            {/loop}
+            <tr>
+            <tr>
+              <td colspan="7" style="text-align:center">{$pager}</td>
+            </tr>
+           </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function recheckchargepay(id,type){
+	if(type<2){
+		alert("支付成功");
+		return;
+	}
+	var url="{php echo $this->createWebUrl('wajax',array('op'=>'cheackwechatpay'))}";
+	if(type==3)url="{php echo $this->createWebUrl('wajax',array('op'=>'cheackalipay'))}";
+	$.post(url,{"id":id},function(datas){
+		console.log(datas);
+		var data=eval("("+datas+")");
+		if(data.success){
+			alert("支付成功");
+			location.reload();
+		}else{
+			alert(data.msg);
+		}
+	});
+}
+function deleteOrder(id){
+	if(!confirm('删除充值记录？'))return false;
+	var url="{php echo $this->createWebUrl('wajax',array('op'=>'check_charge'))}";
+	$.post(url,{"id":id},function(datas){
+		console.log(datas);
+		var data=eval("("+datas+")");
+		if(data.success){
+			alert("支付成功");
+			location.reload();
+		}else{
+			return true;
+		}
+	});
+}
+</script>
+{/if}
+{template 'common/footer'} 

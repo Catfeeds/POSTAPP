@@ -1,0 +1,71 @@
+<!--//0没有优惠，1为满减，2为会员卡折扣，3为微信卡券，4其他优惠//-->
+{loop $list $row}
+<div class="panel {if $row['status']==1}panel-success{else}panel-danger{/if}">
+  <div class="panel-heading"><span class="pull-right"> <span class="label label-default">{php echo date('Y-m-d H:i',$row['createtime'])}</span> <span class="label label-default">收银：{php echo $userList[$row['userid']]}</span></span><span class="label label-success">No：{$row['out_trade_no']}</span></div>
+  <div class="panel-body">
+    <table class="historybox">
+      <thead>
+        <tr>
+          <th style="width:50px">单号</th>
+          <th style="width:80px">商品</th>
+          <th style="width:110px;text-align:center">金额</th>
+          <th style="width:80px;text-align:center">支付</th>
+          <th style="width:80px">结算</th>
+          <th style="width:50px">状态</th>
+          <th style="text-align:right;width:100px;">操作</th>
+        </tr>
+      </thead>
+      <tr>
+      	<td>{$row['serialnum']}</td>
+        <td><p><span class="label label-success">{$row['species']}种</span></p> <span class="label label-info">{$row['num']}件</span></td>
+        <td>
+        <p><span class="label label-default">总金额</span><span class="label label-info pull-right">{php echo sprintf('%.2f',($row['order_fee']*0.01))}</span></p>
+        <p><span class="label label-default">优惠</span><span class="label label-info pull-right">{php echo sprintf('%.2f',($row['discount_fee']/100))}</span></p>
+        <p><span class="label label-default">应付</span><span class="label label-info pull-right">{php echo sprintf('%.2f',($row['total_fee']*0.01))}</span></p>
+        <p><span class="label label-default">实付</span><span class="label label-info pull-right">{php echo sprintf('%.2f',($row['paid_fee']*0.01))}</span></p>
+        {if $row['change_fee']>0}<p><span class="label label-default">找零</span><span class="label label-info pull-right">{php echo sprintf('%.2f',($row['change_fee']*0.01))}</span></p>{/if}
+        {if $row['refund_fee']!=0}<p><span class="label label-default">退款</span><span class="label label-danger pull-right">{php echo sprintf('%.2f',($row['refund_fee']*0.01))}</span></p>{/if}
+        
+        </td>
+        <td style="text-align:center">
+        {if $row['paytype']==0}<img src="{MODULE_URL}template/img/wechart.gif" width="21"/>
+        {elseif $row['paytype']==1}<img src="{MODULE_URL}template/img/alipay.gif" width="21"/> 
+        {elseif $row['paytype']==2}<img src="{MODULE_URL}template/img/cash.gif" width="21"/>
+        {elseif $row['paytype']==3}<img src="{MODULE_URL}template/img/credit.gif" width="21"/>
+        {elseif $row['paytype']==4}<img src="{MODULE_URL}template/img/menbercard.gif" width="21"/>
+        {/if}
+        </td>
+        <td>{if $row['paid_fee']}<span class="label label-warning">{php echo sprintf('%.2f',(($row['total_fee']-$row['refund_fee'])*0.01))}</span>{else}<span class="label label-default">0</span>{/if}</td>
+        <td>
+        {if $row['status']==1}
+        {if $row['refundstatus']==0}
+        <span class="label label-success"><i class="fa fa-check"/></i></span>
+        {elseif $row['refundstatus']==1}<span class="label label-success"><i class="fa fa-check"/></i></span> <span class="label label-danger"><i class="fa fa-recycle"/></i></span>
+        {elseif $row['refundstatus']==2}<span class="label label-danger"><i class="fa fa-recycle"/></i></span>
+        {/if}
+        {else}<span class="label label-danger"><i class="fa fa-times"/></i></span>
+        {/if}
+        </td>
+        <td style="text-align:right;">
+        {if ($row['paytype']==0 || $row['paytype']==1) && !$row['status']}
+        <a href="javascript:recheckpay({$row['paytype']},{$row['id']})" class="btn btn-danger"><i class="fa fa-refresh"></i></a>
+        {/if}
+        {if $row['status']}
+        <a href="javascript:historyOrder_show({$row['out_trade_no']})" class="btn btn-info"><i class="fa fa-file-text-o"></i></a>
+        <a href="javascript:historyOrder_print({$row['out_trade_no']})" class="btn btn-info"><i class="fa fa-print"></i></a>
+        {/if}
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="panel-foot">{$row['remark']}</div>
+</div>
+{/loop}
+<div class="panel panel-default">
+  <div class="panel-body text-center">
+    	<button type="button" {if 1<$pindex}onclick="historyOrder_page(0)" {else}disabled{/if} class="btn btn-default">上一页</button>
+        <button type="button"  class="btn btn-default">{php echo $pindex}/{php echo $allpage}</button>
+        <button type="button" {if $pindex<$allpage} onclick="historyOrder_page(1)" {else}disabled{/if} class="btn btn-default">下一页</button>
+  </div>
+</div>
+<input type="hidden" value="{php echo $pindex}" name="historyOrder_pageindex"/>

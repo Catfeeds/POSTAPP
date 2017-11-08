@@ -1,0 +1,86 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+  <li><a href="{php echo $this->createWebUrl('membercard', array('op' => 'display', 'shopid' => $_GPC['shopid']))}">管理会员</a></li>
+  <li class="active"><a href="{php echo $this->createWebUrl('membercharge', array('op' => 'display', 'shopid' => $_GPC['shopid']))}">充值活动</a></li>
+  <li><a href="{php echo $this->createWebUrl('group', array('op' => 'display'))}">店铺设置</a></li>
+</ul>
+<script>
+require(['bootstrap'],function($){
+	$('.btn').hover(function(){
+		$(this).tooltip('show');
+	},function(){
+		$(this).tooltip('hide');
+	});
+});
+</script> 
+{if $operation == 'display'}
+<style>
+#addbox{margin-bottom:10px;}
+#addbox input[type='text']{ width:80px}
+.list-item{padding-bottom:10px}
+</style>
+<div class="main">
+  <div class="category">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+      <input type="hidden" name="shopid" value="{php echo $_GPC['shopid']}" />
+      <div class="panel panel-info">
+        <div class="panel-body table-responsive">
+          <div class="form-group">
+          	<label class="col-xs-12 col-sm-3 col-md-2 control-label">地址</label>
+            <div class="col-sm-9">
+            <input type="text" class="form-control" value="{$_W['siteroot']}app/index.php?i={$_W['uniacid']}&c=entry&do=membercharge&m=j_money&shopid={php echo $_GPC['shopid']}">
+            </div>
+          </div>
+          <div class="form-group">
+          	<label class="col-xs-12 col-sm-3 col-md-2 control-label">添加入口</label>
+            <div class="col-sm-9">
+            <a href="{php echo $this->createWebUrl('membercharge', array('op' => 'post', 'shopid' => $_GPC['shopid']))}" class="btn btn-danger">添加入口</a></div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">充值活动</label>
+            <div class="col-sm-9 form-inline">
+              <div id="addbox">
+                {php $i=1;}
+              	{loop $fun $row}
+                {php $temp=explode("|",$row)}
+                <div class="list-item">
+                  <div class="input-group"> 
+                    <span class="input-group-addon">充</span>
+                    <input type="text" class="form-control" name="funkey[{php echo $i}]"  placeholder="输入金额" value="{php echo $temp[0]}">
+                    <span class="input-group-addon">元，送</span>
+                    <input type="text" class="form-control" name="funval[{php echo $i}]"  placeholder="输入金额" value="{php echo $temp[1]}">
+                    <span class="input-group-addon">元</span>
+                  </div>
+                  <a class="btn btn-default btn-sm" onclick="del(this)"><i class="fa fa-times"></i></a>
+                </div>
+                {php $i++}
+                {/loop}
+              </div>
+              <div><button class="btn btn-default" type="button" onclick="addNew()"><i class="fa fa-plus"></i> 添加</button></div>
+            </div>
+          </div>
+          <div class="form-group">
+          	<label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+            <div class="col-sm-9 form-inline">
+            <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1"  onclick="return updateForm();return false" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+function addNew(){
+	var i=$(".list-item").size()+1;
+	var temp='<div class="list-item"><div class="input-group"> <span class="input-group-addon">充</span><input type="text" name="funkey['+i+']" class="form-control" placeholder="输入金额" value="0"><span class="input-group-addon">元，送</span><input type="text" name="funval['+i+']" class="form-control" placeholder="输入金额" value="0"><span class="input-group-addon">元</span></div> <a class="btn btn-default btn-sm" onclick="del(this)"><i class="fa fa-times"></i></a></div>';
+	$("#addbox").append(temp);
+}
+function del(obj){
+	var _this=$(obj).parent();
+	_this.remove();
+}
+</script>
+{/if}
+{template 'common/footer'} 

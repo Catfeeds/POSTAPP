@@ -1,0 +1,1698 @@
+2017-08-24 00:11:11 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503504670</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 00:11:11 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503504670',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503504670',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 00:11:11 response :
+------------
+
+2017-08-24 00:11:16 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 00:11:16 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 00:18:51 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503505131</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 00:18:51 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503505131',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503505131',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 00:18:51 response :
+------------
+
+2017-08-24 00:18:54 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 00:18:54 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 00:34:25 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503506065</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 00:34:25 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503506065',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503506065',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 00:34:25 response :
+------------
+
+2017-08-24 00:34:27 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 00:34:27 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 00:48:55 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503506934</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 00:48:55 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503506934',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503506934',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 00:48:55 response :
+------------
+
+2017-08-24 00:49:01 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 00:49:01 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 08:40:31 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503535230</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 08:40:31 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503535230',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503535230',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 08:40:31 response :
+------------
+
+2017-08-24 08:40:38 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 08:40:38 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 10:18:35 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1503541114</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:18:35 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1503541114',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503541114',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:18:35 response :
+------------
+
+2017-08-24 10:19:31 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503541170</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+
+2017-08-24 10:19:31 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503541170',
+    'msgtype' => 'event',
+    'event' => 'subscribe',
+    'eventkey' => '',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503541170',
+    'type' => 'text',
+    'redirection' => true,
+    'source' => 'subscribe',
+  ),
+)
+
+2017-08-24 10:19:31 response :
+------------
+
+2017-08-24 10:19:43 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503541183</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:19:43 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503541183',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503541183',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:19:43 response :
+------------
+
+2017-08-24 10:19:48 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503541188</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:19:48 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503541188',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503541188',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:19:48 response :
+------------
+
+2017-08-24 10:20:22 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1503541222</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:20:22 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1503541222',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503541222',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:20:22 response :
+------------
+
+2017-08-24 10:20:45 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503541244</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:20:45 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503541244',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503541244',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:20:45 response :
+------------
+
+2017-08-24 10:21:08 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503541267</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:21:08 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503541267',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503541267',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:21:08 response :
+------------
+
+2017-08-24 10:21:11 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503541271</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:21:11 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503541271',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503541271',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:21:11 response :
+------------
+
+2017-08-24 10:22:15 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503541334</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:22:15 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503541334',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503541334',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:22:15 response :
+------------
+
+2017-08-24 10:29:36 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 10:29:36 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 10:29:41 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 10:29:41 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 10:30:15 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 10:30:15 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 10:40:38 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503542438</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:40:39 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503542438',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503542438',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:40:39 response :
+------------
+
+2017-08-24 10:41:46 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wooFsPkakB_3R3OQIz9J10Q]]></FromUserName>
+<CreateTime>1503542506</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+
+2017-08-24 10:41:46 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wooFsPkakB_3R3OQIz9J10Q',
+    'createtime' => '1503542506',
+    'msgtype' => 'event',
+    'event' => 'subscribe',
+    'eventkey' => '',
+    'from' => 'oNjw9wooFsPkakB_3R3OQIz9J10Q',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503542506',
+    'type' => 'text',
+    'redirection' => true,
+    'source' => 'subscribe',
+  ),
+)
+
+2017-08-24 10:41:46 response :
+------------
+
+2017-08-24 10:41:57 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wooFsPkakB_3R3OQIz9J10Q]]></FromUserName>
+<CreateTime>1503542516</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:41:57 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wooFsPkakB_3R3OQIz9J10Q',
+    'createtime' => '1503542516',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wooFsPkakB_3R3OQIz9J10Q',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503542516',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:41:57 response :
+------------
+
+2017-08-24 10:42:04 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wooFsPkakB_3R3OQIz9J10Q]]></FromUserName>
+<CreateTime>1503542523</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:42:04 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wooFsPkakB_3R3OQIz9J10Q',
+    'createtime' => '1503542523',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wooFsPkakB_3R3OQIz9J10Q',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503542523',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:42:04 response :
+------------
+
+2017-08-24 10:42:15 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wmlIOrwpMwOsZhkKR0gvvPs]]></FromUserName>
+<CreateTime>1503542534</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+
+2017-08-24 10:42:15 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wmlIOrwpMwOsZhkKR0gvvPs',
+    'createtime' => '1503542534',
+    'msgtype' => 'event',
+    'event' => 'subscribe',
+    'eventkey' => '',
+    'from' => 'oNjw9wmlIOrwpMwOsZhkKR0gvvPs',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503542534',
+    'type' => 'text',
+    'redirection' => true,
+    'source' => 'subscribe',
+  ),
+)
+
+2017-08-24 10:42:15 response :
+------------
+
+2017-08-24 10:42:23 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wooFsPkakB_3R3OQIz9J10Q]]></FromUserName>
+<CreateTime>1503542542</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:42:23 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wooFsPkakB_3R3OQIz9J10Q',
+    'createtime' => '1503542542',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wooFsPkakB_3R3OQIz9J10Q',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503542542',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:42:23 response :
+------------
+
+2017-08-24 10:42:23 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wsoed-77tdXpJoqpMkFWsdk]]></FromUserName>
+<CreateTime>1503542543</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:42:23 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'createtime' => '1503542543',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wsoed-77tdXpJoqpMkFWsdk',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503542543',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:42:23 response :
+------------
+
+2017-08-24 10:42:24 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wmlIOrwpMwOsZhkKR0gvvPs]]></FromUserName>
+<CreateTime>1503542544</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:42:24 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wmlIOrwpMwOsZhkKR0gvvPs',
+    'createtime' => '1503542544',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wmlIOrwpMwOsZhkKR0gvvPs',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503542544',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:42:24 response :
+------------
+
+2017-08-24 10:56:27 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503543387</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:56:27 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503543387',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503543387',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:56:27 response :
+------------
+
+2017-08-24 10:56:42 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503543401</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:56:42 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503543401',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503543401',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:56:42 response :
+------------
+
+2017-08-24 10:56:56 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503543415</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:56:56 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503543415',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503543415',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:56:56 response :
+------------
+
+2017-08-24 10:57:03 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wrtMOEERWt6PxFBrRPIQBcg]]></FromUserName>
+<CreateTime>1503543422</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=14]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 10:57:03 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'createtime' => '1503543422',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=14',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wrtMOEERWt6PxFBrRPIQBcg',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503543422',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=14',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 10:57:03 response :
+------------
+
+2017-08-24 16:40:31 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wr5byzVbkSSx2TJTYYp4-y4]]></FromUserName>
+<CreateTime>1503564030</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey><![CDATA[]]></EventKey>
+</xml>
+
+2017-08-24 16:40:31 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'createtime' => '1503564030',
+    'msgtype' => 'event',
+    'event' => 'subscribe',
+    'eventkey' => '',
+    'from' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503564030',
+    'type' => 'text',
+    'redirection' => true,
+    'source' => 'subscribe',
+  ),
+)
+
+2017-08-24 16:40:31 response :
+------------
+
+2017-08-24 16:40:45 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wr5byzVbkSSx2TJTYYp4-y4]]></FromUserName>
+<CreateTime>1503564044</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=6]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 16:40:45 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'createtime' => '1503564044',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=6',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503564044',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=6',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 16:40:45 response :
+------------
+
+2017-08-24 16:41:34 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wr5byzVbkSSx2TJTYYp4-y4]]></FromUserName>
+<CreateTime>1503564093</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 16:41:34 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'createtime' => '1503564093',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503564093',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 16:41:34 response :
+------------
+
+2017-08-24 16:43:51 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wr5byzVbkSSx2TJTYYp4-y4]]></FromUserName>
+<CreateTime>1503564231</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 16:43:51 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'createtime' => '1503564231',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503564231',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 16:43:51 response :
+------------
+
+2017-08-24 16:44:24 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wr5byzVbkSSx2TJTYYp4-y4]]></FromUserName>
+<CreateTime>1503564263</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 16:44:24 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'createtime' => '1503564263',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503564263',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&m=feng_community&do=announcement&',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 16:44:24 response :
+------------
+
+2017-08-24 16:44:58 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wr5byzVbkSSx2TJTYYp4-y4]]></FromUserName>
+<CreateTime>1503564297</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=14]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 16:44:58 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'createtime' => '1503564297',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=14',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wr5byzVbkSSx2TJTYYp4-y4',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503564297',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=14',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 16:44:58 response :
+------------
+
+2017-08-24 17:04:20 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503565459</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 17:04:20 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503565459',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503565459',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 17:04:20 response :
+------------
+
+2017-08-24 19:42:28 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503574947</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=7]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 19:42:28 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503574947',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=7',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503574947',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=7',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 19:42:28 response :
+------------
+
+2017-08-24 19:43:48 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503575028</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 19:43:48 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503575028',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503575028',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 19:43:48 response :
+------------
+
+2017-08-24 19:44:20 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503575059</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 19:44:20 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503575059',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503575059',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 19:44:20 response :
+------------
+
+2017-08-24 23:38:46 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503589125</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 23:38:46 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503589125',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503589125',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 23:38:46 response :
+------------
+
+2017-08-24 23:38:52 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 23:38:52 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 23:42:22 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170824',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 23:42:22 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170824',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-24 23:42:29 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503589340</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-24 23:42:29 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503589340',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503589340',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-24 23:42:29 response :
+------------
+

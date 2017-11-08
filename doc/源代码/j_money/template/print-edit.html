@@ -1,0 +1,76 @@
+{template 'common/header'} 
+<div style="padding:10px;">
+  <ul class="nav nav-tabs">
+    <li {if $operation == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('print', array('op' => 'post','shopid' =>$shopid))}">添加打印模板</a></li>
+    <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('print', array('op' => 'display','shopid' =>$shopid))}">管理打印模板</a></li>
+  </ul>
+  <div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+      <input type="hidden" name="id" value="{php echo $id}" />
+      <div class="panel panel-default">
+        <div class="panel-heading"> 打印模板 
+        
+        </div>
+        <div class="panel-body" id="editbox">
+        	<div class="form-group">
+            	<label class="col-xs-12 col-sm-3 col-md-2 control-label">标题</label>
+                <div class="col-sm-9 form-inline">
+                  <input type="text" name="title" class="form-control" value="{$item['title']}" placeholder="请填写模板标题" />
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-xs-12 col-sm-3 col-md-2 control-label">小票类别</label>
+                <div class="col-sm-9 form-inline">
+                  <select class="form-control" name="pcate">
+                    <option value="0" {if $item['pcate']==0}selected{/if}>收银小票</option>
+                    <option value="1" {if $item['pcate']==1}selected{/if}>卡券小票</option>
+                    <option value="2" {if $item['pcate']==2}selected{/if}>充值小票</option>
+                    <option value="3" {if $item['pcate']==3}selected{/if}>交班小票</option>
+                    <option value="4" {if $item['pcate']==4}selected{/if}>退款小票</option>
+					<option value="5" {if $item['pcate']==5}selected{/if}>积分兑换小票</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-xs-12 col-sm-3 col-md-2 control-label">所属店铺</label>
+                <div class="col-sm-9 form-inline">
+                  <select class="form-control" name="groupid">
+                    <option value="0" {if $item['groupid']==0}selected{/if}>选择店铺</option>
+                    {loop $shoplist $row}
+                    <option value="{$row['id']}" {if $item['groupid']==$row['id']}selected{/if}>{$row['companyname']}</option>
+                    {/loop}
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+            	<label class="col-xs-12 col-sm-3 col-md-2 control-label">二维码</label>
+                <div class="col-sm-9 form-inline">
+                  <input type="text" name="qrcode" class="form-control" value="{$item['qrcode']}" placeholder="" />
+                  <div class="help-block">【不打印收银小票，请输入0】</div>
+                </div>
+                
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">模板</label>
+              <div class="col-sm-9 form-inline">
+                <textarea name="content" id="content" rows="10" onkeyup="changeHeigth()" style="width:250px;overflow-y:visible;resize:none; min-height:300px;">{$item['content']}</textarea>
+                <div class="help-block">一行中文字最多15个；数字英文30个</div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="form-group col-xs-12">
+        <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1"  onclick="return updateForm();return false" />
+        <input type="hidden" name="token" value="{$_W['token']}" />
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    changeHeigth();
+});
+function perview(){
+	
+}
+</script>

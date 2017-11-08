@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>充值</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="./resource/css/bootstrap.min.css" rel="stylesheet">
+<link href="./resource/css/font-awesome.min.css" rel="stylesheet">
+<link href="./resource/css/common.css" rel="stylesheet">
+{php echo register_jssdk(false);}
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+<script src="{MODULE_URL}template/js/fastclick.min.js"></script>
+<script src="{MODULE_URL}template/js/weui.min.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/weui.min.css"/>
+
+</head>
+<body>
+<style>
+body{background:#EFEEF3;}
+.bodytop{ background:#64C864; padding:40px 0 20px 0; color:#FFF;}
+.til{ font-size:16px; text-align:center;color:#FFF;}
+.price{ font-size:26px; text-align:center; line-height:36px; color:#FFF; font-weight:bolder; font-family:Arial, Helvetica, sans-serif;}
+ul,li,ul li{ list-style:none; margin:0; padding:0}
+.listbtn{ padding-top:20px;}
+.listbtn ul li{ display:inline-block; width:30%;margin:5px 0 5px 5px;border:1px solid #999; padding:5px;text-align:center;color:#999;font-size:18px}
+.listbtn ul li .pr{}
+.listbtn ul li .info{ font-size:14px; }
+.listbtn ul li.check{ border:1px solid #1AAD19;color:#1AAD19; }
+.footer{ padding:5px 10px; position:absolute;left:0;bottom:0;right:0;}
+.topbar{ padding:10px; text-align:center;}
+.topbar span{ border:1px solid #00c800; display:inline-block;padding:5px 30px;color:#00c800;}
+.topbar span:first-child{ border-bottom-left-radius:4px; border-top-left-radius:4px; border-right:none;}
+.topbar span:last-child{ border-bottom-right-radius:4px; border-top-right-radius:4px;}
+.topbar span.checked{ background:#00c800; color:#FFF;}
+.list_box {padding:10px;}
+.weui-cell__title{ font-size:14px;}
+a:active,a:visited{text-decoration:none;}
+a.weui-cell{color:#666;font-size:14px;}
+a.weui-cell:visited{text-decoration:none;}
+</style>
+{if $operation=="display"}
+<div class="topbar">
+	<span class="checked">充值</span><span>记录</span>
+</div>
+<div class="mainpage"> 
+    <div class="bodytop">
+        <div class="til">当前余额</div>
+        <div class="price">￥ {php echo sprintf('%.2f',($membercard['cash']*0.01))}</div>
+    </div>
+    <div class="listbtn">
+        <ul>
+            {php $fun=json_decode($shop['chargefun'],true);}
+            {loop $fun $row}
+            {php $tempary=explode("|",$row)}
+            <li price="{$row}">
+                <div class="pr">{php echo $tempary[0]}元</div>
+                {if $tempary[1]>0}<div class="info">送{php echo $tempary[1]}元</div>{/if}
+            </li>
+            {/loop}
+        </ul>
+    </div>
+    <div style="padding:10px; color:#F60">温馨提示：当充值成功后，务必点击页面中的【完成】按钮。如充值成功后，余额没有到账，请到【记录】中点击失败的订单记录即可。</div>
+    <div class="footer"><a href="javascript:createOrder();" class="weui-btn weui-btn_primary">立即充值</a></div>
+</div>
+<div class="mainpage" style="display:none;">
+<div class="list_box"> 
+  <div class="weui-wepay-lists__bd">
+        <div class="weui-cells" style="margin-top:0">
+        	{loop $list $row}
+            <a class="weui-cell weui-cell_access" href="javascript:checkPay('{$row['out_trade_no']}',{$row['status']});">
+                <div class="weui-cell__bd">
+                    <h2 class="weui-cell__title">No:{$row['out_trade_no']}</h2>
+                    <div class="weui-cell__info">{php echo date('Y-m-d H:i',$row['createtime'])}</div>
+                    {if $row['gift']}<div class="weui-cell__info">
+                    充{php echo sprintf('%.2f',(($row['cash']-$row['gift'])/100))}送{php echo sprintf('%.2f',(($row['gift'])/100))}
+                    </div>{/if}
+                    {if !$row['status']}
+                    <div class="weui-cell__info" style="color:#39F">如支付成功，但积分没有到账，请点击</div>
+                    {/if}
+                </div>
+                <div class="weui-cell__ft">
+                    <div class="weui-cell__title">{if $row['status']}支付成功{else}<b style="color:#C30">失败</b>{/if}</div>
+                    <div class="weui-cell__info">￥{php echo sprintf('%.2f',(($row['cash']-$row['gift'])/100))}元</div>
+                </div>
+            </a>
+            {/loop}
+        </div>
+        <!--<div class="weui-loadmore"> 
+            <i class="weui-loading"></i>
+            <span class="weui-loadmore__tips">正在加载</span>
+        </div>-->
+    </div>
+</div>
+</div>
+<script language="javascript">
+$(function(){FastClick.attach(document.body);});
+$(".listbtn li").on("click",function(){
+	$(this).addClass("check").siblings().removeClass("check");
+})
+wx.ready(function(){
+	wx.hideOptionMenu();		
+});
+var jsApiParameters; 
+var tradeOrderNo;
+function jsApiCall(){
+	wx.chooseWXPay({
+		timestamp: jsApiParameters['timeStamp'], 
+		nonceStr: jsApiParameters['nonceStr'], 
+		package: jsApiParameters['package'],
+		signType: "MD5",
+		paySign: jsApiParameters['paySign'],
+		success: function (res) {
+			location.href="{php echo $this->createmobileurl('membercharge',array('op'=>'paysuccess','shopid'=>$shopid))}&ordersn="+tradeOrderNo;
+		},
+		cancel: function () {
+			location.reload();
+		},
+		error: function (e) {
+			alert("失败");
+		}
+	});
+}
+function createOrder(){
+	if($(".listbtn .check").size()!=1){
+		weui.alert("请选择充值金额");
+		return;
+	}
+	fee=$(".listbtn .check").attr("price");
+	var loading = weui.loading('loading');
+	$.post("{php echo $this->createmobileurl('membercharge',array('op'=>'createorder','shopid'=>$shopid))}",{fee:fee,cardno:'{php echo $cardno}',shopid:'{php echo $shopid}'},function(result){
+		loading.hide();
+		var feeback=eval("("+result+")");
+		if(feeback.success){
+			tradeOrderNo=feeback.out_trade_no;
+			jsApiParameters=feeback.param;
+			callpay();
+		}else{
+			loading.hide();
+			weui.alert(feeback.msg);
+		}
+	});
+}
+function callpay(){
+	if (typeof WeixinJSBridge == "undefined"){
+		if( document.addEventListener ){
+			document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+		}else if (document.attachEvent){
+			document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+			document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+		}
+	}else{
+		jsApiCall();
+	}
+}
+//---
+$(".topbar span").on("click",function(){
+	var index=$(this).index();
+	$(this).addClass("checked").siblings().removeClass("checked");
+	$(".mainpage").hide().eq(index).show();
+})
+function checkPay(ordersn,status){
+	if(status==1)return;
+	var loading = weui.loading('loading');
+	$.post("{php echo $this->createmobileurl('membercharge',array('op'=>'checkpay','shopid'=>$shopid))}",{ordersn:ordersn},function(result){
+		loading.hide();
+		var feeback=eval("("+result+")");
+		if(feeback.success){
+			weui.alert("支付成功","系统提示",function(){
+				location.reload();
+			});
+		}else{
+			weui.alert(feeback.msg);
+		}
+	});
+	
+}
+</script>
+{elseif $operation=="paysuccess"}
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/weui.css"/>
+<style>
+.weui_cell_ft{color:#F00;}
+</style>
+<div class="weui_msg">
+  <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
+  <div class="weui_text_area">
+    <h2 class="weui_msg_title">充值成功</h2>
+  </div>
+  <div class="weui_cells">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;"> 充值金额 </div>
+      <div class="weui_cell_ft"> ￥{php echo sprintf('%.2f',(($trade['cash']-$trade['gift'])/100))} </div>
+    </div>
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;"> 赠送金额 </div>
+      <div class="weui_cell_ft"> ￥{php echo sprintf('%.2f',($trade['gift']/100))} </div>
+    </div>
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;"> 当前余额 </div>
+      <div class="weui_cell_ft"> ￥{php echo sprintf('%.2f',($membercard['cash']/100))} </div>
+    </div>
+  </div>
+  <div class="weui_opr_area">
+    <p class="weui_btn_area"> <a href="javascript:closeWin()" class="weui_btn weui_btn_primary">确定</a></p>
+  </div>
+</div>
+{/if}
+<script language="javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady(){
+	WeixinJSBridge.call('hideOptionMenu');
+	WeixinJSBridge.call('hideToolbar');
+});
+
+function closeWin(){
+	wx.closeWindow();
+}
+</script> 

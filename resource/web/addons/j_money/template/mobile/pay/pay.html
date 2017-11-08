@@ -1,0 +1,453 @@
+﻿<!doctype html>
+<html>
+<head design-width="720">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <meta name="wap-font-scale" content="no">
+	<title>{$shop['companyname']}</title>
+	<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/mobile/pay/css/style.css" /><!--样式-->
+	<link rel="stylesheet" type="text/css" href="{MODULE_URL}template/mobile/pay/css/animate.min.css" /><!--CSS3动画库-->
+	
+	
+	<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/weui.min.css?v=2"/>
+
+	<style>
+		.switch i{ height: 100%; font-size: .3rem; display:block; float: left; width:3em; color:red;}
+		.sum ul li input { width: calc(97% - 9em);
+
+	</style>
+
+	
+	
+	<script type="text/javascript" src="{MODULE_URL}template/mobile/pay/js/auto-size.js"></script><!--设置字体大小-->
+	
+	
+	{php echo register_jssdk(false);}
+</head>
+<body class="bj1">
+	<div class="mobile_wrap center bj">
+		<!-- <div class="header">
+        	<i>
+        		<a href="#"><img src="img/ico0.png" alt=""></a>
+        	</i> 
+        	<h2 class="two">在线付款</h2>
+        </div>
+        -->
+        <div class="logo dt">
+        	<div class="wid">
+        		<i><img src="{MODULE_URL}template/mobile/pay/img/logo-1.png" alt=""></i>
+        	
+
+        		<div class="text">
+        			<p>提示：本店单日消费<span>{php echo isInt($shop['freelimit'])}</span>元以下<span>免手续费</span>，超出部分按千分之<span>{php echo isInt($shop['servermoney']);}</span>收取手续费,您当日已累计支付<span>{$TotalMoney}</span>元。</p>
+        		</div>
+        	</div>
+        </div><!-- logo -->
+
+        <div class="sum">
+        	<ul class="wid">
+        		<li>
+        			<p>消费金额：</p>
+        			<div class="cost-wrap "><i class="gb"></i><span class="cost red size">0.00</span><span class="fr red size"  style="margin-right: 0">￥</span></div>
+        		</li>
+        		<li>
+        			<p>手续费：</p>
+					<span>元</span>
+        			<span class="servermoney">0</span>
+					
+        		</li>
+        	</ul>
+        </div><!-- sum -->
+
+        <div class="sum two">
+        	<ul class="wid">
+        		<li>
+        			<p>服务类型：</p>
+        			<span class="op" id="servertype">保养维修</span>
+        		</li>
+        		<li class="zhub switch">
+        			<p>车牌号：</p>
+					<i>选填</i><i>必填</i>
+        			<input type="text" id="carnumber" placeholder="如沪A12345" value="">
+        		</li>
+        		<li class="dsb switch hide">
+        			<p>备注信息：</p>
+        			<i>选填</i><i>必填</i>
+					<input type="text" id="userbak" placeholder="如购买人信息等">
+        		</li>
+        	</ul>
+        </div><!-- sum -->
+
+        <div class="login wid">
+        	<input type="submit" value="确认支付">
+        </div><!-- login -->
+
+        <div class="footer">
+        	<div class="wid"><p>请仔细核对车牌号和金额信息</p></div>
+        </div><!-- footer -->
+
+        <div class="pop-box">
+        	<div class="pop-up">
+        		<p>本次支付总金额为：<span class="totalmoney">0.00</span>元，其中包含<span class="servermoney">0.00</span>元手续费，请您确认后进行支付。</p>
+        		<div class="bottom">
+        			<ul>
+        				<li class="qiut">
+        					<span>取消</span>
+        				</li>
+        				<li>
+        					<span id="sendPost">确认</span>
+        				</li>
+        			</ul>
+        		</div>
+        	</div><!-- pop-up -->
+        </div><!-- pop-box -->
+
+	{php $serverTypes=empty($shop["servertypes"])?array():json_decode($shop["servertypes"]);}
+        <div class="pop-box2">
+        	<ul>
+        		<!-- 	<li><i><img src="img/ico_5.png" alt=""></i></li> -->
+        		<li data-control='zhub' data-must='{php echo intval($serverTypes[0]);}'   ><p><span>保养维修</span></p></li>
+        		<!-- <li><p><span>新车购买</span></p></li> -->
+        		<li data-control='dsb' data-must='{php echo intval($serverTypes[1]);}'><p><span>新车定金</span></p></li>
+        		<li data-control='zhub' data-must='{php echo intval($serverTypes[2]);}'><p><span>保险续保</span></p></li>
+        		<!-- <li><p><span>卡券购买</span></p></li> -->
+        		<li data-control='dsb' data-must='{php echo intval($serverTypes[3]);}'><p><span>其他服务</span></p></li>
+        	</ul>
+        </div><!-- pop-box2 -->
+    </div><!--mobile_wrap-->
+    <div class="layer-content slideDown">
+    	<div class="form_edit clearfix">
+    		<div class="num">1</div>
+    		<div class="num">2</div>
+    		<div class="num">3</div>
+            <div id="remove" style=" line-height:0px;"><img style="margin-top:0.43rem;" src="{MODULE_URL}template/mobile/pay/img/pic7.png"></div>
+            <div class="num">4</div>
+    		<div class="num">5</div>
+    		<div class="num">6</div>
+            <div class="paybtn" >确认<br/>金额</div>
+    		<div class="num">7</div>
+    		<div class="num">8</div>
+    		<div class="num">9</div>
+            <div class="num" style="width: 50%;">0</div>
+    		<div class="num" id="c_point">.</div>
+    	</div>
+    </div>
+</body>
+<script type="text/javascript" src="{MODULE_URL}template/mobile/pay/js/jquery-2.2.4.min.js"></script><!--jQ库-->
+<script type="text/javascript" src="{MODULE_URL}template/mobile/pay/js/swiper-3.3.1.jquery.min.js"></script><!--轮播库-->
+<script type="text/javascript" src="{MODULE_URL}template/mobile/pay/js/version-3.2.8.js"></script><!--封装函数-->
+<script src="{MODULE_URL}template/mobile/pay/js/jquery-1.8.3.min.js"></script>
+	<script src="{MODULE_URL}template/js/weui.min.js"></script>
+<script>
+	
+	function reload()
+	{
+		var timestramp=new Date().getTime();
+		window.location=window.location+"&t="+timestramp;
+	
+	}
+	
+	$(".login input").click(function(event) {
+		$(".pop-box").fadeIn();
+	});
+
+	
+	  $(".paybtn").click(function(event) {
+        if ($('.cost').text()!='0.00') {
+          
+            $('.layer-content').addClass('slideDown');
+        }
+      
+    });
+
+	$(".qiut").click(function(event) {
+		$(".pop-box").fadeOut();
+	});
+
+	$(".op").click(function(event) {
+		$(".pop-box2").fadeIn();
+		
+	});
+	$(".pop-box2").click(function(event) {
+		$(".pop-box2").fadeOut();
+	});
+	
+	var serverTypeText,class_name,ismust;
+
+	$('.pop-box2 ul li').on('click', function() {
+		
+		 serverTypeText=$(this).find('span').text()
+		 class_name = $(this).attr('data-control');
+		 ismust=$(this).attr("data-must");
+		$('.sum.two ul li span.op').text(serverTypeText);
+	
+		
+		$.each($('.sum.two li.switch'), function(index, val) {
+			$(val).hasClass(class_name) ?$(val).removeClass('hide'): $(val).addClass('hide');
+			if($(val).hasClass(class_name))
+			{
+				var i=$(val).find("i");
+					i.hide().eq(ismust).show();
+			}
+		});
+		
+	});
+
+	$('.pop-box2 ul li').eq(0).click();
+
+	$('.mobile_wrap').on('click', function() {
+		$('.layer-content').addClass('slideDown');
+		$('.cost-wrap').removeClass('animation')
+
+	});
+
+	$('.cost-wrap').on('click', function() {
+		$('.layer-content').removeClass('slideDown');
+		$('.cost-wrap').addClass('animation')
+		return false;
+	});
+	
+	function changeMoney()
+	{
+			var money=$('.cost').text();
+		$.post("{php echo $this->createMobileUrl('ayard',array('op'=>'calculateServerMoney','shopid'=>$_GPC['shopid']))}",
+			  {"money":money},
+			  function(data){
+			  		if(data.type=="success")
+					{
+			  		//	alert(data.message.aliid);
+						$(".servermoney").text(data.message.servermoney);
+						$(".totalmoney").text(data.message.totalmoney);
+					}
+					
+			  },"json");
+
+	}
+
+
+	$('.form_edit .num').on(window.a,function(){
+
+		if (this.innerHTML=='.'&&this.data_switch != 0) {
+			return false;
+		}else{
+			this.data_switch = 1;
+		}
+		if ($('.cost').text()=='0.00') {
+            $(".paybtn").css("background","#1fadff");
+			$('.cost').text(this.innerHTML);
+		}else{
+
+			$('.cost').text($('.cost').text()+this.innerHTML);
+		}
+
+		
+		changeMoney();
+	});
+	document.getElementById('c_point').data_switch = 0 ;
+	$('#remove').on(window.a,function(){
+		var oDiv = $('.cost')[0];
+		var oDivHtml = oDiv.innerHTML;
+		if (oDiv.innerHTML!='0.00') {
+			oDiv.innerHTML = oDivHtml.substring(0,oDivHtml.length-1);
+		}
+		if (oDiv.innerHTML=='') {
+            $(".paybtn").css("background","#9bd8fb");
+			oDiv.innerHTML='0.00';
+			document.getElementById('c_point').data_switch = 0 ;
+		}
+		changeMoney();
+	});
+	// $('#c_point').click(function() {
+	// 	if (this.data_switch == 0){
+	// 		this.data_switch = 1
+	// 	}
+	// });
+
+
+var tradeOrderNo;
+
+var payType=parseInt("{php echo $payType}");
+wx.ready(function(){
+	wx.hideOptionMenu();		
+});
+
+var setTimeTiems;
+function orderquery()
+{
+	$.post("{php echo $this->createmobileurl('ayard',array('op'=>'paysuccess','shopid'=>$shopid, 'islogin'=>$userid ))}",{
+		"ordersn":tradeOrderNo
+	},function(data){
+		if(data.type!="success")
+		{
+			startQuery();
+		}
+		
+	},"json");
+}
+
+function startQuery()
+{
+	setTimeTiems=window.setTimeout(function(){
+		orderquery();
+	},2000);
+}
+function endQuery()
+{
+	clearTimeout(setTimeTiems);
+	
+}
+
+
+
+var jsApiParameters; 
+function jsApiCall(){
+	WeixinJSBridge.invoke(
+        'getBrandWCPayRequest', {
+            "appId":jsApiParameters['appId'],     //公众号名称，由商户传入     
+            "timeStamp":jsApiParameters['timeStamp'],         //时间戳，自1970年以来的秒数     
+            "nonceStr":jsApiParameters['nonceStr'], //随机串     
+            "package":jsApiParameters['package'],     
+            "signType":"MD5",         //微信签名方式：     
+            "paySign":jsApiParameters['paySign'] //微信签名 
+        },
+        function(res){   
+			endQuery(); 
+			// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+				//alert("支付成功！");
+				
+					location.href="{php echo $this->createmobileurl('ayard',array('op'=>'paysuccess','shopid'=>$shopid, 'islogin'=>$userid ))}&ordersn="+tradeOrderNo;
+				
+			
+			}else if(res.err_msg == "get_brand_wcpay_request:cancel" ) {
+				//alert("用户已取消");
+			
+				weui.alert("用户已取消",function(){
+					reload();
+				});
+			}else if(res.err_msg == "get_brand_wcpay_request:fail" ) {
+				//alert("支付失败");
+				
+				weui.alert("支付失败",function(){
+					reload();
+				});
+			}
+        }
+    );
+}
+function createOrder(){
+	var fee = $('.cost').text();
+	if(isNaN(fee)||fee<=0){
+		weui.alert("请输入金额");
+		return;
+	};
+	
+	if(ismust==1)
+	{	
+		var	v=$("."+class_name).find("input").val();
+		if(v=="")
+		{
+			weui.alert($("."+class_name).find("p").text()+"必须填写");
+			return;
+		}
+	}
+	var carnumber=$("#carnumber").val();
+	var userbak=$("#userbak").val();
+	
+	
+	var loading = weui.loading('loading');
+	$.post("{php echo $this->createmobileurl('ayard',array('op'=>'createorder'))}",{fee:fee,servertype:$("#servertype").text(),'carnumber':carnumber,'userbak':userbak,shopid:'{php echo $shopid}'},function(result){
+		console.log(result);
+		loading.hide();
+		
+		
+		var feeback=eval("("+result+")");
+		
+		//alert(feedback.isurl);
+		//return;
+		
+		if(feeback.success){
+			if(result.indexOf("isurl")>0)
+			{
+				location.href=feeback.param;
+				return;
+			}
+			
+			
+			tradeOrderNo=feeback.out_trade_no;
+			if(payType==1){
+				jsApiParameters=feeback.param;
+				callpay();
+			}else{
+				alipay(feeback.tradeno);
+			}
+			startQuery();
+		}else{
+			loading.hide();
+			weui.alert(feeback.msg,function(){
+				reload();
+			});
+			
+		}
+	});
+}
+function callpay(){
+	if (typeof WeixinJSBridge == "undefined"){
+		if( document.addEventListener ){
+			document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+		}else if (document.attachEvent){
+			document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+			document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+		}
+	}else{
+		jsApiCall();
+	}
+}
+function alipay(tradeno){
+	document.addEventListener('AlipayJSBridgeReady', function () {
+		AlipayJSBridge.call("tradePay", {
+			tradeNO:tradeno
+		}, function (result) {
+			endQuery();
+			console.log(JSON.stringify(result));
+			if (result.resultCode =='9000') {
+			
+				 location.href="{php echo $this->createmobileurl('ayard',array('op'=>'paysuccess','shopid'=>$shopid, 'islogin'=>$userid ))}&ordersn="+tradeOrderNo;
+				
+			}else if (result.resultCode =='6001') {
+				//alert("取消支付");
+			
+				weui.alert("取消支付",function(){
+					reload();
+				});
+				
+			}else{
+				//alert("异常");
+				//reload();
+				
+				weui.alert("异常",function(){
+					reload();
+				});
+			}
+		});
+	}, false);
+}
+	
+	$("#sendPost").click(function(){
+			$(".pop-box").fadeOut();
+			createOrder();
+	});
+
+</script>
+
+<script>
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady(){
+	WeixinJSBridge.call('hideOptionMenu');
+	WeixinJSBridge.call('hideToolbar');
+});
+</script>
+
+</html>

@@ -1,0 +1,812 @@
+2017-08-26 09:35:54 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:35:54 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:36:08 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:36:34 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:36:34 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:36:42 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:37:21 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:37:21 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:37:21 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:37:27 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:37:56 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:37:56 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:38:06 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:38:08 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:38:08 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:38:15 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:55:15 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503712514</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-26 09:55:15 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503712514',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503712514',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-26 09:55:15 response :
+------------
+
+2017-08-26 09:55:24 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:55:27 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:55:27 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:55:30 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:55:53 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503712553</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-26 09:55:53 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503712553',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503712553',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-26 09:55:53 response :
+------------
+
+2017-08-26 09:55:55 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:56:09 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503712569</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-26 09:56:09 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503712569',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503712569',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=1',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-26 09:56:09 response :
+------------
+
+2017-08-26 09:56:13 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:58:11 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:58:11 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 09:58:19 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 10:53:03 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 10:53:31 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 10:53:54 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 10:58:18 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 10:58:22 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 78; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:00:48 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 79; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:02:28 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 79; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:06:28 SQL Error :
+------------
+String:
+SQL: <br/>select * from`ims_xcommunity_building_device`where regionid=:regionid and type=:type  order by t4.displayorder asc<hr/>Params: <br/>array (
+  ':regionid' => '1',
+  ':type' => 2,
+)<hr/>SQL Error: <br/>Unknown column 't4.displayorder' in 'order clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 194; <br />file: /framework/function/pdo.func.php; line: 44; <br />file: /addons/feng_community/inc/mobile/opendoor.inc.php; line: 81; <br />file: /framework/class/account.class.php; line: 1076; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/source/entry/site.ctrl.php; line: 12; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:08:34 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:08:34 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:08:41 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:08:41 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:08:46 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:08:46 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:11:20 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:11:20 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:11:23 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:11:23 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:13:51 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 11:13:51 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:15:36 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503728136</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-26 14:15:36 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503728136',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503728136',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-26 14:15:36 response :
+------------
+
+2017-08-26 14:15:42 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:15:42 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:15:49 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:15:49 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:16:46 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:16:46 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:17:03 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:17:03 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:17:28 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503728248</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-26 14:17:28 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503728248',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503728248',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-26 14:17:28 response :
+------------
+
+2017-08-26 14:57:57 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503730676</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-26 14:57:57 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503730676',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503730676',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-26 14:57:57 response :
+------------
+
+2017-08-26 14:58:10 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:58:10 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:58:58 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 14:58:58 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 22:08:39 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wiHUT24ks-VP5her_QYjGJY]]></FromUserName>
+<CreateTime>1503756518</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-26 22:08:39 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'createtime' => '1503756518',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wiHUT24ks-VP5her_QYjGJY',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503756518',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-26 22:08:39 response :
+------------
+
+2017-08-26 22:08:47 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170826',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-26 22:08:47 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170826',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+

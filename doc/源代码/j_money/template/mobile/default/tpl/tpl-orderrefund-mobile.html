@@ -1,0 +1,68 @@
+<ul class="listorder1">
+  <li style="text-align:center">
+  	{if $item['status']==2 || $item['total_fee']-$item['refund_fee']==0}
+    <div class="iconbtn iconbtn0"><i class="fa fa-money"></i> 退款</div>
+    {else}
+    <div class="iconbtn iconbtn2" onclick="do_refund(1,'{$item['out_trade_no']}')"><i class="fa fa-money"></i> 退货退款</div>
+    <div class="iconbtn iconbtn1" onclick="do_refund(2,'{$item['out_trade_no']}')"><i class="fa fa-money"></i> 退款不退货</div>
+    {/if}
+  </li>
+  <li>订单编号：<span class="pull-right">{$item['out_trade_no']}</span></li>
+  <li>总金额：<span class="pull-right">￥ {php echo sprintf('%.2f',($item['order_fee']*0.01))}</span></li>
+  <li>优惠：<span class="pull-right">￥ {php echo sprintf('%.2f',($item['discount_fee']*0.01))}</span></li>
+  <li>合计：<span class="pull-right">￥ {php echo sprintf('%.2f',($item['total_fee']*0.01))}</span></li>
+
+  <li>支付：<span class="pull-right">{if $item['paytype']==0}<img src="{MODULE_URL}template/img/wechart.gif" width="21"/> {elseif $item['paytype']==1}<img src="{MODULE_URL}template/img/alipay.gif" width="21"/> {elseif $item['paytype']==2}<img src="{MODULE_URL}template/img/cash.gif" width="21"/> {elseif $item['paytype']==3}<img src="{MODULE_URL}template/img/credit.gif" width="21"/> {elseif $item['paytype']==4}<img src="{MODULE_URL}template/img/menbercard.gif" width="21"/> {/if} ￥ {php echo sprintf('%.2f',($item['paid_fee']*0.01))}</span></li>
+  {if $item['paytype']==4}
+  <li>会员卡号：<span class="pull-right">{php echo $member['cardno'] ? $member['cardno'] : $member['wxcardno']}</span></li>
+  {/if}
+  <li>找零：<span class="pull-right">￥ {php echo sprintf('%.2f',($item['change_fee']*0.01))}</span></li>
+  <li>状态：<span class="pull-right" style="padding:0 10px 0 0;">
+  {if $item['status']==1}
+  <span class="label label-success"><i class="fa fa-check"/></i></span>
+  {if $item['refund_fee']}<span class="label label-danger"><i class="fa fa-recycle"/></i></span>{/if}
+  {elseif $item['status']==2}
+  <span class="label label-danger"><i class="fa fa-recycle"/></i></span>
+  {else}
+  <span class="label label-danger"><i class="fa fa-times"/></i></span>
+  {/if}
+  </span>
+  </li>
+  <li>时间：<span class="pull-right">{php echo date("Y-m-d H:i",$item['createtime'])}</span></li>
+  <li class="gl">
+    <div class="fx6" style="width:130px;">品名</div>
+    <div class="fx2 text-right">单价</div>
+    <div class="fx2 text-right">数量</div>
+    <div class="fx2 text-right">小计</div>
+  </li>
+  {loop $goodslist $row}
+  <li class="gl" rows="{$row['id']}">
+    <div class="fx6" style="width:130px;">
+    <label>{if $row['status']==1}<input type="checkbox" name="good_id[]" value="{$row['id']}" />{else}<input type="checkbox" disabled="disabled" />{/if}
+    {$row['title']}</label></div>
+    <div class="fx2 text-right">{$row['marketprice']}</div>
+    <div class="fx2 text-right">x{$row['num']}</div>
+    <div class="fx2 text-right refund-fee">{php echo sprintf('%.2f',($row['total_fee']*0.01))}</div>
+  </li>
+  {/loop}
+  <li class="gl">
+    <div class="fx6" style="width:130px;"><input type="checkbox" onclick="selectAllGoodid(this)" /><strong>合计</strong></div>
+    <div class="fx2 text-right"></div>
+    <div class="fx2 text-right">{$item['num']}</div>
+    <div class="fx2 text-right">{php echo sprintf('%.2f',($item['order_fee']*0.01))}</div>
+  </li>
+  {if $item['discounttype']==1}
+  <li class="gl"><div class="fx5">店铺满减</div><div class="fx5">&nbsp;</div><div class="fx2">{php echo sprintf('%.2f',($item['discount_fee']*0.01))}</div></li>
+  {elseif $item['discounttype']==2} 
+  <li class="gl"><div class="fx5">会员折扣</div><div class="fx5">{$item['discount']}</div><div class="fx2">{php echo sprintf('%.2f',($item['discount_fee']*0.01))}</div></li>
+  {elseif $item['discounttype']==3}
+  <li class="gl"><div class="fx5">微信卡券</div><div class="fx5">{$item['discountid']}</div><div class="fx2">{php echo sprintf('%.2f',($item['discount_fee']*0.01))}</div></li>
+  {elseif $item['discounttype']==4}
+  <li class="gl"><div class="fx5">其他优惠</div><div class="fx5">&nbsp;</div><div class="fx2">{php echo sprintf('%.2f',($item['discount_fee']*0.01))}</div></li>
+  {/if}
+</ul>
+<input type="hidden" name="orderrefund_order_fee" value="{$item['order_fee']}"/>
+<input type="hidden" name="orderrefund_total_fee" value="{$item['total_fee']}"/>
+<input type="hidden" name="orderrefund_paytype" value="{$item['paytype']}"/>
+<input type="hidden" name="orderrefund_stauts" value="{$item['stauts']}"/>
+<input type="hidden" name="orderrefund_refundfee" value="{$item['refund_fee']}"/>

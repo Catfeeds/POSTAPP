@@ -1,0 +1,53 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">会员卡级别管理</a></li>
+  <li><a href="./index.php?c=mc&a=group">添加管理</a></li>
+</ul>
+<script>
+require(['bootstrap'],function($){
+	$('.btn').hover(function(){
+		$(this).tooltip('show');
+	},function(){
+		$(this).tooltip('hide');
+	});
+});
+</script> 
+{if $operation == 'display'}
+<div class="main">
+  <div class="category">
+    <form action="" method="post" onsubmit="return formcheck(this)">
+      <div class="panel panel-default">
+        <div class="panel-body table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width:80px;">gid</th>
+                <th>级别名称</th>
+                <th>折扣优惠</th>
+                <th style="text-align:right">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            {loop $list $row}
+            <tr>
+              <td><input type="hidden" name="uid[{$row['id']}]" value="{$row['id']}"/><input type="hidden" name="gid[{$row['gid']}]" value="{$row['gid']}"/>{$row['gid']}</td>
+              <td>{php echo $groupary[$row['gid']]['title']}</td>
+              <td><input type="text" name="discount[{$row['id']}]" class="form-control" value="{$row['discount']}" /></td>
+              <td style="text-align:right">
+              <a href="{php echo $this->createWebUrl('memberlevel', array('op'=>'delete','id'=>$row['id'],'shopid'=>$shopid))}" onclick="return confirm('确认删除吗？');return false;" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="删除"><i class="fa fa-times"></i></a>
+              </td>
+            </tr>
+            {/loop}
+           </tbody>
+          </table>
+          <div class="form-group col-xs-12">
+            <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" onclick="return checkform();return false" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{/if}
+{template 'common/footer'} 

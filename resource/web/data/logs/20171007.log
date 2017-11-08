@@ -1,0 +1,47 @@
+2017-10-07 17:34:22 SQL Error :
+------------
+String:
+SQL: <br/> SELECT * FROM `ims_activity_clerks` WHERE `uid` = :__uid_52  LIMIT 1<hr/>Params: <br/>array (
+  ':__uid_52' => '2',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_activity_clerks' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 408; <br />file: /framework/class/db.class.php; line: 139; <br />file: /framework/class/db.class.php; line: 195; <br />file: /framework/function/pdo.func.php; line: 54; <br />file: /framework/model/user.mod.php; line: 180; <br />file: /framework/model/module.mod.php; line: 769; <br />file: /web/source/module/permission.ctrl.php; line: 23; <br />file: /web/index.php; line: 101; <br />
+
+2017-10-07 17:50:50 SQL Error :
+------------
+String:
+SQL: <br/> SELECT * FROM `ims_activity_clerks` WHERE `uid` = :__uid_52  LIMIT 1<hr/>Params: <br/>array (
+  ':__uid_52' => '2',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_activity_clerks' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 408; <br />file: /framework/class/db.class.php; line: 139; <br />file: /framework/class/db.class.php; line: 195; <br />file: /framework/function/pdo.func.php; line: 54; <br />file: /framework/model/user.mod.php; line: 180; <br />file: /framework/model/module.mod.php; line: 769; <br />file: /web/source/module/permission.ctrl.php; line: 23; <br />file: /web/index.php; line: 101; <br />
+
+2017-10-07 21:29:57 SQL Error :
+------------
+String:
+SQL: <br/> SELECT * FROM `ims_activity_clerks` WHERE `uid` = :__uid_52  LIMIT 1<hr/>Params: <br/>array (
+  ':__uid_52' => '2',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_activity_clerks' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 408; <br />file: /framework/class/db.class.php; line: 139; <br />file: /framework/class/db.class.php; line: 195; <br />file: /framework/function/pdo.func.php; line: 54; <br />file: /framework/model/user.mod.php; line: 180; <br />file: /framework/model/module.mod.php; line: 769; <br />file: /web/source/module/permission.ctrl.php; line: 23; <br />file: /web/index.php; line: 101; <br />
+
+2017-10-07 21:30:06 SQL Error :
+------------
+String:
+SQL: <br/> SELECT * FROM `ims_activity_clerks` WHERE `uid` = :__uid_52  LIMIT 1<hr/>Params: <br/>array (
+  ':__uid_52' => '2',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_activity_clerks' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 408; <br />file: /framework/class/db.class.php; line: 139; <br />file: /framework/class/db.class.php; line: 195; <br />file: /framework/function/pdo.func.php; line: 54; <br />file: /framework/model/user.mod.php; line: 180; <br />file: /framework/model/module.mod.php; line: 769; <br />file: /web/source/module/permission.ctrl.php; line: 23; <br />file: /web/index.php; line: 101; <br />
+
+2017-10-07 21:30:09 SQL Error :
+------------
+String:
+SQL: <br/> SELECT * FROM `ims_activity_clerks` WHERE `uid` = :__uid_52  LIMIT 1<hr/>Params: <br/>array (
+  ':__uid_52' => '2',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_activity_clerks' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 408; <br />file: /framework/class/db.class.php; line: 139; <br />file: /framework/class/db.class.php; line: 195; <br />file: /framework/function/pdo.func.php; line: 54; <br />file: /framework/model/user.mod.php; line: 180; <br />file: /framework/model/module.mod.php; line: 769; <br />file: /web/source/module/permission.ctrl.php; line: 23; <br />file: /web/index.php; line: 101; <br />
+
+2017-10-07 21:47:21 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_users` WHERE x.uid != 1 LIMIT 0,20<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'x.uid' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 408; <br />file: /framework/class/db.class.php; line: 162; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 1584; <br />file: /framework/class/account.class.php; line: 1082; <br />file: /web/source/site/entry.ctrl.php; line: 89; <br />file: /web/source/site/entry.ctrl.php; line: 89; <br />file: /web/index.php; line: 80; <br />
+
+2017-10-07 21:47:21 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_users` WHERE x.uid != 1 LIMIT 0,20<hr/>Params: <br/>array (
+)<hr/>SQL Error: <br/>Unknown column 'x.uid' in 'where clause'<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 408; <br />file: /framework/class/db.class.php; line: 162; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /addons/feng_community/inc/web/system.inc.php; line: 1584; <br />file: /framework/class/account.class.php; line: 1082; <br />file: /web/source/site/entry.ctrl.php; line: 89; <br />file: /web/source/site/entry.ctrl.php; line: 89; <br />file: /web/index.php; line: 80; <br />
+

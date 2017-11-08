@@ -1,0 +1,303 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+  <li {if $operation == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('goods', array('op' => 'post','shopid' => $shopid))}">添加商品</a></li>
+  <li {if $operation=='display'}class="active"{/if}><a href="{php echo $this->createWebUrl('goods', array('op' => 'display','shopid'=>$shopid))}">管理商品</a></li>
+  <li {if $operation=='batch'}class="active"{/if}><a href="{php echo $this->createWebUrl('goods', array('op' => 'batch','shopid'=>$shopid))}">导入</a></li>
+</ul>
+<script>
+require(['bootstrap'],function($){
+	$('.btn').hover(function(){
+		$(this).tooltip('show');
+	},function(){
+		$(this).tooltip('hide');
+	});
+});
+require(['bootstrap.switch', 'util'], function($, u){
+	$(function(){
+		$('.switch').bootstrapSwitch();
+	});
+});
+</script>
+{if $operation == 'post'}
+<div class="main">
+  <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{$_GPC['id']}" />
+    <input type="hidden" name="shopid" value="{$_GPC['shopid']}" />
+    <div class="panel panel-default">
+      <div class="panel-heading"> 基本信息 </div>
+      <div class="panel-body">
+        
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">推荐</label>
+          <div class="col-sm-9 col-xs-12">
+             <div class="col-sm-4 col-xs-4">
+             	<input type="checkbox" class="switch" name="recommend" value="1" {if $item['recommend']==1}checked{/if} />
+             </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">上下架</label>
+          <div class="col-sm-9 col-xs-12">
+             <div class="col-sm-4 col-xs-4">
+             	<input type="checkbox" class="switch" name="status" value="1" {if $item['status']==1 || empty($item)}checked{/if} />
+             </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">分类</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <select name="pcate" class="form-control">
+                {loop $list $row}
+              <option value="{$row['id']}" {if $item['pcate']==$row['id'] || $_GPC['pcate']==$row['id']}selected{/if}>{$row['title']}</option>
+                {/loop}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">商品名称</label>
+          <div class="col-sm-9 col-xs-12">
+            <input type="text" name="title" class="form-control" required value="{$item['title']}" />
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">商家编码</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <input type="text" name="goodsn" class="form-control" value="{$item['goodsn']}" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">单位</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <input type="text" name="unitname" class="form-control" value="{php echo $item['unitname'] ? $item['unitname'] :'份'}" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">价格</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <div class="input-group "> <span class="input-group-addon">市场价￥</span>
+              <input type="text" name="marketprice" class="form-control" value="{php echo $item['marketprice'] ? $item['marketprice'] :'0'}">
+              <span class="input-group-addon">元</span> </div>
+            <div class="input-group"> <span class="input-group-addon">成本价￥</span>
+              <input type="text" name="productprice" class="form-control"  value="{php echo $item['productprice'] ? $item['productprice'] :'0'}">
+              <span class="input-group-addon">元</span> </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">主图</label>
+          <div class="col-sm-9 col-xs-12">
+            {php echo tpl_form_field_image('thumb', $item['thumb']);}
+            <div class="help-block">建议大小：500*500</div>
+          </div>
+        </div>
+     
+      </div>
+    </div>
+    <div class="form-group col-xs-12">
+      <input type="submit" name="submit" value="提交" onclick="checkUpdate()" class="btn btn-primary col-lg-1" />
+      <input type="hidden" name="token" value="{$_W['token']}" />
+    </div>
+  </form>
+</div>
+{elseif $operation == 'display'}
+<div class="main">
+<div class="panel panel-info">
+  <div class="panel-heading">筛选</div>
+  <div class="panel-body">
+    <form action="./index.php" method="get" class="form-horizontal" role="form">
+      <input type="hidden" name="c" value="site" />
+      <input type="hidden" name="shopid" value="{php echo $shopid}" />
+      <input type="hidden" name="a" value="entry" />
+      <input type="hidden" name="m" value="j_money" />
+      <input type="hidden" name="do" value="goods" />
+      <div class="form-group">
+        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+        <div class="col-xs-12 col-sm-8 col-lg-9">
+          <input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">&nbsp;</label>
+        <div class="col-xs-6 col-sm-4">
+          <select class="form-control" name="pcate">
+            <option value="">类别</option>
+            {loop $category $row}
+            <option value="{$row['id']}" {if $_GPC['pcate']==$row['id']}selected{/if}>{$row['title']}</option>
+            {/loop}
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">&nbsp;</label>
+        <div class=" col-xs-12 col-sm-2 col-lg-2">
+          <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="main">
+  <div class="category">
+    <div class="panel panel-default">
+      <div class="panel-body table-responsive">
+        <table class="table table-hover">
+        <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+          <input type="hidden" name="shopid" value="{$_GPC['shopid']}" />
+          <thead>
+            <tr>
+              <th style="width:60px;">#</th>
+              <th style="width:60px;">#</th>
+              <th>分类</th>
+              <th>图片</th>
+              <th>首字母</th>
+              <th>商品名称</th>
+              <th>价格</th>
+              <th>其他</th>
+              <th style="text-align:right">操作</th>
+            </tr>
+          </thead>
+          {loop $list $row}
+          <tr>
+            <td><input type="checkbox" name="select[]" value="{$row['id']}" /></td>
+            <td>{$row['id']}</td>
+            <td><span style="color:#00F">[{php echo $cateAry[$row['pcate']]}]</span></td>
+            <td><img src="{$_W['attachurl']}{$row['thumb']}" width="80" onerror="this.src='./resource/images/nopic-small.jpg'" /></td>
+            <td>{$row['shorttitle']}</td>
+            <td>{$row['title']}<div><span class="label label-info">SN：{$row['goodsn']}</span></div></td>
+            <td>
+              <p><span class="label label-default">价格</span>：<span class="label label-primary">￥ {$row['marketprice']}</span></p>
+              <p><span class="label label-default">成本</span>：<span class="label label-info">￥ {$row['productprice']}</span></p></td>
+            <td>
+            {if $row['isrecommand']}<p><span class="label label-success">全站推荐</span></p>{/if}
+            {if !$row['status']}<span class="label label-danger">下架</span>{/if}
+            </td>
+            <td style="text-align:right"><a href="{php echo $this->createWebUrl('goods', array('op'=>'post','id' =>$row['id'],'shopid' => $row['groupid']))}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="编辑"><i class="fa fa-edit"></i></a>&nbsp;&nbsp; <a href="{php echo $this->createWebUrl('goods', array('op' => 'delete', 'id' => $row['id'],'shopid' => $row['groupid']))}" onclick="return confirm('确认删除此商品吗？');return false;" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="删除"><i class="fa fa-times"></i></a></td>
+          </tr>
+          {/loop}
+          <tr>
+            <td><input type="checkbox" onclick="selectall(this)"/></td>
+            <td colspan="7">
+            <input type="submit" name="getshorttitle" class="btn btn-info" value="批量生成首字母"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+            	<a href="{php echo $this->createWebUrl('goods', array('op' => 'post','shopid' => $shopid))}" class="btn btn-default"><i class="glyphicon glyphicon-plus-sign"></i> 添加新商品</a>&nbsp;&nbsp; 
+                <a href="{php echo $this->createWebUrl('goods', array('op' => 'batch','shopid' => $shopid))}" class="btn btn-default"><i class="glyphicon glyphicon-floppy-open"></i> 批量添加</a>&nbsp;&nbsp; 
+                <a href="javascript:changecate()" class="btn btn-default"><i class="fa fa-random"></i> 转移类别</a>
+             </td>
+          </tr>
+          </form>
+        </table>
+        <div align="center">{php echo $pager}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modal_tiecard" tabindex="-1" role="dialog" aria-hidden="true">
+  <form method="post" id="form_tiecard_cardno" onSubmit="return false;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>转移类别</h3><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+         <div class="form-group">
+         	<label class="col-xs-12 col-sm-3 col-md-2 control-label">转移到</label>
+            <div class="col-sm-9">
+            	<select class="form-control" id="changepcate">
+                  <option value="">类别</option>
+                  {loop $category $row}
+                  <option value="{$row['id']}">{$row['title']}</option>
+                  {/loop}
+                </select>
+            </div>
+            <div class="help-block"></div>
+         </div>
+         <div>&nbsp;</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary" onClick="return doChange();">确定</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<script language="javascript">
+function changecate(){
+	$("#modal_tiecard h3").text("转移到类别");
+	$('#modal_tiecard').modal("show");
+}
+function checkUpdate(){
+	if($("input[name^='select']:checked").size()==0){
+		alert("请选择商品");
+		return false;
+	}
+	return true;
+}
+function doChange(){
+	var temp=[];
+	$("input[name^='select']:checked").each(function(index, element) {
+        temp.push($(this).val());
+    });
+	if(temp.length==0){
+		alert("请先选择要转移的商品");
+		return false;
+	}
+	var pcate=$("#changepcate option:selected").val();
+	if(!pcate){
+		alert("请选择要移动到哪个分类");
+		return false;
+	}
+	$.ajax({
+		type: "POST",
+		url:"{php echo $this->createWebUrl('wajax', array('op' => 'movegood'))}",
+		data:{"goods":temp.join(","),"pcate":pcate},
+		success: function(result){
+			console.log(result);
+			location.reload();
+		},
+		error:function (XMLHttpRequest, textStatus, errorThrown) {
+			swal("数据读取失败");
+		}
+	});
+	return false;
+}
+function selectall(obj){
+	$("input[name^='select']").prop("checked",$(obj).prop("checked"));
+}
+function show(obj){
+	$("tbody[id^='child']").hide();
+	$("tbody[id='child"+obj+"']").show();
+}
+</script> 
+{elseif $operation == 'batch'}
+<div class="main">
+<div class="panel panel-info">
+  <div class="panel-heading">批量添加</div>
+  <div class="panel-body">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+      <input type="hidden" name="shopid" value="{php echo $shopid}" />
+      <div class="form-group">
+        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">&nbsp;</label>
+        <div class=" col-xs-12 col-sm-8 col-lg-9">
+          <a href="{MODULE_URL}template/img/demo_good.csv" target="_blank" class="btn btn-danger">下载模板</a>
+          <div class="help-block"><b style="color:#F00">请使用WPS编辑文件</b>，单次导入请不要大于1000行</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">上传CSV文件</label>
+        <div class="col-xs-12 col-sm-8 col-lg-9">
+          <input class="form-control" name="csvfile" type="file" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">&nbsp;</label>
+        <div class=" col-xs-12 col-sm-8 col-lg-9">
+          <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+          <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{/if}
+{template 'common/footer'} 

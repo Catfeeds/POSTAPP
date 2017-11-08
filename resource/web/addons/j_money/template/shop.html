@@ -1,0 +1,399 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+  <li {if $operation == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('group', array('op' => 'post'))}">添加门店</a></li>
+  <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('group', array('op' => 'display'))}">管理门店</a></li>
+</ul>
+<script>
+require(['bootstrap'],function($){
+	$('.btn').hover(function(){
+		$(this).tooltip('show');
+	},function(){
+		$(this).tooltip('hide');
+	});
+});
+</script> 
+{if $operation == 'post'}
+
+
+<div class="main">
+  <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{php echo $id}" />
+    <div class="panel panel-default">
+      <div class="panel-heading"> 门店管理 </div>
+      <div class="panel-body"> 
+      	<ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#tab1" data-toggle="tab">基本内容</a></li>
+          <li><a href="#tab2" data-toggle="tab">支付方式</a></li>
+          <li><a href="#tab3" data-toggle="tab">微支付参数</a></li>
+          <li><a href="#tab4" data-toggle="tab">支付宝参数</a></li>
+          <li><a href="#tab5" data-toggle="tab">打印参数</a></li>
+          <li><a href="#tab6" data-toggle="tab">积分设置</a></li>
+          <li><a href="#tab7" data-toggle="tab">会员卡</a></li>
+          <li><a href="#tab8" data-toggle="tab">外用API对接</a></li>
+          <li><a href="#tab9" data-toggle="tab">收银模式</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="tab1">
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">门店名称</label>
+              <div class="col-sm-9 col-xs-12">
+                <input type="text" name="companyname" class="form-control" value="{$category['companyname']}" />
+                <div class="help-block"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">备注</label>
+              <div class="col-sm-9 col-xs-12">
+                <input type="text" name="description" class="form-control" value="{$category['description']}" />
+                <div class="help-block"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">退款管理员</label>
+              <div class="col-sm-9">
+                <input type="text" name="refunder" value="{$category['refunder']}" style=" width:250px;" class="form-control"/>
+                <div class="help-block">请在粉丝列表中，填写OPENID。仅1人。退款信息及操作将发送给此人确认。</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">登录页背景图</label>
+              <div class="col-sm-9"> {php echo tpl_form_field_image('bg', $category['bg']);}
+                <div class="help-block">收银登陆页背景1980*1280px</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">LOGO</label>
+              <div class="col-sm-9"> {php echo tpl_form_field_image('logo', $category['logo']);}
+                <div class="help-block">收银界面LOGO139*46px</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">公众号二维码</label>
+              <div class="col-sm-9"> {php echo tpl_form_field_image('qrcode', $category['qrcode']);}
+                <div class="help-block">大小300*300px。用于关注使用</div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab2">
+            <div class="form-group" >
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信支付开关</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="wechat_status" value="0" {if $category['wechat_status'] == 0} checked{/if} />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="wechat_status" value="1" {if $category['wechat_status'] == 1} checked{/if} />
+                  开启</label>
+              </div>
+            </div>
+            <div class="form-group" >
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">支付宝开关</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="ali_status" value="0" {if $category['ali_status'] == 0} checked{/if} />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="ali_status" value="1" {if $category['ali_status'] == 1} checked{/if} />
+                  开启</label>
+              </div>
+            </div>
+            <div class="form-group" >
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">现金/银行卡开关</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="cash_status" value="0" {if $category['cash_status'] == 0} checked{/if} />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="cash_status" value="1" {if $category['cash_status'] == 1} checked{/if} />
+                  开启</label>
+              </div>
+            </div>
+            <div class="form-group" >
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">会员卡开关</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="member_status" value="0" {if $category['member_status'] == 0} checked{/if} />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="member_status" value="1" {if $category['member_status'] == 1} checked{/if} />
+                  开启</label>
+              </div>
+            </div>
+            <!--<div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启输入台号/单号</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="needtable" value="0" {if $category['needtable'] == 0} checked{/if} />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="needtable" value="1" {if $category['needtable'] == 1} checked{/if} />
+                  开启</label>
+                <div class="help-block">在收款时，要求输入台号/单号，方便原收银系统或者其他平台在数据上对接</div>
+              </div>
+            </div>-->
+          </div>
+          <div class="tab-pane" id="tab3">
+            <div class="form-group" >
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">AppId</label>
+              <div class="col-sm-9">
+                <input type="text" name="appid" value="{$category['appid']}" class="form-control"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">子商户AppId</label>
+              <div class="col-sm-9">
+                <input type="text" name="sub_appid" value="{$category['sub_appid']}" class="form-control"/>
+                <div class="help-block">如果您是服务商，请在这里填写子商户的appid。如果不是服务商，请勿填写！</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">AppSecret</label>
+              <div class="col-sm-9">
+                <input type="text" name="appsecret" value="{$category['appsecret']}" class="form-control"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">商户名称</label>
+              <div class="col-sm-9 ">
+                <input type="text" value="{$category['pay_name']}" class="form-control" name="pay_name">
+                <div class="help-block">商户名称,不能多于6个中文字</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">商户号</label>
+              <div class="col-sm-9">
+                <input type="text" value="{$category['pay_mchid']}" class="form-control" name="pay_mchid">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">子商户商户号</label>
+              <div class="col-sm-9">
+                <input type="text" name="sub_mch_id" value="{$category['sub_mch_id']}" class="form-control"/>
+                <div class="help-block">如果您是服务商，请在这里填写子商户的商户号。如果不是服务商，请勿填写！</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">商户密钥</label>
+              <div class="col-sm-9">
+                <input type="text" value="{$category['pay_signkey']}" class="form-control" name="pay_signkey">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">商户证书</label>
+              <div class="col-sm-9 form-inline">
+                <input type="file" name="apiclient_cert" id="apiclient_cert" class="form-control" {if $category['apiclient_cert']} style="display:none"{/if}/>
+                {if $category['apiclient_cert']}
+                <button type="button" class="btn btn-default" onClick="$('#apiclient_cert').click()">{$category['apiclient_cert']}——点击修改</button>
+                {else}请上传apiclient_cert.pem{/if}
+                <input type="hidden" name="apiclient_cert2" value="{$category['apiclient_cert']}"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">商户证书</label>
+              <div class="col-sm-9 form-inline">
+                <input type="file" name="apiclient_key" id="apiclient_key" class="form-control" {if $category['apiclient_key']} style="display:none"{/if}/>
+                {if $category['apiclient_key']}
+                <button type="button" class="btn btn-default" onClick="$('#apiclient_key').click()">{$category['apiclient_key']}——点击修改</button>
+                {else}请上传apiclient_key.pem{/if}
+                <input type="hidden" name="apiclient_key2" value="{$category['apiclient_key']}"/>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab4">
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">app_id</label>
+              <div class="col-sm-9">
+                <input type="text" name="app_id" value="{$category['app_id']}" class="form-control"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">支付宝公匙</label>
+              <div class="col-sm-9 form-inline">
+                <input type="file" name="alipay_key" id="alipay_key" class="form-control"/>
+                {if $category['alipay_key']}{$category['alipay_key']}{else}请上传alipay_key.pem{/if}
+                <input type="hidden" name="alipay_key2" value="{$category['alipay_key']}"/>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab5">
+          	<div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">打印机类型</label>
+              <div class="col-sm-9 form-inline">
+                  <select class='form-control' name='printtype'>
+                  	<option value="0" {if $category["printtype"]==0 || empty($category)}selected{/if}>本地打印机</option>
+                    <option value="1" {if $category["printtype"]==1}selected{/if}>365打印机</option>
+                    <option value="2" {if $category["printtype"]==2}selected{/if}>飞鹅打印机</option>
+                    <!--<option value="2" {if $category["printtype"]==2}selected{/if}>飞印打印机</option>-->
+                  </select>
+                <div class="help-block">注意：只有采用【本地打印机】才能使用【打印模板】。</div>
+                <div class="help-block">飞鹅打印参数：PRINTER_SN,KEY,IP。</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">参数</label>
+              <div class="col-sm-9 form-inline">
+                {php $printparamAry=json_decode($category['printparam'],true)}
+                设备编号：<input type="text" class='form-control' name='print-no' value='{php echo $printparamAry["no"]}'/><br>
+                KEY　　：<input type="text" class='form-control' name='print-key' value='{php echo $printparamAry["key"]}'/><br>
+                Url地址　：<input type="text" class='form-control' name='print-url' value='{php echo $printparamAry["url"]}'/><br>
+                端口　　：<input type="text" class='form-control' name='print-port' value='{php echo $printparamAry["port"]}'/><br>
+                其他　　：<input type="text" class='form-control' name='print-other' value='{php echo $printparamAry["other"]}'/><br>
+                <div class="help-block">注意：如果不是【本地打印机】，请填写您的数据打印机的参数</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">小票张宽度</label>
+              <div class="col-sm-9 form-inline">
+                <div class="input-group">
+                  <input type="text" class='form-control' name='printpagewidth' value='{php echo $category["printpagewidth"] ? $category["printpagewidth"] : 57}'/>
+                  <span class="input-group-addon">mm(毫米)</span> </div>
+                <div class="help-block">热敏小票一般为57mm,则上面写57。请按照实际情况填写。</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">小票张数</label>
+              <div class="col-sm-9 form-inline">
+                <div class="input-group">
+                  <input type="text" class='form-control' name='printnum' value='{$category["printnum"]}'/>
+                  <span class="input-group-addon">张</span> </div>
+                <div class="help-block">收银小票打印张数</div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab6">
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">积分类型</label>
+              <div class="col-sm-9 form-inline">
+                <div class="input-group"> <span class="input-group-addon">人民币1分钱</span> <span class="input-group-addon">获得</span>
+                  <input type="text" class='form-control' name='creadit' value='{php echo $category["creadit"] ? $category["creadit"] : 0}'/>
+                  <span class="input-group-addon">积分</span> </div>
+                <div class="help-block">开启后，请在小票上添加|#积分#|内容的二维码。客户扫码二维码获得积分</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">积分获得后按钮</label>
+              <div class="col-sm-9 form-inline">
+                <input type="text" class='form-control' name='creditbtn' value='{$category["creditbtn"]}'/>
+                <div class="help-block">客户扫码获得积分后，按钮连接的地址</div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab7">
+          	<div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">会员卡ID</label>
+              <div class="col-sm-9">
+                <input type="text" class='form-control' name='memberid' value='{$category["memberid"]}'/>
+                <div class="help-block"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">转为刷卡</label>
+              <div class="col-sm-9">
+                <button class="btn btn-info" type="button" onclick="location.href='{php echo $this->createWebUrl('group',array('op' => 'updatecard', 'id' => $id))}'">将会员卡转为刷卡支付</button>
+                <div class="help-block"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">余额显示</label>
+              <div class="col-sm-9">
+                <button class="btn btn-info" type="button" onclick="location.href='{php echo $this->createWebUrl('group',array('op' => 'updatecard2', 'id' => $id))}'">支持余额显示</button>
+                <div class="help-block">开通后，不可关闭</div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab8">
+          	<div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">店铺对接</label>
+              <div class="col-sm-9">
+                <input type="text" class='form-control' name='docking' value='{$category["docking"]}'/>
+                <div class="help-block"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">收银员对接</label>
+              <div class="col-sm-9">
+                <input type="text" class='form-control' name='docking_userid' value='{$category["docking_userid"]}'/>
+                <div class="help-block"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-pane" id="tab9">
+          	<div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">收银模式</label>
+              <div class="col-sm-9">
+                <select class='form-control' name='style'>
+                {loop $fileskin $row}
+                	<option value="{$row}" {if $category["style"]==$row}selected{/if}>{$row}</option>
+                {/loop}
+                </select>
+                <div class="help-block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="form-group col-xs-12">
+      <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" onclick="return checkform();return false" />
+      <input type="hidden" name="token" value="{$_W['token']}" />
+    </div>
+  </form>
+</div>
+{elseif $operation == 'display'}
+<div class="main">
+  <div class="category">
+    <form action="" method="post" onsubmit="return formcheck(this)">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style="width:30px;">#</th>
+                <th>门店名称</th>
+                <th>备注</th>
+                <th>人员数量</th>
+                <th style="text-align:right">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            {loop $list $row}
+            <tr>
+              <td></td>
+              <td>{$row['companyname']}</td>
+              <td>{$row['description']}</td>
+              <td>{php echo intval($userList[$row['id']])} 人</td>
+              <td style="text-align:right;overflow:visible">
+              <a href="{php echo $this->createWebUrl('group',array('op' => 'post', 'id' => $row['id']))}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="编辑"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  功能 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" style="right:0; left:auto">
+                  <li><a href="{php echo $this->createWebUrl('memberlevel',array('shopid' => $row['id']))}" ><i class="fa fa-users"> </i> 会员级别</a></li>
+                  <li><a href="{php echo $this->createWebUrl('membercard',array('shopid' => $row['id']))}" ><i class="fa fa-user"> </i> 会员管理</a></li>
+                  <li><a href="{php echo $this->createWebUrl('category',array('shopid' => $row['id']))}"><i class="fa fa-sitemap"></i> 商品类别管理</a></li>
+                  <li><a href="{php echo $this->createWebUrl('goods',array('shopid' => $row['id']))}"><i class="fa fa-cubes"></i> 商品管理</a></li>
+                  <li><a href="{php echo $this->createWebUrl('orderhistory',array('shopid' => $row['id']))}"><i class="fa fa-file-text-o"></i> 订单记录</a></li>
+                  <li><a href="{php echo $this->createWebUrl('history',array('shopid' => $row['id']))}"><i class="fa fa-file-text-o"></i> 收银记录</a></li>
+                  <li><a href="{php echo $this->createWebUrl('charge',array('shopid' => $row['id']))}"><i class="fa fa-file-text-o"></i> 充值记录</a></li>
+                  <li><a href="{php echo $this->createWebUrl('statistics',array('shopid' => $row['id']))}"><i class="fa fa-bar-chart-o"></i> 统计分析</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{php echo $this->createWebUrl('group',array('op' => 'delete', 'id' => $row['id']))}" onclick="return confirm('确实删除吗？');return false;"><i class="fa fa-times"></i> 删除</a></li>
+                </ul>
+              </div>
+              
+              </td>
+            </tr>
+            {/loop}
+            <tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{/if}
+{template 'common/footer'} 

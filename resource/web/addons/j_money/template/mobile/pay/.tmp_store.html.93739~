@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head design-width="720">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<title>Demo</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" /><!--样式-->
+<link rel="stylesheet" type="text/css" href="css/animate.min.css" /><!--CSS3动画库-->
+<script type="text/javascript" src="js/auto-size.js"></script><!--设置字体大小-->
+</head>
+<body class="bj1">  
+	<div class="mobile_wrap center bj">
+        <div class="header">
+        <!-- 	<i>
+        		<a href="#"><img src="img/ico0.png" alt=""></a>
+        	</i> -->
+        	<h2>店铺</h2>
+        </div><!-- header -->
+         
+         <div class="tip">
+         	<div class="wid">
+         		<i><img src="img/ico_6.png" alt=""></i>
+         		<p>先服务，后销售</p>
+         	</div>
+         </div>
+
+         <div class="banner">
+	        <div class="bann swiper-container">
+	            <ul class="swiper-wrapper">
+	                <li class="swiper-slide"><img src="img/pic16.jpg" alt=""></li>
+	                <li class="swiper-slide"><img src="img/pic17.jpg" alt=""></li>
+	                <li class="swiper-slide"><img src="img/pic18.jpg" alt=""></li>
+	            </ul>
+	        </div>
+	        <div class="swiper-pagination">
+	        </div>
+        </div><!--banner-->
+
+		<div class="store dt">
+			<div class="wid">
+				<i><img src="img/pic8.jpg" alt=""></i>
+				<div class="text">
+					<h2><a href="#">上海凡德宝马4S店</a></h2>
+					<span>先服务，后销售</span>
+				</div>
+			</div>
+		</div><!-- store -->
+
+		<div class="way dt">
+			<div class="wid">
+				<ul>
+					<li>
+						<h2>选择支付方式</h2>
+					</li>
+					<li class="ont">
+						<em><img src="img/ico1.png" alt=""></em>
+						<div class="text">	
+							<h3>转账支付</h3>
+							<span>余额/储蓄卡</span>
+						</div>
+						<a href="#"><i class="ico-more"></i></a>
+					</li>
+					<li class="one">
+						<em><img src="img/ico2.png" alt=""></em>
+						<div class="text">	
+							<h3>信用支付</h3>
+							<span>花呗/信用卡</span>
+						</div>
+						<a href="#"><i class="ico-more"></i></a>
+					</li>
+				</ul>
+			</div>
+		</div><!-- way -->
+
+	<div class="al-box three center">
+    	<div class="layout">
+    		<div class="box">
+    			<h2>转账支付注意事项：</h2>
+    			<p>1.只支持支付宝余额或储蓄卡支付.</p>
+                <p>2.转账订单无需支付额外手续费.</p>
+                <p>3.付款后请将出示给店内收银员.</p>
+    		</div>
+    		<div class="ok-but">
+    			<a class="a2" href="#">取消</a>
+    			<a href="pay.html" class="a1">确认</a>
+    		</div>
+    	</div>
+    </div>
+    <div class="al-box two center">
+    	<div class="layout">
+    		<div class="box">
+    			<h2>信用支付注意事项：</h2>
+    			<p>1.支持所有支付宝包括花呗,信用卡等付款方式.</p>
+                <p>2.超过免费额度部分支付相应手续费.</p>
+                <p>3.到账即时提醒让付款更方便快捷.</p>
+    		</div>
+    		<div class="ok-but">
+    			<a class="a2" href="#">取消</a>
+    			<a href="pay.html" class="a1">确认</a>
+    		</div>
+    	</div>
+    </div>
+	<!-- 	<div class="null-box"></div> -->
+    </div><!--mobile_wrap-->
+
+    
+</body>
+<script type="text/javascript" src="js/jquery-2.2.4.min.js"></script><!--jQ库-->
+<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script><!--轮播库-->
+<script type="text/javascript" src="js/version-3.2.8.js"></script><!--封装函数-->
+<script>
+    downslide(".banner .bann",".banner .swiper-pagination","","");
+
+    $(".way .one").click(function(event) {
+		$(".al-box.two").fadeIn();
+	});
+	
+	$(".al-box .layout .ok-but a.a2").click(function(event) {
+		$(".al-box").fadeOut();
+	});
+  
+
+    $(".way .ont").click(function(event) {
+		$(".al-box.three").fadeIn();
+	});
+</script>
+</html>

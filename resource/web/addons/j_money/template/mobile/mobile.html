@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>移动收银台</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="./resource/css/bootstrap.min.css" rel="stylesheet">
+<link href="./resource/css/font-awesome.min.css" rel="stylesheet">
+<link href="./resource/css/animate.css" rel="stylesheet">
+<link href="./resource/css/common.css" rel="stylesheet">
+{php echo register_jssdk(false);}
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+<script src="{MODULE_URL}template/js/fastclick.min.js"></script>
+<script src="{MODULE_URL}template/js/sweetalert.min2.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/sweetalert.css"/>
+<script src="{MODULE_URL}template/js/weui.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/weui.css"/>
+<script src="{MODULE_URL}template/mobile/jetsum.min.js?v={TIMESTAMP}"></script>
+</head><body>
+{if $operation=="login"}
+<style>
+body{background:#F3D556;}
+
+</style>
+<div style="padding:50px 10px 10px 10px;">
+  <div class="panel panel-danger">
+    <div class="panel-heading">收银登陆</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">账号</label>
+        <div class=" col-xs-12 col-sm-2 col-lg-2">
+          <input class="form-control" name="userid" type="text" maxlength="10" placeholder="请输入您的账号">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">密码</label>
+        <div class=" col-xs-12 col-sm-2 col-lg-2">
+          <input class="form-control" name="pwd" type="password" maxlength="20" placeholder="请输入您的密码">
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button type="button" onClick="submitForm()" id="btn_submit" class="btn btn-success btn-block">加载中</button>
+    </div>
+  </div>
+</div>
+
+<script language="javascript">
+function submitForm(){
+	var userid=$("input[name='userid']").val();
+	var pwd=$("input[name='pwd']").val();
+	if(!userid || !pwd){
+		swal("信息填写错误！");
+		return;
+	}
+	$.ajax({
+		url: "{php echo $this->createMobileUrl('ajax',array('op'=>'login'))}",
+		type: "POST",
+		data: {"userid":userid,"pwd":pwd},
+		dataType:'json',
+		success: function(data){
+    		if(data.success){
+				location.href="{php echo $this->createMobileUrl('mobile')}";
+			}else{
+				swal(data.msg);
+			}
+		},
+		error:function(event,request,settings){
+    		alert("error");
+		}
+	})
+}
+wx.ready(function () {
+	wx.hideOptionMenu();
+	if($("#btn_submit").size())$("#btn_submit").removeAttr("disabled").text("登陆");
+});
+</script>
+{else}
+<style>
+.money_screen{ background:#2D3E50;padding:10px;text-align:right;color:#FFF; display:table; width:100%;}
+.jrow{display:table-row}
+.money_show{ display:table-cell; vertical-align:bottom; font-size:30px;}
+.btn_num{ background:#E9ECF5;color:#323440; text-align:center; font-size:22px;width:100%;border-radius:0;padding:0;}
+.btn_submit{text-align:center;width:100%;border-radius:0;font-size:18px; color:#FFF;padding:0;}
+.money_keybord .row{padding:0; margin:0;border-bottom:1px solid #A9ADB6;}
+.money_keybord .row div[class^='col-xs']{padding:0; margin:0;background:#E9ECF5; border-right:1px solid #A9ADB6;}
+.money_keybord .row div[class^='col-xs']:last-child{border-right:none}
+.headbar{background:#18222C;  width:100%;position:fixed; left:0; top:0; right:0; height:48px; line-height:48px; color:#FFF;z-index:2}
+.headertable{ display:table; width:100%;}
+.headercell{ display:table-cell; vertical-align:middle; text-align:center; color:#FFF;}
+.headercell a{ height:48px; line-height:48px; display:block; text-align:center; color:#FFF;}
+</style>
+<div class="headbar">
+  <div class="headertable">
+    <div class="jrow">
+      <div class="headercell" style="width:15%"><a href="javascript:$.jweui.msg('{php echo $cfg['copyright']}')"><i class="fa fa-info-circle" style=" font-size:24px"></i></a></div>
+      <div class="headercell">&nbsp;</div>
+      <div class="headercell" style="width:15%"><a href="{php echo $this->createMobileUrl('mobile',array('op'=>'history'))}"><i class="fa fa-asterisk" style=" font-size:24px"></i></a></div>
+    </div>
+  </div>
+</div>
+<div class="money_screen">
+  <div class="jrow">
+    <div class="money_show">0</div>
+  </div>
+</div>
+<div class="money_keybord">
+  <div class="row">
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="1"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="2"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="3"/>
+    </div>
+    <div class="col-xs-3">
+      <button class="btn btn-block btn_num" id="redues"><i class="fa fa-long-arrow-left"></i></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="4"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="5"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="6"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_submit" onClick="qrScan()" style="background:#168AE1;" value="刷卡"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="7"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="8"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="9"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_submit" onClick="payqrcode(1)" style="background:#EE8A2A;" value="支付宝码"/>
+    </div>
+  </div>
+  <div class="row">
+    <!--<div class="col-xs-3"><input type="button" class="btn btn-block btn_num" value="C" onClick=""/></div>-->
+    <div class="col-xs-6">
+      <input type="button" class="btn btn-block btn_num" value="0"/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_num" value="."/>
+    </div>
+    <div class="col-xs-3">
+      <input type="button" class="btn btn-block btn_submit" onClick="payqrcode(0)" style="background:#80B833;" value="微信码"/>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="tradeno"/>
+<textarea id="debug" style="display:none;"></textarea>
+<script type="text/javascript">
+$(function() {
+  FastClick.attach(document.body);
+});
+var uniacid="{$_W['uniacid']}";
+var siteroot="{$_W['siteroot']}";
+$(document).ready(function(e) {
+    var _rootHeight=$(window).height();
+	$(".money_show").css('height',_rootHeight*0.3-20);
+	var _h=_rootHeight*0.7/4;
+	$(".btn_num,.btn_submit").css({'height':_h});
+});
+var checkTimeout;
+var needTable=parseInt("{php echo $shop['needtable']}");
+var isPaying=false;
+$(".btn_num").on('click',function(){
+	var vTecla=$(this).val();
+	Counter(vTecla);
+});
+$("#redues").on('click',function(){
+	var vTecla=$(".money_show");
+	if(vTecla.text().length==1){
+		vTecla.text("0");
+	}else{
+		var len=vTecla.text().length;
+		var temp=vTecla.text().substr(0,len-1);
+		vTecla.text(temp);
+	}
+})
+function Counter(obj){
+	var vTecla=obj;
+	var salida=$(".money_show");
+	if(salida.text().length>8){
+		return false;
+	}
+	if(vTecla=='.'){
+		if(salida.text().indexOf('.')>-1){
+			salida.text(salida.text());
+		}else{
+			salida.text(salida.text()+vTecla);
+		}
+	}else if(vTecla=='0'){
+		if(salida.text()==0 && salida.text().length==1){
+			salida.text("0");
+		}else{
+			salida.text(salida.text()+vTecla);
+		}
+	}else{
+		if((salida.text()==0 && salida.text().length==1)){
+			salida.text(vTecla);
+		}else{
+			salida.text(salida.text()+vTecla);
+		}
+	}
+	var temp=salida.text();
+	if(temp.indexOf('.')>-1){
+		var float=temp.split('.');
+		if(float[1].length>2){
+			salida.text(float[0]+'.'+float[1].substr(0,2));
+		}
+	}
+}
+
+function qrScan(){
+	var temp=parseFloat($(".money_show").text());
+	if(temp*100==0){
+		swal("请输入金额");
+		return;
+	}
+	var tableno="";
+	if(needTable && arguments.length==0){
+		swal({
+			title:"请输入台号/单号",
+			type:"input",
+			html:true,
+			showLoaderOnConfirm: true,
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "确认",
+			cancelButtonText: "关闭",
+			inputPlaceholder: "请输入台号/单号"
+			}, function(inputValue){
+			if (inputValue === false) return false;
+			if (inputValue === "") {
+				swal.showInputError("请输入台号或者单号");
+				return false
+			}
+			tableno=inputValue;
+			qrScan(inputValue);
+			return;
+		});
+	}
+	wx.scanQRCode({
+		needResult: 1,
+		scanType: ["qrCode","barCode"],
+		success: function (res) {
+			var resultqrcode = res.resultStr;
+			swal({
+				title: "收款金额为<span style='color:#F00'>￥"+temp+"元</span>",
+				html:true,
+				showCancelButton: true,
+				confirmButtonText: "确认收款",
+				cancelButtonText: "关闭",
+				}, function(isConfirm){
+					if (isConfirm) {
+						if(isPaying)return;
+						isPaying=true;
+						swal({title:"请稍后",showConfirmButton:false});
+						payAll(resultqrcode,temp,tableno);
+					}
+				}
+			);
+		}
+	});
+}
+function payAll(qrcode,fee,tableNum){
+	if(qrcode.length==0){
+		swal("请先扫描");
+		return;
+	}
+	jetsumpay.payAll({"uniacid":uniacid,"siteroot":siteroot,"fee":fee,"password":"","qrcode":qrcode,"old_trade_no":tableNum,"attach":"mobile","success":function(ordsn){
+		swal("收款成功");
+		jetsumpay.paySuccess({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":ordsn,"success":function(){
+			location.href="{php echo $this->createMobileUrl('mobile',array('op'=>'paysuccess'))}&tradeid="+ordsn;
+		}});
+	}})
+}
+
+function payqrcode(paytype){
+	var temp=parseFloat($(".money_show").text());
+	if(temp*100==0){
+		swal("请输入金额");
+		return;
+	}
+	var tableno=arguments.length>1 ? arguments[1] : "";
+	if(needTable && arguments.length==1 ){
+		swal({
+			title:"请输入台号/单号",
+			type:"input",
+			html:true,
+			showLoaderOnConfirm: true,
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "确认",
+			cancelButtonText: "关闭",
+			inputPlaceholder: "请输入台号/单号"
+			}, function(inputValue){
+				if (inputValue === false) return false;
+				if (inputValue === "") {
+					swal.showInputError("请输入台号或者单号");
+					return false
+				}
+				payqrcode(paytype,inputValue);
+				return;
+			}
+		);
+	}
+	swal({title:"处理中",showConfirmButton:false});
+	jetsumpay.payQrcode({"uniacid":uniacid,"siteroot":siteroot,"fee":temp,"paytype":paytype,"old_trade_no":tableno,"success":function(result){
+		$("#tradeno").val(result.orderid);
+		swal({
+			title: "<img src='"+result.qrcode+"' onload='resetHeight()' style='width:100%' />",
+			text:"￥"+temp+"元<br>请扫描此二维码付款",
+			confirmButtonText: "确认收款",
+			cancelButtonText: "取消",
+			closeOnConfirm: false,
+			showCancelButton: true,
+			html: true,
+			}, function(isConfirm){
+				if (isConfirm){
+					if(!confirm("请务必确认客户已付款成功"))return;
+					checkQrcodePay(result.orderid);
+				}else{
+					location.reload();
+				}
+			}
+		);
+	}});
+}
+function checkQrcodePay(orderid){
+	jetsumpay.reCheckPay2({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":orderid,"success":function(result){
+		if(result.success){
+			swal("收款成功");
+			jetsumpay.paySuccess({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":orderid,"success":function(){
+				location.href="{php echo $this->createMobileUrl('mobile',array('op'=>'paysuccess'))}&tradeid="+orderid;
+			}});
+		}
+	}});
+}
+function resetHeight(){
+	$(".showSweetAlert").css('margin-top',(-1)*$(".showSweetAlert").height()/2);
+}
+function paySuccess(order){
+	location.href="{php echo $this->createMobileUrl('mobile',array('op'=>'paysuccess'))}&tradeid="+order;
+}
+wx.ready(function () {
+	wx.hideOptionMenu();
+});
+</script>
+{/if}

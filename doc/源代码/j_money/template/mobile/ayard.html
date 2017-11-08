@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{$shop['companyname']}</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="./resource/css/bootstrap.min.css" rel="stylesheet">
+<link href="./resource/css/font-awesome.min.css" rel="stylesheet">
+<link href="./resource/css/common.css" rel="stylesheet">
+{php echo register_jssdk(false);}
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+<script src="{MODULE_URL}template/js/fastclick.min.js"></script>
+<script src="{MODULE_URL}template/js/weui.min.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/weui.min.css"/>
+</head><body>
+<style>
+body{background:#EFEEF3;}
+h1{ margin:20px 20px 10px 20px;text-align:center; font-size:2em;color:#333}
+h2{ margin:0 20px 10px 20px;text-align:center;font-size:1em;color:#888}
+.paybox{ margin:20px; background:#FFF; border:#888 1px solid; padding:10px; border-radius:4px;}
+.smalltxt{color:#666; font-size:1em}
+.infotxt{color:#888; font-size:1em; margin-top:10px}
+.inputbox{ padding:6px 0;font-size:2.6em; border-bottom:1px solid #999;}
+.inputpaybox{display:inline; margin-left:10px;}
+.paybtn{margin:10px 20px;}
+#feebox{ font-size:1em;height:2.0em;}
+.numbtnbox{ position:absolute; left:0; right:0; bottom:0;}
+.numbtnbox ul,.numbtnbox ul li{ list-style:none; margin:0; padding:0}
+.numbtnbox ul{display:-webkit-box;display:box;width:100%; padding:0 0 1px 0;position:relative;}
+.numbtnbox ul li{text-align:center; padding-right:1px; display:inline-block;}
+.numbtnbox ul li:last-child{padding:0;}
+.numbtnbox ul li a{display:block; padding:5px 0;text-align:center;text-decoration:none;background:#FFF;font-size:1.8em; color:#333; font-weight:bold}
+.numbtnbox ul li a:active{text-decoration:none; background:#DDD;}
+.box{display:-webkit-box;display:box;}
+.fx2{-webkit-box-flex:8;box-flex:8;}
+.fx8{-webkit-box-flex:8;box-flex:8;}
+.fx6{-webkit-box-flex:6;box-flex:6;max-width:50%;}
+.cross{ position:absolute; z-index:2; right:1px; top:0;}
+</style>
+<div class="paybox">
+    <div class="smalltxt">消费总额</div>
+    <div style="display:table;border-bottom:1px solid #999; margin:5px 0;">
+    <div style="display:table-row">
+        <div style="display:table-cell;font-size:2.6em;">￥</div>
+        <div style="display:table-cell;font-size:2.6em;"><input id="feebox" readonly value="0"class="weui_input" type="text" /></div>
+    </div>
+    </div>
+    <div class="infotxt">请询问服务员消费总额哦</div>
+</div>
+<div class="numbtnbox">
+
+  <ul>
+  	<li class="li1"><a href="javascript:Counter(7)">7</a></li><li><a href="javascript:Counter(8)">8</a></li><li><a href="javascript:Counter(9)">9</a></li><li><a href="javascript:Counter('B')"><i class="fa fa-long-arrow-left"></i></a></li>
+  </ul>
+  <ul>
+  	<li><a href="javascript:Counter(4);">4</a></li><li><a href="javascript:Counter(5);">5</a></li><li><a href="javascript:Counter(6);">6</a></li><li><a href="javascript:Counter('C');">C</a></li>
+  </ul>
+  <ul>
+  	<li><a href="javascript:Counter(1);">1</a></li><li><a href="javascript:Counter(2);">2</a></li><li><a href="javascript:Counter(3);">3</a></li><li class="cross"><a href="javascript:createOrder();" style="background:#4cae4c;color:#FFF">付款</a></li>
+  </ul>
+  <ul>
+  	<li class="fx6"><a href="javascript:Counter(0)">0</a></li><li><a href="javascript:Counter('.')">.</a></li><li><a href="javascript:"></a></li>
+  </ul>
+</div>
+<script language="javascript">
+$(function(){FastClick.attach(document.body);});
+var tradeOrderNo;
+$(document).ready(function(e) {
+	var _w=$(document).width()*0.25-1;
+	$(".numbtnbox ul").width($(window).width());
+	$(".numbtnbox ul li").width(_w);
+	$(".numbtnbox .fx6").css("width",_w*2+4).siblings().css("width",_w+1);
+	var _h=$(".numbtnbox .li1").height();
+	$(".cross").height(_h*2);
+	$(".cross a").height(_h*2-10).css("padding-top",_h*0.6);
+});
+var payType=parseInt("{php echo $payType}");
+wx.ready(function(){
+	wx.hideOptionMenu();		
+});
+var jsApiParameters; 
+function jsApiCall(){
+	WeixinJSBridge.invoke(
+        'getBrandWCPayRequest', {
+            "appId":jsApiParameters['appId'],     //公众号名称，由商户传入     
+            "timeStamp":jsApiParameters['timeStamp'],         //时间戳，自1970年以来的秒数     
+            "nonceStr":jsApiParameters['nonceStr'], //随机串     
+            "package":jsApiParameters['package'],     
+            "signType":"MD5",         //微信签名方式：     
+            "paySign":jsApiParameters['paySign'] //微信签名 
+        },
+        function(res){    
+			// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+				alert("支付成功！");
+				location.href="{php echo $this->createmobileurl('ayard',array('op'=>'paysuccess','shopid'=>$shopid ))}&ordersn="+tradeOrderNo;
+			}else if(res.err_msg == "get_brand_wcpay_request:cancel" ) {
+				alert("用户已取消");
+			}else if(res.err_msg == "get_brand_wcpay_request:fail" ) {
+				alert("支付失败");
+			}
+        }
+    );
+}
+function createOrder(){
+	var fee = $('#feebox').val();
+	if(isNaN(fee)){
+		weui.alert("请输入金额");
+		return;
+	};
+	var loading = weui.loading('loading');
+	$.post("{php echo $this->createmobileurl('ayard',array('op'=>'createorder'))}",{fee:fee,shopid:'{php echo $shopid}'},function(result){
+		console.log(result);
+		loading.hide();
+		var feeback=eval("("+result+")");
+		if(feeback.success){
+			tradeOrderNo=feeback.out_trade_no;
+			if(payType==1){
+				jsApiParameters=feeback.param;
+				callpay();
+			}else{
+				alipay(feeback.tradeno);
+			}
+		}else{
+			loading.hide();
+			weui.alert(feeback.msg);
+		}
+	});
+}
+function callpay(){
+	if (typeof WeixinJSBridge == "undefined"){
+		if( document.addEventListener ){
+			document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+		}else if (document.attachEvent){
+			document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+			document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+		}
+	}else{
+		jsApiCall();
+	}
+}
+function alipay(tradeno){
+	document.addEventListener('AlipayJSBridgeReady', function () {
+		AlipayJSBridge.call("tradePay", {
+			tradeNO:tradeno
+		}, function (result) {
+			console.log(JSON.stringify(result));
+			if (result.resultCode =='9000') {
+				location.href="{php echo $this->createmobileurl('ayard',array('op'=>'paysuccess','shopid'=>$shopid ))}&ordersn="+tradeOrderNo;
+			}else if (result.resultCode =='6001') {
+				alert("取消支付");
+			}else{
+				alert("异常");
+			}
+		});
+	}, false);
+}
+function Counter(obj){
+	var vTecla=obj;
+	var salida=$("#feebox");
+	if(vTecla=='C'){
+		salida.val(0);
+		return false;
+	}else if(vTecla=='B'){
+		var txt=salida.val();
+		if(txt.length<=1){
+			salida.val(0);
+		}else{
+			salida.val(txt.substr(0,txt.length-1));
+		}
+		return false;
+	}
+	if(parseFloat(salida.val())>10000 &&( vTecla!='C' || vTecla!='B')){
+		return false;
+	}
+	if(vTecla=='.'){
+		if(salida.val().indexOf('.')>-1){
+			return false;
+		}else{
+			var txt=salida.val();
+			salida.val(txt+".");
+			return;
+		}
+	}else if(vTecla=='0'){
+		if(salida.val()==0 && salida.val().length==1){
+			salida.val(0);
+		}else{
+			salida.val(salida.val()+vTecla);
+		}
+	}else{
+		if((salida.val()==0 && salida.val().length==1)){
+			salida.val(vTecla);
+		}else{
+			salida.val(salida.val()+vTecla);
+		} 
+	}
+	var temp=salida.val();
+	if(parseFloat(temp)>10000 ){
+		salida.val(temp.substr(0,temp.length-1));
+	}
+	if(temp.indexOf('.')>-1){
+		var float=temp.split('.');
+		if(float[1].length>2){
+			salida.val(float[0]+'.'+float[1].substr(0,2));
+		}
+	}
+}
+</script>
+<script>
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady(){
+	WeixinJSBridge.call('hideOptionMenu');
+	WeixinJSBridge.call('hideToolbar');
+});
+</script> 

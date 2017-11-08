@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{$shop['companyname']}收银台</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="{MODULE_URL}image/css/bootstrap.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/font-awesome.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/common.css" rel="stylesheet">
+{php echo register_jssdk(false);}
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+<script src="{MODULE_URL}template/js/fastclick.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{MODULE_URL}image/js/lib/bootstrap.min.js"></script>
+<script src="{MODULE_URL}template/js/sweetalert.min2.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/sweetalert.css"/>
+<script src="{MODULE_URL}template/js/jquery.transit.js"></script>
+<link href="{MODULE_URL}template/js/weui.css" rel="stylesheet">
+<script src="{MODULE_URL}template/mobile/default/jetsum_j_money_mobile.js"></script>
+<link href="{MODULE_URL}template/js/jdate/jedate.css" rel="stylesheet">
+<script src="{MODULE_URL}template/js/jdate/jedate.min.js"></script>
+<link href="{MODULE_URL}template/js/idangerous.swiper.css" rel="stylesheet">
+<script src="{MODULE_URL}template/js/idangerous.swiper.min.js"></script>
+</head>
+<style>
+ul,ul li,li{list-style:none; padding:0; margin:0;}
+html{height:100%;}
+body{height:100%; background:#F8F8F8;color:#333;font-size:14px;}
+.jtable{ display:table; width:100%;}
+.jrow{ display:table-row;}
+.jcell{ display:table-cell;}
+.valignTop{ vertical-align:top;}
+.iconbtn{line-height:34px; font-size:18px; width:120px; text-align:center; display:inline-block; border-radius:4px}
+.iconbtn i{ display:inline-block;}
+.iconbtn0{ background:#EEE; color:#999}
+.iconbtn1{ background:#489AFE; color:#FFF}
+.iconbtn2{ background:#FE7155; color:#FFF}
+.iconbtn3{ background:#6CDD73; color:#FFF}
+.icontopbtn{font-size:14px;text-align:center; display:inline-block; padding:5px; margin:5px;border-radius:4px}
+.icontopbtn div{}
+.icontopbtn div i{display:inline-block;font-size:26px;}
+.pagesize-left{}
+.jbox{display:-webkit-box;display:box;}
+.fx1{-webkit-box-flex:1;box-flex:1;}
+.fx2{-webkit-box-flex:2;box-flex:2;}
+.fx3{-webkit-box-flex:3;box-flex:3;}
+.fx3{-webkit-box-flex:4;box-flex:4;}
+.fx3{-webkit-box-flex:5;box-flex:5;}
+.fx6{-webkit-box-flex:6;box-flex:6;}
+.fx7{-webkit-box-flex:7;box-flex:7;}
+.fx8{-webkit-box-flex:8;box-flex:8;}
+.fx9{-webkit-box-flex:9;box-flex:9;}
+/**/
+.sweet-counter-box{ text-align:left;}
+.sweet-counter-box ul { position:relative;}
+.sweet-counter-box ul li{display:inline-block;width:24.3%; margin:2px 0.2%; text-align:center; line-height:40px; border:1px solid #CCC; border-radius:4px; font-size:18px; cursor:pointer;}
+.sweet-counter-box .sweet-counter-c{position:absolute; z-index:2; height:134px;padding-top:46px}
+.sweet-counter-box .sweet-counter-0{width:48.8%}
+.sweet-counter-box ul li:hover,.sweet-counter-box ul li:active{ background:#CCC;}
+/*顶部*/
+.page-top{ height:60px; line-height:60px; overflow:hidden;background:#1765C7;color:#FFF;}
+.page-top-logo{width:100px;height:60px;line-height:60px; overflow:hidden;background:#0555B6; float:left;}
+.page-top-logo img{ max-height:90%;max-width:90%;}
+.page-top-userbox{ margin:0 0 0 10px;float:left;}
+.page-top-btngroup{ float:right;}
+.page-top-btngroup a{ display:inline-block; width:60px; height:60px; text-align:center; line-height:60px;color:#FFF;}
+.page-top-btngroup a.disabled{color:#DDD;}
+.page-top-btngroup a:active{ background:#FFF; color:#1765C7; text-decoration:none;}
+.page-top-btngroup a i{ font-size:2em}
+/**/
+.page-left{ width:100px;overflow:hidden; float:left; background:#2D2B2C;}
+.page-left ul li{height:100px;overflow:hidden;color:#CCC; text-align:center; padding-top:20px}
+.page-left ul li p{color:#CCC;}
+.page-left ul li.active{color:#FFF; background:#000;}
+.page-left ul li.active p{color:#FFF;}
+/**/
+.page-right{float:left;}
+.page-right-statusbar{ position:absolute; z-index:2; bottom:0; left:0; right:0; height:40px; line-height:40px; background:rgba(0,0,0,0.5);text-indent:20px;color:#FFF}
+.page-right-statusbar-btn{ float:right; width:260px; margin-left:10px; text-align:right}
+.page-right-statusbar-price{ font-size:18px;float:right;}
+/**/
+.page-main{ position:relative;}
+.page-content{}
+.page-bar{height:59px; border-bottom:1px solid #CCC; line-height:59px; padding:0 15px; background:#FFF;}
+.page-bar input,.page-bar select.page-bar button{ display:inline-block; width:auto; line-height:34px; height:34px; margin:0;}
+.pagecontent{display:table;width:100%;}
+.pagecontent-left{width:140px; background:#FFF; vertical-align:top;}
+ul.catelist li{line-height:39px; border-bottom:1px solid #CCC; padding:0 5px 0 15px;}
+ul.catelist li span{ float:right; background:#FF6F5C;color:#FFF; border-radius:99px; display:inline-block; margin-top:10px; height:18px; line-height:18px; text-align:center; width:26px; text-align:center; font-size:12px;}
+ul.catelist li.active{ border-left:5px solid #489AFE;color:#489AFE; background:#F8F8F8;}
+.pagecontent-middle{border-right:1px solid #CCC;border-left:1px solid #CCC; padding:10px;vertical-align:top;}
+ul.goodslist{ overflow-y:scroll}
+ul.goodslist li{ display:inline-block; width:100px; border:1px solid #CCC; height:100px; padding:5px; position:relative; margin:8px; background:#FFF}
+ul.goodslist li:active{ background:#489AFE; color:#FFF;}
+ul.goodslist li .price{ position:absolute; bottom:0; left:5px;}
+ul.goodslist li span{width:0;height:0;border-bottom:30px solid #FF6F5C;border-left:30px solid transparent;position:absolute; bottom:0; right:0px; color:#FFF; font-size:12px;}
+ul.goodslist li span i{ color:#fff; position:absolute; z-index:2; bottom:-30px; right:3px;}
+.pagecontent-right{width:280px; background:#FFF;vertical-align:top;}
+.pagecontent-right-box{ overflow-y:scroll;}
+ul.menulist{ display:table; width:100%;}
+ul.menulist li{display:table-row;}
+ul.menulist li .menulist-title{ font-size:14px;display:table-cell;height:59px;border-bottom:1px solid #CCC;vertical-align:middle; text-indent:5px}
+ul.menulist li .menulist-num{display:table-cell;width:90px;height:59px;border-bottom:1px solid #CCC;vertical-align:middle;}
+ul.menulist li .menulist-num p{ margin:0}
+ul.menulist li .menulist-btn{display:table-cell;width:40px;height:59px;border-bottom:1px solid #CCC;vertical-align:middle;color:#999;text-align:center}
+ul.menulist li .menulist-btn:active{ background:#489AFE; color:#FFF;}
+
+.pagecontent .pay-left{ display:table-cell; vertical-align:top; width:260px; border-right:1px solid #CCC; background:#FFF}
+.pay-left ul li{ padding:20px;border-bottom:1px solid #CCC;}
+.pagecontent .pay-middle{ display:table-cell; vertical-align:top; width:270px; padding:0 13px;}
+.pagecontent .pay-middle .pay-middle-box{border-left:1px solid #CCC;border-right:1px solid #CCC;background:#FFF}
+
+ul.list1 li{border-bottom:1px solid #CCC;padding:10px 20px;line-height:18px;}
+ul.list1 li span{ font-family:Arial, Helvetica, sans-serif;}
+ul.list2 li span{ font-family:Arial, Helvetica, sans-serif;}
+ul.list3 li span{ font-family:Arial, Helvetica, sans-serif;}
+ul.list1 li.til{padding:20px;font-weight:bold;font-size:18px;line-height:24px;}
+ul.list2 li{border-bottom:1px solid #CCC;padding:10px 20px;line-height:18px;}
+ul.list2 li b{color:#999;}
+ul.list2 li.active b{color:#489AFE;}
+ul.list3 li{border-bottom:1px solid #CCC;padding:10px 20px;line-height:18px;}
+ul.list3 li.active{color:#FFF; background:#489AFE;}
+
+.pagecontent .pay-right{ display:table-cell; vertical-align:top;border-left:1px solid #CCC;background:#FFF;}
+ul.rightlist1{ display:table; width:100%;}
+ul.rightlist1 li{ display:table-row;}
+ul.rightlist1 li div{height:80px;vertical-align:middle;text-align:center; border-bottom:1px solid #CCC;border-left:1px solid #CCC; display:table-cell}
+ul.rightlist1 li div:first-child{border-left:none;}
+ul.rightlist2{ display:table; width:100%;}
+ul.rightlist2 li{ display:table-row;}
+ul.rightlist2 li div{height:60px;vertical-align:middle;text-align:center;border-bottom:1px solid #CCC;display:table-cell}
+ul.rightlist2 li div:nth-child(1){ width:120px;font-size:20px; text-indent:20px;}
+ul.rightlist2 li div:nth-child(2){ text-align:center;font-size:20px; font-family:Arial; color:#4E98FC;}
+ul.rightlist2 li div:nth-child(3){width:90px; background:#4E98FC;color:#FFF;}
+ul.rightlist3 {width:100%; display:table;}
+ul.rightlist3 li{ display:table-row}
+ul.rightlist3 li div{height:80px;vertical-align:middle;text-align:center;border-bottom:1px solid #CCC;display:table-cell;font-size:28px;font-family:Arial;color:#000; width:33%}
+ul.rightlist3 li div:nth-child(2){border-left:1px solid #CCC;border-right:1px solid #CCC;}
+/*2*/
+.orderpage_left{width:600px; background:#FFF;border-right:1px solid #CCC; vertical-align:top;}
+.list-order-box{overflow-y:scroll;}
+.orderpage_right{vertical-align:top;}
+.list-order{ width:100%;}
+.list-order th{font-size:18px; text-align:center;height:50px; border-bottom:1px solid #CCC; background:#FFF;}
+.list-order tbody tr td{height:50px;border-bottom:1px solid #CCC;font-size:16px;text-align:center}
+.list-order tbody tr.active td{background:#489AFE;color:#FFF;}
+.list-orderview-box{overflow-y:scroll;}
+ul.listorder1 li{border-bottom:1px solid #CCC; padding:5px 20px; line-height:40px; font-size:16px;}
+ul.listorder1 li.gl{display:-webkit-box;display:box;line-height:30px;}
+.page-bar .form-control{ display:inline-block; width:auto; margin-top:0; margin-bottom:0; height:38px; background:#EEE}
+</style>
+
+<body>
+<div class="page-top">
+  <Div class="page-top-logo"><img src="{php echo tomedia($shop['logo'])}" onerror="this.style.display='none'"/></Div>
+  <div class="page-top-userbox"><img src="{php echo tomedia($user['headimg'])}" class="img-circle img-thumbnail" onerror="this.src='{MODULE_URL}template/img/head.jpg'" width="36"/> {$user['realname']}</div>
+  <div class="page-top-btngroup"> 
+    <a href="javascript:topMemu(2);"><i class="fa fa-refresh"></i></a> 
+    <a href="javascript:topMemu(1);" id="btn_print" class="disabled"><i class="fa fa-print"></i></a> 
+    <!--<a href="javascript:topMemu(0);"><i class="fa fa-reorder"></i></a>--> 
+  </div>
+</div>
+<div class="page-left">
+  <ul>
+    <li class="active">
+      <p><i class="fa fa-file-text-o fa-2x"></i></p>
+      点餐 </li>
+    <li>
+      <p><i class="fa fa-files-o fa-2x"></i></p>
+      订单记录 </li>
+  </ul>
+</div>
+<div class="page-right">
+  <div class="page-main">
+    <div class="page-right-statusbar"></div>
+    <!--1-->
+    <div class="page-content">
+      <div class="page-bar">
+        <div class="page-right-statusbar-btn">
+          <div class="iconbtn iconbtn0" id="btn_confirm"><i class="fa fa-download"></i> 下单</div>
+          <div class="iconbtn iconbtn2" id="btn_pay" style="display:none;"><i class="fa fa-money"></i> 付款</div>
+          <input type="hidden" id="inp_qrcode"/>
+        </div>
+        <div class="page-right-statusbar-price">共 <b id="total-num">0</b> / ￥<b id="total-price">0.00</b></div>
+        <div class="pull-left"><div class="iconbtn iconbtn1" id="btn_back" style="display:none;"><i class="fa fa-chevron-circle-left"></i> 返回点餐</div> <div class="iconbtn iconbtn3" style="display:none;" id="btn_card" onClick="qrScan(1)"><i class="fa fa-weixin"></i> 微信卡券</div></div>
+      </div>
+      <div class="pagecontent">
+        <div class="jrow">
+          <div class="jcell pagecontent-left">
+            <ul class="catelist">
+              {loop $category $row}
+              <li cid="{$row['id']}" onClick="class_select({$row['id']})">{$row['title']}</li>
+              {/loop}
+            </ul>
+          </div>
+          <div class="jcell pagecontent-middle">
+            <ul class="goodslist">
+              <li></li>
+            </ul>
+          </div>
+          <div class="jcell pagecontent-right">
+            <div class="pagecontent-right-box">
+              <ul class="menulist" id="menu_list">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pagecontent" style="display:none;">
+        <div class="jrow">
+          <div class="pay-left">
+            <ul>
+              <li>
+                <div class="input-group input-group-sm"> <span class="input-group-btn searchbox2">
+                  <button class="btn btn-default" type="button" onClick="qrScan(0)"><i class="fa fa-qrcode"></i></button>
+                  </span>
+                  <input type="text" class="form-control" id="inp_memberkeyword">
+                  <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" onClick="seachmembercard()"><i class="fa fa-search"></i></button>
+                  </span>
+                </div>
+              </li>
+              <li><span class="pull-right"></span>会员卡号</li>
+              <li><span class="pull-right"></span>会员等级</li>
+              <li><span class="pull-right"></span>会员积分</li>
+              <li><span class="pull-right"></span>会员折扣</li>
+              <li><span class="pull-right"></span>会员余额</li>
+              <li>
+                <div class="icontopbtn iconbtn1" onClick="clear_discount(0)">
+                	<div><i class="fa fa-eraser"></i></div>
+                    清除会员优惠
+                </div>
+                <div class="icontopbtn iconbtn2" onClick="clear_discount(1)">
+                	<div><i class="fa fa-eraser"></i></div>
+                    清除所有优惠
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="pay-middle">
+            <div class="pay-middle-box">
+            	<ul class="list1">
+                	<li class="til"><span class="pull-right" id="order_fee">￥ 0.00</span>订单金额</li>
+                </ul>
+                <ul class="list2">
+                   {loop $marketList $row}
+                   <li onclick="changeDiscount(this)" cost="{php echo sprintf('%.2f',($row['condition_fee']*0.01))}" discount="{$row['favorable']}" discounttype="1" memberid="{$row['condition_member']}" memberstr="{$row['memberstr']}" marketid="{$row['id']}"><span class="pull-right">0</span><b><i class="fa fa-circle"></i></b> {$row['title']}</li>
+                   {/loop}
+                </ul>
+                <ul class="list1">
+                	<li class="til"><span class="pull-right" id="total_fee">￥ 0.00</span>合计</li>
+                </ul>
+                <ul class="list3">
+                	<li paytpye='0' class="active"><span class="pull-right">￥ 0.00</span>现金</li>
+                    <li paytpye='1'><span class="pull-right"></span>银行卡</li>
+                    <li paytpye='2'><span class="pull-right"></span>余额</li>
+                    <li paytpye='3'><span class="pull-right"></span>电子支付</li>
+                </ul>
+                <ul class="list1">
+                	<li class="til"><span class="pull-right" id="change_fee">￥ 0.00</span>找零</li>
+                </ul>
+            </div>
+          </div>
+          <div class="pay-right">
+          	<ul class="rightlist1">
+            	<li><div><p><b>今日销售</b></p>{php echo sprintf('%.2f',($today['fee1']*0.01))}</div><div><p><b>单数</b></p>{php echo intval($today['num2'])}</div></li>
+                <li><div><p><b>客单价</b></p>{php echo sprintf('%.2f',($today['fee1']*0.01/$today['num2']))}</div><div><p><b>商品数量</b></p>{php echo intval($today['num1'])}</div></li>
+            </ul>
+            <ul class="rightlist2">
+            	<li><div id="txt_paytitle" style="font-weight:bold">现金</div><div id="paid_fee">0</div><div id="btn_backspace"><i class="fa fa-long-arrow-left fa-2x"></i></div></li>
+            </ul>
+            <ul class="rightlist3">
+              <li><div>7</div><div>8</div><div>9</div></li>
+              <li><div>4</div><div>5</div><div>6</div></li>
+              <li><div>1</div><div>2</div><div>3</div></li>
+              <li><div>0</div><div>00</div><div>.</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--2-->
+    <div class="page-content" style="display:none;">
+    	<div class="page-bar">
+          <input type="text" id="keyword" style="width:160px; text-indent:10px;" placeholder="请输入单号"/>
+          <input type="text" readonly id="datestart" style="width:98px;text-align:center" value="{php echo date('Y-m-d')}"/> -
+          <input type="text" readonly id="dateend" style="width:98px;text-align:center" value="{php echo date('Y-m-d')}"/>
+          <div class="iconbtn iconbtn1" onClick="historyOrder_page(0);"><i class="fa fa-money"></i> 搜索</div>
+        </div>
+        <div class="jtable">
+        	<div class="jrow">
+            	<div class="jcell orderpage_left pagesize-h1">
+                	<div class="pagesize-h1 list-order-box">
+                	<table class="list-order">
+                    	<thead>
+                        	<tr>
+                            	<th>支付方式</th>
+                                <th>订单细节</th>
+                                <th>金额</th>
+                                <th>实付金额</th>
+                                <th>时间</th>
+                                <th>状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <div class="jcell orderpage_right">
+                	<div class="list-orderview-box pagesize-h1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<iframe id="print_iframe" style="position:absolute; z-index:0; width:1px; height:1px;"></iframe>
+<script language="javascript">
+var uniacid="{$_W['uniacid']}";
+var siteroot="{$_W['siteroot']}";
+var print_type=parseInt("{$shop['printtype']}");
+$(function() {
+  FastClick.attach(document.body);
+});
+
+$(document).ready(function(e) {
+    setSize();
+	$("#datestart,#dateend").on("click",function(){
+		var id=$(this).attr("id");
+		JDate.init({minyear:2015,curtime:$(this).val(),target:"#"+id});
+	})
+});
+function setSize(){
+	var _h=$(document).height();
+	var _w=$(document).width();
+	if(_w<700){
+		swal({title:"手机端不能收银",text:"请重新进入",showConfirmButton: false});
+		return false;
+	}
+	var pageHeight=_h-60;
+	$(".page-left,.page-right,.page-main").height(pageHeight);
+	$(".page-content").height(pageHeight-40);
+	$(".page-right").width(_w-100);
+	$(".pagecontent-left,.goodslist").height(pageHeight-120);
+	$(".pagecontent-right-box").height(pageHeight-100);
+	if($(".catelist li").size()>0){
+		var cid=$(".catelist li").attr("cid");
+		class_select(cid);
+	}
+	$(".pay-left ul,.pay-middle-box,.pagesize-h1").height(pageHeight-100);
+	if(print_type){
+		$("#btn_print").removeClass("disabled");
+	}
+}
+$(".page-left li").on('click',function(){
+	var _num=$(this).index();
+	$(this).addClass("active").siblings().removeClass("active");
+	if($(".page-content").eq(_num).size()){
+		$(".page-content").eq(_num).show().siblings().hide();
+		$(".page-right-statusbar").show();
+	}
+});
+function topMemu(num){
+	if(num==0){
+		
+	}else if(num==1){
+		if(print_type){
+			swal("可以打印，无线打印机");
+		}else{
+			swal("无法打印");
+		}
+	}else if(num==2){
+		if($("#menulist li").size()){
+			swal({   
+				title: "目前仍有订单要处理，确认刷新？",
+				showCancelButton: true,
+				confirmButtonText: "确定",
+				cancelButtonText: "取消",
+				}, function(isConfirm){
+					if (isConfirm){
+						location.reload();
+					}
+				}
+			);
+		}else{
+			location.reload();
+		}
+	}
+}
+function class_select(obj){
+	var _this=$("li[cid='"+obj+"']");
+	if(_this.hasClass("active"))return;
+	_this.addClass('active').siblings().removeClass("active");
+	$(".goodslist").html("加载中");
+	jetsumpay.getGoods({'siteroot':siteroot,'uniacid':uniacid,'pcate':obj,'success':function(data){
+		var result=eval("("+data+")");
+		var temp="";
+		var goodlist=result['item'];
+		for(i in goodlist){
+			temp+='<li onclick="good_select('+goodlist[i]['id']+')" goodid="'+goodlist[i]['id']+'" cid="'+obj+'" unitname="'+goodlist[i]['unitname']+'" price="'+goodlist[i]['marketprice']+'" goodsn="'+goodlist[i]['goodsn']+'" title="'+goodlist[i]['title']+'">'+goodlist[i]['title']+'<div class="price">'+goodlist[i]['marketprice']+'/'+goodlist[i]['unitname']+'</div></li>';
+		}
+		$(".goodslist").html(temp);
+		sum_all();
+	}});
+}
+function good_select(obj){
+	var _this=$(".goodslist li[goodid='"+obj+"']");
+	var goodid=_this.attr("goodid");
+	var price=_this.attr("price");
+	var title=_this.attr("title");
+	var goodsn=_this.attr("goodsn");
+	var cid=_this.attr("cid");
+	var unitname=_this.attr("unitname");
+	var _goodItem="#menu_list li[goodid='"+goodid+"']";
+	if($(_goodItem).size()==0){
+		var temp='<li goodid="'+goodid+'" cid="'+cid+'" price="'+price+'" goodsn="'+goodsn+'" title="'+title+'"><div class="menulist-title">'+title+'</div><div class="menulist-num"><p>x1</p>￥'+price+'/'+unitname+'</div><div class="menulist-btn" onclick="goods_deal('+goodid+')"><i class="fa fa-trash-o fa-2x"></i></div></li>';
+		if($("#menu_list li").size()){
+			$("#menu_list li").eq(0).before(temp);
+		}else{
+			$("#menu_list").append(temp);
+		}
+	}else{
+		var nums=parseInt($(_goodItem+" .menulist-num p").text().replace("x",""))+1;
+		if(nums>=99){
+			swal("数量不能大于99");
+			return;
+		}
+		$(_goodItem+" .menulist-num p").text("x"+nums);
+	}
+	sum_all();
+}
+function goods_deal(obj){
+	swal({   
+		title: "确认删除？",
+		showCancelButton: true,
+		confirmButtonText: "确定",
+		cancelButtonText: "取消",
+		}, function(isConfirm){
+			if (isConfirm){
+				_this=$("#menu_list li[goodid='"+obj+"']");
+				_this.remove();
+				sum_all();
+			}
+		}
+	);
+}
+function sum_all(){
+	var all_num=0;
+	var all_price=0;
+	$('.catelist li span').remove();
+	$('.goodslist li span').remove();
+	var catelist=[];
+	$('#menu_list li').each(function(index, element) {
+        var price=parseFloat($(this).attr("price"));
+		var num=parseInt($(this).find("p").text().replace("x",""));
+		var cid=parseInt($(this).attr("cid"));
+		var goodid=$(this).attr("goodid");
+		all_num+=num;
+		all_price+=num*price;
+		if(typeof(catelist[cid])=="undefined")catelist[cid]=0;
+		catelist[cid]++;
+		var temp="<span><i>"+num+"</i></span>";
+		$(".goodslist li[goodid='"+goodid+"']").append(temp);
+    });
+	for(i in catelist){
+		var temp1="<span>"+catelist[i]+"</span>";
+		
+		$(".catelist li[cid='"+i+"']").append(temp1);
+	}
+	if(all_num){
+		$("#btn_confirm").addClass("iconbtn2").removeClass("iconbtn0");
+	}else{
+		$("#btn_confirm").addClass("iconbtn0").removeClass("iconbtn2");
+	}
+	$("#total-num").text(all_num);
+	$("#total-price").text(parseFloat(all_price).toFixed(2));
+}
+$("#btn_confirm").on('click',function(){
+	if($(this).hasClass("iconbtn0"))return false;
+	$(".pagecontent").eq(0).hide();
+	$(".pagecontent").eq(1).show();
+	$("#btn_back").show();
+	$("#btn_pay").show();
+	$("#btn_card").show();
+	$(this).hide();
+	sumorder();
+});
+$("#btn_back").on('click',function(){
+	$(".pagecontent").eq(1).hide();
+	$(".pagecontent").eq(0).show();
+	$("#btn_confirm").show();
+	$("#btn_card").hide();
+	$(".list2 li").removeClass("active");
+	$("#btn_pay").hide();
+	$(this).hide();
+	sumorder();
+});
+function sumorder(){
+	var total_price=parseFloat($("#total-price").text());
+	$("#order_fee").text($("#total-price").text());
+	var discount_fee=0;
+	if($(".list2 li").size()>0){
+		$(".list2 li").each(function(index, element){
+            var _dis_type=$(this).attr("discounttype");
+			if(_dis_type==1){
+				var _discount=$(this).attr("discount");
+				var fee=0;
+				if(_discount.indexOf("%")>-1){
+					_discount=parseFloat(_discount.replace("%",""))*0.01;
+					fee=_discount*total_price;
+				}else{
+					fee=_discount;
+				}
+				$(this).find("span").text("￥ -"+parseFloat(fee).toFixed(2));
+			}else if(_dis_type==2){
+				var _discount=parseFloat($(this).attr("discount"));
+				var fee=total_price*(1-_discount);
+				$(this).find("span").text("￥ -"+parseFloat(fee).toFixed(2));
+			}else if(_dis_type==3){
+				var _discount=parseFloat($(this).attr("discount"));
+				var _distype=parseInt($(this).attr("cardtype"));
+				var fee=0;
+				if(_distype){
+					fee=total_price*(1-_discount);
+				}else{
+					fee=_discount;
+				}
+				fee=parseFloat(fee);
+				$(this).find("span").text("￥ -"+fee.toFixed(2));
+			}
+			if($(this).hasClass("active")){
+				discount_fee=parseFloat($(this).find("span").text().replace("￥","").replace("-","").replace(" ",""));
+			}
+        });
+	}
+	var sum_fee=total_price-discount_fee;
+	var pai_fee=0;
+	$("#total_fee").text("￥"+parseFloat(sum_fee).toFixed(2));
+	if($(".list3 .active").size()){
+		var paytype=parseInt($(".list3 .active").attr("paytpye"));
+		if(paytype==0){
+			pai_fee=parseFloat($(".list3 .active span").text().replace("￥",""));
+		}else{
+			pai_fee=sum_fee;
+			$(".list3 .active span").text("￥"+parseFloat(sum_fee).toFixed(2));
+			$("#paid_fee").text("￥"+parseFloatparseFloat(sum_fee).toFixed(2));
+		}
+	}
+	var change_fee=pai_fee-sum_fee;
+	$("#change_fee").text("￥"+parseFloat(change_fee).toFixed(2));
+}
+function changeDiscount(obj){
+	var discounttype=parseInt($(obj).attr("discounttype"));
+	if(discounttype==3 && !parseInt($(obj).attr("cardtype"))){
+		var _leastcost=parseFloat($(obj).attr("cost"));
+		var _totalfee=parseFloat($("#order_fee").text());
+		if(_totalfee<_leastcost){
+			swal("该卡券必须满￥"+_leastcost+"元方可使用");
+			return false;
+		}
+	}else if(discounttype==1){
+		var _leastcost=parseFloat($(obj).attr("cost"));
+		var _totalfee=parseFloat($("#order_fee").text());
+		if(_totalfee<_leastcost){
+			swal("必须满￥"+_leastcost+"元方可使用");
+			return false;
+		}
+		var _memberid=$(obj).attr("memberid");
+		if(_memberid){
+			var _memberstr=$(obj).attr("memberstr");
+			if($(".pay-left li:eq(1) span").text().length<2){
+				swal("必须是"+_memberstr+"方可使用");
+				return false;
+			}
+			if(_memberstr.indexOf($(".pay-left li:eq(2) span").text())==-1){
+				swal("必须是"+_memberstr+"方可使用");
+				return false;
+			}
+		}
+	}
+	$(obj).addClass('active').siblings().removeClass("active");
+	$(obj).find("b").html('<i class="fa fa-circle"></i>');
+	$(obj).siblings().find("b").html('<i class="fa fa-circle-o"></i>');
+	sumorder();
+}
+$(".list3 li").on('click',function(){
+	var payTxt=['现金','银行卡','余额','电子支付'];
+	var _index=$(this).index();
+	var total_fee=parseFloat($("#total_fee").text().replace("￥",""));
+	switch(_index){
+		case 0:
+			$("#paid_fee").text(0);
+		break;
+		case 1:
+			$("#paid_fee").text("￥"+parseFloat(total_fee).toFixed(2));
+			$(this).find("span").text("￥"+parseFloat(total_fee).toFixed(2));
+		break;
+		case 2:
+			if($(".pay-left li:eq(1) span").text().length<2){
+				swal("请输入会员卡号");
+				return false;
+			}
+			$("#paid_fee").text("￥"+parseFloat(total_fee).toFixed(2));
+			$(this).find("span").text("￥"+parseFloat(total_fee).toFixed(2));
+		break;
+		case 3:
+			$("#paid_fee").text("￥"+parseFloat(total_fee).toFixed(2));
+			$(this).find("span").text("￥"+parseFloat(total_fee).toFixed(2));
+		break;
+	}
+	$(this).addClass('active').siblings().removeClass("active");
+	$("#txt_paytitle").text(payTxt[_index]);
+	$(this).siblings().find("span").text("");
+	sumorder();
+});
+$("#btn_backspace").on('click',function(){
+	if($(".list3 li").eq(0).hasClass("active")){
+		Counter("B","#paid_fee");
+	}
+})
+$(".rightlist3 div").on('click',function(){
+	if($(".list3 li").eq(0).hasClass("active")){
+		var temp=$(this).text();
+		Counter(temp,"#paid_fee");
+		sumorder();
+	}
+})
+$("#paid_fee").bind('DOMNodeInserted', function(e) { 
+	if($(".list3 li").eq(0).hasClass("active")){
+		$(".list3 li").eq(0).find("span").text("￥"+parseFloat($(e.target).text()).toFixed(2));
+	};
+});
+function clear_discount(obj){
+	var txt=obj ? "所有优惠":"会员优惠";
+	swal({   
+		title: "清除"+txt+"？",
+		showCancelButton: true,
+		confirmButtonText: "确定",
+		cancelButtonText: "取消",
+		}, function(isConfirm){
+			if (isConfirm){
+				$(".pay-left li .pull-right").text("");
+				if(obj==0){
+					$(".list2 li[discounttype='2']").remove();
+				}else{
+					$(".list2").empty();
+				}
+				sumorder();
+			}
+		}
+	);
+}
+function qrScan(type){
+	wx.scanQRCode({
+		needResult: 1,
+		scanType: ["qrCode","barCode"],
+		success: function (res) {
+			var resultqrcode = res.resultStr;
+			var code=resultqrcode;
+			if(resultqrcode.indexOf(",")>0){
+				var temp=resultqrcode.split(",");
+				code=temp[1];
+			}
+			if(type==0){
+				$("#inp_memberkeyword").val(code);
+				seachmembercard();
+			}else if(type==1){
+				checkCard(code);
+			}else if(type==2){
+				do_pay(code);
+			}
+		}
+	});
+}
+function seachmembercard(){
+	var keyword=$("#inp_memberkeyword").val();
+	if(!keyword)return;
+	jetsumpay.seachMembercard({"uniacid":uniacid,"siteroot":siteroot,"keyword":keyword,"success":function(data){
+		var temp="";
+		if(data['password'].length>1)temp="<span class='label label-info'>密码</span>";
+		$(".pay-left li:eq(1) span").html(temp+" "+(data['cardno'] ? data['cardno'] : data['wxcardno']));
+		$(".pay-left li:eq(2) span").html(data['leveltxt']+'<input type="hidden" member_level=true value="'+data['gid']+'" />');
+		$(".pay-left li:eq(3) span").text(data['credit']);
+		$(".pay-left li:eq(4) span").text(data['discount']);
+		$(".pay-left li:eq(5) span").text("￥"+data['cash']+"元");
+		if($(".list2 li[discounttype='2']").size()>0)$(".list2 li[discounttype='2']").remove();
+		var temp='<li onclick="changeDiscount(this)" '+(data['password'].length>1 ? "ispass='1'":"")+' discount="'+data['discount']+'" discounttype="2" memberid="'+data['id']+'"><span class="pull-right">0</span><b><i class="fa fa-circle"></i></b> 会员折扣</li>';
+		$(".list2").append(temp);
+		$(".list2 li[discounttype='2']").click();
+	}});
+}
+function checkCard(keyword){
+	if($(".list2 li[discountid='"+keyword+"']").size()>0){
+		swal("该卡券已添加");
+		$(".list2 li[discountid='"+keyword+"']").click();
+		return false;
+	}
+	jetsumpay.checkCard({"uniacid":uniacid,"siteroot":siteroot,"code":keyword,"success":function(cardinfo){
+		if(cardinfo["type"]=="discount" || cardinfo["type"]=="cash"){
+			
+			if(parseInt($("#order_fee").text()*100)==0){
+				swal("使用代金券/折扣券时，请先输入应收金额");
+				return false;
+			}
+			var _totalfee=parseFloat($("#order_fee").text());
+			var _least_cost=parseInt(cardinfo['least_cost']) ? parseInt(cardinfo['least_cost']) : 0;
+			var _discount=parseInt(cardinfo['discount']);
+			var _til=cardinfo["type"]=="discount" ? "折扣券" : "代金券";
+			var cardtype=cardinfo["type"]=="discount" ? 1 : 0;
+			_til+=cardinfo["type"]=="discount" ? "-"+(_discount*0.01)+"折" :"-满"+(_least_cost*0.01).toFixed(2)+"减"+(_discount*0.01).toFixed(2)+"";
+			$(".list2").append('<li onclick="changeDiscount(this)" cost="'+(_least_cost*0.01).toFixed(2)+'" cardtype="'+cardtype+'" discount="'+(_discount*0.01)+'" discounttype="3" discountid="'+cardinfo['code']+'"><span class="pull-right">0</span><b><i class="fa fa-circle"></i></b> '+_til+'</li>');
+			sumorder();
+			$(".list2 li[discounttype='2']").click();
+		}else{
+			swal("付款只支持折扣/代金券");
+		}
+	}});
+}
+function do_pay(){
+	sumorder();
+	var qrcode="";
+	var password="";
+	var paytype=parseInt($(".list3 li.active").attr("paytpye"));
+	if(paytype==2){
+		if($(".pay-left li:eq(1) span").text().length<2){
+			swal("请输入会员卡号");
+			return;
+		}
+		password=arguments[0];
+		var needpassword=parseInt($(".list2 li[discounttype='2']").attr("ispass"));
+		if(needpassword && !password){
+			payInputBox({"title":"请输入会员卡支付密码","text":"请输入会员卡支付密码","success":function(data){do_pay(data)}});
+			return;
+		}
+	}
+	if(paytype==3){
+		qrcode=arguments[0];
+		if(!qrcode){
+			qrScan(2);
+			return;
+		}
+	}
+	var orderfee=parseFloat($("#order_fee").text());
+	var totalfee=parseFloat($("#total_fee").text().replace("￥",""));
+	var paidfee=parseFloat($(".list3 li.active span").text().replace("￥",""));
+	
+	if(paidfee<totalfee){
+		swal("支付金额不足");
+		return ;
+	}
+	var changefee=parseFloat($("#change_fee").text().replace("￥",""));
+	var discountfee=parseFloat($(".list2 li.active span").text().replace("￥",""));
+	var discounttype=$(".list2 li.active").attr("discounttype") ? $(".list2 li.active").attr("discounttype") :"";
+	var cardid=parseInt($(".list2 li.active").attr("discountid"));
+	var marketid=parseInt($("#coupon_list li.active").attr("marketid")) ? parseInt($("#coupon_list li.active").attr("marketid")) : 0;
+	var memberno='';
+	var discount=1;
+	if(discounttype==2){
+		discount=$(".list2 li.active").attr("discount");
+		memberno=$(".list2 li.active").attr("memberid");
+	}else if(discounttype==3){
+		if(parseInt($(".list2 li.active").attr("cardtype"))){
+			discount=$(".list2 li.active").attr("discount");
+		}
+	}
+	jconfirm({
+		"title":"确认支付",
+		"success":function(){
+			swal({title:"系统处理中",showConfirmButton:false});
+			var goodslist=[];
+			$('#menu_list li').each(function(index, element) {
+				var temp_goodid=$(this).attr("goodid");
+				var temp_goodsn=$(this).attr("goodsn");
+				var temp_price=$(this).attr("price");
+				var temp_num=$(this).find(".menulist-num").find("p").text().replace("x","");
+				//var temp=[goodid,goodsn,oprice,price,num,goodfee];
+				var temp=[temp_goodid,temp_goodsn,temp_price,temp_price,temp_num];
+				goodslist.push(temp);
+			});
+			var payAry=[2,3,4,0];
+			var pay_type=payAry[paytype];
+			if(pay_type==0 && qrcode){
+				var _temp=qrcode.substr(0,1);
+				if(_temp==2){pay_type=1;}
+			}
+			jetsumpay.payAll({"uniacid":uniacid,"siteroot":siteroot,
+				"goods":goodslist,
+				"paytype":pay_type,
+				"password":password,
+				"orderfee":orderfee,
+				"couponfee":discountfee,
+				"discount":discount,
+				"totalfee":totalfee,
+				"paidfee":paidfee,
+				"change":changefee,
+				"cardid":cardid,
+				"memberno":memberno,
+				"code":qrcode,
+				"discounttype":discounttype,
+				"marketid":marketid,
+				"remark":"",
+				"success":function(data){
+					if(print_type)jetsumpay.printOrder({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":data});
+					jetsumpay.paySuccess({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":data,"success":function(ordernum){
+						swal({
+							title:"收款成功",
+							text:"点击确定刷新系统",
+							confirmButtonText: "确认",
+							showLoaderOnConfirm: true,
+							}, function(){
+								showMasker({"timer":2000,"success":function(){location.reload()}});
+							}
+						);
+					}});
+				}
+			});
+		}
+	});
+}
+$("#btn_pay").on('click',function(){
+	do_pay();
+})
+/*list-order-box*/
+var isloading=false;
+$(".list-order-box").on('scroll',function(){
+	var taget=$(".list-order").height();
+	var selfh=$(this).height();
+	if($(this).scrollTop()==0)return;
+	if(taget-(selfh+$(this).scrollTop())<15 && !isloading){
+		isloading=true;
+		historyOrder_page();
+	}
+});
+function historyOrder_page(){
+	isloading=false;
+	var _keyword=$('#keyword').val() ? $('#keyword').val() : "";
+	var _ds=parseInt($('#datestart').val().split("-").join(""));
+	var _de=parseInt($('#dateend').val().split("-").join(""));
+	if(_de<_ds){
+		swal("结束时间不能小于开始时间");
+		return;
+	}
+	_ds=$('#datestart').val();
+	_de=$('#dateend').val();
+	var _page=0;
+	if(arguments[0]==0){
+		$(".list-order tbody").empty();
+		$(".list-orderview-box").empty();
+	}
+	if($(".list-order-box table tbody tr:last-child").size()){
+		var temp=$(".list-order-box table tbody tr:last-child");
+		if(parseInt(temp.attr("pindex"))){
+			_page=parseInt(temp.attr("pindex"));
+			_allpage=parseInt(temp.attr("allpage"));
+			if(_page>=_allpage && _allpage){
+				return false;
+			}
+		}
+	}
+	_page++;
+	showMasker();
+	jetsumpay.getOrder({"uniacid":uniacid,"siteroot":siteroot,'keyword':_keyword,'de':_de,'ds':_ds,'page':_page,'success':function(data){
+		if(_page==1){
+			$(".list-order tbody").html(data);
+		}else{
+			$(".list-order tbody").append(data);
+		}
+		showMasker();
+	}});
+}
+function select_order(obj){
+	showMasker();
+	$(obj).addClass("active").siblings().removeClass("active");
+	var ordersn=$(obj).attr("ordersn");
+	jetsumpay.getOrderView({"uniacid":uniacid,"siteroot":siteroot,"keyword":ordersn,"success":function(html){
+		$(".list-orderview-box").html(html);
+		showMasker();
+	}});
+}
+function historyOrder_print(ordersn){
+	if(!print_type){
+		swal("系统不支持本地打印");
+		return;
+	}
+	jconfirm({"title":"是否打印订单？","success":function(){
+		jetsumpay.printOrder({"uniacid":uniacid,"siteroot":siteroot,"out_trade_no":ordersn});
+	}});
+}
+function historyOrder_refund(ordersn){
+	jetsumpay.getrefundView({"uniacid":uniacid,"siteroot":siteroot,"keyword":ordersn,"success":function(data){
+		$(".list-orderview-box").html(data);
+	}});
+}
+function selectAllGoodid(obj){
+	$("input[name^='good_id']").prop("checked",$(obj).prop("checked"));
+}
+function do_refund(type,ordersn){
+	var total=parseInt($("input[name='orderrefund_total_fee']").val());
+	var refundfee=parseInt($("input[name='orderrefund_refundfee']").val());	
+	if(type==1){
+		if($("input[name^='good_id']:checked").size()==0){
+			swal("选择需要退货的商品");
+			return;
+		}
+		var fee=0;
+		var tempary=[];
+		$("input[name^='good_id']:checked").each(function(index, element) {
+            var id=$(this).val();
+			tempary.push(id);
+			fee+=parseFloat($("li[rows='"+id+"']").find(".refund-fee").text());
+        });
+		if(total-refundfee<fee*100){
+			swal("可退款金额"+(((total-refundfee)*0.01).toFixed(2)));
+			return;
+		}
+		jconfirm({"title":"本次退款<b class='red'>"+(parseFloat((fee).toFixed(2))+"</b>元，确认退款？","text":"","success":function(){
+			jetsumpay.getRefund({"uniacid":uniacid,"siteroot":siteroot,"ordersn":ordersn,'fee':0,'goods':tempary.join(","),'success':function(data){
+				swal({title:"退款成功"},function(){location.reload()});
+				
+			}});
+		}});
+	}else{
+		payInputBox({"title":"请输入退款金额","text":"可退款金额"+(((total-refundfee)*0.01).toFixed(2))+"元","success":function(num){
+			if(total-refundfee<parseFloat(num)*100){
+				swal("可退款金额"+(((total-refundfee)*0.01).toFixed(2)));
+				return;
+			}
+			jetsumpay.getRefund({"uniacid":uniacid,"siteroot":siteroot,"ordersn":ordersn,'fee':num,'goods':"",'success':function(data){
+				swal({title:"退款成功"},function(){location.reload()});
+			}});
+		}});
+	}
+}
+</script>

@@ -1,0 +1,17 @@
+<div class="select-box">
+  <ul>
+    {loop $list $row}
+    <li onclick="good_select({$row['id']})" goodid='{$row["id"]}' price='{$row["marketprice"]}' goodsn='{$row["goodsn"]}' title='{$row["title"]}' style="background:url({if $row['thumb']}{php echo tomedia($row['thumb'])}{else}{/if});background-size:cover;">
+      <div> <span>{$row["goodsn"]}</span>
+        <h3>{$row["title"]}</h3>
+      </div>
+    </li>
+    {/loop}
+  </ul>
+</div>
+<div class="select-box-btn text-center"> 
+  <button type="button" {if 1<$pindex}onclick="history_page(0)" {else}disabled{/if} class="btn btn-default">上一页</button>
+  <button type="button"  class="btn btn-default">{php echo $pindex}/{php echo $allpage}</button>
+  <button type="button" {if $pindex<$allpage} onclick="history_page(1)" {else}disabled{/if} class="btn btn-default">下一页</button>
+</div>
+<input type="hidden" value="{php echo $pindex}" id="history_pageindex"/>

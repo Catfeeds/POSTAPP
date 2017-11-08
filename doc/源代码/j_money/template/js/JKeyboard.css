@@ -1,0 +1,33 @@
+@charset "utf-8";
+.keyboard-outer{ position:absolute; z-index:9999; padding:5px; border:1px solid #CCC; background:#FFF;font-size:12px; display:none;box-shadow:0px 0px 8px #CCC; border-radius:4px;}
+.keyboard-word{ position:relative; display:inline; float:left;}
+.keyboard-word ul ,.keyboard-word ul li{ list-style:none; margin:0; padding:0;}
+.keyboard-word ul{ margin-bottom:2px; text-align:center}
+.keyboard-word ul li{ display:inline-block; text-align:center; line-height:40px; border:1px solid #CCC; border-radius:4px;}
+.keyboard-word ul li.keyboard-word-1{ width:40px;}
+.keyboard-word ul li.keyboard-word-2{ width:80px;}
+.keyboard-word ul li.keyboard-word-4{ width:83px;}
+.keyboard-num ul ,.keyboard-num ul li{ list-style:none; margin:0; padding:0;}
+.keyboard-num ul{ margin-bottom:2px;}
+.keyboard-num ul li{ display:inline-block; text-align:center; line-height:40px; border:1px solid #CCC; border-radius:4px;}
+.keyboard-num ul li.keyboard-num-1{ width:40px;}
+.keyboard-num ul li.keyboard-num-2{ width:80px;}
+.keyboard-num ul li.keyboard-num-4{ width:83px;}
+.keyboard-num ul li.keyboard-num-3{ width:80px; line-height:84px; position:fixed; margin-left:3px}
+.keyboard-num{ position:relative; float:right; margin-left:10px;}
+.keyboard-input{clear:right; margin-bottom:4px;text-align:center; display:table; width:100%;}
+
+.keyboard-row{ display:table-row}
+.keyboard-row div{ display:table-cell;line-height:40px; font-size:16px; text-align:center;}
+.keyboard-row div:first-child{border:1px solid #CCC; border-bottom-left-radius:4px;border-top-left-radius:4px}
+.keyboard-row div:last-child{width:80px;border:1px solid #CCC; border-left:none; border-bottom-right-radius:4px;border-top-right-radius:4px;font-size:12px;}
+.keyboard-num2 ul ,.keyboard-num2 ul li{ list-style:none; margin:0; padding:0;}
+.keyboard-num2 ul{ margin-bottom:2px;}
+.keyboard-num2 ul li{ display:inline-block; text-align:center; line-height:40px; border:1px solid #CCC; border-radius:4px;}
+.keyboard-num2 ul li.keyboard-num-1{ width:80px;}
+.keyboard-num2 ul li.keyboard-num-4{ width:163px;}
+.keyboard-num2 ul li.keyboard-num-3{ width:80px; line-height:84px; position:fixed; margin-left:3px}
+.keyboard-num2{ position:relative;}
+.keyboard-outer li:active{ background:#09F;color:#FFF}
+.keyboard-outer li.onactive{ background:#09F;color:#FFF}
+.keyboard-tips{ margin-bottom:5px; line-height:30px; color:#666; text-align:center}

@@ -1,0 +1,3 @@
+cardno,gid,cash,creadit,discount,realname,mobile,wxcardno,remark,
+卡号,会员级别,余额,积分,折扣,姓名,电话,微信卡号,备注,*上传时删除本行
+100001,81,98.41,9999,0.78,张三,13700000000,1.24231E+13,,*上传时删除本行

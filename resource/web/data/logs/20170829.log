@@ -1,0 +1,78 @@
+2017-08-29 08:19:22 trace :
+------------
+String:
+<xml><ToUserName><![CDATA[gh_0c2d3a9066f5]]></ToUserName>
+<FromUserName><![CDATA[oNjw9wqWBsgRd7zoXDyh6GdK6Qjc]]></FromUserName>
+<CreateTime>1503965961</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9]]></EventKey>
+<MenuId>412230488</MenuId>
+</xml>
+
+2017-08-29 08:19:22 params :
+------------
+String:
+array (
+  'rule' => -2,
+  'module' => '',
+  'message' => 
+  array (
+    'tousername' => 'gh_0c2d3a9066f5',
+    'fromusername' => 'oNjw9wqWBsgRd7zoXDyh6GdK6Qjc',
+    'createtime' => '1503965961',
+    'msgtype' => 'event',
+    'event' => 'VIEW',
+    'eventkey' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'menuid' => '412230488',
+    'from' => 'oNjw9wqWBsgRd7zoXDyh6GdK6Qjc',
+    'to' => 'gh_0c2d3a9066f5',
+    'time' => '1503965961',
+    'type' => 'text',
+    'content' => 'http://wuye.iot-gj.cn/app/index.php?i=2&c=entry&eid=9',
+    'redirection' => true,
+    'source' => 'VIEW',
+  ),
+)
+
+2017-08-29 08:19:22 response :
+------------
+
+2017-08-29 08:19:40 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170829',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-29 08:19:40 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170829',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-29 08:19:47 SQL Error :
+------------
+String:
+SQL: <br/>SELECT * FROM `ims_stat_visit` WHERE `date` =  :__date_1 AND `uniacid` =  :__uniacid_2 AND `module` =  :__module_3  LIMIT 1<hr/>Params: <br/>array (
+  ':__date_1' => '20170829',
+  ':__uniacid_2' => 2,
+  ':__module_3' => 'wesite',
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 167; <br />file: /framework/class/db.class.php; line: 227; <br />file: /framework/function/pdo.func.php; line: 49; <br />file: /framework/model/app.mod.php; line: 54; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+
+2017-08-29 08:19:47 SQL Error :
+------------
+String:
+SQL: <br/>INSERT INTO `ims_stat_visit` SET `uniacid` =  :uniacid_1 , `module` =  :module_2 , `date` =  :date_3 , `count` =  :count_4<hr/>Params: <br/>array (
+  ':uniacid_1' => 2,
+  ':module_2' => 'wesite',
+  ':date_3' => '20170829',
+  ':count_4' => 1,
+)<hr/>SQL Error: <br/>Table 'njzhsq.ims_stat_visit' doesn't exist<hr/>Traces: <br/>file: /framework/class/db.class.php; line: 115; <br />file: /framework/class/db.class.php; line: 285; <br />file: /framework/function/pdo.func.php; line: 71; <br />file: /framework/model/app.mod.php; line: 62; <br />file: /app/source/utility/visit.ctrl.php; line: 9; <br />file: /app/index.php; line: 115; <br />
+

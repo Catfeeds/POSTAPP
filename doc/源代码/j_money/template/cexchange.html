@@ -1,0 +1,127 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+ 
+  <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('group', array('op' => 'display'))}">管理店铺</a></li>
+   <li class="active"><a href="">积分兑换</a></li>
+</ul>
+<script>
+require(['bootstrap'],function($){
+	$('.btn').hover(function(){
+		$(this).tooltip('show');
+	},function(){
+		$(this).tooltip('hide');
+	});
+});
+</script> 
+<div class="main">
+  <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{php echo $id}" />
+    <div class="panel panel-default">
+      <div class="panel-heading">积分兑换配置</div>
+      <div class="panel-body">
+
+
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">兑换二维码</label>
+              <div class="col-sm-9 col-xs-12">
+                 <img src="http://qr.liantu.com/api.php?text={php echo urlencode($url)}" width="200"/>
+              
+                <div class="help-block"></div>
+              </div>
+            </div>
+			
+			
+			 <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">直接访问地址</label>
+              <div class="col-sm-9 col-xs-12">
+                <input type="text" class="form-control" value="{$url}" />
+                <div class="help-block"></div>
+              </div>
+            </div>
+			
+			
+			<div class="form-group">
+	          <label class="col-xs-12 col-sm-3 col-md-2 control-label">打印机</label>
+	          <div class="col-sm-9 col-xs-12 form-inline">
+	            <select name="data[printerid]" id="printerid" class="form-control">
+	            	<option value="0">请选择</option>
+	                
+	            </select>
+	            <div class="help-block">不选择，则默认使用当前店铺默认打印机</div>
+	          </div>
+	        </div>
+			
+			<div class="form-group">
+	          <label class="col-xs-12 col-sm-3 col-md-2 control-label">小票模板</label>
+	          <div class="col-sm-9 col-xs-12 form-inline">
+	            <select name="data[printertem]" id="printertem" class="form-control">
+	            	<option  {if empty($data['printertem'])}selected {/if}  value="0">请选择</option>
+	                {loop $templist $temp}
+					<option {if $data['printertem']== $temp['id']}selected {/if}  value="{$temp['id']}">{$temp['title']}</option>
+					{/loop}
+	            </select>
+	            <div class="help-block">不选择，则默认使用当前店铺默认小票</div>
+	          </div>
+	        </div>
+			
+			
+			
+			
+			 <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">积分换算</label>
+              <div class="col-sm-6 col-xs-12">
+              	   <div class="input-group"> 
+				  	 <span class="input-group-addon">兑换一份需要</span>
+                	  <input type="text" name="data[creditsnum]" class="form-control" value="{$data['creditsnum']}" />
+               		  <span class="input-group-addon">积分</span>
+			   		</div> 	
+				<div class="help-block">兑换一份需要所需要的积分</div>
+              </div>
+            </div>
+			
+			<div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">顶部图片</label>
+               <div class="col-sm-9">
+               	 {php echo tpl_form_field_image('data[topimg]', $data['topimg']);}
+                <div class="help-block">兑换页面顶部图片</div>
+              </div>
+            </div>
+			
+			 <div class="form-group col-xs-12">
+		      <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" onclick="return checkform();return false" />
+		      <input type="hidden" name="token" value="{$_W['token']}" />
+		    </div>
+		</div>
+		</div>
+  </form>
+</div>
+<script>
+	var printerid="{$data['printerid']}"||0;
+	var id="{$id}";
+	function getPrinterList(shopid)
+	{
+		var obj=$("#printerid");
+
+		$.post("{php echo $this->createWebUrl('member_select_print')}",{
+			"shopid":shopid,
+		},function(data){
+			if(data.type=="success")
+			{
+				var printList=data.message;
+				var str="<option value='0'>请选择使用的打印机</option>";
+				for(i in printList)
+				{
+					str+="<option value='"+printList[i]['id']+"'>"+printList[i]['title']+"("+printList[i]['printsn']+")</option>";
+				}
+				obj.html(str);
+				obj.val(printerid);
+			}else{
+				obj.html("<option>未配置打印机，请先配置</option>");		
+			}
+		},"json");
+	}
+	
+	getPrinterList(id);
+	
+</script>
+	{template 'common/footer'} 		

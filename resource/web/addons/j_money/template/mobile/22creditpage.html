@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{$shop['companyname']}</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="{MODULE_URL}image/css/bootstrap.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/font-awesome.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/common.css" rel="stylesheet">
+{php echo register_jssdk(false);}
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+
+<script src="{MODULE_URL}template/js/fastclick.min.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/weui.css"/>
+</head>
+<style>
+.weui_cell_ft{color:#F00;}
+</style>
+<body>
+{if !$fans['follow']}
+<div class="weui_msg">
+    <div class="weui_icon_area"><i class="weui_icon_msg weui_icon_warn"></i></div>
+    <div class="weui_text_area">
+        <h2 class="weui_msg_title"><img src="{php echo tomedia($cfg['qrcode'])}?v={TIMESTAMP}" style="width:50%;"/></h2>
+        <p class="weui_msg_desc">请长按上方二维码关注</p>
+    </div>
+</div>
+{else}
+
+  
+<div class="weui_msg">
+    <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
+    <div class="weui_text_area">
+      {if $favorabletype==4}
+        <h2 class="weui_msg_title">恭喜您获得抽奖机会哦</h2>
+        {else}
+        <h2 class="weui_msg_title">积分已进账</h2>
+        {/if}
+        
+        <p class="weui_msg_desc">订单积分<b style="color:#F60">{php echo $shop['creadit'] ? $shop['creadit']*$trade['total_fee'] : $cfg['creadit']*$trade['total_fee']}</b>，您共有<b style="color:#F60">{php  $allcredit=mc_credit_fetch($uid,array('credit1'))}{php echo $allcredit['credit1']}</b>积分。</p>
+    </div>
+    <div class="weui_opr_area">
+        <p class="weui_btn_area">
+            {if $favorabletype==4 && $gstatus}
+            <a href="{php echo $url}" class="weui_btn weui_btn_warn">抽奖咯</a>
+            {/if}
+            
+            {if $cfg['creditbtn']}
+            <a href="{$cfg['creditbtn']}" class="weui_btn weui_btn_primary">使用积分</a>
+            {/if}
+        </p>
+    </div>
+</div>
+{/if}
+<script language="javascript">
+$(function() {
+  FastClick.attach(document.body);
+});
+wx.ready(function () {
+	wx.hideOptionMenu();
+	jumpCardUrl();
+});
+function jumpCardUrl(){
+	wx.addCard({
+	cardList: [{
+		cardId: '{php echo $cardArry["cardId"]}',
+		cardExt: '{"code":"", "openid": "{$cardArry["openid"]}","timestamp":"{$cardArry["timestamp"]}","nonce_str":"{$cardArry["nonceStr"]}", "signature":"{$cardArry["signature"]}"}'
+	}],
+		success: function (res) {
+			var cardList = res.cardList;
+		}
+	});	
+}
+</script>

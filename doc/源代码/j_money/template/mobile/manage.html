@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{$shop['companyname']}收银台</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="{MODULE_URL}image/css/bootstrap.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/font-awesome.min.css" rel="stylesheet">
+<link href="{MODULE_URL}image/css/common.css" rel="stylesheet">
+{php echo register_jssdk(false);}
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+<script src="{MODULE_URL}template/js/fastclick.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="{MODULE_URL}image/js/lib/bootstrap.min.js"></script>
+<script src="{MODULE_URL}template/js/jquery.transit.js"></script>
+<link href="{MODULE_URL}template/js/weui.css" rel="stylesheet">
+<script src="{MODULE_URL}template/js/weui.js"></script>
+
+</head>
+<style>
+ul,ul li,li{list-style:none; padding:0; margin:0;}
+html{height:100%;}
+body{height:100%;background:#F8F8F8;color:#333;font-size:14px;}
+.jtable{ display:table; width:100%;}
+.jrow{ display:table-row;}
+.jcell{ display:table-cell;}
+.jbox{display:-webkit-box;display:box;}
+.fx1{-webkit-box-flex:1;box-flex:1;}
+.fx2{-webkit-box-flex:2;box-flex:2;}
+.fx3{-webkit-box-flex:3;box-flex:3;}
+.fx3{-webkit-box-flex:4;box-flex:4;}
+.fx3{-webkit-box-flex:5;box-flex:5;}
+.fx6{-webkit-box-flex:6;box-flex:6;}
+.fx7{-webkit-box-flex:7;box-flex:7;}
+.fx8{-webkit-box-flex:8;box-flex:8;}
+.fx9{-webkit-box-flex:9;box-flex:9;}
+header{border-bottom:1px solid #CCC;line-height:39px; background:#FFF; text-align:center; position:fixed; left:0; top:0; right:0; z-index:999999}
+header a{ display:block;line-height:39px; text-decoration:none; padding:0 6px;}
+header h3{ text-align:center; margin:0; line-height:39px; padding:0; font-size:14px; font-weight:bolder}
+.mainbody{margin-top:40px;}
+.mainbody .weui-grid__icon{ position:relative;}
+small{ font-size:70%; color:#666}
+/*顶部*/
+</style>
+<body>
+{if $operation=='display'}
+<header class="weui-flex">
+    <div><div class="placeholder"><a href="#">&nbsp;</a></div></div>
+    <div class="weui-flex__item"><div class="placeholder"><h3>{$shop['companyname']}</h3></div></div>
+    <div><div class="placeholder"><a href="#">&nbsp;</a></div></div>
+</header>
+<div class="mainbody">
+  <div class="weui-panel weui-panel_access">
+      <div class="weui-panel__hd">今天经营情况</div>
+      <div class="weui-panel__bd">
+          <div class="weui-media-box weui-media-box_text">
+              <h4 class="weui-media-box__title">订单<span class="pull-right">￥{php echo sprintf('%.2f',($allorder['fee1']*0.01))}</span></h4>
+          </div>
+          <div class="weui-media-box weui-media-box_text">
+              <h4 class="weui-media-box__title">收款<span class="pull-right">￥{php echo sprintf('%.2f',($alltrade['fee1']*0.01))}</span></h4>
+          </div>
+          <div class="weui-media-box weui-media-box_text">
+              <h4 class="weui-media-box__title">充值<span class="pull-right">￥{php echo sprintf('%.2f',($allcharge['fee1']*0.01))}</span></h4>
+          </div>
+      </div>
+  </div>
+  <div class="weui-cells__title">主菜单</div>
+  <div class="weui-grids" style="background:#FFF;">
+      <a href="{php echo $this->createMobileUrl('manage',array('op'=>'trade'))}" class="weui-grid">
+          <div class="weui-grid__icon">
+              <img src="{MODULE_URL}template/img/icon1.png" alt="">
+              {if $alltrade['num1']}<span class="weui-badge" style="position:absolute;top:-.4em;right:-.4em;">{$alltrade['num1']}</span>{/if}
+          </div>
+          <p class="weui-grid__label">
+              交易账单
+          </p>
+      </a>
+      <a href="{php echo $this->createMobileUrl('manage',array('op'=>'order'))}" class="weui-grid">
+          <div class="weui-grid__icon">
+              <img src="{MODULE_URL}template/img/icon2.png" alt="">
+              {if $allorder['num1']}<span class="weui-badge" style="position:absolute;top:-.4em;right:-.4em;">{$allorder['num1']}</span>{/if}
+          </div>
+          <p class="weui-grid__label">
+              订单记录
+          </p>
+      </a>
+      <a href="{php echo $this->createMobileUrl('manage',array('op'=>'charge'))}" class="weui-grid">
+          <div class="weui-grid__icon">
+              <img src="{MODULE_URL}template/img/icon5.png" alt="">
+              {if $allcharge['num1']}<span class="weui-badge" style="position:absolute;top:-.4em;right:-.4em;">{$allcharge['num1']}</span>{/if}
+          </div>
+          <p class="weui-grid__label">
+              充值记录
+          </p>
+      </a>
+      <a href="javascript:;" class="weui-grid">
+          <div class="weui-grid__icon">
+              <img src="{MODULE_URL}template/img/icon3.png" alt="">
+          </div>
+          <p class="weui-grid__label">
+              会员
+          </p>
+      </a>
+  </div>
+  <div class="weui-cells__title">当前有效营销活动</div>
+  {loop $marketing $row}
+  <div class="weui-panel">
+      <div class="weui-panel__hd">{$row['title']}</div>
+      <div class="weui-panel__bd">
+          <div class="weui-media-box weui-media-box_text">
+              <h4 class="weui-media-box__title">满￥<span class="text-danger">{php echo sprintf('%.2f',($row['condition_fee']*0.01))}</span>元
+              {if $row['favorabletype']==1}
+              <span class="text-warning">减</span>  
+              <span class="text-danger">{php echo str_replace("[|#满减#|","",str_replace("]","",$row['favorable']));}</span>元
+              {elseif $row['favorabletype']==2}
+              <span class="text-warning">返</span>  
+              <span class="text-danger">{php echo str_replace("[|#红包#|","",str_replace("]","",$row['favorable']));}</span>元
+              {elseif $row['favorabletype']==3}
+              <span class="text-warning">送卡券</span>
+              {elseif $row['favorabletype']==4}
+              <span class="text-warning">获得</span> 
+              <span class="text-danger">{php echo str_replace("[|#抽奖#|","",str_replace("]","",$row['favorable']));}</span>次抽奖机会
+              {/if}
+              </h4>
+              <p class="weui-media-box__desc">{$row['description']}</p>
+              <p class="weui-media-box__desc">资格：{if $row['condition']==1}所有人{else}{$row['memberstr']}{/if}</p>
+              <p class="weui-media-box__desc">时间：{php echo date("Y/m/d",$row['starttime'])} - {php echo date("Y/m/d",$row['endtime'])}</p>
+              <p class="weui-media-box__desc">时段：{if !$row['hour']}全日{else}{$row['hour']}{/if}</p>
+              <p class="weui-media-box__desc">人数：{if $row['num']}{if $row['isallnum']}共{$row['num']}人{else}每天前{$row['num']}人{/if}{else}不限{/if}</p>
+          </div>
+      </div>
+  </div>
+  {/loop}
+</div>
+{elseif $operation=='trade'}
+<header class="weui-flex">
+    <div><div class="placeholder"><a href="{php echo $this->createMobileUrl('manage',array('op'=>''))}"><i class="fa fa-times"></i></a></div></div>
+    <div class="weui-flex__item"><div class="placeholder"><h3>交易账单日结</h3></div></div>
+    <div><div class="placeholder"><a href="{php echo $this->createMobileUrl('manage',array('op'=>'tradelist'))}"><i class="fa fa-times"></i></a></div></div>
+</header>
+<div class="mainbody">
+  {loop $listOrder $index $row}
+  <div class="weui-panel">
+      <div class="weui-panel__hd">{$index}</div>
+      <div class="weui-panel__bd">
+          <div class="weui-media-box weui-media-box_small-appmsg">
+              <div class="weui-cells">
+                  <a class="weui-cell weui-cell_access" href="javascript:;">
+                      <div class="weui-cell__hd"><img src="{MODULE_URL}template/img/a0.jpg" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                      <div class="weui-cell__bd weui-cell_primary">
+                          微信<small>({php echo intval($row[0]['num'])}笔)</small>
+                      </div>
+                      <span class="weui-cell__ft">￥{php echo sprintf('%.2f',($row[0]['fee']*0.01))}</span>
+                  </a>
+                  <a class="weui-cell weui-cell_access" href="javascript:;">
+                      <div class="weui-cell__hd"><img src="{MODULE_URL}template/img/a1.jpg" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                      <div class="weui-cell__bd weui-cell_primary">
+                          支付宝<small>({php echo intval($row[1]['num'])}笔)</small>
+                      </div>
+                      <span class="weui-cell__ft">￥{php echo sprintf('%.2f',($row[1]['fee']*0.01))}</span>
+                  </a>
+                  <a class="weui-cell weui-cell_access" href="javascript:;">
+                      <div class="weui-cell__hd"><img src="{MODULE_URL}template/img/a2.jpg" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                      <div class="weui-cell__bd weui-cell_primary">
+                          现金<small>({php echo intval($row[2]['num'])}笔)</small>
+                      </div>
+                      <span class="weui-cell__ft">￥{php echo sprintf('%.2f',($row[2]['fee']*0.01))}</span>
+                  </a>
+                  <a class="weui-cell weui-cell_access" href="javascript:;">
+                      <div class="weui-cell__hd"><img src="{MODULE_URL}template/img/a3.jpg" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                      <div class="weui-cell__bd weui-cell_primary">
+                          银行卡<small>({php echo intval($row[3]['num'])}笔)</small>
+                      </div>
+                      <span class="weui-cell__ft">￥{php echo sprintf('%.2f',($row[3]['fee']*0.01))}</span>
+                  </a>
+                  <a class="weui-cell weui-cell_access" href="javascript:;">
+                      <div class="weui-cell__hd"><img src="{MODULE_URL}template/img/a4.jpg" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                      <div class="weui-cell__bd weui-cell_primary">
+                          余额<small>({php echo intval($row[4]['num'])}笔)</small>
+                      </div>
+                      <span class="weui-cell__ft">￥{php echo sprintf('%.2f',($row[4]['fee']*0.01))}</span>
+                  </a>
+                  <a class="weui-cell weui-cell_access" href="javascript:;">
+                      <div class="weui-cell__hd"></div>
+                      <div class="weui-cell__bd weui-cell_primary">
+                          合计
+                      </div>
+                      <span class="weui-cell__ft">￥{php echo sprintf('%.2f',(($row[0]['fee']+$row[1]['fee']+$row[2]['fee']+$row[3]['fee']+$row[4]['fee'])*0.01))}</span>
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+  {/loop}
+</div>
+<script language="javascript">
+
+</script>
+{/if}

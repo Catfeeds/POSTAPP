@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>积分兑换</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="./resource/css/bootstrap.min.css" rel="stylesheet">
+<link href="./resource/css/font-awesome.min.css" rel="stylesheet">
+<link href="./resource/css/animate.css" rel="stylesheet">
+<link href="./resource/css/common.css" rel="stylesheet">
+{php echo register_jssdk(false);}
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+<script src="{MODULE_URL}template/js/fastclick.min.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/weui.css"/>
+</head>
+<style>
+.weui_cell_ft{}
+{if !empty($jfconfig['topimg'])}
+	#comfirn{ margin-top:0px;padding-top:0px;}
+{/if}
+</style>
+<body style="display:none;">
+	
+	
+<div class="weui_msg" id="comfirn">
+	{if empty($jfconfig['topimg'])}
+  <div class="weui_icon_area"><i class="weui_icon_msg weui_icon_warn"></i></div>
+  <div class="weui_text_area">
+    <h2 class="weui_msg_title">是否确认兑换呢？</h2>
+  </div>
+  {else}
+  <div style=" margin:0px;">
+  <img style=" width:100%; height:auto;" src="{php echo toimage($jfconfig['topimg']);}">
+  </div>
+  {/if}
+  <div class="weui_cells">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;"> 会员卡 </div>
+      <div class="weui_cell_ft">
+      	 <select  style="width:100%; min-width:200px;"  id="k">
+      	 	{loop $cards $kd $car}
+      		<option {if $k==$kd} selected {/if} value="{$kd}">{$car["cardNumber"]}</option>
+			{/loop}	 
+		 </select> 
+	  </div>
+    </div>
+   
+   	<div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;">会员信息 </div>
+      <div class="weui_cell_ft">
+      		<span  style= " text-align:left; width:100%; min-width:200px; display:inline-block;">{php echo $cards[$k]['holderContact']['conatctName']}({php echo $cards[$k]['holderContact']['mobile']})</span>
+
+	  </div>
+    </div>
+	
+	 <div class="weui_cell"  style="display:none;">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;">部门信息 </div>
+      <div class="weui_cell_ft">
+      		<span  style= " text-align:left; width:100%; min-width:200px; display:inline-block;" ><input type='hidden' id="bumen" name='bumen' ></span>
+
+	  </div>
+    </div>
+   
+   <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;">可用积分 </div>
+      <div class="weui_cell_ft">
+      		<span  style= " text-align:left; width:100%; min-width:200px; display:inline-block;">{$availableCredits}积分</span>
+	  </div>
+    </div>
+   
+   
+   
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;">兑换份数 </div>
+      <div class="weui_cell_ft"> 
+	  						<select style="width:100%; min-width:200px;" name="num" id="num">
+	  							{php $numlist=array("1","2","3","4","5","6","7","8","9","10");}
+								{loop $numlist $items}
+								<option value="{$items}">{$items}份</option>
+								{/loop}
+	  						</select>
+	   </div>
+    </div>
+	
+	 <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;">需要积分 </div>
+      <div class="weui_cell_ft">
+      		<span  style= " text-align:left; width:100%; min-width:200px; display:inline-block;" ><span id="havejf"></span>积分</span>
+	  </div>
+    </div>
+	
+	
+	<div class="weui_cell" style="display:none;">
+      <div class="weui_cell_bd weui_cell_primary" style="text-align:left;">描述 </div>
+      <div class="weui_cell_ft"> <input type="text" id="des" value="兑换午餐" class="weui_input" placeholder="请输入描述信息" >  </div>
+    </div>
+	
+   
+  </div>
+  <div class="weui_opr_area">
+    <p class="weui_btn_area"> 
+		<a style="display:none;" href="javascript:$('#refund').show();" class="weui_btn weui_btn_warn">取消</a>
+		<a href="javascript:void(0);" id="gotoExchange" class="weui_btn weui_btn_primary">确定</a>
+	 </p>
+    
+  </div>
+</div>
+</body>
+<div class="weui_msg" id="success" style="display:none;">
+  <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
+  <div class="weui_text_area">
+    <h2 class="weui_msg_title">积分兑换成功</h2>
+  </div>
+ 
+  <div class="weui_opr_area">
+    <p class="weui_btn_area"> <a href="javascript:wx.closeWindow();" class="weui_btn weui_btn_primary">确定</a></p>
+  </div>
+</div>
+
+
+<div class="weui_dialog_confirm" id="dorefund" style="display:none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">积分兑换提示</strong></div>
+        <div class="weui_dialog_bd">确认进行积分兑换吗？</div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:void(0);" onclick="$('#dorefund').hide();" class="weui_btn_dialog default">取消</a>
+            <a href="javascript:void(0);" onclick="doRefund();" class="weui_btn_dialog primary">确定</a>
+        </div>
+    </div>
+</div>
+
+<div id="loadingToast" style="display:none;" class="weui_loading_toast"><div class="weui_mask_transparent"></div><div class="weui_toast"><div class="weui_loading"><div class="weui_loading_leaf weui_loading_leaf_0"></div><div class="weui_loading_leaf weui_loading_leaf_1"></div><div class="weui_loading_leaf weui_loading_leaf_2"></div><div class="weui_loading_leaf weui_loading_leaf_3"></div><div class="weui_loading_leaf weui_loading_leaf_4"></div><div class="weui_loading_leaf weui_loading_leaf_5"></div><div class="weui_loading_leaf weui_loading_leaf_6"></div><div class="weui_loading_leaf weui_loading_leaf_7"></div><div class="weui_loading_leaf weui_loading_leaf_8"></div><div class="weui_loading_leaf weui_loading_leaf_9"></div><div class="weui_loading_leaf weui_loading_leaf_10"></div><div class="weui_loading_leaf weui_loading_leaf_11"></div></div><p class="weui_toast_content">数据加载中</p></div></div>
+<div id="toast" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <i class="weui_icon_toast"></i>
+        <p class="weui_toast_content">已完成</p>
+    </div>
+</div>
+
+<div class="msgbox"></div>
+<script language="javascript">
+	var num=1;
+	var k=0;	
+	var des="";
+	var creditsnum="{$jfconfig['creditsnum']}"||1;
+$("#gotoExchange").click(function(){
+	num=$("#num").val();	
+	k=$("#k").val();
+	des=$("#des").val();	
+	if(num==""){
+		alert("请输入兑换积分数量");
+		return false;
+	}
+	$('#dorefund').show();
+});
+
+function getCardInfo(mobile,carid)
+{
+	$('#loadingToast').show();
+	$.post("{php echo murl('entry//carinfo',array('m'=>'rlong_car'));}",{"mobile":mobile,"carid":carid},function(data){
+		$('#loadingToast').hide();
+		if(data.type=="success")
+		{
+			var bm=data.message.contactAddress;
+			$("#bumen").val(bm);	
+		}
+		$("body").show();
+	},"json");
+}
+
+ getCardInfo({php echo $cards[$k]['holderContact']['mobile']},{$carid});
+
+$("#k").change(function(){
+	var v=$(this).val();
+	window.location="{php echo $this->createMobileUrl('cexchange',array('shopid'=>$id))}&k="+v;
+});
+$("[name='num']").change(function(){
+	var v=$(this).val();
+	$("#havejf").html(v*parseInt(creditsnum));
+	
+});
+$("[name='num']").change();
+function doRefund(){
+	$('#dorefund').hide()
+	$('#loadingToast').show();
+	var bm=$("#bumen").val();
+	$.post("{php echo $this->createMobileUrl('cexchange',array('op'=>'exchange','shopid'=>$id))}",
+		 {"k":k,"num":num,'des':des,'bumen':bm},function(data){
+	
+		$('#loadingToast').hide();
+		if(data.type=="success"){
+			$('#toast').show();
+			setTimeout(function(){$('#toast').hide();},2000);
+			$("#comfirn").hide();
+			$("#success").show();
+		}else{
+			alert(data.message);
+		}
+	},"json");
+}
+$(function() {
+  FastClick.attach(document.body);
+});
+wx.ready(function () {
+	wx.hideOptionMenu();
+});
+</script>

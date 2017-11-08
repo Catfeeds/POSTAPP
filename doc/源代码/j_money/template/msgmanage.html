@@ -1,0 +1,108 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+  <li {if $operation == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('msgmanage')}">消息推送</a></li>
+</ul>
+<script src="{MODULE_URL}template/js/socket.js"></script> 
+<script language="javascript">
+require(['bootstrap'],function($){
+	$('.btn').hover(function(){
+		$(this).tooltip('show');
+	},function(){
+		$(this).tooltip('hide');
+	});
+});
+</script> 
+<style>
+
+</style>
+{if $operation == 'display'}
+<div class="main">
+  <div class="category">
+    <div class="panel panel-default">
+      <div class="panel-body table-responsive" id="msglist">
+      
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main">
+  <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+    <div class="panel panel-default">
+      <div class="panel-heading"> 发送消息 </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">对象</label>
+          <div class="col-sm-9 col-xs-12 form-inline">
+            <select name="touser" id="touser" class="form-control">
+            	<option value="all">全部人</option>
+                {loop $list $row}
+                <option value="{php echo implode(',',$userList[$row['id']])}">{$row['companyname']}({php echo count($userList[$row['id']])})</option>
+                {/loop}
+            </select>
+            <div class="help-block"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">消息内容</label>
+          <div class="col-sm-9 col-xs-12">
+            <textarea name="content" id="content" class="form-control" rows="8"></textarea>
+            <div class="help-block"></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="form-group col-xs-12">
+      <input type="button" name="submit" value="提交" class="btn btn-primary col-lg-1" onclick="return checkform();return false" />
+    </div>
+  </form>
+</div>
+<script>
+var socketurl="{$cfg['socketurl']}";
+if(!socketurl){
+	alert("请先到参数设置中设置socket地址");
+}
+var systemsg = new Wilddog(socketurl);
+systemsg.orderByKey().on("value", function(snapshot) {
+	$("#msglist").empty();
+	snapshot.forEach(function(data) {
+		$("#msglist").append('<div id="d'+data.key()+'" class="alert alert-warning" role="alert"><button type="button" class="close" onclick="deleteMes(\''+data.key()+'\')"><span>&times;</span></button><b>'+formatDate(data.key())+'</b>：'+data.val().content+'</div>');
+	});
+});
+function deleteMes(obj){
+	if(confirm("确认删除此公告？")){
+		systemsg.child(obj).remove();
+		$("#d"+obj).remove();
+	}
+}
+function formatDate(now1) {
+	datetime = new Date(parseInt(now1) * 1000);
+	var year = datetime.getFullYear();
+	var month = datetime.getMonth() + 1;
+	month = month.toString().length = 1 ? "0" + month : month;
+	var dates = datetime.getDate();
+	var hour = datetime.getHours();
+	var minute = datetime.getMinutes();
+	minute = minute < 10 ? "0" + minute : minute;
+	return year + "-" + month + "-" + dates + " " + hour + ":" + minute;
+}
+function checkform(){
+	var content=$("#content").val().replace("\n"," ");
+	var timestamp=parseInt(Date.parse(new Date())/1000); 
+	systemsg.child(timestamp).set({
+		"content" : content,
+		"type" : "msg",
+		"to" : $("#touser").val(),
+	});
+	systemsg.on("child_added", function(datasnapshot,error) {
+		if (error == null) {
+			$("#content").val("");
+			alert("发送成功");
+			console.log(JSON.stringify(datasnapshot.val()));
+		}
+	});
+}
+
+</script>
+{/if}
+{template 'common/footer'} 

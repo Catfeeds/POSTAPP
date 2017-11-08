@@ -1,0 +1,20 @@
+{template 'common/header'} 
+<script id="jetsumfunjs" src="../addons/j_money/template/jetsum-money.js?siteroot={$_W['siteroot']}&uniacid={$_W['uniacid']}&shopid=1" language="javascript"></script>
+<ul class="nav nav-tabs">
+  <li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('print', array('op' => 'display'))}">插件管理</a></li>
+</ul>
+<div class="clearfix welcome-container">
+  <div class="page-header">
+    <h4><i class="fa fa-plane"></i> 插件列表</h4>
+  </div>
+  <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+  <div class="shortcut clearfix">
+  	<input name="code" type="text" />
+    <button type="submit" class="btn btn-info">按钮</button>
+  </div>
+  </form>
+</div>
+
+<script>
+</script>
+{template 'common/footer'} 

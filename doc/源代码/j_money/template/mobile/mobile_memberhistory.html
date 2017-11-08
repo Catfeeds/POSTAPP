@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>我的消费记录</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="./resource/css/bootstrap.min.css" rel="stylesheet">
+<link href="./resource/css/font-awesome.min.css" rel="stylesheet">
+<link href="./resource/css/common.css" rel="stylesheet">
+{php echo register_jssdk(false);}
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+<script src="{MODULE_URL}template/js/fastclick.min.js"></script>
+<script src="{MODULE_URL}template/js/weui.min.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/weui.min.css"/>
+</head>
+<body>
+<style>
+body{background:#EFEEF3;}
+.bodytop{ background:#64C864; padding:40px 0 20px 0; color:#FFF;}
+.til{ font-size:16px; text-align:center;color:#FFF;}
+.price{ font-size:26px; text-align:center; line-height:36px; color:#FFF; font-weight:bolder; font-family:Arial, Helvetica, sans-serif;}
+ul,li,ul li{ list-style:none; margin:0; padding:0}
+.listbtn{ padding-top:20px;}
+.listbtn ul li{ display:inline-block; width:30%;margin:5px 0 5px 5px;border:1px solid #999; padding:5px;text-align:center;color:#999;font-size:18px}
+.listbtn ul li .pr{}
+.listbtn ul li .info{ font-size:14px; }
+.listbtn ul li.check{ border:1px solid #1AAD19;color:#1AAD19; }
+.footer{ padding:5px 10px; position:absolute;left:0;bottom:0;right:0;}
+.topbar{ padding:10px; text-align:center;}
+.topbar span{ border:1px solid #00c800; display:inline-block;padding:5px 30px;color:#00c800;}
+.topbar span:first-child{ border-bottom-left-radius:4px; border-top-left-radius:4px; border-right:none;}
+.topbar span:last-child{ border-bottom-right-radius:4px; border-top-right-radius:4px;}
+.topbar span.checked{ background:#00c800; color:#FFF;}
+.list_box {padding:10px;}
+.weui-cell__title{ font-size:14px;}
+a:active,a:visited{text-decoration:none;}
+a.weui-cell{color:#666;font-size:14px;}
+a.weui-cell:visited{text-decoration:none;}
+</style>
+<div class="mainpage">
+<div class="list_box"> 
+  <div class="weui-wepay-lists__bd">
+        <div class="weui-cells" style="margin-top:0">
+        	{loop $list $row}
+            <a class="weui-cell">
+                <div class="weui-cell__bd">
+                    <h2 class="weui-cell__title">No:{$row['out_trade_no']}</h2>
+                    <div class="weui-cell__info">{if $row['paytype']==4}<span class="label label-info label-sm">会员卡</span>{/if}</div>
+                    <div class="weui-cell__info" style="font-size:12px">{php echo date('Y-m-d H:i',$row['createtime'])}</div>
+                </div>
+                <div class="weui-cell__ft">
+                    <div class="weui-cell__title">
+                    {if $row['status']==1}成功{elseif $row['status']==2}<b style="color:#00F">退款</b>{else}<b style="color:#C30">失败</b>{/if}</div>
+                    <div class="weui-cell__info">
+                    {if $row['paytype']==4}
+                    ￥{php echo sprintf('%.2f',($row['total_fee']/100))}元
+                    {else}
+                    ￥{php echo sprintf('%.2f',($row['cash_fee']/100))}元
+                    {/if}
+                    </div>
+                </div>
+            </a>
+            {/loop}
+        </div>
+        <!--<div class="weui-loadmore"> 
+            <i class="weui-loading"></i>
+            <span class="weui-loadmore__tips">正在加载</span>
+        </div>-->
+    </div>
+</div>
+</div>
+<script language="javascript">
+$(function(){FastClick.attach(document.body);});
+$(".listbtn li").on("click",function(){
+	$(this).addClass("check").siblings().removeClass("check");
+})
+wx.ready(function(){
+	wx.hideOptionMenu();		
+});
+$(".topbar span").on("click",function(){
+	var index=$(this).index();
+	$(this).addClass("checked").siblings().removeClass("checked");
+	$(".mainpage").hide().eq(index).show();
+})
+function checkPay(ordersn){
+	$.post("{php echo $this->createMobileUrl('membercharge',array('op'=>'checkpay','shopid'=>$shopid))}",{'ordersn':ordersn},function(data){
+		var result=eval("("+data+")");
+		if(resutl.success){
+			alert("支付成功");
+			location.reload();
+		}else{
+			alert(result.msg);
+		}
+	})
+}
+</script>

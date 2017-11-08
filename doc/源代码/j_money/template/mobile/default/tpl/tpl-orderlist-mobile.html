@@ -1,0 +1,25 @@
+{if count($list)==0}
+<tr><td colspan="6">暂无数据</td></tr>
+{else}
+{loop $list $row}
+<tr ordersn="{$row['out_trade_no']}" onclick="select_order(this)" allpage="{php echo $allpage}" pindex="{php echo $pindex}">
+  <td>
+  {if $row['paytype']==0}<img src="{MODULE_URL}template/img/wechart.gif" width="21"/>
+  {elseif $row['paytype']==1}<img src="{MODULE_URL}template/img/alipay.gif" width="21"/> 
+  {elseif $row['paytype']==2}<img src="{MODULE_URL}template/img/cash.gif" width="21"/>
+  {elseif $row['paytype']==3}<img src="{MODULE_URL}template/img/credit.gif" width="21"/>
+  {elseif $row['paytype']==4}<img src="{MODULE_URL}template/img/menbercard.gif" width="21"/>
+  {/if}
+  </td>
+  <td><span class="label label-success">{$row['species']}种</span> <span class="label label-info">{$row['num']}件</span></td>
+  <td>{php echo sprintf('%.2f',($row['order_fee']*0.01))}</td>
+  <td>{php echo sprintf('%.2f',($row['total_fee']*0.01))}</td>
+  <td>{php echo date("m-d H:i",$row['time_end'])}</td>
+  <td>
+  {if $row['status']==1}<span class="label label-success"><i class="fa fa-check"/></i></span>
+  {elseif $row['status']==2}<span class="label label-danger"><i class="fa fa-recycle"/></i></span>
+  {else}<span class="label label-danger"><i class="fa fa-times"/></i></span>
+  {/if}</td>
+</tr>
+{/loop}
+{/if}

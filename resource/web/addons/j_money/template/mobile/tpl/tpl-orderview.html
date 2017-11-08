@@ -1,0 +1,75 @@
+<!--//0没有优惠，1为满减，2为会员卡折扣，3为微信卡券，4其他优惠//-->
+<div>
+  <table class="table">
+  	<thead>
+      <tr>
+        <th colspan="2" style="text-align:left;">订单编号：{$item['out_trade_no']}</th>
+        <th colspan="3">{php echo date("Y-m-d H:i",$item['createtime'])}</th>
+      </tr>
+    </thead>
+    <thead>
+      <tr>
+        <th>总金额</th>
+        <th>优惠</th>
+        <th>合计</th>
+        <th>支付</th>
+        <th>找零</th>
+      </tr>
+    </thead>
+    <input type="hidden" id="orderview_order_fee" value="{php echo sprintf('%.2f',($item['order_fee']*0.01))}"/>
+    <input type="hidden" id="orderview_total_fee" value="{php echo sprintf('%.2f',($item['total_fee']*0.01))}"/>
+    <input type="hidden" id="orderview_paytype" value="{$item['paytype']}"/>
+    <input type="hidden" id="orderview_stauts" value="{$item['stauts']}"/>
+    <tr>
+      <td><span class="label label-warning">￥ {php echo sprintf('%.2f',($item['order_fee']*0.01))}</span></td>
+      <td><span class="label label-info">￥ {php echo sprintf('%.2f',($item['discount_fee']*0.01))}</span></td>
+      <td><span class="label label-danger">￥ {php echo sprintf('%.2f',($item['total_fee']*0.01))}</span></td>
+      <td>
+      {if $item['paytype']==0}<img src="{MODULE_URL}template/img/wechart.gif" width="21"/> 
+      {elseif $item['paytype']==1}<img src="{MODULE_URL}template/img/alipay.gif" width="21"/> 
+      {elseif $item['paytype']==2}<img src="{MODULE_URL}template/img/cash.gif" width="21"/> 
+      {elseif $item['paytype']==3}<img src="{MODULE_URL}template/img/credit.gif" width="21"/> 
+      {elseif $item['paytype']==4}<img src="{MODULE_URL}template/img/menbercard.gif" width="21"/> 
+      {/if} <span class="label label-success">￥ {php echo sprintf('%.2f',($item['paid_fee']*0.01))}</span></td>
+      <td><span class="label label-warning">￥ {php echo sprintf('%.2f',($item['change_fee']*0.01))}</span></td>
+    </tr>
+    <tr>
+      <td colspan="5">
+      {if $item['discounttype']==1}
+      <span class="label label-info">店铺满减</span>
+      {elseif $item['discounttype']==2}
+      <span class="label label-info">会员折扣</span>
+      {elseif $item['discounttype']==3}
+      <span class="label label-info">微信卡券</span>
+      {elseif $item['discounttype']==4}
+      <span class="label label-info">其他优惠</span>
+      {/if}
+      {$item['remark']}
+      </td>
+    </tr>
+  </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>品名</th>
+        <th style="width:80px">单价</th>
+        <th style="width:50px">数量</th>
+        <th style="width:80px">小计</th>
+      </tr>
+    </thead>
+    {loop $goodslist $row}
+    <tr>
+      <td>{if $row['goodsn']}[{$row['goodsn']}]{/if}{if $row['goodid']==0}无条码商品{else}<br>{$row['title']}{/if}</td>
+      <td>{$row['marketprice']}</td>
+      <td>{$row['num']}</td>
+      <td>{php echo sprintf('%.2f',($row['total_fee']*0.01))}</td>
+    </tr>
+    {/loop}
+    <tr>
+      <td>合计</td>
+      <td>{$item['species']}</td>
+      <td>{$item['num']}</td>
+      <td>{php echo sprintf('%.2f',($item['order_fee']*0.01))}</td>
+    </tr>
+  </table>
+</div>

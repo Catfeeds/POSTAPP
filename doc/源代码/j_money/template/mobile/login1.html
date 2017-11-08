@@ -1,0 +1,227 @@
+{if $operation=='display'}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<title>{$shop['companyname']}-收银台</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+
+<script src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+
+<script src="{MODULE_URL}template/js/sweetalert.min2.js"></script>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/js/sweetalert.css"/>
+<link type="text/css" rel="stylesheet" href="{MODULE_URL}template/mobile/css/zfb.css"/>
+<style>
+	html{ height:100%;}
+	body{height:100%; overflow:hidden; background:url({php echo tomedia($cfg['bg'])}); background-size:100% 100%;}
+	
+</style>
+
+</head>
+<body>
+
+<div class="J_login_from">
+<div class="login login-modern" id="J-login">
+        <form name="loginForm" id="login" action="" method="post" class="ui-form" >
+		
+        <fieldset>
+
+              <h2 class="ui-form-title " id="J-login-title">账号登陆</h2>
+
+    
+       <div class="ui-form-item" id="J-username">
+    <label id="J-label-user" class="ui-label" >
+        <span class="ui-icon ui-icon-userDEF"><i class="iconauth"></i></span>
+            </label>
+                          <input id="J-input-user" class="ui-input ui-input-normal " name="userid" tabindex="1" value="" autocomplete="off" maxlength="100" placeholder="用户名" type="text">
+        <div class="ui-form-explain"></div></div>
+
+                        
+
+<div class="ui-form-item ui-form-item-20pd" id="J-password">
+    <label id="J-label-editer" class="ui-label"  seed="authcenter-switch-aliedit">
+        <span class="ui-icon ui-icon-securityON" id="safeSignCheck"><i class="iconauth"></i></span>
+                      
+            </label>
+
+
+        
+        
+    <span class="alieditContainer" id="password_container">
+		<input tabindex="2" id="password_rsainput" name="pwd" class="ui-input i-text" oncontextmenu="return false" onpaste="return false" oncopy="return false" oncut="return false" autocomplete="off" value="" type="password"></span>
+
+	</div>
+
+      
+ 
+				<div class="ui-form-item ui-form-item-30pd" id="J-submit">
+                <input value="登 录" class="ui-button" id="J-login-btn" tabindex="4" seed="authcenter-submit-homeB" type="submit" onClick="return checkUpdate();return false;"  >
+                
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
+<a href="javascript:void(0);" class="qrcode-target qrcode-target-show" id="J-qrcode-target" title="扫码登录" seed="Login"></a>
+
+
+<div id="J-qrcode" class="qrcode qrcode-modern fn-hide">
+    <span class="qrcode-tips" id="J-qrcode-tips"></span>
+        <h2 class="qrcode-title " id="J-qrcode-title">扫码登录</h2>
+        <div class="sl-error" id="J-qrcode-errorBox" >
+    <span class="sl-error-text"></span>
+</div>
+    <div class="qrcode-detail" id="J-qrcode-body">
+        <div class="qrcode-detail-img" id="J-qrcode-img">
+			
+<div id="J-barcode-container" class="barcode-container">
+		<div class="status" style="display:block;">
+     		 <img src="http://qr.liantu.com/api.php?text={php echo $url}" style="width:100%; height:100%;">
+		 </div>
+	
+	
+    <div class="mask"></div>
+	
+    <div class="error status">
+        <p class="second">二维码失效</p>
+        <button type="button" seed="timeout-btn" smartracker="on">刷新</button>
+    </div>
+    <div class="scanned status">
+        <p class="first">
+          <img class="barcode-icon-pic" src="https://t.alipayobjects.com/images/rmsweb/T1HEXhXfdcXXXXXXXX.png" style="width:40px;height:40px;" >
+        </p>
+        <p>扫码成功</p>
+    </div>
+    
+</div>
+
+ </div>
+        <div class="qrcode-detail-intro" id="J-qrcode-intro"></div>
+    </div>
+    <div class="qrcode-footer">
+        <p class="qrcode-footer-tips">请使用手机微信扫码</p>
+       
+    </div>
+</div>
+
+</div>
+
+
+
+
+<script>
+var timer=0;
+
+$("#J-barcode-container .error button").click(function(){
+	location.reload();	
+});
+function checkIslogin(){
+	timer++;
+	console.log(timer);
+	$.ajax({ 
+		url: "{php echo $this->createMobileUrl('ajax',array('op'=>'checklogin'))}",
+		type: "POST",
+		dataType:'json', 
+		success: function(data){
+    		if(data.success){
+					$("#J-barcode-container .mask").show();
+					$("#J-barcode-container .scanned").show();
+				setTimeout(function(){
+					location.href="{php echo $this->createMobileUrl('index',array('op'=>'in'))}";
+				},2000)
+			}else{
+				if(data.msg){
+					$("#J-barcode-container .mask").show();
+					$("#J-barcode-container .error .second").html(data.msg);
+					$("#J-barcode-container .error").show();				
+				}
+				if(data.reload){
+					//location.reload();
+				}
+				setTimeout("checkIslogin()",5000);
+			}
+		},
+		error:function(event,request,settings){
+    		alert("error");
+		}
+	})
+}
+	
+</script>
+
+
+<script language="javascript">
+
+
+function checkUpdate(){
+	var userid=$("input[name='userid']").val();
+	var pwd=$("input[name='pwd']").val();
+	if(userid.length<1){
+		swal("用户名不能为空");
+		return false;
+	}
+	if(pwd.length<6){
+		swal("密码长度不正确");
+		return false;
+	}
+	$.ajax({ 
+		url: "{php echo $this->createMobileUrl('ajax',array('op'=>'login'))}",
+		type: "POST",
+		data: {"userid":userid,"pwd":pwd},
+		dataType:'json', 
+		success: function(data){
+    		if(data.success){
+				location.href="{php echo $this->createMobileUrl('index',array('op'=>'in'))}";
+			}else{
+				swal(data.msg);
+			}
+		},
+		error:function(event,request,settings){
+    		alert("error");
+		}
+	})
+	return false;
+}
+</script> 
+<script>
+
+	function showQR() 
+	{
+		$("#J-login").addClass("fn-hide");
+		$("#J-qrcode").removeClass("fn-hide");
+
+		$("#J-qrcode-target").removeClass("qrcode-target-show").addClass("qrcode-target-hide");
+		$("#J-qrcode-target").attr("seed", "qrCodeLogin");
+		
+		timer=setTimeout("checkIslogin()",5000);
+		
+	}	
+	
+	function hideQR() {	
+		$("#J-qrcode").addClass("fn-hide");
+		$("#J-login").removeClass("fn-hide");
+		$("#J-qrcode-target").removeClass("qrcode-target-hide").addClass("qrcode-target-show");
+		$("#J-qrcode-target").attr("seed", "Login");
+		clearTimeout(timer);
+	}
+	$("#J-qrcode-target").click(function(){
+		var seed=$(this).attr("seed");
+		seed=="Login"?showQR():hideQR();
+	});
+	
+	{if $_GPC['logintype'] == 1}
+		showQR();
+	{/if}
+
+</script>	
+
+</body>
+</html>
+{/if}
+ 
