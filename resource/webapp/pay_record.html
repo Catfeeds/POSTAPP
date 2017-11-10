@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head design-width="540">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<!-- 优先使用 IE 最新版本和 Chrome -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<!-- <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/> -->
+	<!-- 添加 favicon icon -->
+	<meta name="renderer" content="webkit">
+	<title>收银记录</title>
+	<link rel="stylesheet" href="css/public.css?ver=1" />
+	<script src="js/font-size.js"></script>
+</head>
+<body class="bgf7f7f7">
+	<div class="zx-record-t">
+		<div class="top">
+			<h6 onclick="javascript:history.back()"><img src="img/zx2.png" alt=""></h6>
+			<h5><span>收银记录</span><i>2017年10月10日</i></h5>
+			<h4 href="barcode_pay.html">取消</h4>
+		</div>
+		<div class="midd">
+			<h6 class="wl4"><span>总交易笔数</span><i>12笔</i></h6>
+			<h6><span>总交易金额</span><i>￥3600.00</i></h6>
+		</div>
+	</div>
+	<div class="zx-record-m">
+		<ul class="zx-record-ul">
+
+		</ul>
+	</div>
+	<div class="zx-record-b">
+		<ul>
+			<li>
+				<h6><img class="img1" src="img/hico4.png" alt=""><span>刷卡支付</span></h6>
+				<h5>￥188.00</h5>
+			</li>
+			<li>
+				<h6><img class="img2" src="img/zx4.png" alt=""><span>支付宝支付</span></h6>
+				<h5>￥188.00</h5>
+			</li>
+			<li>
+				<h6><img class="img3" src="img/zx3.png" alt=""><span>微信支付</span></h6>
+				<h5>￥188.00</h5>
+			</li>
+		</ul>
+	</div>
+
+	<script src="js/mui.min.js"></script>
+	<script src="js/zepto.js"></script>
+	<script src="js/event.js"></script>
+	<script src="js/touch.js"></script>
+	<script src="js/js.js"></script>
+	<script type="text/javascript">
+		(function($, doc) {
+			$.init({
+				statusBarBackground: '#f7f7f7'
+			});
+			$.plusReady(function() {
+				var baseUrl = plus.storage.getItem("baseUrl");
+				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=gettradelist";
+				var keyword = "";
+				var ds      = "";
+				var de      = "";
+				var islogin = plus.storage.getItem("islogin");
+				$.ajax({
+					type: "post",
+					url: postUrl,
+					data: {
+						keyword: keyword,
+						ds: ds,
+						de: de,
+						islogin: islogin	
+					},
+					async: true,
+					dataType: "json",
+					success: function(data) {
+						var list = data.list;
+						if(data.success == true){
+							var list = data.list;
+							if(list.length > 0){
+								console.log(data.list[0]['out_trade_no']);
+								var total = list.length;
+								var str = "";
+								var cardnum = "";
+								for(var i in list){
+									var thumb = "";
+									var title = "";
+									var out_trade_no = list[i]["out_trade_no"];
+									out_trade = out_trade_no.substr(out_trade_no.length-4);
+									if(list[i]['paytype'] == 0){
+										//微信支付
+										thumb = "img/zx3.png";
+										title = "微信收款";
+										cardnum = "<span>订单后四位：</span><i>"+out_trade+"</i>";
+									}else if(list[i]['paytype'] == 1){
+										//支付宝
+										thumb = "img/zx4.png";
+										title = "支付宝收款";
+										cardnum = "<span>订单后四位：</span><i>"+out_trade+"</i>";
+									}else if(list[i]['paytype'] == 3){
+										//刷卡
+										thumb = "img/hico4.png";
+										title = "刷卡收款";
+										cardnum = "<span>"+out_trade_no.substr(0,4)+"*******"+out_trade+"</span>";
+									}
+
+									if(list[i]['status'] == 0){
+
+									}
+				
+									str += "<li>";
+									str += "<div class=\"wrap\">";
+									str += "<div class=\"list-l\">";
+									str += "<h6><img src=\""+thumb+"\" alt=\"\"></h6>";
+									str += "<div class=\"wl5\">";
+									str += "<h5>"+title+"</h5>";
+									str += "<h4><span>"+getDate(list[i]['time'])+"</span>"+cardnum+"</h4>";
+									str += "</div>";
+									str += "<h3><span>"+list[i]['status']+"</span><i>"+list[i]['total_fee']+"元</i></h3>";
+									str += "</div>";
+									str += "<h2><span>打<br>印</span></h2>";
+									str += "</div>";
+									str += "</li>";
+								}
+								var ularea = doc.querySelector('.zx-record-ul');
+								ularea.innerHTML = str;
+							}
+						}
+
+						function getDate(str){
+							return str.split(" ")[0];
+						}
+//						if(data.success == true) {
+//							plus.nativeUI.toast("登录成功");
+//							plus.storage.setItem("islogin", 21);
+//							var w = plus.webview.create('barcode_pay.html');
+//							w.show();
+//						} else {
+//							plus.nativeUI.toast(data.msg);
+//						}
+					}
+				});
+			})
+		}(mui, document));
+	</script>
+
+</body>
+</html>
+

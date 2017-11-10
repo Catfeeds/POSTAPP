@@ -66,7 +66,8 @@ class J_moneyModuleSite extends WeModuleSite
 	{
 		global $_GPC, $_W;
 		if (!$_W['isajax']) {
-			die(json_encode(array('success' => false, 'msg' => "错误！")));
+			// long 2017-11-10
+			// die(json_encode(array('success' => false, 'msg' => "错误！")));
 		}
 		$operation = !empty($_GPC['op']) ? $_GPC['op'] : 'display';
 		$cfg = $this->module['config'];
@@ -121,7 +122,6 @@ class J_moneyModuleSite extends WeModuleSite
 			if (!$user) {
 				die(json_encode(array("success" => false, "msg" => "请先登录")));
 			}
-			
 				
 			
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));

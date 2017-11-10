@@ -1,0 +1,45 @@
+{
+	"index.html": {
+		"refer": [
+			"barcode_pay.html",
+			"barcode_refundorder.html",
+			"login.html"
+		]
+	},
+	"barcode_pay.html": {
+		"refer": [
+			"barcode_scan_payall.html",
+			"barcode_refundorder.html",
+			"setting.html",
+			"pay_record.html",
+			"card_pay.html",
+			"member.html"
+		]
+	},
+	"setting.html": {
+		"refer": [
+			"login.html",
+			"barcode_pay.html"
+		]
+	},
+	"login.html": {
+		"refer": [
+			"barcode_pay.html"
+		]
+	},
+	"pay_record.html": {
+		"refer": [
+			"barcode_pay.html"
+		]
+	},
+	"card_pay.html": {
+		"refer": [
+			"barcode_pay.html"
+		]
+	},
+	"member.html": {
+		"refer": [
+			"setting.html"
+		]
+	}
+}

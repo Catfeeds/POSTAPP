@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head design-width="540">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<!-- 优先使用 IE 最新版本和 Chrome -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="HandheldFriendly" content="true"/>
+	<meta name="MobileOptimized" content="320"/>
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<!-- <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/> -->
+	<!-- 添加 favicon icon -->
+	<meta name="renderer" content="webkit">
+	<title>移动支付</title>
+	<link rel="stylesheet" href="css/public.css?ver=1" />
+	<script src="js/font-size.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript">
+		var img = null;
+		var blist = [];
+		function scaned(t, r, f,type){
+			console.log(r);
+			var baseUrl = plus.storage.getItem("baseUrl");
+			if(type == 'pay'){
+				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=pay_all";
+				var fee = "0.01";
+				var qrcode = r;
+				var password = "";
+				var old_trade_no = "";
+				mui.ajax({
+					type: "post",
+					url: postUrl,
+					data: {
+						fee: fee,
+						qrcode: qrcode,
+						password: password,
+						old_trade_no: old_trade_no	
+					},
+					async: true,
+					dataType: "text",
+					success: function(data) {
+						console.log(data);
+					}
+				})
+			}
+			// var d = new Date();
+			// var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds(),ms=d.getMilliseconds();
+			// if(h < 10){ h='0'+h; }
+			// if(m < 10){ m='0'+m; }
+			// if(s < 10){ s='0'+s; }
+			// if(ms < 10){ ms='00'+ms; }
+			// else if(ms < 100){ ms='0'+ms; }
+			// var ts = '['+h+':'+m+':'+s+'.'+ms+']';
+			// var li=null,hl = document.getElementById('history');
+			// if(blist.length > 0){
+			// 	li = document.createElement('li');
+			// 	li.className = 'ditem';
+			// 	hl.insertBefore(li, hl.childNodes[0]);
+			// } else{
+			// 	li = document.getElementById('nohistory');
+			// }
+			// li.id = blist.length;
+			// var html = '['+h+':'+m+':'+s+'.'+ms+']'+'　　'+t+'码<div class="hdata">';
+			// html += r;
+			// html += '</div>';
+			// li.innerHTML = html;
+			// li.setAttribute('onclick', 'selected(id)');
+			// blist[blist.length] = {type:t,result:r,file:f};
+			// update(t, r, f);
+		}
+		function selected(id){
+			var h = blist[id];
+			update( h.type, h.result, h.file );
+			if(h.result.indexOf('http://')==0  || h.result.indexOf('https://')==0){
+				plus.nativeUI.confirm(h.result, function(i){
+					if(i.index == 0){
+						plus.runtime.openURL(h.result);
+					}
+				}, '', ['打开', '取消']);
+			} else{
+				plus.nativeUI.alert(h.result);
+			}
+		}
+		function update(t, r, f){
+			outSet('扫描成功：');
+			outLine(t);
+			outLine(r);
+			outLine('\n图片地址：'+f);
+			if(!f || f=='null'){
+				img.src = '../img/barcode.png';	
+			} else{
+				plus.io.resolveLocalFileSystemURL(f, function(entry){
+					img.src=entry.toLocalURL();
+				});
+				//img.src = 'http://localhost:13131/'+f;
+			}
+		}
+		function onempty(){
+			if(window.plus){
+				plus.nativeUI.alert('无扫描记录');
+			} else {
+				alert('无扫描记录');
+			}
+		}
+		function cleanHistroy(){
+			if(blist.length > 0){
+				var hl = document.getElementById('history');
+				hl.innerHTML = '<li id="nohistory" class="ditem" onclick="onempty();">无历史记录	</li>';
+			}
+			plus.io.resolveLocalFileSystemURL('_doc/barcode/', function(entry){
+				entry.removeRecursively(function(){
+					// Success
+				}, function(e){
+					//alert( "failed"+e.message );
+				});
+			});
+		}
+	</script>
+</head>
+<body class="bgf0f0f0">
+	<header class="header">
+		<div class="left-nav">
+			<a href="pay_record.html">收银记录</a>
+		</div>
+		<div class="logo"><a href="#"><img src="img/hico3.png" alt=""></a></div>
+		<div class="right-nav">
+			<a href="#" onclick="clicked('barcode_refundorder.html',true,true)">退款</a>
+		</div>
+	</header>
+	<main class="main">
+		<div class="payment-menthod">
+			<div class="union pay active" href="card_pay.html">
+				<!-- d -->
+				<div class="pic"><img src="img/hico4.png" alt=""></div>
+				<div class="text">刷卡支付</div>
+			</div>
+			<div class="mobile pay" href="#">
+				<div class="pic"><img src="img/hico5.png" alt=""></div>
+				<div class="text">移动支付</div>
+			</div>
+		</div>
+		<div class="amount-collected">
+			<div class="row title">
+				<div class="brand">
+					<img src="img/hico5.png" alt="">
+				</div>
+				<div class="text">输入收款金额：</div>
+			</div>
+			<div class="row">
+				<div class="money" data-after="手续费:￥3.00" data-before="￥"><span class="text">0.00</span><span  class="cursor"></span></div>
+			</div>
+			<div class="row">
+				<div class="total">
+					<div class="text">总金额:</div>
+					<div class="text">￥0.00</div>
+				</div>
+			</div>
+		</div>
+		<div class="input-control normal pc">
+			<table>
+				<tr>
+					<td width="100">1</td>
+					<td width="100">2</td>
+					<td width="100">3</td>
+					<td width="100" class="bgff7f7f back"><img src="img/hico10.png" alt=""></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td rowspan="3" class="bg3099ff enter" onclick="clicked('barcode_scan_payall.html',true,true)">
+						确认<br>
+						收款
+					</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+				<tr>
+					<td>00</td>
+					<td>0</td>
+					<td class="number">.</td>
+				</tr>
+			</table>
+		</div>
+	</main>
+	<div class="footer-none"></div>
+	<footer class="footer footer-nav pc">
+		<a href="member.html" class="vip"><div class="pic"></div><div class="text">会员</div></a>
+		<a href="barcode_pay.html" class="center money active"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
+		<a href="setting.html" class="set"><div class="pic"></div><div class="text">设置</div></a>
+	</footer>
+	<script src="js/zepto.js"></script>
+	<script src="js/event.js"></script>
+	<script src="js/touch.js"></script>
+	<script src="js/js.js"></script>
+	<script type="text/javascript" src="js/immersed.js" ></script>
+</body>
+</html>
+
