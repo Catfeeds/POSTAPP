@@ -85,6 +85,7 @@ $('.input-control.normal').on(window.a, 'td', function(e) {
 		$('.input-control.normal .number')[0].number = '';
 		// alert($('.input-control.normal .number')[0].number);
 	}
+	console.log("price = " + str);
 	$('.main .amount-collected .money .text').text(str);
 });
 

@@ -55,7 +55,7 @@ function onmarked(type, result, file){
     	break;
     }
     result = result.replace(/\n/g, '');
-    wo.evalJS("scaned('"+ type +"','"+ result +"','"+ file +"');");
+    wo.evalJS("scaned('"+ type +"','"+ result +"','"+ file +"','refund');");
     back();
 }
 // 从相册中选择二维码图片 

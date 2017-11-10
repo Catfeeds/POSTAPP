@@ -43,6 +43,21 @@
 						console.log(data);
 					}
 				})
+			}else if(type == 'refund'){
+				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=refundorder";
+				var orderid = r;
+				mui.ajax({
+					type: "post",
+					url: postUrl,
+					data: {
+						orderid: orderid,
+					},
+					async: true,
+					dataType: "text",
+					success: function(data) {
+						console.log(data);
+					}
+				})
 			}
 			// var d = new Date();
 			// var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds(),ms=d.getMilliseconds();
