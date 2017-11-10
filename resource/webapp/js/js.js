@@ -87,6 +87,7 @@ $('.input-control.normal').on(window.a, 'td', function(e) {
 	}
 	console.log("price = " + str);
 	$('.main .amount-collected .money .text').text(str);
+	$('.main .total-text').text(str);
 });
 
 
@@ -97,6 +98,7 @@ $('.input-control.normal .back').on(window.a, function() {
 	$('.input-control.normal .number')[0].number = '';
 	var str = $('.main .amount-collected .money .text').text();
 	$('.main .amount-collected .money .text').text(str.slice(0, str.length - 1));
+	$('.main .total-text').text(str.slice(0, str.length - 1));
 	console.log(str.slice(0, str.length - 1));
 });
 

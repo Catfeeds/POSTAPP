@@ -13,13 +13,21 @@
 			"setting.html",
 			"pay_record.html",
 			"card_pay.html",
-			"member.html"
+			"member.html",
+			"index.html",
+			"card_pay_info.html",
+			"3.html",
+			"login.html"
+		],
+		"resources": [
+			"card_pay.html"
 		]
 	},
 	"setting.html": {
 		"refer": [
 			"login.html",
-			"barcode_pay.html"
+			"barcode_pay.html",
+			"member.html"
 		]
 	},
 	"login.html": {
@@ -34,12 +42,21 @@
 	},
 	"card_pay.html": {
 		"refer": [
-			"barcode_pay.html"
+			"barcode_pay.html",
+			"card_pay_info.html",
+			"member.html",
+			"pay_record.html"
 		]
 	},
 	"member.html": {
 		"refer": [
-			"setting.html"
+			"setting.html",
+			"barcode_pay.html"
+		]
+	},
+	"card_pay_info.html": {
+		"refer": [
+			"barcode_pay.html"
 		]
 	}
 }

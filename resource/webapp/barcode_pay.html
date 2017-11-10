@@ -15,7 +15,6 @@
 	<link rel="stylesheet" href="css/public.css?ver=1" />
 	<script src="js/font-size.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
-	<script src="js/mui.min.js"></script>
 	<script type="text/javascript">
 		var img = null;
 		var blist = [];
@@ -24,11 +23,12 @@
 			var baseUrl = plus.storage.getItem("baseUrl");
 			if(type == 'pay'){
 				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=pay_all";
-				var fee = "0.01";
+				var fee = $('.main .total-text').text();
 				var qrcode = r;
 				var password = "";
 				var old_trade_no = "";
-				mui.ajax({
+				console.log("fee = " + fee);
+				$.ajax({
 					type: "post",
 					url: postUrl,
 					data: {
@@ -135,19 +135,19 @@
 </head>
 <body class="bgf0f0f0">
 	<header class="header">
-		<div class="left-nav">
-			<a href="pay_record.html">收银记录</a>
+		<div class="left-nav" onclick="clicked('pay_record.html',false,false)">
+			<a href="#">收银记录</a>
 		</div>
 		<div class="logo"><a href="#"><img src="img/hico3.png" alt=""></a></div>
-		<div class="right-nav">
-			<a href="#" onclick="clicked('barcode_refundorder.html',true,true)">退款</a>
+		<div class="right-nav" onclick="clicked('barcode_refundorder.html',true,true)">
+			<a href="#">退款</a>
 		</div>
 	</header>
 	<main class="main">
 		<div class="payment-menthod">
-			<div class="union pay active" href="card_pay.html">
+			<div class="union pay active" >
 				<!-- d -->
-				<div class="pic"><img src="img/hico4.png" alt=""></div>
+				<div class="pic" onclick="clicked('card_pay.html',false,false)"><img src="img/hico4.png" alt=""></div>
 				<div class="text">刷卡支付</div>
 			</div>
 			<div class="mobile pay" href="#">
@@ -168,7 +168,7 @@
 			<div class="row">
 				<div class="total">
 					<div class="text">总金额:</div>
-					<div class="text">￥0.00</div>
+					<div class="text">￥<span class="total-text">0.00</span></div>
 				</div>
 			</div>
 		</div>
@@ -204,9 +204,9 @@
 	</main>
 	<div class="footer-none"></div>
 	<footer class="footer footer-nav pc">
-		<a href="member.html" class="vip"><div class="pic"></div><div class="text">会员</div></a>
-		<a href="barcode_pay.html" class="center money active"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
-		<a href="setting.html" class="set"><div class="pic"></div><div class="text">设置</div></a>
+		<a href="#" onclick="clicked('member.html',false,false)" class="vip"><div class="pic"></div><div class="text">会员</div></a>
+		<a href="#" class="center money active"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
+		<a href="#" onclick="clicked('setting.html',false,false)" class="set"><div class="pic"></div><div class="text">设置</div></a>
 	</footer>
 	<script src="js/zepto.js"></script>
 	<script src="js/event.js"></script>

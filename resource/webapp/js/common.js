@@ -56,6 +56,7 @@ w.clicked=function(id,wa,ns,ws){
 	if(openw){//避免多次打开同一个页面
 		return null;
 	}
+	
 	if(w.plus){
 		wa&&(waiting=plus.nativeUI.showWaiting());
 		ws=ws||{};
@@ -63,6 +64,7 @@ w.clicked=function(id,wa,ns,ws){
 		ws.scalable||(ws.scalable=false);
 		var pre='';//'http://192.168.1.178:8080/h5/';
 		openw=plus.webview.create(pre+id,id,ws);
+		console.log("openw = " + pre+id);
 		ns||openw.addEventListener('loaded',function(){//页面加载完成后才显示
 //		setTimeout(function(){//延后显示可避免低端机上动画时白屏
 			openw.show(as);

@@ -212,14 +212,19 @@
 				"priority": 0
 			},
 			"barcode_pay.html": {
-				"resources": [],
+				"resources": [
+					"card_pay.html"
+				],
 				"refer": [
 					"barcode_scan_payall.html",
 					"barcode_refundorder.html",
 					"setting.html",
 					"pay_record.html",
-					"card_pay.html",
-					"member.html"
+					"member.html",
+					"index.html",
+					"card_pay_info.html",
+					"3.html",
+					"login.html"
 				],
 				"priority": 0
 			},
@@ -227,7 +232,8 @@
 				"resources": [],
 				"refer": [
 					"login.html",
-					"barcode_pay.html"
+					"barcode_pay.html",
+					"member.html"
 				],
 				"priority": 0
 			},
@@ -248,14 +254,25 @@
 			"card_pay.html": {
 				"resources": [],
 				"refer": [
-					"barcode_pay.html"
+					"barcode_pay.html",
+					"card_pay_info.html",
+					"member.html",
+					"pay_record.html"
 				],
 				"priority": 0
 			},
 			"member.html": {
 				"resources": [],
 				"refer": [
-					"setting.html"
+					"setting.html",
+					"barcode_pay.html"
+				],
+				"priority": 0
+			},
+			"card_pay_info.html": {
+				"resources": [],
+				"refer": [
+					"barcode_pay.html"
 				],
 				"priority": 0
 			}
@@ -309,7 +326,6 @@
 				"input/reset.css",
 				"img/hico7-blue.png",
 				"2.html",
-				"3.html",
 				"img/zx3.png",
 				"img/hico2.png",
 				"img/hico11.png",
