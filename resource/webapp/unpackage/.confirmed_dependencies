@@ -32,12 +32,14 @@
 	},
 	"login.html": {
 		"refer": [
-			"barcode_pay.html"
+			"barcode_pay.html",
+			"pay_record.html"
 		]
 	},
 	"pay_record.html": {
 		"refer": [
-			"barcode_pay.html"
+			"barcode_pay.html",
+			"login.html"
 		]
 	},
 	"card_pay.html": {
@@ -45,7 +47,8 @@
 			"barcode_pay.html",
 			"card_pay_info.html",
 			"member.html",
-			"pay_record.html"
+			"pay_record.html",
+			"setting.html"
 		]
 	},
 	"member.html": {

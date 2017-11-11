@@ -578,11 +578,11 @@ class J_moneyModuleSite extends WeModuleSite
 				die(json_encode(array("success" => false, "msg" => "请先登录")));
 			}
 			if (!$orderid) {
-				die(json_encode(array("success" => false, "msg" => "订单号不能为空")));
+				die(json_encode(array("success" => false, "msg" => "订单号不能为空1")));
 			}
 			$trade = pdo_fetch("SELECT * FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' and out_trade_no=:a ", array(":a" => $orderid));
 			if (!$trade) {
-				die(json_encode(array("success" => false, "msg" => "订单号不能为空")));
+				die(json_encode(array("success" => false, "msg" => "订单号不能为空2")));
 			}
 			if (!$trade['status']) {
 				die(json_encode(array("success" => false, "msg" => "该订单没有付款")));
@@ -748,7 +748,29 @@ class J_moneyModuleSite extends WeModuleSite
 			$pindex = intval($_GPC['page']) ? intval($_GPC['page']) : 1;
 			$psize = intval($_GPC['psize']) ? intval($_GPC['psize']) : 10;
 			$start = ($pindex - 1) * $psize;
-			$list = pdo_fetchall("SELECT * FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' {$where} {$where2} order by id desc LIMIT " . $start . "," . $psize);
+
+			//long 2017-11-11
+			$all = $_GPC['all'];
+			if(empty($all)){
+				$list = pdo_fetchall("SELECT * FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' {$where} {$where2} order by id desc LIMIT " . $start . "," . $psize);
+			}else{
+				//获取全部
+				$list = pdo_fetchall("SELECT * FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' {$where} {$where2} order by id desc ");
+				$pay_total = pdo_fetchall("SELECT paytype, sum(total_fee-servermoney) as total from ".tablename('j_money_trade'). " WHERE weid='{$_W['uniacid']}' and status=1 and createdate=:createdate {$where} group by paytype",array(':createdate'=>date('Y-m-d')));
+				$all_total = 0;
+				foreach($pay_total as &$row){
+					$row['total'] = sprintf('%.2f',$row['total'] * 0.01);
+					$all_total = $all_total + $row['total'];
+				}
+				unset($row);
+				$outPostData = [
+					'date' => date('Y年m月d日'),
+					'listCount' => count($list),
+					'allTotal'  => $all_total,
+					'payListTotal' => $pay_total
+				];
+			}
+			
 			$total = pdo_fetchcolumn("SELECT count(*) FROM " . tablename('j_money_trade') . " WHERE weid='" . $_W['uniacid'] . "' {$where} {$where2}");
 			$allpage = $total <= $psize ? 1 : ($total % $psize == 0 ? $total / $psize : intval($total / $psize) + 1);
 			$user = pdo_fetchall("SELECT id,realname FROM " . tablename('j_money_user') . " WHERE weid = '{$_W['uniacid']}' order by id desc ");
@@ -782,7 +804,7 @@ class J_moneyModuleSite extends WeModuleSite
 				);
 				$outPutAry[] = $temp;
 			}
-			die(json_encode(array("success" => true, "list" => $outPutAry, "allpage" => $allpage, "pindex" => $pindex, "userlist" => $userList)));
+			die(json_encode(array("success" => true, "list" => $outPutAry, "allpage" => $allpage, "pindex" => $pindex, "userlist" => $userList,'outPostData'=>$outPostData)));
 		} elseif ($operation == "getchargelist") {
 			$deviceinfo = intval($_GPC["islogin"]);
 			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));

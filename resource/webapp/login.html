@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
 		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/common.js"></script>
 		<link href="css/style.css" rel="stylesheet" />
 		<style>
 			.area {
@@ -115,7 +116,7 @@
 			</form>-->
 			<div class="mui-content-padded">
 				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
-				<button id='barcode' class="mui-btn mui-btn-block mui-btn-primary">扫描登录</button>
+				<button id='barcode' class="mui-btn mui-btn-block mui-btn-primary" onclick="clicked('pay_record.html',false,false);">扫描登录</button>
 				<!--<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>-->
 				<!--</div>-->
 			</div>
@@ -132,6 +133,14 @@
 					statusBarBackground: '#f7f7f7'
 				});
 				$.plusReady(function() {
+					var acct = localStorage.getItem( "account");
+					var pasw = localStorage.getItem( "password");
+					
+					if(acct){
+						console.log("account = " + acct);
+						doc.getElementById('account').value = acct;
+						doc.getElementById('password').value = pasw;
+					}
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
@@ -258,7 +267,7 @@
 							return false;
 						}
 						console.log(username);
-						xhr = new plus.net.XMLHttpRequest();
+						
 						var baseUrl = plus.storage.getItem("baseUrl");
 						var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=login";
 						console.log(postUrl);
@@ -269,11 +278,12 @@
 							async:true,
 							dataType:"json",
 							success:function(data){
-								console.log(data.success);
 								if(data.success == true){
 									plus.nativeUI.toast("登录成功");
-									plus.storage.setItem( "islogin", 21);
-									console.log("islogin = "+plus.storage.getItem("islogin"));
+									localStorage.setItem( "islogin", "islogin");
+									localStorage.setItem( "account", username);
+									localStorage.setItem( "password", pwd);
+									console.log("islogin = "+localStorage.getItem("islogin"));
 									var w = plus.webview.create('barcode_pay.html');
 									w.show();
 								}else{
@@ -281,17 +291,22 @@
 								}
 							}
 						});
+						// xhr = new plus.net.XMLHttpRequest();
 //						xhr.onreadystatechange = function () {
 //					        console.log ( xhr.readyState );
 //					        if(xhr.readyState == 4){
 //					        	if ( xhr.status == 200 ) {
 //					                console.log( "xhr请求成功："+xhr.responseText );
+//					                console.log(xhr.responseText);
 //					            } else {
 //					                console.log( "xhr请求失败："+xhr.status );
 //					            }
 //					        }
-//					    }   
-//						xhr.open( "POST", baseurl );
+//					    }
+
+//						var data = {userid:username,pwd:pwd};
+//						baseUrl = baseUrl + "&userid="+username + "&pwd="+pwd;
+//						xhr.open( "GET", baseUrl );
 //						xhr.send();
 
 //						app.login(loginInfo, function(err) {

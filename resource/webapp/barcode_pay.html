@@ -19,70 +19,30 @@
 		var img = null;
 		var blist = [];
 		function scaned(t, r, f,type){
-			console.log(r);
-			var baseUrl = plus.storage.getItem("baseUrl");
-			if(type == 'pay'){
-				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=pay_all";
-				var fee = $('.main .total-text').text();
-				var qrcode = r;
-				var password = "";
-				var old_trade_no = "";
-				console.log("fee = " + fee);
-				$.ajax({
-					type: "post",
-					url: postUrl,
-					data: {
-						fee: fee,
-						qrcode: qrcode,
-						password: password,
-						old_trade_no: old_trade_no	
-					},
-					async: true,
-					dataType: "text",
-					success: function(data) {
-						console.log(data);
-					}
-				})
-			}else if(type == 'refund'){
-				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=refundorder";
-				var orderid = r;
-				mui.ajax({
-					type: "post",
-					url: postUrl,
-					data: {
-						orderid: orderid,
-					},
-					async: true,
-					dataType: "text",
-					success: function(data) {
-						console.log(data);
-					}
-				})
+			var d = new Date();
+			var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds(),ms=d.getMilliseconds();
+			if(h < 10){ h='0'+h; }
+			if(m < 10){ m='0'+m; }
+			if(s < 10){ s='0'+s; }
+			if(ms < 10){ ms='00'+ms; }
+			else if(ms < 100){ ms='0'+ms; }
+			var ts = '['+h+':'+m+':'+s+'.'+ms+']';
+			var li=null,hl = document.getElementById('history');
+			if(blist.length > 0){
+				li = document.createElement('li');
+				li.className = 'ditem';
+				hl.insertBefore(li, hl.childNodes[0]);
+			} else{
+				li = document.getElementById('nohistory');
 			}
-			// var d = new Date();
-			// var h=d.getHours(),m=d.getMinutes(),s=d.getSeconds(),ms=d.getMilliseconds();
-			// if(h < 10){ h='0'+h; }
-			// if(m < 10){ m='0'+m; }
-			// if(s < 10){ s='0'+s; }
-			// if(ms < 10){ ms='00'+ms; }
-			// else if(ms < 100){ ms='0'+ms; }
-			// var ts = '['+h+':'+m+':'+s+'.'+ms+']';
-			// var li=null,hl = document.getElementById('history');
-			// if(blist.length > 0){
-			// 	li = document.createElement('li');
-			// 	li.className = 'ditem';
-			// 	hl.insertBefore(li, hl.childNodes[0]);
-			// } else{
-			// 	li = document.getElementById('nohistory');
-			// }
-			// li.id = blist.length;
-			// var html = '['+h+':'+m+':'+s+'.'+ms+']'+'　　'+t+'码<div class="hdata">';
-			// html += r;
-			// html += '</div>';
-			// li.innerHTML = html;
-			// li.setAttribute('onclick', 'selected(id)');
-			// blist[blist.length] = {type:t,result:r,file:f};
-			// update(t, r, f);
+			li.id = blist.length;
+			var html = '['+h+':'+m+':'+s+'.'+ms+']'+'　　'+t+'码<div class="hdata">';
+			html += r;
+			html += '</div>';
+			li.innerHTML = html;
+			li.setAttribute('onclick', 'selected(id)');
+			blist[blist.length] = {type:t,result:r,file:f};
+			update(t, r, f);
 		}
 		function selected(id){
 			var h = blist[id];
@@ -131,6 +91,18 @@
 				});
 			});
 		}
+		
+		function goBarcodePay(){
+			var total = document.getElementById('total-text').innerHTML;
+//			console.log(total);
+			if(total <= 0){
+				plus.nativeUI.alert('请输入金额');
+				return false;
+			}
+			plus.storage.removeItem("pay_total");
+			plus.storage.setItem("pay_total",total);
+			clicked('barcode_scan_payall.html',true,true);
+		}
 	</script>
 </head>
 <body class="bgf0f0f0">
@@ -168,7 +140,7 @@
 			<div class="row">
 				<div class="total">
 					<div class="text">总金额:</div>
-					<div class="text">￥<span class="total-text">0.00</span></div>
+					<div class="text">￥<span class="total-text" id="total-text">0.00</span></div>
 				</div>
 			</div>
 		</div>
@@ -184,7 +156,7 @@
 					<td>4</td>
 					<td>5</td>
 					<td>6</td>
-					<td rowspan="3" class="bg3099ff enter" onclick="clicked('barcode_scan_payall.html',true,true)">
+					<td rowspan="3" class="bg3099ff enter" onclick="goBarcodePay();">
 						确认<br>
 						收款
 					</td>

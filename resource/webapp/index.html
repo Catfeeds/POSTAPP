@@ -9,18 +9,20 @@
     	
    		document.addEventListener('plusready', function(){
    			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
-   			var islogin = plus.storage.getItem("islogin");
+   			var islogin = localStorage.getItem("islogin");
    			var baseUrl = "http://4sscrm.com/app/index.php?i=10";
+// 			var baseUrl = "http://demo.flyinc.cn/app/index.php?i=2";
    			plus.storage.setItem("baseUrl", baseUrl);
-   			if(islogin == null){
-   				var w = plus.webview.create('login.html');
-				w.show(); // 显示窗口
-   			}else{
-   				var w = plus.webview.create('barcode_pay.html');
-				w.show(); // 显示窗口
-   			}
    			console.log(islogin);
    			console.log(plus.storage.getItem("baseUrl"));
+   			if(islogin == null){
+          		clicked('login.html',false,false);
+          		return;
+   			}else{
+          		clicked('barcode_pay.html',false,false);
+          		return;
+   			}
+   			
    		});
    		
     </script>

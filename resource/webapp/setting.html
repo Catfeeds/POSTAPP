@@ -12,8 +12,8 @@
 	<title>设置</title>
 	<link rel="stylesheet" href="css/public.css?ver=1" />
 	<script type="text/javascript" src="js/common.js"></script>
+	<script src="js/mui.min.js"></script>
 	<script src="js/font-size.js"></script>
-	<!--<script type="text/javascript" src="js/common.js"></script>-->
 	<script type="text/javascript">
 		var ws=null,wo=null;
 		var scan=null,domready=false;
@@ -33,9 +33,21 @@
 		    wo.evalJS('closeWaiting()');
 		}
 		function logout(){
-			plus.storage.removeItem("islogin");
-			var w = plus.webview.create('login.html');
-			w.show(); // 显示窗口
+			var baseUrl = plus.storage.getItem("baseUrl");
+			var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=logout";
+			mui.ajax({
+				type: "post",
+				url: postUrl,
+				async: true,
+				dataType: "json",
+				success: function(data) {
+					plus.storage.removeItem("islogin");
+					clicked('login.html',false,false);
+          			return;
+				}
+
+			})
+			
 		}
 		
 	</script>

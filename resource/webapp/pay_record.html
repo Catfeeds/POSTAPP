@@ -18,12 +18,12 @@
 	<div class="zx-record-t">
 		<div class="top">
 			<h6 onclick="back()"><img src="img/zx2.png" alt=""></h6>
-			<h5><span>收银记录</span><i>2017年10月10日</i></h5>
+			<h5><span>收银记录</span><i></i></h5>
 			<h4 href="#" onclick="back()">取消</h4>
 		</div>
 		<div class="midd">
-			<h6 class="wl4"><span>总交易笔数</span><i>12笔</i></h6>
-			<h6><span>总交易金额</span><i>￥3600.00</i></h6>
+			<h6 class="wl4"><span>总交易笔数</span><i class="listCount"></i></h6>
+			<h6><span>总交易金额</span><i class="allTotal"></i></h6>
 		</div>
 	</div>
 	<div class="zx-record-m">
@@ -35,15 +35,15 @@
 		<ul>
 			<li>
 				<h6><img class="img1" src="img/hico4.png" alt=""><span>刷卡支付</span></h6>
-				<h5>￥188.00</h5>
+				<h5 class="card-pay-total">￥0.00</h5>
 			</li>
 			<li>
 				<h6><img class="img2" src="img/zx4.png" alt=""><span>支付宝支付</span></h6>
-				<h5>￥188.00</h5>
+				<h5 class="ali-pay-total">￥0.00</h5>
 			</li>
 			<li>
 				<h6><img class="img3" src="img/zx3.png" alt=""><span>微信支付</span></h6>
-				<h5>￥188.00</h5>
+				<h5 class="wx-pay-total">￥0.00</h5>
 			</li>
 		</ul>
 	</div>
@@ -64,7 +64,6 @@
 				var keyword = "";
 				var ds      = "";
 				var de      = "";
-				var islogin = plus.storage.getItem("islogin");
 				$.ajax({
 					type: "post",
 					url: postUrl,
@@ -72,16 +71,38 @@
 						keyword: keyword,
 						ds: ds,
 						de: de,
-						islogin: islogin	
+						all:1	
 					},
 					async: true,
 					dataType: "json",
 					success: function(data) {
+//						console.log(data);
 						var list = data.list;
 						if(data.success == true){
 							var list = data.list;
+							var outPostData = data.outPostData;
+							doc.querySelector(".zx-record-t .top i").innerHTML = outPostData.date;
+							doc.querySelector(".listCount").innerHTML = outPostData.listCount;
+							doc.querySelector(".allTotal").innerHTML = "￥" + outPostData.allTotal;
+							var payListTotal = outPostData.payListTotal;
+
+							for(var j in payListTotal){
+								console.log(payListTotal[j]['paytype'] + "=" + payListTotal[j]['total'])
+								switch(payListTotal[j]['paytype']){
+									case "0":
+										doc.querySelector(".wx-pay-total").innerHTML = payListTotal[j]['total'];
+										break;
+									case "1":
+										doc.querySelector(".ali-pay-total").innerHTML = payListTotal[j]['total'];
+										break;
+									case "3":
+										doc.querySelector(".card-pay-total").innerHTML = payListTotal[j]['total'];
+										break;
+									default:
+										break;
+								}
+							}
 							if(list.length > 0){
-								console.log(data.list[0]['out_trade_no']);
 								var total = list.length;
 								var str = "";
 								var cardnum = "";
@@ -107,8 +128,13 @@
 										cardnum = "<span>"+out_trade_no.substr(0,4)+"*******"+out_trade+"</span>";
 									}
 
-									if(list[i]['status'] == 0){
-
+									var status = "";
+									if(list[i]['status'] == 1){
+										status = "<span>支付成功</span>";
+									}else if(list[i]['status'] == 0){
+										status = "<span style='color:red;'>支付失败</span>";
+									}else if(list[i]['status'] == 2){
+										status = "<span style='color:red;'>已退款</span>";
 									}
 				
 									str += "<li>";
@@ -119,7 +145,7 @@
 									str += "<h5>"+title+"</h5>";
 									str += "<h4><span>"+getDate(list[i]['time'])+"</span>"+cardnum+"</h4>";
 									str += "</div>";
-									str += "<h3><span>"+list[i]['status']+"</span><i>"+list[i]['total_fee']+"元</i></h3>";
+									str += "<h3>"+status+"<i>￥"+list[i]['total_fee']+"元</i></h3>";
 									str += "</div>";
 									str += "<h2><span>打<br>印</span></h2>";
 									str += "</div>";
@@ -127,6 +153,12 @@
 								}
 								var ularea = doc.querySelector('.zx-record-ul');
 								ularea.innerHTML = str;
+							}
+						}else{
+							if(data.msg == "请先登录"){
+								plus.nativeUI.toast("请先登录");
+								clicked('login.html',false,false);
+								return;
 							}
 						}
 
