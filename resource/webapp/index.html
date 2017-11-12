@@ -10,8 +10,8 @@
    		document.addEventListener('plusready', function(){
    			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
    			var islogin = localStorage.getItem("islogin");
-   			var baseUrl = "http://4sscrm.com/app/index.php?i=10";
-// 			var baseUrl = "http://demo.flyinc.cn/app/index.php?i=2";
+// 			var baseUrl = "http://4sscrm.com/app/index.php?i=10";
+   			var baseUrl = "http://demo.flyinc.cn/app/index.php?i=2";
    			plus.storage.setItem("baseUrl", baseUrl);
    			console.log(islogin);
    			console.log(plus.storage.getItem("baseUrl"));

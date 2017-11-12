@@ -63,6 +63,11 @@ w.clicked=function(id,wa,ns,ws){
 		ws.scrollIndicator||(ws.scrollIndicator='none');
 		ws.scalable||(ws.scalable=false);
 		var pre='';//'http://192.168.1.178:8080/h5/';
+		//关闭当前窗口
+//		var dd=plus.webview.currentWebview();
+//		console.log("currentWebview = " + dd);
+		//plus.webview.close(dd);
+
 		openw=plus.webview.create(pre+id,id,ws);
 //		console.log("openw = " + pre+id);
 		ns||openw.addEventListener('loaded',function(){//页面加载完成后才显示
