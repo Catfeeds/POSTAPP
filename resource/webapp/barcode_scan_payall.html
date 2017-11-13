@@ -76,6 +76,8 @@ function onmarked(type, result, file){
     	async: true,
     	dataType: "json",
     	success: function(data) {
+    		console.log(data.success);
+    		console.log(data.msg);
     		console.log(data);
 //  		plus.nativeUI.showWaiting( "等待中..." );
     		
@@ -110,9 +112,11 @@ function onmarked(type, result, file){
     					out_trade_no: out_trade_no	
     				},
     				async: true,
-    				dataType: "text",
+    				dataType: "json",
     				success: function(data) {
+    					console.log("paywait" + data.success);
 						if(data.success == false){
+							plus.nativeUI.closeWaiting();
 							plus.nativeUI.alert(data.msg);
 			    			back();
 			    			return false;
@@ -124,6 +128,7 @@ function onmarked(type, result, file){
 		    					return;
 							}
 							//支付成功
+							plus.nativeUI.closeWaiting();
 							plus.nativeUI.toast("收款成功");
 							back();
 			    			return false;

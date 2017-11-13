@@ -241,7 +241,8 @@
 				"resources": [],
 				"refer": [
 					"barcode_pay.html",
-					"pay_record.html"
+					"pay_record.html",
+					"login_scan.html"
 				],
 				"priority": 0
 			},
@@ -260,7 +261,8 @@
 					"card_pay_info.html",
 					"member.html",
 					"pay_record.html",
-					"setting.html"
+					"setting.html",
+					"barcode_refundorder.html"
 				],
 				"priority": 0
 			},
@@ -276,6 +278,27 @@
 				"resources": [],
 				"refer": [
 					"barcode_pay.html"
+				],
+				"priority": 0
+			},
+			"barcode_refundorder.html": {
+				"resources": [],
+				"refer": [
+					"refundorder_by_hand.html"
+				],
+				"priority": 0
+			},
+			"refundorder_by_hand.html": {
+				"resources": [],
+				"refer": [
+					"barcode_pay.html"
+				],
+				"priority": 0
+			},
+			"login_scan.html": {
+				"resources": [],
+				"refer": [
+					"login.html"
 				],
 				"priority": 0
 			}

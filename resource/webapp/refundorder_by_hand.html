@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>手动退款</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/common.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">手动退款</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+			    <div class="mui-input-row">
+			        <input type="number" id="refundcode" class="mui-input-clear" placeholder="请输入退款码">
+			    </div>
+			  	<div class="mui-button-row">
+			        <button type="button" class="mui-btn mui-btn-primary" onclick="refundOrder()">确认</button>
+			        <button type="button" class="mui-btn mui-btn-danger" onclick="clicked('barcode_pay.html',false,false)" >取消</button>
+			    </div>
+			</form>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+				mui.init({
+					statusBarBackground: '#f7f7f7'
+				});
+				
+				function refundOrder(){
+					var baseUrl = plus.storage.getItem("baseUrl");
+				    var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=refundorder";
+				    var orderid = mui("#refundcode")[0].value;
+				    console.log("orderid = "+orderid);
+				    if(orderid == null || orderid == undefined){
+				    	plus.nativeUI.alert("请输入正确的退款码!");
+				    	return;
+				    }
+				    
+				    mui.ajax({
+				    	type: "post",
+				    	url: postUrl,
+				    	data: {
+				    		orderid: orderid,
+				    	},
+				    	async: true,
+				    	dataType: "json",
+				    	success: function(data) {
+				    		console.log(data);
+				    		if(data.success == false){
+				    			if(data.msg == "请先登录"){
+									plus.nativeUI.toast("请先登录");
+									clicked('login.html',false,false);
+									return;
+								}
+				    			plus.nativeUI.alert(data.msg);
+				    			return false;
+				    		}else{
+				    			if(data.isrefunded == true){
+				    				plus.nativeUI.toast("退款成功");
+					    			clicked('barcode_pay.html',false,false);
+					    			return false;
+				    			}else{
+				    				plus.nativeUI.alert("退款申请已经提交,请等待处理");
+					    			clicked('barcode_pay.html',false,false);
+					    			return false;
+				    			}
+				    		}
+				    	}
+				    })
+				}
+		</script>
+	</body>
+
+</html>
