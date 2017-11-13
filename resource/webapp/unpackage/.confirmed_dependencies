@@ -27,7 +27,8 @@
 		"refer": [
 			"login.html",
 			"barcode_pay.html",
-			"member.html"
+			"member.html",
+			"modif_password.html"
 		]
 	},
 	"login.html": {
@@ -76,7 +77,13 @@
 	},
 	"login_scan.html": {
 		"refer": [
-			"login.html"
+			"login.html",
+			"card_pay.html"
+		]
+	},
+	"modif_password.html": {
+		"refer": [
+			"barcode_pay.html"
 		]
 	}
 }

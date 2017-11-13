@@ -93,15 +93,36 @@
 		}
 		
 		function goBarcodePay(){
-			var total = document.getElementById('total-text').innerHTML;
-//			console.log(total);
-			if(total <= 0){
-				plus.nativeUI.alert('请输入金额');
-				return false;
+			var pay_type = $("#pay_type").val();
+			if(pay_type == 2){
+				var total = document.getElementById('total-text').innerHTML;
+				console.log(total);
+				if(total <= 0){
+					plus.nativeUI.alert('请输入金额');
+					return false;
+				}
+				plus.storage.removeItem("pay_total");
+				plus.storage.setItem("pay_total",total);
+				clicked('barcode_scan_payall.html',true,true);
 			}
-			plus.storage.removeItem("pay_total");
-			plus.storage.setItem("pay_total",total);
-			clicked('barcode_scan_payall.html',true,true);
+			
+		}
+		
+		function changePayType(type){
+			$("#pay_type").val(type);
+			if(type == 1){
+				$(".mobile").addClass("active");
+				$(".union").removeClass("active");
+				$(".amount-collected .brand img").attr("src","img/hico4.png");
+//				mui(".mobile").setAttribute("class","mobile pay active");
+//				mui(".union").setAttribute("class","union pay");
+			}else{
+				$(".union").addClass("active");
+				$(".mobile").removeClass("active");
+				$(".amount-collected .brand img").attr("src","img/hico5.png");
+//				mui(".mobile").setAttribute("class","mobile pay");
+//				mui(".union").setAttribute("class","union pay active");
+			}
 		}
 	</script>
 </head>
@@ -117,16 +138,16 @@
 	</header>
 	<main class="main">
 		<div class="payment-menthod">
-			<div class="union pay active" >
-				<!-- d -->
-				<div class="pic" onclick="clicked('card_pay.html',false,false)"><img src="img/hico4.png" alt=""></div>
+			<div class="union pay active" onclick="changePayType(1);">
+				<div class="pic"><img src="img/hico4.png" alt=""></div>
 				<div class="text">刷卡支付</div>
 			</div>
-			<div class="mobile pay" href="#">
+			<div class="mobile pay" onclick="changePayType(2);">
 				<div class="pic"><img src="img/hico5.png" alt=""></div>
 				<div class="text">移动支付</div>
 			</div>
 		</div>
+		<input type="hidden" name="pay_type" id="pay_type" value="2" />
 		<div class="amount-collected">
 			<div class="row title">
 				<div class="brand">
@@ -135,9 +156,9 @@
 				<div class="text">输入收款金额：</div>
 			</div>
 			<div class="row">
-				<div class="money" data-after="手续费:￥3.00" data-before="￥"><span class="text">0.00</span><span  class="cursor"></span></div>
+				<div class="money" data-before="￥"><span class="text">0.00</span><span  class="cursor"></span></div>
 			</div>
-			<div class="row">
+			<div class="row" style="display: none;">
 				<div class="total">
 					<div class="text">总金额:</div>
 					<div class="text">￥<span class="total-text" id="total-text">0.00</span></div>

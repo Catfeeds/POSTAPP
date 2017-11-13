@@ -284,6 +284,7 @@
 									localStorage.setItem( "account", username);
 									localStorage.setItem( "password", pwd);
 									console.log("islogin = "+localStorage.getItem("islogin"));
+									localStorage.setItem( "shop", data.shop.companyname);
 									var w = plus.webview.create('barcode_pay.html');
 									w.show();
 								}else{

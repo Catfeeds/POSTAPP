@@ -85,10 +85,12 @@ class J_moneyModuleSite extends WeModuleSite
 			if (!$item['status']) {
 				die(json_encode(array("success" => false, "msg" => "该用户还没有审核，请联系管理员")));
 			}
+			//long 2017-11-13
+			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $item['pcate']));
 			isetcookie('islogin', $item['id'], 3600 * $cfg['cookiehold']);
 			isetcookie('siteuniacid', $_W['uniacid'], 3600 * $cfg['cookiehold']);
 			pdo_update("j_money_user", array('lasttime' => TIMESTAMP), array('id' => $item['id']));
-			die(json_encode(array("success" => true)));
+			die(json_encode(array("success" => true,'shop'=>$shop)));
 		} elseif ($operation == "logout") {
 			isetcookie('islogin', '', -1);
 			isetcookie('siteuniacid', '', -1);
@@ -1345,6 +1347,19 @@ class J_moneyModuleSite extends WeModuleSite
 			} else {
 				die(json_encode(array("success" => true, "status" => 0)));
 			}
+		} else if($operation == 'getLoginUrl'){
+			// long 2017-11-13
+			isetcookie('islogin', '', -1);
+			$cfg["login_pc_type"]==1&&$_GPC['logintype']=1;
+			$qrcode = $_GPC['qrcodes'];
+			if (!$qrcode) {
+				$qrcode = TIMESTAMP;
+				$data = array("weid" => $_W['uniacid'], "sncode" => $qrcode, "createtime" => TIMESTAMP);
+				pdo_insert("j_money_qrlogin", $data);
+				isetcookie('qrcodes', $qrcode, 300);
+			}
+			$url = urlencode($_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=login&m=j_money&qrcode=" . $qrcode);
+			echo $url;
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')

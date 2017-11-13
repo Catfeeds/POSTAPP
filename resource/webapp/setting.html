@@ -15,23 +15,44 @@
 	<script src="js/mui.min.js"></script>
 	<script src="js/font-size.js"></script>
 	<script type="text/javascript">
-		var ws=null,wo=null;
-		var scan=null,domready=false;
-		if(window.plus){
-			plusReady();
-		}else{
-			document.addEventListener('plusready', plusReady, false);
-		}
-		function plusReady(){
-			if(ws||!window.plus||!domready){
-				return;
-			}
-			// 显示页面并关闭等待框
-			ws=plus.webview.currentWebview();
-			wo=ws.opener();
-		    ws.show('pop-in');
-		    wo.evalJS('closeWaiting()');
-		}
+//		var ws=null,wo=null;
+//		var scan=null,domready=false;
+//		if(window.plus){
+//			plusReady();
+//		}else{
+//			document.addEventListener('plusready', plusReady, false);
+//		}
+//		function plusReady(){
+//			if(ws||!window.plus||!domready){
+//				return;
+//			}
+//			// 显示页面并关闭等待框
+//			ws=plus.webview.currentWebview();
+//			wo=ws.opener();
+//		    ws.show('pop-in');
+//		    wo.evalJS('closeWaiting()');
+//		}
+		
+		(function($, doc) {
+				$.init({
+					statusBarBackground: '#f7f7f7'
+				});
+				$.plusReady(function() {
+					var shop = localStorage.getItem("shop");
+
+					doc.getElementById("shopname").innerHTML = shop;
+					
+					$(".zx-setup").on("click","#printTest",function(){
+						var Intent = plus.android.importClass("android.content.Intent");
+						var ComponentName = plus.android.importClass("android.content.ComponentName");
+						// 导入后可以使用new方法创建类的实例对象
+						var intent=new Intent();
+						intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.CustomPrinterActivity"));
+						console.log(intent);
+					});
+				})
+		}(mui, document));
+		
 		function logout(){
 			var baseUrl = plus.storage.getItem("baseUrl");
 			var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=logout";
@@ -59,15 +80,15 @@
 	<div class="zx-setup">
 		<ul>
 			<li>
-				<h6>商品名称</h6><h5><span>测试</span><img src="img/zx1.png" alt=""></h5>
+				<h6>商家名称</h6><h5><span id="shopname"></span><img src="img/zx1.png" alt=""></h5>
 			</li>
-			<li>
+			<li id="printTest">
 				<h6>打印测试</h6><h5><img src="img/zx1.png" alt=""></h5>
 			</li>
 			<li class="wl1">
 				<h6>消息通知</h6><h5><img src="img/zx1.png" alt=""></h5>
 			</li>
-			<li class="wl1">
+			<li class="wl1" onclick="clicked('modif_password.html',false,false)">
 				<h6>密码安全</h6><h5><span>密码修改</span><img src="img/zx1.png" alt=""></h5>
 			</li>
 			<li class="wl2">

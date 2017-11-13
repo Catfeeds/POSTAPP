@@ -29,8 +29,8 @@
 			<h1 class="mui-title">微信扫描登录</h1>
 		</header>
 		<div class="mui-content">
-			<div>
-				<img id="qr_pic" src="images/api.png" alt="微信二维码">
+			<div id="qr_pic">
+				
 			</div>
 		</div>
 
@@ -46,18 +46,20 @@
 				$.plusReady(function() {
 					var baseUrl = plus.storage.getItem("baseUrl");
 					var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=getLoginUrl";
-					console.log(postUrl);
+					console.log(postUrl);					
+
 					var qrcode = "";
 					$.ajax({
 						type:"post",
 						url:postUrl,
 						data:{qrcode:qrcode},
 						async:true,
-						dataType:"json",
+						dataType:"text",
 						success:function(data){
 							console.log(data)
-//							var qr_url = data.url;
-//							mui("#qr_pic").attr("src",qr_url);
+							var liantu = "http://qr.liantu.com/api.php?text=";
+							var qr_url = liantu + data;
+							doc.getElementById("qr_pic").innerHTML = "<img src=\""+qr_url+"\" alt=\"微信二维码\">";
 							checkLogin();
 							function checkLogin(){
 								var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=checklogin";
@@ -74,12 +76,15 @@
 													checkLogin();
 												},3000);
 											}else{
-		
+												window.reload();
+												return;
 											}
 										}else{
-		
+											localStorage.setItem( "islogin", "islogin");
+											localStorage.setItem( "shop", data.shop.companyname);
+											clicked("card_pay.html",false,false);
+											return;
 										}
-										
 									}
 								})
 							}

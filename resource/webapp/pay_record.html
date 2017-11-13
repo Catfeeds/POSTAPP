@@ -147,12 +147,33 @@
 									str += "</div>";
 									str += "<h3>"+status+"<i>￥"+list[i]['total_fee']+"元</i></h3>";
 									str += "</div>";
-									str += "<h2><span>打<br>印</span></h2>";
+									str += "<h2 data-tradeno=\""+list[i]['out_trade_no']+"\"><span>打<br>印</span></h2>";
 									str += "</div>";
 									str += "</li>";
 								}
+								
 								var ularea = doc.querySelector('.zx-record-ul');
 								ularea.innerHTML = str;
+
+								mui('.zx-record-m ul li').on('swipeleft','.wrap', function() {
+//									console.log('left');
+									mui('.zx-record-m ul li .wrap').each(function(){
+										this.setAttribute("class","wrap");
+									});
+									this.setAttribute("class","wrap active");
+									var classn = this.getAttribute("class");
+//									console.log(classn);
+
+								}).on('swiperight','.wrap', function() {
+//									console.log('right');
+									this.setAttribute("class","wrap");
+								});
+								
+								mui(".wrap").on("click","h2",function(){
+									var out_trade_no = this.getAttribute("data-tradeno");
+									console.log(out_trade_no);
+								});
+								
 							}
 						}else{
 							if(data.msg == "请先登录"){
