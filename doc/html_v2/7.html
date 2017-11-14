@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head design-width="540">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<!-- 优先使用 IE 最新版本和 Chrome -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<!-- <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/> -->
+	<!-- 添加 favicon icon -->
+	<meta name="renderer" content="webkit">
+	<title>电子小票</title>
+	<link rel="stylesheet" href="css/public.css?ver=1" />
+	<script src="js/font-size.js"></script>
+</head>
+<body class="bgf7f7f7">
+	<div class="zx-payment-t">
+		<h5 onClick="javascript:history.back()"></h5>
+		<h6>电子小票</h6>
+	</div>
+	<div class="zx-invoice">
+		<div class="zx-invoice-t">
+			<h6>银行卡PSO签购单</h6>
+			<h5><span>商户名称</span><i>北京朝阳区综合购物商城</i></h5>
+			<h5><span>商户编号</span><i>864100258122988</i></h5>
+			<h5><span>终端编号</span><i>79209498</i></h5>
+			<h5><span>付款卡号</span><i>622262*******4642</i></h5>
+			<h5><span>参考号</span><i>106911364356</i></h5>
+			<ul>
+				<li><h4><span>有效期</span><i>24/12</i></h4></li>
+				<li><h4><span>授权码</span><i>115216</i></h4></li>
+				<li><h4><span>卡片类型</span><i>借记卡</i></h4></li>
+				<li><h4><span>交易类型</span><i>消费</i></h4></li>
+				<li><h4><span>批次号</span><i>000001</i></h4></li>
+				<li><h4><span>查询号</span><i>000007</i></h4></li>
+			</ul>
+			<h5><span>交易流水号</span><i>000317</i></h5>
+			<h5><span>交易时间</span><i>2017-10-26 11:23:51</i></h5>
+			<h5><span>交易金额</span><i class="wl9">RMB 4888.00</i></h5>
+		</div>
+		<div class="zx-invoice-b">
+			<h6>本人签名</h6>
+			<h5>本人确认以上交易，同意将其计入本卡账户</h5>
+			<h4><span class="inp1">清除</span><span class="inp2">确认</span></h4>
+			<!-- <h4><input class="inp1" type="submit" value="清除"><input class="inp2" type="submit" value="确认"></h4> -->
+		</div>
+	</div>
+	<div class="zx-ting-int">
+		<div class="zx-ting2">
+			<img src="img/zx15.png" alt="">
+			<h6>等待客户支付密码</h6>
+			<h5>确认</h5>
+		</div>
+		<div class="zx-ting">
+			<h6>提示</h6>
+			<h5>是否继续打印下一联</h5>
+			<h4><a class="wl10">确认</a><a class="wl11">取消</a></h4>
+		</div>
+	</div>
+	
+	
+	<script src="js/zepto.js"></script>
+	<script src="js/event.js"></script>
+	<script src="js/touch.js"></script>
+	<script src="js/js.js"></script>
+	<script>
+		$('.zx-invoice .zx-invoice-b h4 .inp2').click(function() {
+        //点击对象
+        $('.zx-ting-int').show();
+        //弹出对象
+    });
+		$('.zx-ting2 h5').click(function() {
+        //点击对象
+        $('.zx-ting').show();
+        //弹出对象
+    });
+		$('.zx-ting2 h5').click(function() {
+        //点击对象
+        $('.zx-ting2').hide();
+         //隐藏对象
+     });
+		$('.zx-ting h4 .wl10').click(function() {
+        //点击对象
+        $('.zx-ting-int').hide();
+         //隐藏对象
+     });
+		$('.zx-ting h4 .wl11').click(function() {
+        //点击对象
+        $('.zx-ting-int').hide();
+         //隐藏对象
+     });
+	</script>
+</body>
+</html>
+
