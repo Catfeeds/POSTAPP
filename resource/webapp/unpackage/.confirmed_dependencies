@@ -85,5 +85,10 @@
 		"refer": [
 			"barcode_pay.html"
 		]
+	},
+	"barcode_scan_payall.html": {
+		"refer": [
+			"login.html"
+		]
 	}
 }

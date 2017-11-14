@@ -94,16 +94,20 @@
 		
 		function goBarcodePay(){
 			var pay_type = $("#pay_type").val();
+			var total = document.getElementById('total-text').innerHTML;
+			console.log(total);
+			if(total <= 0){
+				plus.nativeUI.alert('请输入金额');
+				return false;
+			}
+			plus.storage.removeItem("pay_total");
+			plus.storage.setItem("pay_total",total);
 			if(pay_type == 2){
-				var total = document.getElementById('total-text').innerHTML;
-				console.log(total);
-				if(total <= 0){
-					plus.nativeUI.alert('请输入金额');
-					return false;
-				}
-				plus.storage.removeItem("pay_total");
-				plus.storage.setItem("pay_total",total);
 				clicked('barcode_scan_payall.html',true,true);
+				return;
+			}else{
+				clicked('card_pay_info.html',false,false);
+				return;
 			}
 			
 		}
@@ -129,7 +133,7 @@
 <body class="bgf0f0f0">
 	<header class="header">
 		<div class="left-nav" onclick="clicked('pay_record.html',false,false)">
-			<a href="#">收银记录</a>
+			<a href="#">记录</a>
 		</div>
 		<div class="logo"><a href="#"><img src="img/hico3.png" alt=""></a></div>
 		<div class="right-nav" onclick="clicked('barcode_refundorder.html',true,true)">

@@ -310,6 +310,13 @@
 					"barcode_pay.html"
 				],
 				"priority": 0
+			},
+			"barcode_scan_payall.html": {
+				"resources": [],
+				"refer": [
+					"login.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
