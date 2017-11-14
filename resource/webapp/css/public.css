@@ -804,7 +804,7 @@ body {
     background: #b4b4b4;
     transition: .2s;
     left:50%;
-    transform: translateX(-47%);
+    transform: translateX(-50%);
 }
 
 .footer a.center .wrap.poa .pic {
@@ -879,12 +879,12 @@ body {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    width: .84rem;
-    height: .67rem;
+    width: 1.44rem;
+    height: .86rem;
     box-sizing: border-box;
     background: #fff;
     border-radius: .03rem;
-    border: 2px solid #9acdff
+    border: 2px solid #9acdff;
 }
 
 .main .payment-menthod .pay .text {
@@ -901,14 +901,14 @@ body {
 
 .main .payment-menthod .union img {
     display: block;
-    max-width: .6rem;
-    width: 100%
+    max-width: .94rem;
+    width: 100%;
 }
 
 .main .payment-menthod .mobile img {
     display: block;
-    max-width: .73rem;
-    width: 100%
+    max-width: 1.11rem;
+    width: 100%;
 }
 
 .main .amount-collected {
@@ -920,7 +920,7 @@ body {
 }
 
 .main .amount-collected .title {
-    height: .6rem;
+    height: .66rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -938,9 +938,9 @@ body {
 }
 
 .main .amount-collected .money {
-    padding: .05rem 0 .19rem;
+    padding: .22rem 0 .19rem;
     height: .34rem;
-    border-bottom: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
     font-size: .34rem;
     color: #3099ff;
     line-height: 1;
@@ -1021,7 +1021,7 @@ body {
 }
 
 .input-control table td {
-    height: .9rem;
+    height: 0.9rem;
     /*da*/
     transition: .2s
 }
@@ -1106,6 +1106,12 @@ body {
     background: #f7f7f7
 }
 
+.hcl-pay-over .tips{
+    padding-top: .2rem;
+    font-size: .16rem;
+    color: #3099ff;
+    background: none;
+}
 .hcl-pay-over>div {
     border-radius: 10px;
     background: #fff
