@@ -1,94 +1,95 @@
 {
-	"index.html": {
-		"refer": [
-			"barcode_pay.html",
-			"barcode_refundorder.html",
-			"login.html"
-		]
-	},
-	"barcode_pay.html": {
-		"refer": [
-			"barcode_scan_payall.html",
-			"barcode_refundorder.html",
-			"setting.html",
-			"pay_record.html",
-			"card_pay.html",
-			"member.html",
-			"index.html",
-			"card_pay_info.html",
-			"3.html",
-			"login.html"
-		],
-		"resources": [
-			"card_pay.html"
-		]
-	},
-	"setting.html": {
-		"refer": [
-			"login.html",
-			"barcode_pay.html",
-			"member.html",
-			"modif_password.html"
-		]
-	},
-	"login.html": {
-		"refer": [
-			"barcode_pay.html",
-			"pay_record.html",
-			"login_scan.html"
-		]
-	},
-	"pay_record.html": {
-		"refer": [
-			"barcode_pay.html",
-			"login.html"
-		]
-	},
-	"card_pay.html": {
-		"refer": [
-			"barcode_pay.html",
-			"card_pay_info.html",
-			"member.html",
-			"pay_record.html",
-			"setting.html",
-			"barcode_refundorder.html"
-		]
-	},
-	"member.html": {
-		"refer": [
-			"setting.html",
-			"barcode_pay.html"
-		]
-	},
-	"card_pay_info.html": {
-		"refer": [
-			"barcode_pay.html"
-		]
-	},
-	"barcode_refundorder.html": {
-		"refer": [
-			"refundorder_by_hand.html"
-		]
-	},
-	"refundorder_by_hand.html": {
-		"refer": [
-			"barcode_pay.html"
-		]
-	},
-	"login_scan.html": {
-		"refer": [
-			"login.html",
-			"card_pay.html"
-		]
-	},
-	"modif_password.html": {
-		"refer": [
-			"barcode_pay.html"
-		]
-	},
-	"barcode_scan_payall.html": {
-		"refer": [
-			"login.html"
-		]
-	}
+  "index.html": {
+    "refer": [
+      "barcode_pay.html",
+      "barcode_refundorder.html",
+      "login.html"
+    ]
+  },
+  "barcode_pay.html": {
+    "refer": [
+      "barcode_scan_payall.html",
+      "barcode_refundorder.html",
+      "setting.html",
+      "pay_record.html",
+      "card_pay.html",
+      "member.html",
+      "index.html",
+      "card_pay_info.html",
+      "3.html",
+      "login.html"
+    ],
+    "resources": [
+      "card_pay.html"
+    ]
+  },
+  "setting.html": {
+    "refer": [
+      "login.html",
+      "barcode_pay.html",
+      "member.html",
+      "modif_password.html"
+    ]
+  },
+  "login.html": {
+    "refer": [
+      "barcode_pay.html",
+      "pay_record.html",
+      "login_scan.html"
+    ]
+  },
+  "pay_record.html": {
+    "refer": [
+      "barcode_pay.html",
+      "login.html"
+    ]
+  },
+  "card_pay.html": {
+    "refer": [
+      "barcode_pay.html",
+      "card_pay_info.html",
+      "member.html",
+      "pay_record.html",
+      "setting.html",
+      "barcode_refundorder.html"
+    ]
+  },
+  "member.html": {
+    "refer": [
+      "setting.html",
+      "barcode_pay.html"
+    ]
+  },
+  "card_pay_info.html": {
+    "refer": [
+      "barcode_pay.html"
+    ]
+  },
+  "barcode_refundorder.html": {
+    "refer": [
+      "refundorder_by_hand.html"
+    ]
+  },
+  "refundorder_by_hand.html": {
+    "refer": [
+      "barcode_pay.html",
+      "login.html"
+    ]
+  },
+  "login_scan.html": {
+    "refer": [
+      "login.html",
+      "card_pay.html"
+    ]
+  },
+  "modif_password.html": {
+    "refer": [
+      "barcode_pay.html"
+    ]
+  },
+  "barcode_scan_payall.html": {
+    "refer": [
+      "login.html"
+    ]
+  }
 }

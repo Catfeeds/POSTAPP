@@ -15,24 +15,6 @@
 	<script src="js/mui.min.js"></script>
 	<script src="js/font-size.js"></script>
 	<script type="text/javascript">
-//		var ws=null,wo=null;
-//		var scan=null,domready=false;
-//		if(window.plus){
-//			plusReady();
-//		}else{
-//			document.addEventListener('plusready', plusReady, false);
-//		}
-//		function plusReady(){
-//			if(ws||!window.plus||!domready){
-//				return;
-//			}
-//			// 显示页面并关闭等待框
-//			ws=plus.webview.currentWebview();
-//			wo=ws.opener();
-//		    ws.show('pop-in');
-//		    wo.evalJS('closeWaiting()');
-//		}
-		
 		(function($, doc) {
 				$.init({
 					statusBarBackground: '#f7f7f7'
@@ -46,10 +28,49 @@
 						var Intent = plus.android.importClass("android.content.Intent");
 						var ComponentName = plus.android.importClass("android.content.ComponentName");
 						// 导入后可以使用new方法创建类的实例对象
-						var intent=new Intent();
+						var intent = new Intent();
+						var data = {
+							    "spos": [
+							        {
+							            "position": "center",
+							            "content": "POS签购单",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "left",
+							            "content": "请妥善保管",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "1"
+							        }
+							        
+							    ]
+						};
+						
 						intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.CustomPrinterActivity"));
-						console.log(intent);
-					});
+						intent.putExtra("data", data);
+						doc.getElementById("console1").innerHTML = intent;
+						// console.log(intent);
+						// intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.MainActivity"));
+						// intent.putExtra("transName", "消费");
+						// intent.putExtra("amount", "000000001000");
+						// intent.putExtra("orderNumber", "1234567");
+						var main = plus.android.runtimeMainActivity();
+						main.onActivityResult = function(requestCode, resultCode, data) { 
+						 	doc.getElementById("console").innerHTML = requestCode + "==" + resultCode +"==" +data;
+
+						};
+
+						main.startActivityForResult(intent, 0);
+					})
 				})
 		}(mui, document));
 		
@@ -97,6 +118,14 @@
 		</ul>
 		<h4><a href="#">收不到语音通知？</a></h4>
 		<h3><input type="submit" onclick="logout();" value="安全退出"></h3>
+	</div>
+	
+	<div id="console">
+		
+	</div>
+	---------------
+	<div id="console1">
+		
 	</div>
 	
 

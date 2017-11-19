@@ -97,6 +97,11 @@ function onmarked(type, result, file){
     // wo.evalJS("scaned('"+ type +"','"+ result +"','"+ file +"','refund');");
     // back();
 }
+
+function goPage(){
+	scan.cancel();
+	clicked('refundorder_by_hand.html',false,false);
+}
 // 从相册中选择二维码图片 
 function scanPicture(){
     plus.gallery.pick(function(path){
@@ -150,7 +155,7 @@ footer {
 		</div>
 		<footer>
 			<div class="fbt" onclick="back()">取　 消</div>
-			<div class="fbt" onclick="clicked('refundorder_by_hand.html',false,false)">手动输入</div>
+			<div class="fbt" onclick="goPage();">手动输入</div>
 		</footer>
 	</body>
 </html>
