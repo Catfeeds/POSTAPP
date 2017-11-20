@@ -20,6 +20,7 @@
 					statusBarBackground: '#f7f7f7'
 				});
 				$.plusReady(function() {
+					var main = null;
 					var shop = localStorage.getItem("shop");
 
 					doc.getElementById("shopname").innerHTML = shop;
@@ -63,7 +64,7 @@
 						// intent.putExtra("transName", "消费");
 						// intent.putExtra("amount", "000000001000");
 						// intent.putExtra("orderNumber", "1234567");
-						var main = plus.android.runtimeMainActivity();
+						main = plus.android.runtimeMainActivity();
 						main.onActivityResult = function(requestCode, resultCode, data) { 
 						 	doc.getElementById("console").innerHTML = requestCode + "==" + resultCode +"==" +data;
 
@@ -106,7 +107,7 @@
 			<li id="printTest">
 				<h6>打印测试</h6><h5><img src="img/zx1.png" alt=""></h5>
 			</li>
-			<li class="wl1">
+			<li class="wl1" onclick="clicked('nfc.html',false,false)">
 				<h6>消息通知</h6><h5><img src="img/zx1.png" alt=""></h5>
 			</li>
 			<li class="wl1" onclick="clicked('modif_password.html',false,false)">

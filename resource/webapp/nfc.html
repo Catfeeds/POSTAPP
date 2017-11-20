@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script type="text/javascript" src="js/common.js"></script>
+		<script src="js/mui.min.js"></script>
+        
+        <script>
+        	(function($, doc) {
+				$.init({
+					statusBarBackground: '#f7f7f7'
+				});
+				$.plusReady(function() {
+		           	var REQUESTCODE = 1000;
+					console.log(REQUESTCODE);
+
+				})
+				
+				
+			})
+        	var main = null;
+        	function readData(){
+//					var REQUESTCODE = 1000;
+//					
+//					var Intent = plus.android.importClass("android.content.Intent");
+//					var ComponentName = plus.android.importClass("android.content.ComponentName");
+//								// 导入后可以使用new方法创建类的实例对象
+//		
+//					var ContactsContract = plus.android.importClass('android.provider.ContactsContract');
+//					var intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+//					main = plus.android.runtimeMainActivity();
+//					main.onActivityResult = function(requestCode, resultCode, data) { 
+//						console.log(resultCode);
+//						document.getElementById("content").innerHTML = data;
+//						
+//					};
+//					main.startActivityForResult(intent, REQUESTCODE);
+//					
+//					console.log(intent);
+
+
+			        plus.android.importClass('java.util.ArrayList');
+			        plus.android.importClass('android.content.pm.PackageInfo');
+			        plus.android.importClass('android.content.pm.PackageManager');
+			        var MainActivity = plus.android.runtimeMainActivity();
+			        var PackageManager = MainActivity.getPackageManager();
+			        var pinfo = plus.android.invoke(PackageManager, 'getInstalledPackages', 0)
+			        
+			        if (pinfo != null) {
+			            for (i = 0; i < pinfo.size(); i++) {
+			            	document.getElementById("content").innerHTML += pinfo.get(i).toString()+"<br>";
+			                //PackageInfo{4b45699f9d  com.tencent.mobileqq}
+			                if (pinfo.get(i).toString().indexOf("com.fuyousf") !== -1) {
+			                    document.getElementById("content1").innerHTML += pinfo.get(i).toString()+"<br>";
+			                }
+			            }
+			        }
+//			        return false;
+
+				}
+        
+		</script>
+
+        <style>
+            button{
+                width: 50%;
+                height: 50px;
+            }
+        </style>
+    </head>
+    <body>
+
+
+        <button onclick="readData()">读取</button><br/>
+
+        <div id="content">
+        	
+        	</div>
+        ///////////////////////////////
+        <div id="content1" style="color:red;">
+        	
+        	</div>
+    </body>
+</html>
