@@ -20,24 +20,32 @@
 					statusBarBackground: '#f7f7f7'
 				});
 				$.plusReady(function() {
-					var main = null;
-					var shop = localStorage.getItem("shop");
-
-					doc.getElementById("shopname").innerHTML = shop;
 					
+					var shop = localStorage.getItem("shop");
+					var account = localStorage.getItem("account");
+					var realname = localStorage.getItem("realname");
+					var audioPlay = localStorage.getItem(account+"audioPlay");
+					console.log("audioPlay " + audioPlay);
+					doc.getElementById("shopname").innerHTML = shop;
+					doc.getElementById("account").innerHTML = "账号：" + account +" 收银员："+ realname;
+					if(audioPlay == 1){
+						mui('.zx-setup .switch h5')[0].setAttribute("class","active");
+					}
 					$(".zx-setup").on("click","#printTest",function(){
+						var main = null;
 						var Intent = plus.android.importClass("android.content.Intent");
 						var ComponentName = plus.android.importClass("android.content.ComponentName");
 						// 导入后可以使用new方法创建类的实例对象
 						var intent = new Intent();
 						var data = {
 							    "spos": [
-							        {
+							        {	
+							        	"version": "0.1",
 							            "position": "center",
 							            "content": "POS签购单",
 							            "contenttype": "txt",
-							            "bold": "0",
-							            "height": "-1",
+							            "bold": "1",  
+							            "height": "1",
 							            "italic": "0",
 							            "offset": "0",
 							            "size": "3"
@@ -49,29 +57,353 @@
 							            "bold": "0",
 							            "height": "-1",
 							            "italic": "0",
+							            "offset": "-1",
+							            "size": "1"
+							        },
+							        {
+							            "position": "center",
+							            "content": "_____________________",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "center",
+							            "content": "         ",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "left",
+							            "content": "商户名称(MERCHANT NAME):\n武汉市江岸区便捷货运部\n商户编号(MERCHANT NO):\n818521042150005\n终端编号(TERMINAL NO):\n60919624",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "left",
+							            "content": "发卡行:               04105840",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "left",
+							            "content": "收单行:               48180000",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "left",
+							            "content": "批次号(BATCH NO):     000018",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "left",
+							            "content": "交易类别:",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "left",
+							            "content": "银行卡",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "left",
+							            "content": "银行卡号:",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "right",
+							            "content": "623058******3229340",
+							            "contenttype": "txt",
+							            "bold": "1",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "left",
+							            "content": "凭证号:               100006",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "left",
+							            "content": "日期/时间(DATA/TIME):                       2017-02-08 15:08:00",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "left",
+							            "content": "交易金额(AMOUNT):",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "right",
+							            "content": "￥0.01",
+							            "contenttype": "txt",
+							            "bold": "1",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "left",
+							            "content": "操作员号:                        ",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "right",
+							            "content": "3377",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "left",
+							            "content": "交易结果:                        ",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "right",
+							            "content": "支付成功",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "2"
+							        },
+							        {
+							            "position": "left",
+							            "content": "持卡人签名：",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "center",
+							            "content": "_______",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "center",
+							            "content": "         ",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "center",
+							            "content": "0123456789654",
+							            "contenttype": "one-dimension",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "center",
+							            "content": "0123456789654",
+							            "contenttype": "two-dimension",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3",
+							            "gray": "1"
+							        },
+							        {
+							            "position": "center",
+							            "content": "/sdcard/tmp/pay.bmp",
+							            "contenttype": "bmp",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "3"
+							        },
+							        {
+							            "position": "center",
+							            "content": "感谢您的支持,欢迎下次惠顾",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
 							            "offset": "0",
 							            "size": "1"
+							        },
+							        {
+							            "position": "center",
+							            "content": "感谢您的支持,please AAAAAAAAAA",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "1"
+							        },
+							        {
+							            "position": "center",
+							            "content": "efbbb这是个汉汉子;;;;;;;;",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "s"
+							        },
+							        {
+							            "position": "center",
+							            "content": "efbbb这是个汉汉子;;;;;;;;",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "m"
+							        },
+							        {
+							            "position": "center",
+							            "content": "efbbb这是个汉汉子;;;;;;;;",
+							            "contenttype": "txt",
+							            "bold": "0",
+							            "height": "-1",
+							            "italic": "0",
+							            "offset": "0",
+							            "size": "l"
 							        }
-							        
 							    ]
-						};
-						
-						intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.CustomPrinterActivity"));
-						intent.putExtra("data", data);
-						doc.getElementById("console1").innerHTML = intent;
-						// console.log(intent);
-						// intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.MainActivity"));
-						// intent.putExtra("transName", "消费");
-						// intent.putExtra("amount", "000000001000");
-						// intent.putExtra("orderNumber", "1234567");
-						main = plus.android.runtimeMainActivity();
-						main.onActivityResult = function(requestCode, resultCode, data) { 
-						 	doc.getElementById("console").innerHTML = requestCode + "==" + resultCode +"==" +data;
+							};
 
+						intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.CustomPrinterActivity"));
+						intent.putExtra("data", JSON.stringify(data));
+						intent.putExtra("isPrintTicket", "true");
+
+
+						main = plus.android.runtimeMainActivity();
+						main.onActivityResult = function(requestCode, resultCode, data) {
+
+							plus.android.importClass(data);
+							var bundle = data.getExtras();
+							plus.android.importClass(bundle);
+							var reason = bundle.getString("reason");
+							plus.nativeUI.toast(reason);
 						};
 
 						main.startActivityForResult(intent, 0);
 					})
+					
+					$(".zx-setup").on("click","#scanTest",function(){
+						var main = null;
+						var Intent = plus.android.importClass("android.content.Intent");
+						var ComponentName = plus.android.importClass("android.content.ComponentName");
+						// 导入后可以使用new方法创建类的实例对象
+						var intent = new Intent();
+						intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.NewSetScanCodeActivity"));
+						intent.putExtra("flag","true");
+						main = plus.android.runtimeMainActivity();
+						main.onActivityResult = function(requestCode, resultCode, data) { 
+							plus.android.importClass(data);
+							var bundle = data.getExtras();
+							plus.android.importClass(bundle);
+							var return_txt = bundle.getString("return_txt");
+						 	doc.getElementById("console").innerHTML = requestCode + "==" + resultCode +"==" +return_txt;
+						};
+						main.startActivityForResult(intent, 0);
+					})
+					
+					mui('.zx-setup .switch').on("click","h5", function() {
+						var classn = this.getAttribute("class");
+						console.log(classn);
+						if(classn == "active"){
+							this.setAttribute("class","");
+							localStorage.setItem( account+"audioPlay", 0);
+						}else{
+							this.setAttribute("class","active");
+							localStorage.setItem( account+"audioPlay", 1);
+						}
+					});
+
+					
 				})
 		}(mui, document));
 		
@@ -93,43 +425,56 @@
 			
 		}
 		
+		
+			function startPlay(url){
+				var p = plus.audio.createPlayer(url);
+				p.play(function(){
+					console.log("pay_end");
+					p.stop();
+				}, function(e){
+					plus.nativeUI.alert('播放音频文件失败');
+				});
+			}
+		
 	</script>
 </head>
 <body class="bgf7f7f7">
 	<div class="zx-setup-t">
 		<h6>设置</h6>
 	</div>
+
 	<div class="zx-setup">
+		<div>
+			<img src="img/zx16.png" alt="">
+			<h6>
+				<span id="shopname"></span>
+				<i id="account"></i>
+			</h6>
+		</div>
 		<ul>
-			<li>
-				<h6>商家名称</h6><h5><span id="shopname"></span><img src="img/zx1.png" alt=""></h5>
-			</li>
 			<li id="printTest">
 				<h6>打印测试</h6><h5><img src="img/zx1.png" alt=""></h5>
 			</li>
-			<li class="wl1" onclick="clicked('nfc.html',false,false)">
+			<li class="wl1" onclick="startPlay('_www/audio/transsucc.mp3');">
 				<h6>消息通知</h6><h5><img src="img/zx1.png" alt=""></h5>
 			</li>
-			<li class="wl1" onclick="clicked('modif_password.html',false,false)">
+			<li class="wl1">
 				<h6>密码安全</h6><h5><span>密码修改</span><img src="img/zx1.png" alt=""></h5>
 			</li>
-			<li class="wl2">
-				<h6>语音播报</h6><h5><label><b><input type="checkbox"></b></label></h5>
+			<li>
+				<h6>当前版本：<span>万车通收银台VS1.2.05</span></h6>
+				<h5><span>更新</span><img src="img/zx1.png" alt=""></h5>
+			</li>
+			<li class="wl2 switch">
+				<h6>语音播报</h6><h5 id="audio_play"><label><b><input type="checkbox"></b></label></h5>
 			</li>
 		</ul>
 		<h4><a href="#">收不到语音通知？</a></h4>
 		<h3><input type="submit" onclick="logout();" value="安全退出"></h3>
 	</div>
-	
-	<div id="console">
+<div id="console">
 		
-	</div>
-	---------------
-	<div id="console1">
-		
-	</div>
-	
-
+</div>
 	<div class="footer-none"></div>
 	<footer class="footer footer-nav pc">
 		<a href="#" onclick="clicked('member.html',false,false)" class="vip"><div class="pic"></div><div class="text">会员</div></a>

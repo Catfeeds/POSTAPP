@@ -279,14 +279,18 @@
 							dataType:"json",
 							success:function(data){
 								if(data.success == true){
+									var user = data.user;
 									plus.nativeUI.toast("登录成功");
-									localStorage.setItem( "islogin", "islogin");
+									localStorage.setItem( "islogin", user.id);
 									localStorage.setItem( "account", username);
 									localStorage.setItem( "password", pwd);
+									localStorage.setItem( "realname", user.realname);
 									console.log("islogin = "+localStorage.getItem("islogin"));
+									console.log(user.realname);
 									localStorage.setItem( "shop", data.shop.companyname);
-									var w = plus.webview.create('barcode_pay.html');
-									w.show();
+									clicked('barcode_pay.html',false,false);
+//									var w = plus.webview.create('barcode_pay.html');
+//									w.show();
 								}else{
 									plus.nativeUI.toast(data.msg);
 								}

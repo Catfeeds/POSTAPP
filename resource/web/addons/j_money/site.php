@@ -90,7 +90,8 @@ class J_moneyModuleSite extends WeModuleSite
 			isetcookie('islogin', $item['id'], 3600 * $cfg['cookiehold']);
 			isetcookie('siteuniacid', $_W['uniacid'], 3600 * $cfg['cookiehold']);
 			pdo_update("j_money_user", array('lasttime' => TIMESTAMP), array('id' => $item['id']));
-			die(json_encode(array("success" => true,'shop'=>$shop)));
+			//long 2017-11-22 添加返回user
+			die(json_encode(array("success" => true,'shop'=>$shop,'user'=>$item)));
 		} elseif ($operation == "logout") {
 			isetcookie('islogin', '', -1);
 			isetcookie('siteuniacid', '', -1);
@@ -115,7 +116,9 @@ class J_moneyModuleSite extends WeModuleSite
 			isetcookie('islogin', $user['id'], 3600 * $cfg['cookiehold']);
 			isetcookie('siteuniacid', $_W['uniacid'], 3600 * $cfg['cookiehold']);
 			pdo_update("j_money_user", array('lasttime' => TIMESTAMP), array('id' => $user['id']));
-			die(json_encode(array("success" => true)));
+			//long 2017-11-22 添加返回user,$shop
+			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
+			die(json_encode(array("success" => true,'shop'=>$shop,'user'=>$user)));
 		} elseif ($operation == "pay_all") {
 			$qrcode = $_GPC["qrcode"];
 			$fee = $_GPC["fee"] ? $_GPC["fee"] : 1;
@@ -1360,6 +1363,26 @@ class J_moneyModuleSite extends WeModuleSite
 			}
 			$url = urlencode($_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=login&m=j_money&qrcode=" . $qrcode);
 			echo $url;
+		} else if($operation == 'getOrderDetail'){
+			$deviceinfo = intval($_GPC["islogin"]);
+			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			if (!$user) {
+				die(json_encode(array("success" => false, "msg" => "请先登录")));
+			}
+			$out_trade_no = $_GPC["out_trade_no"];
+			if (!$out_trade_no) {
+				die(json_encode(array("success" => false, "msg" => "订单号不能为空")));
+			}
+			$trade = pdo_fetch("SELECT * FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' and out_trade_no=:a ", array(":a" => $out_trade_no));
+			if (!$trade) {
+				die(json_encode(array("success" => false, "msg" => "找不到订单")));
+			}
+			$trade['time'] = date('Y/m/d H:i',$trade['createtime']);
+			$tradeUser = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $trade['userid']));
+			$trade['total_fee'] = sprintf('%.2f', $trade['total_fee'] * 0.01);
+			$trade['order_fee'] = sprintf('%.2f', $trade['order_fee'] * 0.01);
+			echo json_encode(array('success'=>true,'trade'=>$trade,'tradeUser'=>$tradeUser));
+			die;
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" class="hg">
+<head design-width="540">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<!-- 优先使用 IE 最新版本和 Chrome -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<!-- <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/> -->
+	<!-- 添加 favicon icon -->
+	<meta name="renderer" content="webkit">
+	<title>订单信息</title>
+	<link rel="stylesheet" href="css/public.css?ver=1" />
+	<script type="text/javascript" src="js/common.js"></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/font-size.js"></script>
+	<script type="text/javascript">
+		(function($, doc) {
+			$.init({
+				statusBarBackground: '#f7f7f7'
+			});
+			$.plusReady(function() {
+				var out_trade_no = localStorage.getItem("out_trade_no");
+				
+				if (out_trade_no == null || out_trade_no == undefined) {
+					back();
+					return;
+				}else{
+					console.log(out_trade_no);
+					//获取订单详情
+					var baseUrl = plus.storage.getItem("baseUrl");
+					var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=getOrderDetail";
+					mui.ajax({
+						type: "post",
+						url: postUrl,
+						data:{out_trade_no:out_trade_no},
+						async: true,
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+							if(data.success = true){
+								var order = data.trade;
+								var status = order.status;
+								var paytype = order.paytype;
+								var tradeUser = data.tradeUser;
+								var str = "";
+								var statusStr = "";
+								var menuStr = "";
+
+								if(status == 0){
+									//失败
+									statusStr += "<img src=\"img/pic_4.png\" alt=\"收款失败\">";
+									statusStr +="<strong>收款失败</strong>";
+									
+									menuStr += "<div class=\"fixed-menu\">";
+									menuStr += "<a href=\"#\" id='refresh' data-ordersn='"+out_trade_no+"'><img class=\"img1\" src=\"img/ico_6.png\" alt=\"刷新\">刷新</a>";
+									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
+									menuStr += "</div>";
+
+								}else if(status == 1){
+									//成功
+									statusStr += "<img src=\"img/pic_3.png\" alt=\"收款成功\">";
+									statusStr +="<strong>收款成功</strong>";
+									menuStr += "<div class=\"fixed-menu\">";
+									menuStr += "<a href=\"#\"><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
+									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
+									menuStr += "</div>";
+
+								}else if(status == 2){
+									//退款
+									statusStr += "<img src=\"img/pic_3.png\" alt=\"已退款\">";
+									statusStr +="<strong>已退款</strong>";
+									menuStr += "<div class=\"fixed-menu\">";
+									menuStr += "<a href=\"#\"><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
+									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
+									menuStr += "</div>";
+								}
+
+								var paytypeStr = "";
+								var cardPayStr = "";
+								if(paytype == 0){
+									//微信支付
+									paytypeStr = "<span><img src=\"img/ico_3.png\" alt=\"微信支付\">微信支付</span>";
+								}else if(paytype == 1){
+									//支付宝
+									paytypeStr = "<span><img src=\"img/ico_4.png\" alt=\"支付宝支付\">支付宝支付</span>";
+								}else if(paytype == 3){
+									//刷卡
+									paytypeStr = "<span><img src=\"img/ico_3.png\" alt=\"刷卡支付\">刷卡支付</span>";
+									cardPayStr = "<li>银行卡号<span>62101545646546540</span></li>";
+								}
+								str += "<div class=\"money\">";
+								str += statusStr;
+								str += "<span>￥"+order.order_fee+"</span>";
+								str += "</div>";
+								str += "<div class=\"open-list two\">";
+								str += "<ul>";
+								str += "<li>";
+								str += "账单应付";
+								str += "<span class=\"blue\">￥"+order.order_fee+"</span>";
+								str += "</li>";
+								str += "<li>";
+								str += "支付方式";
+								str += paytypeStr;
+								str += "</li>";
+								str += "<li>";
+								str += "交易单号";
+								str += "<span>"+order.out_trade_no+"</span>";
+								str += "</li>";
+								str += "<li>";
+								str += "收银员";
+								str += "<span>"+tradeUser.realname+"</span>";
+								str += "</li>";
+								str += cardPayStr;
+								str += "<li>";
+								str += "交易时间";
+								str += "<span>"+order.time+"</span>";
+								str += "</li>";
+								str += "</ul>";
+								str += "</div>";
+								str += "<div class=\"null\"></div>";
+								str += menuStr;
+								
+								
+								doc.querySelector('.zk_pop').innerHTML = str;
+								
+								mui(".fixed-menu").on("click","#refresh",function(){
+									var out_trade_no = this.getAttribute("data-ordersn");
+									console.log(out_trade_no);
+									var refreshUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=pay_waitpassword";
+									mui.ajax({
+										type: "post",
+										url: refreshUrl,
+										data:{out_trade_no:out_trade_no},
+										async: true,
+										dataType: "json",
+										success: function(data) {
+											console.log(data);
+											if(data.success == true){
+												if(data.paywait == true){
+													plus.nativeUI.alert("等待客户输入密码");
+													return;
+												}else{
+													plus.nativeUI.toast("支付成功");
+													if(data.isnew == true){
+														location.reload();
+													}
+												}
+											}else{
+												if(data.msg == '请先登录'){
+													plus.nativeUI.toast("请先登录");
+													clicked('login.html',false,false);
+													return;
+												}else{
+													plus.nativeUI.toast(data.msg);
+//													clicked('pay_record.html',false,false);
+													return;
+												}
+											}
+										}
+									})
+								});
+
+							}else{
+								if(data.msg == '请先登录'){
+									plus.nativeUI.toast("请先登录");
+									clicked('login.html',false,false);
+									return;
+								}else{
+									plus.nativeUI.toast(data.msg);
+									clicked('pay_record.html',false,false);
+									return;
+								}
+							}
+						}
+
+					}) 
+				}
+			})
+		}(mui, document));
+	</script>
+</head>
+<body class="bgf7f7f7 hg">
+	<div class="zx-payment-t">
+		<h5 onClick="back()"><img src="img/zx2.png" alt=""></h5>
+		<h6>订单信息</h6>
+		<a class="jl" href="#" onClick="clicked('pay_record.html',false,false);"><img src="img/ico_7.png" alt="">记录</a>
+	</div>
+	<div class="zk_pop">
+		
+	</div>
+	
+</body>
+</html>
+

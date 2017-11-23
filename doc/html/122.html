@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head design-width="540">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<!-- 优先使用 IE 最新版本和 Chrome -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<!-- <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/> -->
+	<!-- 添加 favicon icon -->
+	<meta name="renderer" content="webkit">
+	<title>付款</title>
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<link rel="stylesheet" href="css/public.css?ver=1" />
+	<link rel="stylesheet" href="css/c.css">
+	<script src="js/font-size.js"></script>
+</head>
+<body class="bgf7f7f7">
+	<div class="zx-payment-t">
+		<h5 onClick="javascript:history.back()"><img src="img/zx2.png" alt=""></h5>
+		<h6>审核会员</h6>
+	</div>
+	<div class="hcl-list">
+		<div class="item">
+			<div class="title">
+				<div class="left">
+					<div class="number">1</div>
+					<h3>扫码读卡</h3>
+				</div>
+				<div class="right">
+					<div class="arrow"><img src="img/drop-down.png" alt=""></div>
+				</div>
+			</div>
+			<div class="content step1">
+				<div class="qrcode">
+					<img src="img/qocode.png" alt="">
+				</div>
+				<h4>微信扫一扫识别会员信息</h4>
+			</div>
+		</div>
+		<div class="item show">
+			<div class="title">
+				<div class="left">
+					<div class="number">2</div>
+					<h3>卡片信息</h3>
+				</div>
+				<div class="right">
+					<div class="arrow"><img src="img/drop-down.png" alt=""></div>
+				</div>
+			</div>
+			<div class="content step2">
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="wrap">
+								<div class="row name">
+									<h3>宝德集团<small>上海凡德宝马4S店</small></h3>
+									<div class="logo"><img src="img/car-logo.png" alt=""></div>
+								</div>
+								<div class="row qrcode">
+									<img src="img/qrcode2.png" alt="">
+								</div>
+								<div class="row align-flex-bottom">
+									<div class="id">
+										<h3>车架号<span>SL98745</span></h3>
+									</div>
+									<div class="card-date">
+										<h3>会员卡<small>办卡日期：2017/11/09</small></h3>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="wrap">
+								<div class="row name">
+									<h3>宝德集团<small>上海凡德宝马4S店</small></h3>
+									<div class="logo"><img src="img/car-logo.png" alt=""></div>
+								</div>
+								<div class="row qrcode">
+									<img src="img/qrcode2.png" alt="">
+								</div>
+								<div class="row align-flex-bottom">
+									<div class="id">
+										<h3>车架号<span>SL98745</span></h3>
+									</div>
+									<div class="card-date">
+										<h3>会员卡<small>办卡日期：2017/11/09</small></h3>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="wrap">
+								<div class="row name">
+									<h3>宝德集团<small>上海凡德宝马4S店</small></h3>
+									<div class="logo"><img src="img/car-logo.png" alt=""></div>
+								</div>
+								<div class="row qrcode">
+									<img src="img/qrcode2.png" alt="">
+								</div>
+								<div class="row align-flex-bottom">
+									<div class="id">
+										<h3>车架号<span>SL98745</span></h3>
+									</div>
+									<div class="card-date">
+										<h3>会员卡<small>办卡日期：2017/11/09</small></h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+				<div class="enter-card-info">
+					<div class="pic">
+						<img src="img/fingerprint.png" alt="">
+					</div>
+					<div class="tips">确认卡片信息</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="layout">
+		<div class="wrap">
+			<h3>会员消费出示二维码</h3>
+			<div class="qrcode">
+				<img src="img/qocode.png" alt="">
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script>
+		var swiper = new Swiper('.swiper-container',{
+			pagination : '.swiper-pagination',
+			paginationClickable :true,
+			effect : 'coverflow',
+			slidesPerView: 1.5,
+			initialSlide :1,
+			centeredSlides: true,
+			coverflow: {
+				rotate: 0,
+				stretch:-15,
+				depth: 50,
+				modifier: 5,
+				slideShadows : false
+			}
+		})
+		$('.hcl-list .item .step2 .wrap .qrcode').on('click', function() {
+			$('.layout').fadeIn();
+		});
+		$('.layout').on('click', function() {
+			$('.layout').fadeOut();
+		});
+		$('.layout .wrap').on('click', function(event) {
+			event.stopPropagation();
+		});
+	</script>
+</body>
+</html>
+

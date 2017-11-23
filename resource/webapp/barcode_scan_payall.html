@@ -64,6 +64,8 @@ function onmarked(type, result, file){
     var password = "";
     var old_trade_no = "";
     console.log("fee = " + fee);
+    var account = localStorage.getItem("account");
+	var audioPlay = localStorage.getItem(account+"audioPlay");
     mui.ajax({
     	type: "post",
     	url: postUrl,
@@ -88,8 +90,18 @@ function onmarked(type, result, file){
 					return;
 				}
     			plus.nativeUI.alert(data.msg);
-    			back();
-    			return false;
+    			if(audioPlay == 1){
+    				startPlay('_www/audio/transfail.mp3');
+	    			console.log(1);
+	    			window.setTimeout(function(){
+			    		back();
+		    			return false;
+			    	},3000);
+    			}else{
+    				back();
+		    		return false;
+    			}
+    			
     		}else{
     			//等待输入密码
     			if(data.paywait == true){
@@ -98,11 +110,31 @@ function onmarked(type, result, file){
     				payWait(out_trade_no);
     			}else{
     				plus.nativeUI.toast("收款成功");
-    				console.log(data.items);
-	    			back();
-	    			return false;
+    				if(audioPlay == 1){
+    					startPlay('_www/audio/transsucc.mp3');
+	    				console.log(data.items);
+	    				window.setTimeout(function(){
+			    			back();
+		    				return false;
+			    		},2000);
+    				}else{
+    					back();
+		    			return false;
+    				}
+    				
+	    			
     			}
     		}
+    		// 开始播放
+    		// 播放文件相关对象
+			function startPlay(url){
+				var p = plus.audio.createPlayer(url);
+				p.play(function(){
+					p.stop();
+				}, function(e){
+					plus.nativeUI.alert('播放音频文件失败');
+				});
+			}
     		function payWait(out_trade_no){
     			var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=pay_waitpassword";
     			mui.ajax({

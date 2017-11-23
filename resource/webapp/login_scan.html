@@ -80,8 +80,13 @@
 												return;
 											}
 										}else{
-											localStorage.setItem( "islogin", "islogin");
+											var user = data.user;
+											localStorage.setItem( "islogin", user.id);
 											localStorage.setItem( "shop", data.shop.companyname);
+											localStorage.setItem( "realname", user.realname);
+											localStorage.setItem( "account", user.useracount);
+											console.log(user.realname);
+											console.log(user.useracount);
 											clicked("barcode_pay.html",false,false);
 											return;
 										}

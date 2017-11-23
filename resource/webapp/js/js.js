@@ -85,7 +85,6 @@ $('.input-control.normal').on(window.a, 'td', function(e) {
 		$('.input-control.normal .number')[0].number = '';
 		// alert($('.input-control.normal .number')[0].number);
 	}
-//	console.log("price = " + str);
 	$('.main .amount-collected .money .text').text(str);
 	$('.main .total-text').text(str);
 });
@@ -161,15 +160,17 @@ $('.zx-record-m ul li .wrap').on('swipeLeft', function() {
 	$(this).removeClass('active');
 });
 
-$('.zx-setup ul li h5').on(window.a, function() {
-	if (typeof(this.data_switch) == 'undefined' || this.data_switch == '0') {
-		this.data_switch = 1;
-		$(this).addClass('active');
-	} else {
-		this.data_switch = 0;
-		$(this).removeClass('active');
-	}
-});
+//$('.zx-setup ul li h5').on(window.a, function() {
+//	var data_switch = $(this).attr("data-switch");
+//	console.log(data_switch);
+//	if (typeof(this.data_switch) == 'undefined' || this.data_switch == '0') {
+//		this.data_switch = 1;
+//		$(this).addClass('active');
+//	} else {
+//		this.data_switch = 0;
+//		$(this).removeClass('active');
+//	}
+//});
 
 
 var media = document.createElement('style')

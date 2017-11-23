@@ -5,7 +5,7 @@
 		"iPad"
 	],
 	"id": "H5BBED553",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "webapp",/*应用名称，程序桌面图标名称*/
+	"name": "万车通收银台",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "1.0",/*应用版本名称*/
 		"code": ""
@@ -288,7 +288,8 @@
 				"resources": [],
 				"refer": [
 					"barcode_pay.html",
-					"login.html"
+					"login.html",
+					"order_detail.html"
 				],
 				"priority": 0
 			},
@@ -308,6 +309,8 @@
 				"resources": [],
 				"refer": [
 					"setting.html",
+					"search_member_card.html",
+					"check_member_card.html",
 					"barcode_pay.html"
 				],
 				"priority": 0
@@ -338,7 +341,8 @@
 				"resources": [],
 				"refer": [
 					"login.html",
-					"card_pay.html"
+					"card_pay.html",
+					"barcode_pay.html"
 				],
 				"priority": 0
 			},
@@ -353,6 +357,20 @@
 				"resources": [],
 				"refer": [
 					"login.html"
+				],
+				"priority": 0
+			},
+			"check_member_card.html": {
+				"resources": [],
+				"refer": [
+					"check_member_card_detail.html"
+				],
+				"priority": 0
+			},
+			"order_detail.html": {
+				"resources": [],
+				"refer": [
+					"pay_record.html"
 				],
 				"priority": 0
 			}

@@ -19,7 +19,7 @@
 		<div class="top">
 			<h6 onclick="back()"><img src="img/zx2.png" alt=""></h6>
 			<h5><span>收银记录</span><i></i></h5>
-			<h4 href="#" onclick="back()">取消</h4>
+			<h4 href="#" onclick="clicked('barcode_pay.html',false,false)">取消</h4>
 		</div>
 		<div class="midd">
 			<h6 class="wl4"><span>总交易笔数</span><i class="listCount"></i></h6>
@@ -87,7 +87,7 @@
 							var payListTotal = outPostData.payListTotal;
 
 							for(var j in payListTotal){
-								console.log(payListTotal[j]['paytype'] + "=" + payListTotal[j]['total'])
+//								console.log(payListTotal[j]['paytype'] + "=" + payListTotal[j]['total'])
 								switch(payListTotal[j]['paytype']){
 									case "0":
 										doc.querySelector(".wx-pay-total").innerHTML = payListTotal[j]['total'];
@@ -139,7 +139,7 @@
 				
 									str += "<li>";
 									str += "<div class=\"wrap\">";
-									str += "<div class=\"list-l\">";
+									str += "<div class=\"list-l\" data-tradeno=\""+list[i]['out_trade_no']+"\">";
 									str += "<h6><img src=\""+thumb+"\" alt=\"\"></h6>";
 									str += "<div class=\"wl5\">";
 									str += "<h5>"+title+"</h5>";
@@ -150,6 +150,7 @@
 									str += "<h2 data-tradeno=\""+list[i]['out_trade_no']+"\"><span>打<br>印</span></h2>";
 									str += "</div>";
 									str += "</li>";
+//									console.log(str);
 								}
 								
 								var ularea = doc.querySelector('.zx-record-ul');
@@ -172,6 +173,15 @@
 								mui(".wrap").on("click","h2",function(){
 									var out_trade_no = this.getAttribute("data-tradeno");
 									console.log(out_trade_no);
+								});
+								
+								mui(".wrap").on("click",".list-l",function(){
+									var out_trade_no = this.getAttribute("data-tradeno");
+//									console.log(out_trade_no);
+									if(out_trade_no){
+										localStorage.setItem("out_trade_no",out_trade_no);
+										clicked('order_detail.html',false,false);
+									}
 								});
 								
 							}
