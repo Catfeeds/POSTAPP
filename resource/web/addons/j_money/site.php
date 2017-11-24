@@ -1395,11 +1395,283 @@ class J_moneyModuleSite extends WeModuleSite
 			}
 			
 			$template = pdo_fetch("SELECT * FROM " . tablename('j_money_print') . " WHERE weid = :uniacid and groupid=:shopid and pcate=0 ",array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
-			echo $template['content']['spos'];die;
+			 // var_dump($template['content']);die;
 			if (!$template) {
-				die(json_encode(array("success" => false, "msg" => "请设置默认打印模板")));
+				die(-1);
 			}
-			die(json_encode(array("success" => true, "msg" => $template['content'])));
+			$data = '{
+    "spos": [
+        {	
+            "position": "center",
+            "content": "{店铺}",
+            "contenttype": "txt",
+            "bold": "1",  
+            "height": "1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{	
+            "position": "center",
+            "content": "【商户联】",
+            "contenttype": "txt",
+            "bold": "1",  
+            "height": "1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{	
+            "position": "center",
+            "content": "--{订单状态}--",
+            "contenttype": "txt",
+            "bold": "1",  
+            "height": "1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+			"position": "left",
+			"content": "收银员:{收银员}",
+			"contenttype": "txt",
+			"bold": "0",
+			"height": "-1",
+			"italic": "0",
+			"offset": "0",
+			"size": "2"
+		},
+		{
+			"position": "left",
+			"content": "收款时间:{收款时间}",
+			"contenttype": "txt",
+			"bold": "0",
+			"height": "-1",
+			"italic": "0",
+			"offset": "0",
+			"size": "2"
+		},
+		{
+			"position": "left",
+			"content": "付款方式:{付款方式}",
+			"contenttype": "txt",
+			"bold": "0",
+			"height": "-1",
+			"italic": "0",
+			"offset": "0",
+			"size": "2"
+		},
+		{
+			"position": "left",
+			"content": "{服务类型} {服务内容}",
+			"contenttype": "txt",
+			"bold": "0",
+			"height": "-1",
+			"italic": "0",
+			"offset": "0",
+			"size": "2"
+		},
+		{
+            "position": "center",
+            "content": "            ",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+        {
+            "position": "center",
+            "content": "--------------------------------",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "left",
+            "content": "账单金额: {账单金额}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		{
+            "position": "left",
+            "content": "手续费: {手续费}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		{
+            "position": "left",
+            "content": "实付: {实付}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		
+		{
+            "position": "center",
+            "content": "--------------------------------",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "center",
+            "content": "            ",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "center",
+            "content": "{一维码}",
+            "contenttype": "one-dimension",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+        {
+            "position": "center",
+            "content": "{一维码}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "1"
+        },
+		{
+            "position": "center",
+            "content": "            ",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "left",
+            "content": "请妥善保管打印的第{打印份数}份凭证",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		{
+            "position": "left",
+            "content": "打印时间:{打印时间}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		{
+            "position": "center",
+            "content": "            ",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "center",
+            "content": "--------先服务，后销售--------",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        }
+    ]
+}';
+			$printTemplate = $template['content'];
+			$out_trade_no = $_GPC["out_trade_no"];
+			// pdo_update('j_money_print',array('content'=>$data),array('id'=>$template['id']));
+			// echo $data;die;
+			if(!empty($out_trade_no)){
+				$trade = pdo_fetch("SELECT * FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' and out_trade_no=:a ", array(":a" => $out_trade_no));
+				if (!$trade) {
+					die(json_encode(array("success" => false, "msg" => "找不到订单")));
+				}
+				$trade['time'] = date('Y-m-d H:i:s',$trade['createtime']);
+				$tradeUser = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $trade['userid']));
+				$trade['total_fee'] = sprintf('%.2f', $trade['total_fee'] * 0.01);
+				$trade['order_fee'] = sprintf('%.2f', $trade['order_fee'] * 0.01);
+				$trade['servermoney'] = sprintf('%.2f', $trade['servermoney'] * 0.01);
+
+				$statusStr = "";
+				if($trade['status'] == 1){
+					$statusStr = '已支付';
+				}else if($trade['status'] == 0){
+					$statusStr = '已支付';
+				}else if($trade['status'] == 2){
+					$statusStr = '已退款';
+				}
+				$paystr = "微信支付";
+				if ($trade['paytype'] == 1) {
+					$paystr = "支付宝支付";
+				} else {
+					if ($trade['paytype'] == 2) {
+						$paystr = "现金支付";
+					} else {
+						if ($trade['paytype'] == 3) {
+							$paystr = "银行卡支付";
+						} else {
+							if ($trade['paytype'] == 4) {
+								$paystr = "会员卡余额";
+							}
+						}
+					}
+				}
+				$isprint = intval($trade['isprint']) + 1;
+				//替换
+				$printTemplate = str_replace("{店铺}", $shop['companyname'], $printTemplate);
+				$printTemplate = str_replace("{订单状态}", $statusStr, $printTemplate);
+				$printTemplate = str_replace("{收银员}", $tradeUser['realname'], $printTemplate);
+				$printTemplate = str_replace("{收款时间}", $trade['time'], $printTemplate);
+				$printTemplate = str_replace("{付款方式}", $paystr, $printTemplate);
+				$printTemplate = str_replace("{服务类型}", '', $printTemplate);
+				$printTemplate = str_replace("{服务内容}", '', $printTemplate);
+				$printTemplate = str_replace("{账单金额}", $trade['order_fee'], $printTemplate);
+				$printTemplate = str_replace("{手续费}", $trade['servermoney'], $printTemplate);
+				$printTemplate = str_replace("{实付}", $trade['total_fee'], $printTemplate);
+				$printTemplate = str_replace("{一维码}", $trade['out_trade_no'], $printTemplate);
+				$printTemplate = str_replace("{打印份数}",$isprint , $printTemplate);
+				$printTemplate = str_replace("{打印时间}", date('Y-m-d H:i:s'), $printTemplate);
+				pdo_update('j_money_trade',array('isprint'=>$isprint),array('out_trade_no'=>$out_trade_no));
+			}
+
+			echo $printTemplate;die;
 		}else if($operation == 'checkVersion'){
 			$version = file_get_contents('../addons/j_money/version.txt');
 			if($version){
@@ -1407,8 +1679,22 @@ class J_moneyModuleSite extends WeModuleSite
 			}else{
 				die(json_encode(array("success" => false, "msg" => '获取版本失败')));
 			}
-			
-
+		}else if($operation == 'modifPassword'){
+			$deviceinfo = intval($_GPC["islogin"]);
+			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			if (!$user) {
+				die(json_encode(array("success" => false, "msg" => "请先登录")));
+			}
+			$password = $_GPC["password"];
+			if(empty($password)){
+				die(json_encode(array("success" => false, "msg" => "请输入密码")));
+			}
+			$result = pdo_update('j_money_user',array('password'=>md5($password)),array('id'=>$user['id']));
+			if($result){
+				die(json_encode(array("success" => true)));
+			}else{
+				die(json_encode(array("success" => false, "msg" => "修改错误")));
+			}
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')

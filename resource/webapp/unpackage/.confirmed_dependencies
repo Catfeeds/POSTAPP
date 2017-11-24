@@ -94,7 +94,10 @@
   },
   "barcode_scan_payall.html": {
     "refer": [
-      "login.html"
+      "login.html",
+      "order_detail.html",
+      "refundorder_by_hand.html",
+      "payall_by_hand.html"
     ]
   },
   "check_member_card.html": {
@@ -105,6 +108,12 @@
   "order_detail.html": {
     "refer": [
       "pay_record.html"
+    ]
+  },
+  "payall_by_hand.html": {
+    "refer": [
+      "order_detail.html",
+      "barcode_pay.html"
     ]
   }
 }

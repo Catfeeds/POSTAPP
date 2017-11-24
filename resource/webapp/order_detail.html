@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="js/common.js"></script>
 	<script src="js/mui.min.js"></script>
 	<script src="js/font-size.js"></script>
+	<script src="js/print.js"></script>
 	<script type="text/javascript">
 		(function($, doc) {
 			$.init({
@@ -62,7 +63,7 @@
 									statusStr += "<img src=\"img/pic_3.png\" alt=\"收款成功\">";
 									statusStr +="<strong>收款成功</strong>";
 									menuStr += "<div class=\"fixed-menu\">";
-									menuStr += "<a href=\"#\"><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
+									menuStr += "<a href=\"#\" id='print' data-ordersn='"+out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
 									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
 									menuStr += "</div>";
 
@@ -71,7 +72,7 @@
 									statusStr += "<img src=\"img/pic_3.png\" alt=\"已退款\">";
 									statusStr +="<strong>已退款</strong>";
 									menuStr += "<div class=\"fixed-menu\">";
-									menuStr += "<a href=\"#\"><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
+									menuStr += "<a href=\"#\" id='print' data-ordersn='"+out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
 									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
 									menuStr += "</div>";
 								}
@@ -123,6 +124,12 @@
 								
 								
 								doc.querySelector('.zk_pop').innerHTML = str;
+								
+								mui(".fixed-menu").on("click","#print",function(){
+									var out_trade_no = this.getAttribute("data-ordersn");
+									console.log(out_trade_no);
+									printOrder(out_trade_no);
+								})
 								
 								mui(".fixed-menu").on("click","#refresh",function(){
 									var out_trade_no = this.getAttribute("data-ordersn");

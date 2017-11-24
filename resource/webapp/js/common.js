@@ -185,9 +185,7 @@ w.ultZeroize=function(v,l){
 	return z+v;
 };
 
-/**
- * 自定义打印
- */
+
 
 })(window);
 

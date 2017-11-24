@@ -8,6 +8,7 @@
 		<title>扫描支付</title>
 		<script type="text/javascript" src="js/common.js"></script>
 		<script src="js/mui.min.js"></script>
+		<script src="js/print.js"></script>
 		<script type="text/javascript">
 var ws=null,wo=null;
 var scan=null,domready=false;
@@ -78,9 +79,8 @@ function onmarked(type, result, file){
     	async: true,
     	dataType: "json",
     	success: function(data) {
-    		console.log(data.success);
-    		console.log(data.msg);
-    		console.log(data);
+
+    		console.log(JSON.stringify(data));
     		var out_trade_no = data.out_trade_no;
     		
 //  		plus.nativeUI.showWaiting( "等待中..." );
@@ -128,6 +128,8 @@ function onmarked(type, result, file){
     		
     		function getToUrl(){
     			if(out_trade_no != null && out_trade_no !=0){
+    				//打印
+					printOrder(out_trade_no);
 	    			localStorage.setItem("out_trade_no",out_trade_no);
 					clicked('order_detail.html',false,false);
 	    		}else{
@@ -183,6 +185,10 @@ function onmarked(type, result, file){
     // wo.evalJS("scaned('"+ type +"','"+ result +"','"+ file +"','pay');");
     // back();
 }
+function goPage(){
+	scan.cancel();
+	clicked('payall_by_hand.html',false,false);
+}
 // 从相册中选择二维码图片 
 function scanPicture(){
     plus.gallery.pick(function(path){
@@ -218,7 +224,7 @@ footer {
 	color: #FFF;
 }
 .fbt {
-	width: 100%;
+	width: 50%;
 	height: 100%;
 	background-color: #3099ff;
 	float: left;
@@ -236,7 +242,7 @@ footer {
 		</div>
 		<footer>
 			<div class="fbt" onclick="back()">取　 消</div>
-			<!--<div class="fbt" onclick="scanPicture()">从相册选择二维码</div>-->
+			<div class="fbt" onclick="goPage();">手动输入</div>
 		</footer>
 	</body>
 </html>
