@@ -59,7 +59,7 @@ $('.input-control.normal').on(window.a, 'td', function(e) {
 	} else {
 		var str = $('.main .amount-collected .money .text').text() + $(this).text();
 	}
-	str = parseFloat(str)
+	//str = parseFloat(str)
 	if (str.toString().split('.').length > 1) {
 		if (str.toString().split('.')[1].length > 2) {
 			str = '请输入有效值。';
@@ -74,7 +74,7 @@ $('.input-control.normal').on(window.a, 'td', function(e) {
 			// alert($('.input-control.normal .number')[0].number);
 		}
 	}
-	if (str > 90000000) {
+	if (str.length > 10) {
 		str = '请输入有效值。';
 		// $('.input-control.normal').off(window.a, 'td')
 		// $('.input-control.normal td').off(window.a)

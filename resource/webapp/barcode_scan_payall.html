@@ -92,7 +92,6 @@ function onmarked(type, result, file){
     			plus.nativeUI.alert(data.msg);
     			if(audioPlay == 1){
     				startPlay('_www/audio/transfail.mp3');
-	    			console.log(1);
 	    			window.setTimeout(function(){
 			    		back();
 		    			return false;
@@ -112,7 +111,6 @@ function onmarked(type, result, file){
     				plus.nativeUI.toast("收款成功");
     				if(audioPlay == 1){
     					startPlay('_www/audio/transsucc.mp3');
-	    				console.log(data.items);
 	    				window.setTimeout(function(){
 			    			back();
 		    				return false;
