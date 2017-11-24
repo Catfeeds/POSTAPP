@@ -1,0 +1,215 @@
+{
+    "spos": [
+        {	
+            "position": "center",
+            "content": "{店铺}",
+            "contenttype": "txt",
+            "bold": "1",  
+            "height": "1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{	
+            "position": "center",
+            "content": "【商户联】",
+            "contenttype": "txt",
+            "bold": "1",  
+            "height": "1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{	
+            "position": "center",
+            "content": "--{订单状态}--",
+            "contenttype": "txt",
+            "bold": "1",  
+            "height": "1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+			"position": "left",
+			"content": "收银员:{收银员}",
+			"contenttype": "txt",
+			"bold": "0",
+			"height": "-1",
+			"italic": "0",
+			"offset": "0",
+			"size": "2"
+		},
+		{
+			"position": "left",
+			"content": "收款时间:{收款时间}",
+			"contenttype": "txt",
+			"bold": "0",
+			"height": "-1",
+			"italic": "0",
+			"offset": "0",
+			"size": "2"
+		},
+		{
+			"position": "left",
+			"content": "付款方式:{付款方式}",
+			"contenttype": "txt",
+			"bold": "0",
+			"height": "-1",
+			"italic": "0",
+			"offset": "0",
+			"size": "2"
+		},
+		{
+			"position": "left",
+			"content": "{服务类型} {服务内容}",
+			"contenttype": "txt",
+			"bold": "0",
+			"height": "-1",
+			"italic": "0",
+			"offset": "0",
+			"size": "2"
+		},
+		{
+            "position": "center",
+            "content": "            ",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+        {
+            "position": "center",
+            "content": "--------------------------------",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "left",
+            "content": "账单金额: {账单金额}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		{
+            "position": "left",
+            "content": "手续费: {手续费}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		{
+            "position": "left",
+            "content": "实付: {实付}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		
+		{
+            "position": "center",
+            "content": "--------------------------------",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "center",
+            "content": "            ",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "center",
+            "content": "{一维码}",
+            "contenttype": "one-dimension",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+        {
+            "position": "center",
+            "content": "{一维码}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "1"
+        },
+		{
+            "position": "center",
+            "content": "            ",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "left",
+            "content": "请妥善保管打印的第{打印份数}份凭证",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		{
+            "position": "left",
+            "content": "打印时间:{打印时间}",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        },
+		{
+            "position": "center",
+            "content": "            ",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "3"
+        },
+		{
+            "position": "center",
+            "content": "--------先服务，后销售--------",
+            "contenttype": "txt",
+            "bold": "0",
+            "height": "-1",
+            "italic": "0",
+            "offset": "0",
+            "size": "2"
+        }
+    ]
+}
