@@ -81,6 +81,8 @@ function onmarked(type, result, file){
     		console.log(data.success);
     		console.log(data.msg);
     		console.log(data);
+    		var out_trade_no = data.out_trade_no;
+    		
 //  		plus.nativeUI.showWaiting( "等待中..." );
     		
     		if(data.success == false){
@@ -93,11 +95,11 @@ function onmarked(type, result, file){
     			if(audioPlay == 1){
     				startPlay('_www/audio/transfail.mp3');
 	    			window.setTimeout(function(){
-			    		back();
+			    		getToUrl();
 		    			return false;
 			    	},3000);
     			}else{
-    				back();
+    				getToUrl();
 		    		return false;
     			}
     			
@@ -112,16 +114,25 @@ function onmarked(type, result, file){
     				if(audioPlay == 1){
     					startPlay('_www/audio/transsucc.mp3');
 	    				window.setTimeout(function(){
-			    			back();
+			    			getToUrl();
 		    				return false;
 			    		},2000);
     				}else{
-    					back();
+    					getToUrl();
 		    			return false;
     				}
     				
 	    			
     			}
+    		}
+    		
+    		function getToUrl(){
+    			if(out_trade_no != null && out_trade_no !=0){
+	    			localStorage.setItem("out_trade_no",out_trade_no);
+					clicked('order_detail.html',false,false);
+	    		}else{
+	    			back();
+	    		}
     		}
     		// 开始播放
     		// 播放文件相关对象
@@ -148,7 +159,7 @@ function onmarked(type, result, file){
 						if(data.success == false){
 							plus.nativeUI.closeWaiting();
 							plus.nativeUI.alert(data.msg);
-			    			back();
+			    			getToUrl();
 			    			return false;
 						}else{
 							if(data.paywait == true){
@@ -160,7 +171,7 @@ function onmarked(type, result, file){
 							//支付成功
 							plus.nativeUI.closeWaiting();
 							plus.nativeUI.toast("收款成功");
-							back();
+							getToUrl();
 			    			return false;
 						}
     					

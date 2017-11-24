@@ -174,7 +174,7 @@ class J_moneyModuleSite extends WeModuleSite
 					if ($result['err_code'] == 'USERPAYING') {
 						die(json_encode(array("success" => true, "paywait" => true, "out_trade_no" => $payParama['outTradeNo'])));
 					}
-					die(json_encode(array("success" => false, "msg" => $result['trade_state_desc'] . $result['err_code_des'] . $result['return_msg'])));
+					die(json_encode(array("success" => false, "msg" => $result['trade_state_desc'] . $result['err_code_des'] . $result['return_msg'], "out_trade_no" => $payParama['outTradeNo'])));
 				}
 				$insertInfo = array("openid" => $result['openid'], "is_subscribe" => $result['is_subscribe'] == "Y" ? 1 : 0, "sub_openid" => isset($result['sub_openid']) ? $result['sub_openid'] : "", "sub_is_subscribe" => isset($result['sub_is_subscribe']) && $result['sub_is_subscribe'] == "Y" ? 1 : 0, "trade_type" => $result['trade_type'], "bank_type" => $result['bank_type'], "fee_type" => $result['CNY'], "isconfirm" => 1, "status" => 1, "coupon_fee" => intval($result['coupon_fee']), "cash_fee" => intval(strval($result['cash_fee'])), "transaction_id" => $result['transaction_id'], "time_end" => strtotime($result['time_end']));
 				pdo_update("j_money_trade", $insertInfo, array("out_trade_no" => $payParama['outTradeNo']));
@@ -220,11 +220,11 @@ class J_moneyModuleSite extends WeModuleSite
 					die(json_encode(array("success" => true, "items" => $item, "out_trade_no" => $payParama['outTradeNo'])));
 				} else {
 					pdo_update("j_money_trade", array("log" => "收款失败：" . $result['sub_msg']), array("out_trade_no" => $payParama['outTradeNo']));
-					die(json_encode(array("success" => false, "msg" => $result['sub_msg'])));
+					die(json_encode(array("success" => false, "msg" => $result['sub_msg'], "out_trade_no" => $payParama['outTradeNo'])));
 				}
-				die(json_encode(array("success" => false, "msg" => "未知错误")));
+				die(json_encode(array("success" => false, "msg" => "未知错误", "out_trade_no" => $payParama['outTradeNo'])));
 			} else {
-				die(json_encode(array("success" => false, "msg" => "支付码错误")));
+				die(json_encode(array("success" => false, "msg" => "支付码错误", "out_trade_no" => 0)));
 			}
 		} elseif ($operation == "pay_member") {
 			$deviceinfo = intval($_GPC["islogin"]);
@@ -1395,7 +1395,7 @@ class J_moneyModuleSite extends WeModuleSite
 			}
 			
 			$template = pdo_fetch("SELECT * FROM " . tablename('j_money_print') . " WHERE weid = :uniacid and groupid=:shopid and pcate=0 ",array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
-			// var_dump(json_decode($template['content'],true));die;
+			echo $template['content']['spos'];die;
 			if (!$template) {
 				die(json_encode(array("success" => false, "msg" => "请设置默认打印模板")));
 			}
