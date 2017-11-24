@@ -1383,6 +1383,32 @@ class J_moneyModuleSite extends WeModuleSite
 			$trade['order_fee'] = sprintf('%.2f', $trade['order_fee'] * 0.01);
 			echo json_encode(array('success'=>true,'trade'=>$trade,'tradeUser'=>$tradeUser));
 			die;
+		} else if($operation == 'getPrintTemplate'){
+			$deviceinfo = intval($_GPC["islogin"]);
+			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			if (!$user) {
+				die(json_encode(array("success" => false, "msg" => "请先登录1")));
+			}
+			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a", array(":a" => $user['pcate']));
+			if (!$shop) {
+				die(json_encode(array("success" => false, "msg" => "请先登录2")));
+			}
+			
+			$template = pdo_fetch("SELECT * FROM " . tablename('j_money_print') . " WHERE weid = :uniacid and groupid=:shopid and pcate=0 ",array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
+			// var_dump(json_decode($template['content'],true));die;
+			if (!$template) {
+				die(json_encode(array("success" => false, "msg" => "请设置默认打印模板")));
+			}
+			die(json_encode(array("success" => true, "msg" => $template['content'])));
+		}else if($operation == 'checkVersion'){
+			$version = file_get_contents('../addons/j_money/version.txt');
+			if($version){
+				die(json_encode(array("success" => true, "version" => json_decode($version,true))));
+			}else{
+				die(json_encode(array("success" => false, "msg" => '获取版本失败')));
+			}
+			
+
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')

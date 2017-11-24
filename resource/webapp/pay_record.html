@@ -129,12 +129,16 @@
 									}
 
 									var status = "";
+									var print = "";
 									if(list[i]['status'] == 1){
 										status = "<span>支付成功</span>";
+										print = "<h2 data-type=\"print\" data-tradeno=\""+list[i]['out_trade_no']+"\"><span>打<br>印</span></h2>";
 									}else if(list[i]['status'] == 0){
 										status = "<span style='color:red;'>支付失败</span>";
+										print = "<h2 data-type=\"refresh\" data-tradeno=\""+list[i]['out_trade_no']+"\" class=\"wl7\"><a href=\"#\"><span>刷<br>新</span></a></h2>";
 									}else if(list[i]['status'] == 2){
 										status = "<span style='color:red;'>已退款</span>";
+										print = "<h2 data-type=\"print\" data-tradeno=\""+list[i]['out_trade_no']+"\"><span>打<br>印</span></h2>";
 									}
 				
 									str += "<li>";
@@ -147,7 +151,7 @@
 									str += "</div>";
 									str += "<h3>"+status+"<i>￥"+list[i]['total_fee']+"元</i></h3>";
 									str += "</div>";
-									str += "<h2 data-tradeno=\""+list[i]['out_trade_no']+"\"><span>打<br>印</span></h2>";
+									str += print;
 									str += "</div>";
 									str += "</li>";
 //									console.log(str);
@@ -172,6 +176,44 @@
 								
 								mui(".wrap").on("click","h2",function(){
 									var out_trade_no = this.getAttribute("data-tradeno");
+									var type = this.getAttribute("data-type");
+									if(type == 'refresh'){
+										var out_trade_no = this.getAttribute("data-ordersn");
+										console.log(out_trade_no);
+										var refreshUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=pay_waitpassword";
+										mui.ajax({
+											type: "post",
+											url: refreshUrl,
+											data:{out_trade_no:out_trade_no},
+											async: true,
+											dataType: "json",
+											success: function(data) {
+												console.log(data);
+												if(data.success == true){
+													if(data.paywait == true){
+														plus.nativeUI.alert("等待客户输入密码");
+														return;
+													}else{
+														plus.nativeUI.toast("支付成功");
+														if(data.isnew == true){
+															location.reload();
+														}
+													}
+												}else{
+													if(data.msg == '请先登录'){
+														plus.nativeUI.toast("请先登录");
+														clicked('login.html',false,false);
+														return;
+													}else{
+														plus.nativeUI.toast(data.msg);
+														return;
+													}
+												}
+											}
+										})
+									}else{
+										//打印
+									}
 									console.log(out_trade_no);
 								});
 								

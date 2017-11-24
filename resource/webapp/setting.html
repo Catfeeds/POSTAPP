@@ -31,6 +31,80 @@
 					if(audioPlay == 1){
 						mui('.zx-setup .switch h5')[0].setAttribute("class","active");
 					}
+					
+					var wgtVer = null;
+					//当前版本
+					plus.runtime.getProperty(plus.runtime.appid,function(inf){
+				        wgtVer = inf.version;
+				        doc.getElementById("crruversion").innerHTML = "万车通收银台V" + wgtVer;
+				        console.log("当前应用版本："+wgtVer);
+				    });
+					
+					//获取版本
+					$(".zx-setup").on("click","#updateVer",function(){
+						var baseUrl = plus.storage.getItem("baseUrl");
+						var versionUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=checkVersion";
+						mui.ajax({
+							type: "post",
+							url: versionUrl,
+							async: true,
+							dataType: "json",
+							success: function(data) {
+								console.log(JSON.stringify(data));
+								if(data.success == true){
+									var version = data.version;
+									var newVer = version.version;
+									console.log(version.packages);
+									if(wgtVer&&newVer&&wgtVer!=newVer){
+										downWgt(version.packages);
+									}else{
+										plus.nativeUI.toast("当前是最新版本");
+									}
+								}else{
+									plus.nativeUI.toast(data.msg);
+								}
+			          			return;
+							}
+			
+						})
+					})
+					
+					// 下载wgt文件
+					
+					function downWgt(wgt){
+						var wgtUrl="http://4sscrm.com/addons/j_money/image/app/"+wgt;
+						console.log(wgtUrl);
+					    plus.nativeUI.showWaiting("下载更新文件...");
+					    plus.downloader.createDownload( wgtUrl, {filename:"_doc/update/"}, function(d,status){
+					        if ( status == 200 ) { 
+					            console.log("下载更新成功："+d.filename);
+					            installWgt(d.filename); // 安装wgt包
+					        } else {
+					            console.log("下载更新失败！");
+					            plus.nativeUI.alert("下载更新失败！");
+					        }
+					        plus.nativeUI.closeWaiting();
+					    }).start();
+					}
+					
+					// 更新应用资源
+					function installWgt(path){
+					    plus.nativeUI.showWaiting("安装更新文件...");
+					    plus.runtime.install(path,{},function(){
+					        plus.nativeUI.closeWaiting();
+					        console.log("安装更新文件成功！");
+					        plus.nativeUI.alert("应用资源更新完成！",function(){
+					            plus.runtime.restart();
+					        });
+					    },function(e){
+					        plus.nativeUI.closeWaiting();
+					        console.log("安装更新文件失败["+e.code+"]："+e.message);
+					        plus.nativeUI.alert("安装更新文件失败["+e.code+"]："+e.message);
+					    });
+					}
+					
+					
+					
 					$(".zx-setup").on("click","#printTest",function(){
 						var main = null;
 						var Intent = plus.android.importClass("android.content.Intent");
@@ -462,8 +536,8 @@
 				<h6>密码安全</h6><h5><span>密码修改</span><img src="img/zx1.png" alt=""></h5>
 			</li>
 			<li>
-				<h6>当前版本：<span>万车通收银台VS1.2.05</span></h6>
-				<h5><span>更新</span><img src="img/zx1.png" alt=""></h5>
+				<h6>当前版本：<span id="crruversion"></span></h6>
+				<h5 id="updateVer"><span>更新</span><img src="img/zx1.png" alt=""></h5>
 			</li>
 			<li class="wl2 switch">
 				<h6>语音播报</h6><h5 id="audio_play"><label><b><input type="checkbox"></b></label></h5>
