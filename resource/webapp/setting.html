@@ -247,26 +247,27 @@
 				async: true,
 				dataType: "json",
 				success: function(data) {
-					plus.storage.removeItem("islogin");
-					clicked('login.html',false,false);
-          			return;
+					
 				}
 
 			})
+			plus.storage.removeItem("islogin");
+			clicked('login.html',false,false);
+          	return;
 			
 		}
 		
 		
-			function startPlay(url){
-				var p = plus.audio.createPlayer(url);
-				p.play(function(){
-					console.log("pay_end");
-					p.stop();
-				}, function(e){
-					plus.nativeUI.alert('播放音频文件失败');
-				});
-			}
-		
+		function startPlay(url){
+			var p = plus.audio.createPlayer(url);
+			p.play(function(){
+				console.log("pay_end");
+				p.stop();
+			}, function(e){
+				plus.nativeUI.alert('播放音频文件失败');
+			});
+		}
+
 	</script>
 </head>
 <body class="bgf7f7f7">
@@ -275,7 +276,7 @@
 	</div>
 
 	<div class="zx-setup">
-		<div>
+		<div onclick="clicked('embed.html',false,false)">
 			<img src="img/zx16.png" alt="">
 			<h6>
 				<span id="shopname"></span>
@@ -286,10 +287,10 @@
 			<li id="printTest" onclick="printOrder(0)">
 				<h6>打印测试</h6><h5><img src="img/zx1.png" alt=""></h5>
 			</li>
-			<li class="wl1" onclick="startPlay('_www/audio/transsucc.mp3');">
+			<!--<li class="wl1" onclick="startPlay('_www/audio/transsucc.mp3');">
 				<h6>消息通知</h6><h5><img src="img/zx1.png" alt=""></h5>
-			</li>
-			<li class="wl1" onclick="clicked('modif_password.html',false,false)">
+			</li>-->
+			<li class="wl1" onclick="">
 				<h6>密码安全</h6><h5><span>密码修改</span><img src="img/zx1.png" alt=""></h5>
 			</li>
 			<li>
@@ -300,7 +301,7 @@
 				<h6>语音播报</h6><h5 id="audio_play"><label><b><input type="checkbox"></b></label></h5>
 			</li>
 		</ul>
-		<h4><a href="#">收不到语音通知？</a></h4>
+		<h4 onclick="plus.nativeUI.alert('可调整语音播报音量')"><a href="#">收不到语音通知？</a></h4>
 		<h3><input type="submit" onclick="logout();" value="安全退出"></h3>
 	</div>
 <div id="console">

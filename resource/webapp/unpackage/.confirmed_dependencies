@@ -30,7 +30,8 @@
       "barcode_pay.html",
       "member.html",
       "modif_password.html",
-      "nfc.html"
+      "nfc.html",
+      "embed.html"
     ],
     "resources": []
   },
@@ -131,5 +132,15 @@
       "barcode_pay.html"
     ],
     "resources": []
+  },
+  "embed.html": {
+    "resources": [
+      "barcode_scan_payall.html"
+    ],
+    "refer": [
+      "barcode_scan_payall.html",
+      "barcode_pay.html",
+      "setting.html"
+    ]
   }
 }

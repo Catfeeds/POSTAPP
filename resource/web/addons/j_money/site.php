@@ -1711,18 +1711,22 @@ class J_moneyModuleSite extends WeModuleSite
 				die(json_encode(array("success" => false, "msg" => "请先登录")));
 			}
 
-			$sql = "DROP TABLE IF EXISTS `ims_j_money_print_log`;
-					CREATE TABLE `ims_j_money_print_log` (
-					  `id` int(10) NOT NULL,
-					  `uniacid` int(10) NOT NULL,
-					  `shopid` int(10) NOT NULL,
-					  `out_trade_no` int(10) NOT NULL,
-					  `isprint` int(10) DEFAULT '0',
-					  `createtime` int(11) DEFAULT NULL,
-					  `printtime` int(11) DEFAULT NULL,
-					  PRIMARY KEY (`id`)
-					) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
-			pdo_run($sql);
+			// $sql = "DROP TABLE IF EXISTS `ims_j_money_print_log`;
+			// 		CREATE TABLE `ims_j_money_print_log` (
+			// 		  `id` int(10) NOT NULL,
+			// 		  `uniacid` int(10) NOT NULL,
+			// 		  `shopid` int(10) NOT NULL,
+			// 		  `out_trade_no` int(10) NOT NULL,
+			// 		  `isprint` int(10) DEFAULT '0',
+			// 		  `createtime` int(11) DEFAULT NULL,
+			// 		  `printtime` int(11) DEFAULT NULL,
+			// 		  PRIMARY KEY (`id`)
+			// 		) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+			// pdo_run($sql);
+			$list = pdo_fetchall('SELECT a.id as userid, a.useracount,a.realname,a.openid,b.id as shopid,b.companyname FROM '.tablename('j_money_user').' a left join '.tablename('j_money_group').' b on a.pcate=b.id WHERE a.weid=:weid',array(':weid'=>$_W['uniacid']));
+			$url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode;
+			// var_dump($list);
+			include $this->template('user-list');
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')
@@ -2733,7 +2737,15 @@ class J_moneyModuleSite extends WeModuleSite
 				$auth = @json_decode($ret['content'], true);
 				if (is_array($auth) && !empty($auth['openid'])) {
 					$openid = $auth['openid'];
-					$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and openid=:a ", array(":a" => $openid));
+
+					$users = pdo_fetchall("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and openid=:a ", array(":a" => $openid));
+					if(count($users) > 1){
+						$list = pdo_fetchall('SELECT a.id as userid, a.useracount,a.realname,a.openid,b.id as shopid,b.companyname FROM '.tablename('j_money_user').' a left join '.tablename('j_money_group').' b on a.pcate=b.id WHERE a.weid=:weid and a.openid=:openid',array(':weid'=>$_W['uniacid'],':openid'=>$openid));
+						$url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode;
+						include $this->template('user-list');
+						return;
+					}
+					$user = $users[0];
 					if (!$user) {
 						message("您没权使用本系统！");
 					}
@@ -2759,6 +2771,30 @@ class J_moneyModuleSite extends WeModuleSite
 		}
 		die('微信授权失败');
 	}
+
+	public function doMobileLoginbyuserid(){
+		global $_W, $_GPC;
+		$userid = $_GPC['userid'];
+		$openid = $_GPC['openid'];
+		$qrcode = $_GPC['qrcode'];
+		$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and openid=:openid", array(":a" => $userid,':openid'=>$openid));
+		if (!$user) {
+			message("您没权使用本系统！");
+		}
+		if (!$user['login_pc']) {
+			message("您的账号禁止在电脑端登录！");
+		}
+		$item = pdo_fetch("SELECT * FROM " . tablename('j_money_qrlogin') . " WHERE sncode=:a and status=0 and openid='' and userid='' ", array(':a' => $qrcode));
+		if (!$item) {
+			message("抱歉，该二维码已过期！");
+		}
+		if (TIMESTAMP - $item['createtime'] > 60 * 5) {
+			message("抱歉，该二维码已过期！");
+		}
+		pdo_update('j_money_qrlogin', array("status" => 1, "openid" => $openid, "userid" => $user['id']), array("id" => $item['id']));
+		message("登陆成功",'success');
+	}
+
 	public function doMobileLogin()
 	{
 		global $_W, $_GPC;

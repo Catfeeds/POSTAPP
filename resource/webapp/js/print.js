@@ -49,7 +49,7 @@ function printOrder(out_trade_no){
 (function($, doc) {
 
 	$.plusReady(function() {
-		checkPrintOrder();
+//		checkPrintOrder();
 		function checkPrintOrder(){
 			var baseUrl = plus.storage.getItem("baseUrl");
 			var versionUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=checkVersion";

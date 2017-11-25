@@ -178,8 +178,9 @@
 								mui(".wrap").on("click","h2",function(){
 									var out_trade_no = this.getAttribute("data-tradeno");
 									var type = this.getAttribute("data-type");
+									var that = this;
 									if(type == 'refresh'){
-										var out_trade_no = this.getAttribute("data-ordersn");
+//										var out_trade_no = this.getAttribute("data-ordersn");
 										console.log(out_trade_no);
 										var refreshUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=pay_waitpassword";
 										mui.ajax({
@@ -206,6 +207,9 @@
 														clicked('login.html',false,false);
 														return;
 													}else{
+														mui('.zx-record-m ul li .wrap').each(function(){
+															this.setAttribute("class","wrap");
+														});
 														plus.nativeUI.toast(data.msg);
 														return;
 													}

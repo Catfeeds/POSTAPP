@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>用户列表</title>
+	<meta name="format-detection" content="telephone=no, address=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<link href="./resource/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./resource/css/font-awesome.min.css" rel="stylesheet">
+	<link href="./resource/css/animate.css" rel="stylesheet">
+	<link href="./resource/css/common.css" rel="stylesheet">
+	<script type="text/javascript" src="{MODULE_URL}template/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="{MODULE_URL}template/js/sweetalert.min2.js"></script>
+	<link href="{MODULE_URL}template/js/sweetalert.css" rel="stylesheet">
+	<script type="text/javascript" src="{MODULE_URL}template/js/let.js"></script> 
+	<style>
+	html{height:100%;}
+	body{background:{$item['bgcolor']} url({if $item['thumb_bg']}{php echo tomedia($item['thumb_bg'])}{else}{MODULE_URL}template/img/startbg.jpg{/if});}
+	.gamebody{ width:100%;height:100%;}
+	.turntablebox{width:90%;margin:20px auto 0 auto; text-align:center; position:relative; overflow:hidden}
+	#pointerbox{ position:absolute;top:0;}
+	.infobox{width:96%;margin:30% auto 0 auto; }
+	.infobox-body{background:url({MODULE_URL}template/img/messagebox2.png) top left repeat-y; background-size:100% auto; text-align:center; padding:10px 0;}
+	.infobox-footer{background:url({MODULE_URL}template/img/messagebox3.png) bottom left no-repeat; background-size:100% 100%; text-align:center; padding:10px 0 }
+	.game-info{ margin:10px; background:#FFF;border-radius:5px;padding:2px}
+	.box{border-radius:5px; font-size:14px;border:1px dashed #CCC;}
+	.title-brown{padding:0 5px 0 10px;border-radius:3px 3px 3px 0;color:#FFF;height:22px; margin:-1px; width:84px; background:#0D6FB8}
+	.Detail{ padding:15px;}
+	.game-btn{ text-align:center;}
+	.game-btn div[class^='col-']{ padding:0 2px; margin:0;}
+	.red{color:#F00}
+	
+	header{
+		height: 40px;
+		width: 100%;
+		line-height: 40px;
+		text-align: center;
+		background: 
+	}
+	a{
+		color:#000;
+	}
+</style>
+</head>
+<body>
+	<div class="gamebody">
+		<!-- <header>
+			<h3>用户列表</h3>
+		</header> -->
+		{loop $list $item}
+		<a href="{$url}&userid={$item['userid']}">
+			<div class="game-info">
+				<div class="box">
+					<div class="Detail">
+						门店:{$item['companyname']}<br>
+						用户:{$item['useracount']}<br>
+						姓名:{$item['realname']}
+					</div>
+				</div>
+			</div>
+		</a>
+		{/loop}
+	</div>
+</body>
+</html>
