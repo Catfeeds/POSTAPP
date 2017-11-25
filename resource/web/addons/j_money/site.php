@@ -87,8 +87,8 @@ class J_moneyModuleSite extends WeModuleSite
 			}
 			//long 2017-11-13
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $item['pcate']));
-			isetcookie('islogin', $item['id'], 3600 * $cfg['cookiehold']);
-			isetcookie('siteuniacid', $_W['uniacid'], 3600 * $cfg['cookiehold']);
+			isetcookie('islogin', $item['id'], 36000 * $cfg['cookiehold']);
+			isetcookie('siteuniacid', $_W['uniacid'], 36000 * $cfg['cookiehold']);
 			pdo_update("j_money_user", array('lasttime' => TIMESTAMP), array('id' => $item['id']));
 			//long 2017-11-22 添加返回user
 			die(json_encode(array("success" => true,'shop'=>$shop,'user'=>$item)));
@@ -113,8 +113,8 @@ class J_moneyModuleSite extends WeModuleSite
 				die(json_encode(array("success" => false, "msg" => "", "reload" => false)));
 			}
 			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $item['userid']));
-			isetcookie('islogin', $user['id'], 3600 * $cfg['cookiehold']);
-			isetcookie('siteuniacid', $_W['uniacid'], 3600 * $cfg['cookiehold']);
+			isetcookie('islogin', $user['id'], 36000 * $cfg['cookiehold']);
+			isetcookie('siteuniacid', $_W['uniacid'], 36000 * $cfg['cookiehold']);
 			pdo_update("j_money_user", array('lasttime' => TIMESTAMP), array('id' => $user['id']));
 			//long 2017-11-22 添加返回user,$shop
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
@@ -1387,14 +1387,14 @@ class J_moneyModuleSite extends WeModuleSite
 			$deviceinfo = intval($_GPC["islogin"]);
 			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
 			if (!$user) {
-				die(json_encode(array("success" => false, "msg" => "请先登录1")));
+				die(-2);
 			}
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a", array(":a" => $user['pcate']));
 			if (!$shop) {
-				die(json_encode(array("success" => false, "msg" => "请先登录2")));
+				die(-2);
 			}
 			
-			$template = pdo_fetch("SELECT * FROM " . tablename('j_money_print') . " WHERE weid = :uniacid and groupid=:shopid and pcate=0 ",array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
+			$template = pdo_fetch("SELECT * FROM " . tablename('j_money_print') . " WHERE weid = :uniacid and groupid=:shopid and pcate=6 ",array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
 			 // var_dump($template['content']);die;
 			if (!$template) {
 				die(-1);
@@ -1616,7 +1616,7 @@ class J_moneyModuleSite extends WeModuleSite
 }';
 			$printTemplate = $template['content'];
 			$out_trade_no = $_GPC["out_trade_no"];
-			// pdo_update('j_money_print',array('content'=>$data),array('id'=>$template['id']));
+			// pdo_update('j_money_print',array('pcate'=>6),array('id'=>$template['id']));
 			// echo $data;die;
 			if(!empty($out_trade_no)){
 				$trade = pdo_fetch("SELECT * FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' and out_trade_no=:a ", array(":a" => $out_trade_no));
@@ -1673,6 +1673,11 @@ class J_moneyModuleSite extends WeModuleSite
 
 			echo $printTemplate;die;
 		}else if($operation == 'checkVersion'){
+			$deviceinfo = intval($_GPC["islogin"]);
+			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			if (!$user) {
+				die(json_encode(array("success" => false, "msg" => "请先登录")));
+			}
 			$version = file_get_contents('../addons/j_money/version.txt');
 			if($version){
 				die(json_encode(array("success" => true, "version" => json_decode($version,true))));
@@ -1695,6 +1700,29 @@ class J_moneyModuleSite extends WeModuleSite
 			}else{
 				die(json_encode(array("success" => false, "msg" => "修改错误")));
 			}
+		}else if($operation == 'checkPrintOrder'){
+			$deviceinfo = intval($_GPC["islogin"]);
+			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			if (!$user) {
+				die(json_encode(array("success" => false, "msg" => "请先登录")));
+			}
+			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a", array(":a" => $user['pcate']));
+			if (!$shop) {
+				die(json_encode(array("success" => false, "msg" => "请先登录")));
+			}
+
+			$sql = "DROP TABLE IF EXISTS `ims_j_money_print_log`;
+					CREATE TABLE `ims_j_money_print_log` (
+					  `id` int(10) NOT NULL,
+					  `uniacid` int(10) NOT NULL,
+					  `shopid` int(10) NOT NULL,
+					  `out_trade_no` int(10) NOT NULL,
+					  `isprint` int(10) DEFAULT '0',
+					  `createtime` int(11) DEFAULT NULL,
+					  `printtime` int(11) DEFAULT NULL,
+					  PRIMARY KEY (`id`)
+					) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+			pdo_run($sql);
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')

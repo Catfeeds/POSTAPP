@@ -20,7 +20,10 @@ function printOrder(out_trade_no){
 //  	console.log(data);
 //	    console.log(JSON.stringify(data));
 	    if(data == -1){
-			plus.nativeUI.toast("请设置默认打印模板");
+				plus.nativeUI.toast("请设置默认打印模板");
+	    }else if(data == -2){
+	    	plus.nativeUI.toast("请先登录");
+	    	clicked('login.html',false,false);
 	    }else{
 	      	console.log(data);
 	        var str = data;
@@ -42,3 +45,26 @@ function printOrder(out_trade_no){
 
   })
 }
+
+(function($, doc) {
+
+	$.plusReady(function() {
+		checkPrintOrder();
+		function checkPrintOrder(){
+			var baseUrl = plus.storage.getItem("baseUrl");
+			var versionUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=checkVersion";
+			mui.ajax({
+				type: "post",
+				url: versionUrl,
+				async: true,
+				dataType: "json",
+				success: function(data) {
+					console.log(JSON.stringify(data));
+					var interval = window.setTimeout(function(){
+						checkPrintOrder();
+					},2000);
+				}
+			})
+		}
+	})
+}(mui, document));

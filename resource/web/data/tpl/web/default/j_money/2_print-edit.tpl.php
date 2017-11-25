@@ -27,7 +27,8 @@
                     <option value="2" <?php  if($item['pcate']==2) { ?>selected<?php  } ?>>充值小票</option>
                     <option value="3" <?php  if($item['pcate']==3) { ?>selected<?php  } ?>>交班小票</option>
                     <option value="4" <?php  if($item['pcate']==4) { ?>selected<?php  } ?>>退款小票</option>
-					<option value="5" <?php  if($item['pcate']==5) { ?>selected<?php  } ?>>积分兑换小票</option>
+                    <option value="5" <?php  if($item['pcate']==5) { ?>selected<?php  } ?>>积分兑换小票</option>
+					          <option value="6" <?php  if($item['pcate']==6) { ?>selected<?php  } ?>>POS机收银小票</option>
                   </select>
                 </div>
             </div>

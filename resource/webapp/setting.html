@@ -35,11 +35,33 @@
 					
 					var wgtVer = null;
 					//当前版本
+					
 					plus.runtime.getProperty(plus.runtime.appid,function(inf){
 				        wgtVer = inf.version;
 				        doc.getElementById("crruversion").innerHTML = "万车通收银台V" + wgtVer;
 				        console.log("当前应用版本："+wgtVer);
 				    });
+				    
+				    var baseUrl = plus.storage.getItem("baseUrl");
+				    var versionUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=checkVersion";
+				    mui.ajax({
+				    	type: "post",
+				    	url: versionUrl,
+				    	async: true,
+				    	dataType: "json",
+				    	success: function(data) {
+				    		console.log(JSON.stringify(data));
+				    		if(data.success == true){
+				    			var version = data.version;
+				    			var newVer = version.version;
+				    			if(wgtVer&&newVer&&wgtVer!=newVer){
+				    				doc.getElementById("crruversion").innerHTML = "万车通收银台V" + wgtVer+"<span style='color:red;'>(有新版本)</span>";
+				    			}
+				    		}
+				    		return;
+				    	}
+
+				    })
 					
 					//获取版本
 					$(".zx-setup").on("click","#updateVer",function(){
@@ -62,6 +84,11 @@
 										plus.nativeUI.toast("当前是最新版本");
 									}
 								}else{
+									if(data.msg == "请先登录"){
+										plus.nativeUI.toast("请先登录");
+										clicked('login.html',false,false);
+										return;
+									}
 									plus.nativeUI.toast(data.msg);
 								}
 			          			return;
