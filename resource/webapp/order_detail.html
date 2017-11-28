@@ -21,6 +21,7 @@
 				statusBarBackground: '#f7f7f7'
 			});
 			$.plusReady(function() {
+				closeWaiting();
 				var out_trade_no = localStorage.getItem("out_trade_no");
 				
 				if (out_trade_no == null || out_trade_no == undefined) {

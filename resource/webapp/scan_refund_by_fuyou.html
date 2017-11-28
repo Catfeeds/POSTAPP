@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>扫描退款</title>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init({
+					statusBarBackground: '#f7f7f7'
+				});
+				$.plusReady(function() {
+					closeWaiting();
+					var baseUrl = plus.storage.getItem("baseUrl");
+					var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=refundorder";
+					var main = null;
+					var Intent = plus.android.importClass("android.content.Intent");
+					var ComponentName = plus.android.importClass("android.content.ComponentName");
+					var intent = new Intent();
+					intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.NewSetScanCodeActivity"));
+					intent.putExtra("flag","true");
+					main = plus.android.runtimeMainActivity();
+					main.onActivityResult = function(requestCode, resultCode, data) { 
+						plus.android.importClass(data);
+						var bundle = data.getExtras();
+						plus.android.importClass(bundle);
+						var return_txt = bundle.getString("return_txt");
+						var orderid = return_txt;
+						if(return_txt != null){
+							console.log("refund_orderid= " + orderid);
+
+							mui.ajax({
+								type: "post",
+								url: postUrl,
+								data: {
+									orderid: orderid,
+								},
+								async: true,
+								dataType: "json",
+								success: function(data) {
+									console.log(JSON.stringify(data));
+									if(data.success == false){
+										if(data.msg == "请先登录"){
+											plus.nativeUI.toast("请先登录");
+											clicked('login.html',false,false);
+											return;
+										}
+										plus.nativeUI.alert(data.msg);
+										back();
+										return false;
+									}else{
+										if(data.isrefunded == true){
+											plus.nativeUI.toast("退款成功");
+											back();
+											return false;
+										}else{
+											plus.nativeUI.alert("退款申请已经提交,请等待处理");
+											back();
+											return false;
+										}
+									}
+								}
+							})
+						}
+					};
+					main.startActivityForResult(intent, 0);
+				})
+			}(mui, document));
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

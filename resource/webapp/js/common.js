@@ -8,6 +8,7 @@ document.oncontextmenu=shield;//屏蔽选择函数
 // H5 plus事件处理
 var ws=null,as='pop-in';
 function plusReady(){
+	closeWaiting();
 	ws=plus.webview.currentWebview();
 	// Android处理返回键
 	plus.key.addEventListener('backbutton',function(){

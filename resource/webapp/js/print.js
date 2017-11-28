@@ -1,5 +1,6 @@
 function printOrder(out_trade_no){
   console.log(out_trade_no);
+  closeWaiting();
   var baseUrl = plus.storage.getItem("baseUrl");
   var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=getPrintTemplate";
   var main = null;
@@ -34,7 +35,14 @@ function printOrder(out_trade_no){
 	           	var bundle = data.getExtras();
 	           	plus.android.importClass(bundle);
 	           	var reason = bundle.getString("reason");
-	          	plus.nativeUI.toast(reason);
+	           	console.log(reason);
+	           	if(reason.indexOf("SUCCESS") != -1){
+	           		plus.nativeUI.toast("打印成功");
+	           	}else{
+	           		var str = reason.split("-")[1];
+	           		plus.nativeUI.toast(str);
+	           	}
+//	          	plus.nativeUI.toast(reason);
 	        };
 	        main.startActivityForResult(intent, 0);
 	      }
