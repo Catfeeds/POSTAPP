@@ -767,10 +767,11 @@ class J_moneyModuleSite extends WeModuleSite
 					$row['total'] = sprintf('%.2f',$row['total'] * 0.01);
 					$all_total = $all_total + $row['total'];
 				}
+				$listCount = pdo_fetchcolumn("SELECT count(*) FROM ".tablename('j_money_trade')." WHERE status=1 and weid='{$_W['uniacid']}' {$where} {$where2}");
 				unset($row);
 				$outPostData = [
 					'date' => date('Y年m月d日'),
-					'listCount' => count($list),
+					'listCount' => $listCount,
 					'allTotal'  => $all_total,
 					'payListTotal' => $pay_total
 				];
@@ -800,7 +801,7 @@ class J_moneyModuleSite extends WeModuleSite
 						"paytype" => $row['paytype'],
 						 "status" => $row['status'],
 						 "userid" => $row['userid'],
-						 "time" => date("m-d H:i", $row['createtime']),
+						 "time" => date("m-d H:i:s", $row['createtime']),
 						 "servermoney"=> sprintf('%.2f', $row['servermoney'] * 0.01),  //服务费
 						 "servertype" => $row['servertype'],
 						 "carnumber" => $row['carnumber'],
@@ -2739,9 +2740,16 @@ class J_moneyModuleSite extends WeModuleSite
 					$openid = $auth['openid'];
 
 					$users = pdo_fetchall("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and openid=:a ", array(":a" => $openid));
+					$list = pdo_fetchall('SELECT a.id as userid, a.useracount,a.realname,a.openid,b.id as shopid,b.companyname FROM '.tablename('j_money_user').' a left join '.tablename('j_money_group').' b on a.pcate=b.id WHERE a.weid=:weid and a.openid=:openid',array(':weid'=>$_W['uniacid'],':openid'=>$openid));
 					if(count($users) > 1){
-						$list = pdo_fetchall('SELECT a.id as userid, a.useracount,a.realname,a.openid,b.id as shopid,b.companyname FROM '.tablename('j_money_user').' a left join '.tablename('j_money_group').' b on a.pcate=b.id WHERE a.weid=:weid and a.openid=:openid',array(':weid'=>$_W['uniacid'],':openid'=>$openid));
+						
 						$url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode;
+						include $this->template('user-list');
+						return;
+					}else{
+						$url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode."&userid=".$list[0]['id'];
+						$flag = 1;
+						$companyname = $list[0]['companyname'];
 						include $this->template('user-list');
 						return;
 					}

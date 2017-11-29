@@ -17,8 +17,8 @@
 <body class="bgf7f7f7">
 	<div class="zx-record-t">
 		<div class="top">
-			<h6 onclick="back()"><img src="img/zx2.png" alt=""></h6>
-			<h5><span>收银记录</span><i></i></h5>
+			<!--<h6 onclick="back()"><img src="img/zx2.png" alt=""></h6>-->
+			<h5 class="wl14"><span>收银记录</span><i></i></h5>
 			<h4 href="#" onclick="clicked('scan_refund_by_fuyou.html',false,false)">退款</h4>
 		</div>
 		<div class="midd">
@@ -47,11 +47,21 @@
 			</li>
 		</ul>
 	</div>
+	
+	<div class="zx-ting-int">
+		<div class="zx-ting">
+			<h6>提示</h6>
+			<h5>是否继续打印下一联</h5>
+			<h4><a class="wl10">确认</a><a class="wl11">取消</a></h4>
+		</div>
+	</div>
+	
 	<div class="footer-none"></div>
 	<footer class="footer footer-nav pc">
 		<a href="#" onclick="clicked('member.html',false,false)" class="vip"><div class="pic"></div><div class="text">会员</div></a>
-		<a href="#" onclick="clicked('barcode_pay.html',false,false)" class="center money active"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
-		<a href="#" onclick="clicked('setting.html',false,false)" class="set"><div class="pic"></div><div class="text">设置</div></a>
+		<a href="#" onclick="clicked('barcode_pay.html',false,false)" class="center money "><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
+		<a href="#" onclick="clicked('pay_record.html',false,false)" class="set hhh active"><div class="pic"></div><div class="text">记录</div></a>
+		
 	</footer>
 	<script src="js/mui.min.js"></script>
 	<script src="js/zepto.js"></script>
@@ -60,11 +70,31 @@
 	<script src="js/js.js"></script>
 	<script src="js/print.js"></script>
 	<script type="text/javascript">
+//					var old_back = mui.back;
+//				mui.back = function(){
+//				  var btn = ["确定","取消"];
+//				  mui.confirm('确认关闭当前窗口116？','Hello MUI',btn,function(e){
+//				    if(e.index==0){
+//				    	//执行mui封装好的窗口关闭逻辑；
+//				    	old_back();
+//				    }
+//				  });
+//				}
 		(function($, doc) {
 			$.init({
-				statusBarBackground: '#f7f7f7'
+				statusBarBackground: '#f7f7f7',
+//				keyEventBind: {
+//					backbutton: false  //关闭back按键监听
+//				},
+//				beforeback: function(){
+//					alert(1);
+//					return false;
+//
+//				}
 			});
+
 			$.plusReady(function() {
+
 				var baseUrl = plus.storage.getItem("baseUrl");
 				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=gettradelist";
 				var keyword = "";
@@ -224,6 +254,9 @@
 									}else{
 										//打印
 										printOrder(out_trade_no);
+										mui('.zx-record-m ul li .wrap').each(function(){
+											this.setAttribute("class","wrap");
+										});
 									}
 									console.log(out_trade_no);
 								});

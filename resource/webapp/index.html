@@ -33,7 +33,23 @@
 							var newVer = version.version;
 
 							if(wgtVer&&newVer&&wgtVer!=newVer){
-								downWgt(version.packages);
+								plus.nativeUI.confirm("有新版本更新,确定更新?", function(e){
+									console.log("Close confirm: "+e.index);
+									if(e.index == 0){
+										downWgt(version.packages);
+									}
+
+								}, {"title":"系统更新",
+									"buttons":["更新","取消"],
+									"verticalAlign":"center"
+								});
+								
+							}
+						}else{
+							if(data.msg == '请先登录'){
+								plus.nativeUI.toast("请先登录");
+								clicked('login.html',false,false);
+								return;
 							}
 						}
 					}
@@ -60,9 +76,8 @@
 					plus.runtime.install(path,{},function(){
 						plus.nativeUI.closeWaiting();
 						console.log("安装更新文件成功！");
-						plus.nativeUI.alert("应用资源更新完成！",function(){
-							plus.runtime.restart();
-						});
+						plus.runtime.restart();
+						
 					},function(e){
 						plus.nativeUI.closeWaiting();
 						console.log("安装更新文件失败["+e.code+"]："+e.message);

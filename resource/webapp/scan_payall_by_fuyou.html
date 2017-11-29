@@ -26,6 +26,7 @@
 				intent.putExtra("flag","true");
 				main = plus.android.runtimeMainActivity();
 				main.onActivityResult = function(requestCode, resultCode, data) { 
+					main = null;
 					console.log("flag = " + flag);
 					if(flag){
 						return;
@@ -61,7 +62,7 @@
 
 								if(data.success == false){
 									if(data.msg == "请先登录"){
-										plus.nativeUI.toast("请先登录");
+										plus.nativeUI.alert("请先登录");
 										clicked('login.html',false,false);
 										return;
 									}
@@ -86,7 +87,7 @@
 	    								return;
 //										payWait(out_trade_no);
 									}else{
-										plus.nativeUI.toast("收款成功");
+										plus.nativeUI.alert("收款成功");
 										if(audioPlay == 1){
 											startPlay('_www/audio/transsucc.mp3');
 											window.setTimeout(function(){
@@ -155,7 +156,7 @@
 													return;
 												}
 												plus.nativeUI.closeWaiting();
-												plus.nativeUI.toast("收款成功");
+												plus.nativeUI.alert("收款成功");
 												if(audioPlay == 1){
 													startPlay('_www/audio/transsucc.mp3');
 													window.setTimeout(function(){

@@ -19,9 +19,13 @@
 	<script type="text/javascript">
 		(function($, doc) {
 			$.init({
-				statusBarBackground: '#f7f7f7'
+				statusBarBackground: '#f7f7f7',
+				keyEventBind: {
+					backbutton: false  //关闭back按键监听
+				}
 			});
 			$.plusReady(function() {
+				var out_trade_no = localStorage.getItem("pay_wait_trade_no");
 				doc.getElementById("J_second").innerHTML = 90;
 				var second = 90;
 				var timer = null;
@@ -32,11 +36,13 @@
 					if(second >0 ){
 						doc.getElementById("J_second").innerHTML = second;
 					}else{
+						plus.nativeUI.alert("支付超时");
 						clearInterval(timer);
+						getToUrl(0);
 					}
 				},1000);
 				
-				var out_trade_no = localStorage.getItem("pay_wait_trade_no");
+				
 				if(out_trade_no == null){
 					clicked("barcode_pay.html",false,false);
 					return;
@@ -129,11 +135,11 @@
 							payWait(out_trade_no);
 						}else{
 							if(data.msg == '请先登录'){
-								plus.nativeUI.toast("请先登录");
+								plus.nativeUI.alert("请先登录");
 								clicked('login.html',false,false);
 								return;
 							}else{
-								plus.nativeUI.toast(data.msg);
+								plus.nativeUI.alert(data.msg);
 								clicked('pay_record.html',false,false);
 								return;
 							}
@@ -176,7 +182,7 @@
 								}
 								//支付成功
 								plus.nativeUI.closeWaiting();
-								plus.nativeUI.toast("收款成功");
+								plus.nativeUI.alert("收款成功");
 								if(audioPlay == 1){
 			    					startPlay('_www/audio/transsucc.mp3');
 				    				window.setTimeout(function(){
@@ -226,7 +232,7 @@
 	<div class="zk_pop">
 		<div class="money">
 			<div class="time"><span class="second" id="J_second"></span>秒</div>
-			<strong>请等待</strong>
+			<strong>请等待客户输入支付密码...</strong>
 		</div>
 		<div class="open-list two">
 			

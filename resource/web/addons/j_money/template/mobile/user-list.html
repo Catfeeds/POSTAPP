@@ -45,21 +45,32 @@
 	}
 </style>
 <script>
-	$(".game-info").on("click",function(){
-		var href = $(this).data("url");
-		if(confirm("是否登录该门店?")){
-			location.href = href;
+	var flag = "{$flag}";
+	if(flag == 1){
+		if(confirm("是否登录{$companyname}?")){
+			location.href = "{$url}";
 		}
-	})
+	}
+	function login(userid,companyname){
+		var url = "{$url}&userid=" + userid;
+		// alert(url);
+		if(confirm("是否登录"+companyname+"?")){
+			location.href = url;
+		}
+	}
+// 	$(".game-info").on("click",function(){
+// 		alert(1);
+// //		var href = $(this).data("url");
+// //		if(confirm("是否登录该门店?")){
+// //			location.href = href;
+// //		}
+// 	})
 </script>
 </head>
 <body>
 	<div class="gamebody">
-		<!-- <header>
-			<h3>用户列表</h3>
-		</header> -->
 		{loop $list $item}
-			<div class="game-info" data-url="{$url}&userid={$item['userid']}">
+			<div class="game-info" onclick="login('{$item['userid']}','{$item['companyname']}');" data-url="{$url}&userid={$item['userid']}">
 				<div class="box">
 					<div class="Detail">
 						门店:{$item['companyname']}<br>

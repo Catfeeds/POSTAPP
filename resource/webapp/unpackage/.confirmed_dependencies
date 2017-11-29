@@ -55,7 +55,8 @@
       "login.html",
       "order_detail.html",
       "member.html",
-      "setting.html"
+      "setting.html",
+      "scan_refund_by_fuyou.html"
     ],
     "resources": []
   },
@@ -75,7 +76,8 @@
       "setting.html",
       "barcode_pay.html",
       "search_member_card.html",
-      "check_member_card.html"
+      "check_member_card.html",
+      "pay_record.html"
     ],
     "resources": []
   },
@@ -155,6 +157,7 @@
   "pay_wait.html": {
     "refer": [
       "order_detail.html"
-    ]
+    ],
+    "resources": []
   }
 }

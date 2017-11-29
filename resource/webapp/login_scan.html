@@ -69,14 +69,14 @@
 									async:true,
 									dataType:"json",
 									success:function(data){
-										console.log(data);
+										console.log(JSON.stringify(data));
 										if(data.success == false){
 											if(data.reload == false){
 												var interval = window.setTimeout(function(){
 													checkLogin();
 												},3000);
 											}else{
-												window.reload();
+												clicked("login_scan.html",false,false);
 												return;
 											}
 										}else{

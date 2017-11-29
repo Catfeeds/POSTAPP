@@ -21,9 +21,9 @@ function printOrder(out_trade_no){
 //  	console.log(data);
 //	    console.log(JSON.stringify(data));
 	    if(data == -1){
-				plus.nativeUI.toast("请设置默认打印模板");
+				plus.nativeUI.alert("请设置默认打印模板");
 	    }else if(data == -2){
-	    	plus.nativeUI.toast("请先登录");
+	    	plus.nativeUI.alert("请先登录");
 	    	clicked('login.html',false,false);
 	    }else{
 	      	console.log(data);
@@ -37,12 +37,12 @@ function printOrder(out_trade_no){
 	           	var reason = bundle.getString("reason");
 	           	console.log(reason);
 	           	if(reason.indexOf("SUCCESS") != -1){
-	           		plus.nativeUI.toast("打印成功");
+	           		plus.nativeUI.alert("打印成功");
 	           	}else{
 	           		var str = reason.split("-")[1];
-	           		plus.nativeUI.toast(str);
+	           		plus.nativeUI.alert(str);
 	           	}
-//	          	plus.nativeUI.toast(reason);
+//	          	plus.nativeUI.alert(reason);
 	        };
 	        main.startActivityForResult(intent, 0);
 	      }
@@ -74,5 +74,6 @@ function printOrder(out_trade_no){
 				}
 			})
 		}
+
 	})
 }(mui, document));
