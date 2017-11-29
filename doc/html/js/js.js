@@ -162,9 +162,11 @@ $('.zx-setup ul li h5').on(window.a, function() {
 	if (typeof(this.data_switch) == 'undefined' || this.data_switch == '0') {
 		this.data_switch = 1;
 		$(this).addClass('active');
+		$(this).find('var').text('ON').css('color','#fff').addClass('ac');
 	} else {
 		this.data_switch = 0;
 		$(this).removeClass('active');
+		$(this).find('var').text('OFF').css('color','#a0a0a0').removeClass('ac');
 	}
 });
 

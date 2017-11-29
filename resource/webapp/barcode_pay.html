@@ -30,6 +30,7 @@
 			plus.storage.setItem("pay_total",total);
 			if(pay_type == 2){
 				clicked('scan_payall_by_fuyou.html',false,false);
+//				clicked("barcode_scan_payall.html",false,false);
 				return;
 			}else{
 				clicked('card_pay_info.html',false,false);
@@ -58,12 +59,12 @@
 </head>
 <body class="bgf0f0f0">
 	<header class="header">
-		<div class="left-nav" onclick="clicked('pay_record.html',false,false)">
+		<div class="left-nav vv" onclick="clicked('pay_record.html',false,false)">
 			<a href="#">记录</a>
 		</div>
 		<div class="logo"><a href="#"><img src="img/hico3.png" alt=""></a></div>
-		<div class="right-nav" onclick="clicked('scan_refund_by_fuyou.html',false,false)">
-			<a href="#">退款</a>
+		<div class="right-nav set" onclick="clicked('setting.html',false,false)">
+			<a href="#"></a>
 		</div>
 	</header>
 	<main class="main">
@@ -129,7 +130,7 @@
 	<footer class="footer footer-nav pc">
 		<a href="#" onclick="clicked('member.html',false,false)" class="vip"><div class="pic"></div><div class="text">会员</div></a>
 		<a href="#" class="center money active"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
-		<a href="#" onclick="clicked('setting.html',false,false)" class="set"><div class="pic"></div><div class="text">设置</div></a>
+		<a href="#" onclick="clicked('pay_record.html',false,false)" class="set hhh"><div class="pic"></div><div class="text">记录</div></a>
 	</footer>
 	<script src="js/zepto.js"></script>
 	<script src="js/event.js"></script>

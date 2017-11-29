@@ -21,10 +21,16 @@
 				var Intent        = plus.android.importClass("android.content.Intent");
 				var ComponentName = plus.android.importClass("android.content.ComponentName");
 				var intent        = new Intent();
+				var flag = false;
 				intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.NewSetScanCodeActivity"));
 				intent.putExtra("flag","true");
 				main = plus.android.runtimeMainActivity();
 				main.onActivityResult = function(requestCode, resultCode, data) { 
+					console.log("flag = " + flag);
+					if(flag){
+						return;
+					}
+					flag = true;
 					plus.android.importClass(data);
 					var bundle = data.getExtras();
 					plus.android.importClass(bundle);
@@ -63,29 +69,32 @@
 									if(audioPlay == 1){
 										startPlay('_www/audio/transfail.mp3');
 										window.setTimeout(function(){
-											getToUrl();
+											getToUrl(0);
 											return false;
 										},3000);
 									}else{
-										getToUrl();
+										getToUrl(0);
 										return false;
 									}
 
 								}else{
 									if(data.paywait == true){
-										plus.nativeUI.showWaiting( "等待客户输入支付密码..." );
+//										plus.nativeUI.showWaiting( "等待客户输入支付密码..." );
 										var out_trade_no = data.out_trade_no;
-										payWait(out_trade_no);
+										localStorage.setItem("pay_wait_trade_no",out_trade_no);
+	    								clicked("pay_wait.html",false,false);
+	    								return;
+//										payWait(out_trade_no);
 									}else{
 										plus.nativeUI.toast("收款成功");
 										if(audioPlay == 1){
 											startPlay('_www/audio/transsucc.mp3');
 											window.setTimeout(function(){
-												getToUrl();
+												getToUrl(1);
 												return false;
 											},2000);
 										}else{
-											getToUrl();
+											getToUrl(1);
 											return false;
 										}
 
@@ -93,9 +102,12 @@
 									}
 								}
 
-								function getToUrl(){
+								function getToUrl(is_print){
 									if(out_trade_no != null && out_trade_no !=0){
-										printOrder(out_trade_no);
+										if(is_print == 1){
+											printOrder(out_trade_no);
+										}
+										
 										localStorage.setItem("out_trade_no",out_trade_no);
 										clicked('order_detail.html',false,false);
 									}else{
@@ -128,11 +140,11 @@
 												if(audioPlay == 1){
 													startPlay('_www/audio/transfail.mp3');
 													window.setTimeout(function(){
-														getToUrl();
+														getToUrl(0);
 														return false;
 													},3000);
 												}else{
-													getToUrl();
+													getToUrl(0);
 													return false;
 												}
 											}else{
@@ -147,11 +159,11 @@
 												if(audioPlay == 1){
 													startPlay('_www/audio/transsucc.mp3');
 													window.setTimeout(function(){
-														getToUrl();
+														getToUrl(1);
 														return false;
 													},2000);
 												}else{
-													getToUrl();
+													getToUrl(1);
 													return false;
 												}
 //												getToUrl();

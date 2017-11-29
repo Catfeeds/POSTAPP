@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" class="hg">
+<head design-width="540">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<!-- 优先使用 IE 最新版本和 Chrome -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<!-- <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/> -->
+	<!-- 添加 favicon icon -->
+	<meta name="renderer" content="webkit">
+	<title>订单信息</title>
+	<link rel="stylesheet" href="css/public.css?ver=1" />
+	<script src="js/font-size.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/print.js"></script>
+	
+	<script type="text/javascript">
+		(function($, doc) {
+			$.init({
+				statusBarBackground: '#f7f7f7'
+			});
+			$.plusReady(function() {
+				doc.getElementById("J_second").innerHTML = 90;
+				var second = 90;
+				var timer = null;
+				var account = localStorage.getItem("account");
+				var audioPlay = localStorage.getItem(account+"audioPlay");
+				timer = setInterval(function(){
+					second -= 1;
+					if(second >0 ){
+						doc.getElementById("J_second").innerHTML = second;
+					}else{
+						clearInterval(timer);
+					}
+				},1000);
+				
+				var out_trade_no = localStorage.getItem("pay_wait_trade_no");
+				if(out_trade_no == null){
+					clicked("barcode_pay.html",false,false);
+					return;
+				}
+				//获取订单详情
+				var baseUrl = plus.storage.getItem("baseUrl");
+				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=getOrderDetail";
+				mui.ajax({
+					type: "post",
+					url: postUrl,
+					data:{out_trade_no:out_trade_no},
+					async: true,
+					dataType: "json",
+					success: function(data) {
+						console.log(JSON.stringify(data));
+						if(data.success = true){
+							var order = data.trade;
+							var status = order.status;
+							var paytype = order.paytype;
+							var tradeUser = data.tradeUser;
+							var str = "";
+							var statusStr = "";
+							var menuStr = "";
+
+							if(status == 0){
+								statusStr += "<img src=\"img/pic_4.png\" alt=\"收款失败\">";
+								statusStr +="<strong>收款失败</strong>";
+
+								menuStr += "<div class=\"fixed-menu\">";
+								menuStr += "<a href=\"#\" id='refresh' data-ordersn='"+out_trade_no+"'><img class=\"img1\" src=\"img/ico_6.png\" alt=\"刷新\">刷新</a>";
+								menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
+								menuStr += "</div>";
+
+							}else if(status == 1){
+								statusStr += "<img src=\"img/pic_3.png\" alt=\"收款成功\">";
+								statusStr +="<strong>收款成功</strong>";
+								menuStr += "<div class=\"fixed-menu\">";
+								menuStr += "<a href=\"#\" id='print' data-ordersn='"+out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
+								menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
+								menuStr += "</div>";
+
+							}else if(status == 2){
+								statusStr += "<img src=\"img/pic_3.png\" alt=\"已退款\">";
+								statusStr +="<strong>已退款</strong>";
+								menuStr += "<div class=\"fixed-menu\">";
+								menuStr += "<a href=\"#\" id='print' data-ordersn='"+out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
+								menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
+								menuStr += "</div>";
+							}
+
+							var paytypeStr = "";
+							var cardPayStr = "";
+							if(paytype == 0){
+									//微信支付
+								paytypeStr = "<span><img src=\"img/ico_3.png\" alt=\"微信支付\">微信支付</span>";
+							}else if(paytype == 1){
+									//支付宝
+								paytypeStr = "<span><img src=\"img/ico_4.png\" alt=\"支付宝支付\">支付宝支付</span>";
+							}else if(paytype == 3){
+									//刷卡
+								paytypeStr = "<span><img src=\"img/ico_3.png\" alt=\"刷卡支付\">刷卡支付</span>";
+								cardPayStr = "<li>银行卡号<span>62101545646546540</span></li>";
+							}
+
+							str += "<ul>";
+							str += "<li>";
+							str += "账单应付";
+							str += "<span class=\"blue\">￥"+order.order_fee+"</span>";
+							str += "</li>";
+							str += "<li>";
+							str += "支付方式";
+							str += paytypeStr;
+							str += "</li>";
+							str += "<li>";
+							str += "交易单号";
+							str += "<span>"+out_trade_no+"</span>";
+							str += "</li>";
+							str += "<li>";
+							str += "收银员";
+							str += "<span>"+tradeUser.realname+"</span>";
+							str += "</li>";
+							str += "<li>";
+							str += "交易时间";
+							str += "<span>"+order.time+"</span>";
+							str += "</li>";
+							str += "</ul>";
+
+
+							doc.querySelector('.open-list').innerHTML = str;
+							payWait(out_trade_no);
+						}else{
+							if(data.msg == '请先登录'){
+								plus.nativeUI.toast("请先登录");
+								clicked('login.html',false,false);
+								return;
+							}else{
+								plus.nativeUI.toast(data.msg);
+								clicked('pay_record.html',false,false);
+								return;
+							}
+						}
+					}
+
+				}) 
+				function payWait(out_trade_no){
+	    			var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=pay_waitpassword";
+	    			mui.ajax({
+	    				type: "post",
+	    				url: postUrl,
+	    				data: {
+	    					out_trade_no: out_trade_no	
+	    				},
+	    				async: true,
+	    				dataType: "json",
+	    				success: function(data) {
+	    					console.log(JSON.stringify(data))
+	    					console.log("paywait" + data.success);
+							if(data.success == false){
+								plus.nativeUI.closeWaiting();
+								plus.nativeUI.alert(data.msg);
+				    			if(audioPlay == 1){
+				    				startPlay('_www/audio/transfail.mp3');
+					    			window.setTimeout(function(){
+							    		getToUrl(0);
+						    			return false;
+							    	},3000);
+				    			}else{
+				    				getToUrl(0);
+						    		return false;
+				    			}
+							}else{
+								if(data.paywait == true){
+			    					var interval = window.setTimeout(function(){
+			    						payWait(out_trade_no);
+			    					},2000);
+			    					return;
+								}
+								//支付成功
+								plus.nativeUI.closeWaiting();
+								plus.nativeUI.toast("收款成功");
+								if(audioPlay == 1){
+			    					startPlay('_www/audio/transsucc.mp3');
+				    				window.setTimeout(function(){
+						    			getToUrl(1);
+					    				return false;
+						    		},2000);
+			    				}else{
+			    					getToUrl(1);
+					    			return false;
+			    				}
+							}
+	    					
+	    				}
+	    			})
+	    		}
+				function getToUrl(is_print){
+				    if(out_trade_no != null && out_trade_no !=0){
+				    				//打印
+				    	if(is_print == 1){
+				    		printOrder(out_trade_no);
+				    	}
+									
+					    localStorage.setItem("out_trade_no",out_trade_no);
+						clicked('order_detail.html',false,false);
+					}else{
+					    back();
+					}
+				}
+				    		// 开始播放
+				    		// 播放文件相关对象
+				function startPlay(url){
+					var p = plus.audio.createPlayer(url);
+					p.play(function(){
+						p.stop();
+					}, function(e){
+						plus.nativeUI.alert('播放音频文件失败');
+					});
+				}
+			})
+		}(mui, document));
+	</script>
+</head>
+<body class="bgf7f7f7 hg">
+	<div class="zx-payment-t">
+		<h6 class="tac">订单信息</h6>
+	</div>
+	<div class="zk_pop">
+		<div class="money">
+			<div class="time"><span class="second" id="J_second"></span>秒</div>
+			<strong>请等待</strong>
+		</div>
+		<div class="open-list two">
+			
+		</div>
+	</div>
+</body>
+</html>
+

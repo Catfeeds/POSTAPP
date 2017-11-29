@@ -31,6 +31,9 @@
 					doc.getElementById("account").innerHTML = "账号：" + account +" 收银员："+ realname;
 					if(audioPlay == 1){
 						mui('.zx-setup .switch h5')[0].setAttribute("class","active");
+						mui('.zx-setup .switch var')[0].setAttribute("class","ac");
+						mui('.zx-setup .switch var')[0].setAttribute("style","color:#fff");
+						mui('.zx-setup .switch var')[0].innerHTML= "NO";
 					}
 					
 					var wgtVer = null;
@@ -227,9 +230,16 @@
 						console.log(classn);
 						if(classn == "active"){
 							this.setAttribute("class","");
+							mui('.zx-setup .switch var')[0].setAttribute("class","");
+							mui('.zx-setup .switch var')[0].setAttribute("style","color:rgb(160, 160, 160)");
+							
+							mui('.zx-setup .switch var')[0].innerHTML= "OFF";
 							localStorage.setItem( account+"audioPlay", 0);
 						}else{
 							this.setAttribute("class","active");
+							mui('.zx-setup .switch var')[0].setAttribute("class","ac");
+							mui('.zx-setup .switch var')[0].setAttribute("style","color:#fff");
+							mui('.zx-setup .switch var')[0].innerHTML= "NO";
 							localStorage.setItem( account+"audioPlay", 1);
 						}
 					});
@@ -271,7 +281,8 @@
 	</script>
 </head>
 <body class="bgf7f7f7">
-	<div class="zx-setup-t">
+	<div class="zx-payment-t">
+		<h5 onClick="back()"><img src="img/zx2.png" alt=""></h5>
 		<h6>设置</h6>
 	</div>
 
@@ -298,7 +309,7 @@
 				<h5 id="updateVer"><span>更新</span><img src="img/zx1.png" alt=""></h5>
 			</li>
 			<li class="wl2 switch">
-				<h6>语音播报</h6><h5 id="audio_play"><label><b><input type="checkbox"></b></label></h5>
+				<h6>语音播报</h6><h5 id="audio_play"><label class="bgg"><b><input type="checkbox"><var>OFF</var></b></label></h5>
 			</li>
 		</ul>
 		<h4 onclick="plus.nativeUI.alert('音量按键可调整语音音量')"><a href="#">收不到语音通知？</a></h4>
@@ -307,14 +318,15 @@
 <div id="console">
 		
 </div>
-	<div class="footer-none"></div>
+	<!--<div class="footer-none"></div>
 	<footer class="footer footer-nav pc">
 		<a href="#" onclick="clicked('member.html',false,false)" class="vip"><div class="pic"></div><div class="text">会员</div></a>
 		<a href="#" onclick="clicked('barcode_pay.html',false,false)" class="center money"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
 		<a href="#" class="set active"><div class="pic"></div><div class="text">设置</div></a>
-	</footer>
+	</footer>-->
 	<script src="js/zepto.js"></script>
-	<script src="js/event.js"></script>
+	<script src="js/event.js">< $
+	>
 	<script src="js/touch.js"></script>
 	<script src="js/js.js"></script>
 

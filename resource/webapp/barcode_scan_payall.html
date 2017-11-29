@@ -97,30 +97,32 @@ function onmarked(type, result, file){
     			if(audioPlay == 1){
     				startPlay('_www/audio/transfail.mp3');
 	    			window.setTimeout(function(){
-			    		getToUrl();
+			    		getToUrl(0);
 		    			return false;
 			    	},3000);
     			}else{
-    				getToUrl();
+    				getToUrl(0);
 		    		return false;
     			}
     			
     		}else{
     			//等待输入密码
     			if(data.paywait == true){
-    				plus.nativeUI.showWaiting( "等待客户输入支付密码..." );
+//  				plus.nativeUI.showWaiting( "等待客户输入支付密码..." );
     				var out_trade_no = data.out_trade_no;
-    				payWait(out_trade_no);
+    				localStorage.setItem("pay_wait_trade_no",out_trade_no);
+    				clicked("pay_wait.html",false,false);
+//  				payWait(out_trade_no);
     			}else{
     				plus.nativeUI.toast("收款成功");
     				if(audioPlay == 1){
     					startPlay('_www/audio/transsucc.mp3');
 	    				window.setTimeout(function(){
-			    			getToUrl();
+			    			getToUrl(1);
 		    				return false;
 			    		},2000);
     				}else{
-    					getToUrl();
+    					getToUrl(1);
 		    			return false;
     				}
     				
@@ -128,10 +130,13 @@ function onmarked(type, result, file){
     			}
     		}
     		
-    		function getToUrl(){
+    		function getToUrl(is_print){
     			if(out_trade_no != null && out_trade_no !=0){
     				//打印
-					printOrder(out_trade_no);
+    				if(is_print == 1){
+    					printOrder(out_trade_no);
+    				}
+					
 	    			localStorage.setItem("out_trade_no",out_trade_no);
 					clicked('order_detail.html',false,false);
 	    		}else{
@@ -163,7 +168,7 @@ function onmarked(type, result, file){
 						if(data.success == false){
 							plus.nativeUI.closeWaiting();
 							plus.nativeUI.alert(data.msg);
-			    			getToUrl();
+			    			getToUrl(0);
 			    			return false;
 						}else{
 							if(data.paywait == true){
@@ -175,7 +180,7 @@ function onmarked(type, result, file){
 							//支付成功
 							plus.nativeUI.closeWaiting();
 							plus.nativeUI.toast("收款成功");
-							getToUrl();
+							getToUrl(1);
 			    			return false;
 						}
     					

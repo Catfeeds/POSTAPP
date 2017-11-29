@@ -44,6 +44,14 @@
 		color:#000;
 	}
 </style>
+<script>
+	$(".game-info").on("click",function(){
+		var href = $(this).data("url");
+		if(confirm("是否登录该门店?")){
+			location.href = href;
+		}
+	})
+</script>
 </head>
 <body>
 	<div class="gamebody">
@@ -51,8 +59,7 @@
 			<h3>用户列表</h3>
 		</header> -->
 		{loop $list $item}
-		<a href="{$url}&userid={$item['userid']}">
-			<div class="game-info">
+			<div class="game-info" data-url="{$url}&userid={$item['userid']}">
 				<div class="box">
 					<div class="Detail">
 						门店:{$item['companyname']}<br>
@@ -61,7 +68,6 @@
 					</div>
 				</div>
 			</div>
-		</a>
 		{/loop}
 	</div>
 </body>

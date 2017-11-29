@@ -7,7 +7,7 @@
 	"id": "H5BBED553",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "万车通收银台",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.3.4",/*应用版本名称*/
+		"name": "1.3.6",/*应用版本名称*/
 		"code": ""
 	},
 	"description": "",/*应用描述信息*/
@@ -249,7 +249,10 @@
 			},
 			"barcode_pay.html": {
 				"resources": [
-					"card_pay.html"
+					"card_pay.html",
+					"img/setssss.png",
+					"img/hh.png",
+					"img/gggggg.png"
 				],
 				"refer": [
 					"barcode_scan_payall.html",
@@ -274,7 +277,8 @@
 					"member.html",
 					"modif_password.html",
 					"nfc.html",
-					"embed.html"
+					"embed.html",
+					"pay_wait.html"
 				],
 				"priority": 0
 			},
@@ -292,7 +296,9 @@
 				"refer": [
 					"barcode_pay.html",
 					"login.html",
-					"order_detail.html"
+					"order_detail.html",
+					"member.html",
+					"setting.html"
 				],
 				"priority": 0
 			},
@@ -385,7 +391,8 @@
 				"resources": [],
 				"refer": [
 					"order_detail.html",
-					"barcode_pay.html"
+					"barcode_pay.html",
+					"pay_wait.html"
 				],
 				"priority": 0
 			},
@@ -396,6 +403,13 @@
 				"refer": [
 					"barcode_pay.html",
 					"setting.html"
+				],
+				"priority": 0
+			},
+			"pay_wait.html": {
+				"resources": [],
+				"refer": [
+					"order_detail.html"
 				],
 				"priority": 0
 			}

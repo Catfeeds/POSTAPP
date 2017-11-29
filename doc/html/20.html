@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head design-width="540">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<!-- 优先使用 IE 最新版本和 Chrome -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<!-- 启用360浏览器的极速模式(webkit) -->
+	<!-- <link rel="shortcut icon" type="image/ico" href="/favicon.ico"/> -->
+	<!-- 添加 favicon icon -->
+	<meta name="renderer" content="webkit">
+	<title>付款</title>
+	<link rel="stylesheet" href="css/public.css?ver=1" />
+	<script src="js/font-size.js"></script>
+</head>
+<body class="bgf7f7f7">
+	<div class="zx-payment-t">
+		<h5 onClick="javascript:history.back()"><img src="img/zx2.png" alt=""></h5>
+		<h6>手动收款</h6>
+	</div>
+	<div class="zx-word">
+		<h6><span>收款码</span><input type="text" placeholder="请输入钱包收款码" value=""></h6>
+	</div>
+	<div class="zx-word2 zx-word3">
+		<input class="inp1" type="submit" value="取消">
+		<input class="inp2" type="submit" value="确认">
+	</div>
+	
+</body>
+<script src="js/jquery-3.1.0.min.js"></script>
+<script>
+$('.hy-list .bottom span img').click(function(event) {
+    $(this).parent().siblings('var').fadeIn();
+    event.stopPropagation();
+  });
+
+$('body').click(function(event) {
+	$('.hy-list .bottom var').fadeOut();
+
+});
+</script>
+</html>
+

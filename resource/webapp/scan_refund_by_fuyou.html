@@ -18,10 +18,15 @@
 					var Intent = plus.android.importClass("android.content.Intent");
 					var ComponentName = plus.android.importClass("android.content.ComponentName");
 					var intent = new Intent();
+					var flag = false;
 					intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.NewSetScanCodeActivity"));
 					intent.putExtra("flag","true");
 					main = plus.android.runtimeMainActivity();
 					main.onActivityResult = function(requestCode, resultCode, data) { 
+						if(flag){
+							return;
+						}
+						flag = true;
 						plus.android.importClass(data);
 						var bundle = data.getExtras();
 						plus.android.importClass(bundle);

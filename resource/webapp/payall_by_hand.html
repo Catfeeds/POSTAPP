@@ -7,6 +7,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/print.js"></script>
 	</head>
 
 	<body>
@@ -81,9 +83,13 @@
 				    		}else{
 				    			//等待输入密码
 				    			if(data.paywait == true){
-				    				plus.nativeUI.showWaiting( "等待客户输入支付密码..." );
+				    				//plus.nativeUI.showWaiting( "等待客户输入支付密码..." );
+				    				
 				    				var out_trade_no = data.out_trade_no;
-				    				payWait(out_trade_no);
+				    				localStorage.setItem("pay_wait_trade_no",out_trade_no);
+    								clicked("pay_wait.html",false,false);
+    								return;
+				    				//payWait(out_trade_no);
 				    			}else{
 				    				plus.nativeUI.toast("收款成功");
 				    				if(audioPlay == 1){
@@ -101,10 +107,13 @@
 				    			}
 				    		}
 				    		
-				    		function getToUrl(){
+				    		function getToUrl(is_print){
 				    			if(out_trade_no != null && out_trade_no !=0){
 				    				//打印
-									printOrder(out_trade_no);
+				    				if(is_print == 1){
+				    					printOrder(out_trade_no);
+				    				}
+									
 					    			localStorage.setItem("out_trade_no",out_trade_no);
 									clicked('order_detail.html',false,false);
 					    		}else{
