@@ -17,7 +17,19 @@
 	<script type="text/javascript" src="js/common.js"></script>
 	
 	<script type="text/javascript">
-		
+
+
+		document.addEventListener('plusready',plusReady,false);
+
+		function plusReady(){
+			
+			plus.key.addEventListener('backbutton',function(){
+				console.log('backbutton');
+				plus.runtime.quit();
+			},false);
+		}
+
+
 		function goBarcodePay(){
 			var pay_type = $("#pay_type").val();
 			var total = document.getElementById('total-text').innerHTML;
