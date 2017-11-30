@@ -136,75 +136,10 @@
 					
 					
 					
-					// $(".zx-setup").on("click","#printTest",function(){
-					// 	var main = null;
-					// 	var Intent = plus.android.importClass("android.content.Intent");
-					// 	var ComponentName = plus.android.importClass("android.content.ComponentName");
-					// 	// 导入后可以使用new方法创建类的实例对象
-					// 	var intent = new Intent();
-					// 	var data = {
-					// 		    "spos": [
-					// 		        {	
-					// 		        	"version": "0.1",
-					// 		            "position": "center",
-					// 		            "content": "POS签购单",
-					// 		            "contenttype": "txt",
-					// 		            "bold": "1",  
-					// 		            "height": "1",
-					// 		            "italic": "0",
-					// 		            "offset": "0",
-					// 		            "size": "3"
-					// 		        },
-					// 		        {
-					// 		            "position": "left",
-					// 		            "content": "商户名称(MERCHANT NAME):\n武汉市江岸区便捷货运部\n商户编号(MERCHANT NO):\n818521042150005\n终端编号(TERMINAL NO):\n60919624",
-					// 		            "contenttype": "txt",
-					// 		            "bold": "0",
-					// 		            "height": "-1",
-					// 		            "italic": "0",
-					// 		            "offset": "0",
-					// 		            "size": "2"
-					// 		        },
-					// 		        {
-					// 		            "position": "right",
-					// 		            "content": "623058******3229340",
-					// 		            "contenttype": "txt",
-					// 		            "bold": "1",
-					// 		            "height": "-1",
-					// 		            "italic": "0",
-					// 		            "offset": "0",
-					// 		            "size": "3"
-					// 		        },
-					// 		        {
-					// 		            "position": "left",
-					// 		            "content": "凭证号:               100006",
-					// 		            "contenttype": "txt",
-					// 		            "bold": "0",
-					// 		            "height": "-1",
-					// 		            "italic": "0",
-					// 		            "offset": "0",
-					// 		            "size": "2"
-					// 		        }
-					// 		    ]
-					// 		};
-
-					// 	intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.CustomPrinterActivity"));
-					// 	intent.putExtra("data", JSON.stringify(data));
-					// 	intent.putExtra("isPrintTicket", "true");
-
-
-					// 	main = plus.android.runtimeMainActivity();
-					// 	main.onActivityResult = function(requestCode, resultCode, data) {
-
-					// 		plus.android.importClass(data);
-					// 		var bundle = data.getExtras();
-					// 		plus.android.importClass(bundle);
-					// 		var reason = bundle.getString("reason");
-					// 		plus.nativeUI.toast(reason);
-					// 	};
-
-					// 	main.startActivityForResult(intent, 0);
-					// })
+					$(".zx-setup").on("click","#printTest",function(){
+						plus.nativeUI.alert("设备唯一值：" + plus.device.imei);
+						printOrder(0);
+					})
 					
 					$(".zx-setup").on("click","#scanTest",function(){
 						var main = null;
@@ -239,7 +174,7 @@
 							this.setAttribute("class","active");
 							mui('.zx-setup .switch var')[0].setAttribute("class","ac");
 							mui('.zx-setup .switch var')[0].setAttribute("style","color:#fff");
-							mui('.zx-setup .switch var')[0].innerHTML= "NO";
+							mui('.zx-setup .switch var')[0].innerHTML= "ON";
 							localStorage.setItem( account+"audioPlay", 1);
 						}
 					});
@@ -295,7 +230,7 @@
 			</h6>
 		</div>
 		<ul>
-			<li id="printTest" onclick="printOrder(0)">
+			<li id="printTest">
 				<h6>打印测试</h6><h5><img src="img/zx1.png" alt=""></h5>
 			</li>
 			<!--<li class="wl1" onclick="startPlay('_www/audio/transsucc.mp3');">

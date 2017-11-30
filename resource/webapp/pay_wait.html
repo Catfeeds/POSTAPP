@@ -162,7 +162,8 @@
 	    					console.log("paywait" + data.success);
 							if(data.success == false){
 								plus.nativeUI.closeWaiting();
-								plus.nativeUI.alert(data.msg);
+								localStorage.setItem("pay_error_msg",data.msg);
+//								plus.nativeUI.alert(data.msg);
 				    			if(audioPlay == 1){
 				    				startPlay('_www/audio/transfail.mp3');
 					    			window.setTimeout(function(){

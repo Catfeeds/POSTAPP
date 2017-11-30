@@ -1724,10 +1724,10 @@ class J_moneyModuleSite extends WeModuleSite
 			// 		  PRIMARY KEY (`id`)
 			// 		) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 			// pdo_run($sql);
-			$list = pdo_fetchall('SELECT a.id as userid, a.useracount,a.realname,a.openid,b.id as shopid,b.companyname FROM '.tablename('j_money_user').' a left join '.tablename('j_money_group').' b on a.pcate=b.id WHERE a.weid=:weid',array(':weid'=>$_W['uniacid']));
-			$url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode;
+			// $list = pdo_fetchall('SELECT a.id as userid, a.useracount,a.realname,a.openid,b.id as shopid,b.companyname FROM '.tablename('j_money_user').' a left join '.tablename('j_money_group').' b on a.pcate=b.id WHERE a.weid=:weid',array(':weid'=>$_W['uniacid']));
+			// $url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode;
 			// var_dump($list);
-			include $this->template('user-list');
+			// include $this->template('user-list');
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')

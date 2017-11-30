@@ -28,9 +28,15 @@ function printOrder(out_trade_no){
 	    }else{
 	      	console.log(data);
 	        var str = data;
+	        var flag = false;
 	        intent.putExtra("data", str);
 	        main = plus.android.runtimeMainActivity();
 	        main.onActivityResult = function(requestCode, resultCode, data) {
+	        		if(flag){
+	        			return false;
+	        		}
+	        		flag = true;
+	        		console.log(flag);
 	           	plus.android.importClass(data);
 	           	var bundle = data.getExtras();
 	           	plus.android.importClass(bundle);

@@ -58,7 +58,7 @@
 									
 									menuStr += "<div class=\"fixed-menu\">";
 									menuStr += "<a href=\"#\" id='refresh' data-ordersn='"+out_trade_no+"'><img class=\"img1\" src=\"img/ico_6.png\" alt=\"刷新\">刷新</a>";
-									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
+									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('barcode_pay.html',false,false);\">确认</a>";
 									menuStr += "</div>";
 
 								}else if(status == 1){
@@ -67,7 +67,7 @@
 									statusStr +="<strong>收款成功</strong>";
 									menuStr += "<div class=\"fixed-menu\">";
 									menuStr += "<a href=\"#\" id='print' data-ordersn='"+out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
-									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
+									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('barcode_pay.html',false,false);\">确认</a>";
 									menuStr += "</div>";
 
 								}else if(status == 2){
@@ -76,7 +76,7 @@
 									statusStr +="<strong>已退款</strong>";
 									menuStr += "<div class=\"fixed-menu\">";
 									menuStr += "<a href=\"#\" id='print' data-ordersn='"+out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
-									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
+									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('barcode_pay.html',false,false);\">确认</a>";
 									menuStr += "</div>";
 								}
 
@@ -192,9 +192,9 @@
 </head>
 <body class="bgf7f7f7 hg">
 	<div class="zx-payment-t">
-		<h5 onClick="clicked('barcode_pay.html',false,false)"><img src="img/zx2.png" alt=""></h5>
-		<h6>订单信息</h6>
-		<a class="jl" href="#" onClick="clicked('pay_record.html',false,false);"><img src="img/ico_7.png" alt="">记录</a>
+		<!--<h5 onClick="clicked('barcode_pay.html',false,false)"><img src="img/zx2.png" alt=""></h5>-->
+		<h6 style="width: 100%;">订单信息</h6>
+		<!--<a class="jl" href="#" onClick="clicked('pay_record.html',false,false);"><img src="img/ico_7.png" alt="">记录</a>-->
 	</div>
 	<div class="zk_pop">
 		

@@ -45,6 +45,7 @@
 								dataType: "json",
 								success: function(data) {
 									console.log(JSON.stringify(data));
+									localStorage.setItem("out_trade_no",orderid);
 									if(data.success == false){
 										if(data.msg == "请先登录"){
 											plus.nativeUI.alert("请先登录");
@@ -52,16 +53,19 @@
 											return;
 										}
 										plus.nativeUI.alert(data.msg);
+										clicked('order_detail.html',false,false);
 										back();
 										return false;
 									}else{
 										if(data.isrefunded == true){
-											plus.nativeUI.alert("退款成功");
-											clicked("pay_record.html",false,false);
+//											plus.nativeUI.alert("退款成功");
+											
+											clicked('order_detail.html',false,false);
 											return false;
 										}else{
 											plus.nativeUI.alert("退款申请已经提交,请等待处理");
-											back();
+											clicked('order_detail.html',false,false);
+//											back();
 											return false;
 										}
 									}
