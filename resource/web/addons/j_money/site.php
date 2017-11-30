@@ -2747,7 +2747,7 @@ class J_moneyModuleSite extends WeModuleSite
 						include $this->template('user-list');
 						return;
 					}else{
-						$url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode."&userid=".$list[0]['id'];
+						$url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode."&userid=".$list[0]['userid'];
 						$flag = 1;
 						$companyname = $list[0]['companyname'];
 						include $this->template('user-list');

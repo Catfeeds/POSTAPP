@@ -50,7 +50,8 @@
 								fee: fee,
 								qrcode: qrcode,
 								password: password,
-								old_trade_no: old_trade_no	
+								old_trade_no: old_trade_no,
+								attach:"MOBILE"
 							},
 							async: true,
 							dataType: "json",
@@ -66,7 +67,8 @@
 										clicked('login.html',false,false);
 										return;
 									}
-									plus.nativeUI.alert(data.msg);
+									localStorage.setItem("pay_error_msg",data.msg);
+//									plus.nativeUI.alert(data.msg);
 									if(audioPlay == 1){
 										startPlay('_www/audio/transfail.mp3');
 										window.setTimeout(function(){
@@ -87,7 +89,7 @@
 	    								return;
 //										payWait(out_trade_no);
 									}else{
-										plus.nativeUI.alert("收款成功");
+//										plus.nativeUI.alert("收款成功");
 										if(audioPlay == 1){
 											startPlay('_www/audio/transsucc.mp3');
 											window.setTimeout(function(){
@@ -110,7 +112,7 @@
 										}
 										
 										localStorage.setItem("out_trade_no",out_trade_no);
-										clicked('order_detail.html',false,false);
+										clicked('pay_order_detail.html',false,false);
 									}else{
 										back();
 									}
@@ -137,7 +139,9 @@
 											console.log("paywait" + data.success);
 											if(data.success == false){
 												plus.nativeUI.closeWaiting();
-												plus.nativeUI.alert(data.msg);
+												localStorage.setItem("pay_error_msg",data.msg);
+												
+//												plus.nativeUI.alert(data.msg);
 												if(audioPlay == 1){
 													startPlay('_www/audio/transfail.mp3');
 													window.setTimeout(function(){
@@ -156,7 +160,7 @@
 													return;
 												}
 												plus.nativeUI.closeWaiting();
-												plus.nativeUI.alert("收款成功");
+//												plus.nativeUI.alert("收款成功");
 												if(audioPlay == 1){
 													startPlay('_www/audio/transsucc.mp3');
 													window.setTimeout(function(){

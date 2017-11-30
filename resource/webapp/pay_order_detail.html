@@ -51,8 +51,10 @@
 
 								if(status == 0){
 									//失败
+									
+									var pay_error_msg = localStorage.getItem("pay_error_msg");
 									statusStr += "<img src=\"img/pic_4.png\" alt=\"收款失败\">";
-									statusStr +="<strong>收款失败</strong>";
+									statusStr +="<strong>收款失败<br>"+pay_error_msg+"</strong>";
 									
 									menuStr += "<div class=\"fixed-menu\">";
 									menuStr += "<a href=\"#\" id='refresh' data-ordersn='"+out_trade_no+"'><img class=\"img1\" src=\"img/ico_6.png\" alt=\"刷新\">刷新</a>";
@@ -190,7 +192,7 @@
 </head>
 <body class="bgf7f7f7 hg">
 	<div class="zx-payment-t">
-		<h5 onClick="back()"><img src="img/zx2.png" alt=""></h5>
+		<h5 onClick="clicked('barcode_pay.html',false,false)"><img src="img/zx2.png" alt=""></h5>
 		<h6>订单信息</h6>
 		<a class="jl" href="#" onClick="clicked('pay_record.html',false,false);"><img src="img/ico_7.png" alt="">记录</a>
 	</div>

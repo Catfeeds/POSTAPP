@@ -36,7 +36,7 @@
 					if(second >0 ){
 						doc.getElementById("J_second").innerHTML = second;
 					}else{
-						plus.nativeUI.alert("支付超时");
+//						plus.nativeUI.alert("支付超时");
 						clearInterval(timer);
 						getToUrl(0);
 					}
@@ -139,7 +139,7 @@
 								clicked('login.html',false,false);
 								return;
 							}else{
-								plus.nativeUI.alert(data.msg);
+//								plus.nativeUI.alert(data.msg);
 								clicked('pay_record.html',false,false);
 								return;
 							}
@@ -182,7 +182,7 @@
 								}
 								//支付成功
 								plus.nativeUI.closeWaiting();
-								plus.nativeUI.alert("收款成功");
+//								plus.nativeUI.alert("收款成功");
 								if(audioPlay == 1){
 			    					startPlay('_www/audio/transsucc.mp3');
 				    				window.setTimeout(function(){
@@ -206,7 +206,7 @@
 				    	}
 									
 					    localStorage.setItem("out_trade_no",out_trade_no);
-						clicked('order_detail.html',false,false);
+						clicked('pay_order_detail.html',false,false);
 					}else{
 					    back();
 					}
