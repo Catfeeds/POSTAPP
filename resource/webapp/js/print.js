@@ -80,6 +80,9 @@ function printOrder(out_trade_no){
 					if(data.success == true){
 						//打印
 						printOrder(data.out_trade_no);
+						var interval = window.setTimeout(function(){
+								checkPrintOrder();
+						},3000);
 					}else{
 						if(data.wait == true){
 							var interval = window.setTimeout(function(){

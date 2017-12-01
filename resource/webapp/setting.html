@@ -197,7 +197,9 @@
 
 			})
 			plus.storage.removeItem("islogin");
-			clicked('login.html',false,false);
+			plus.storage.removeItem("account");
+			plus.storage.removeItem("password");
+			clicked('login_scan.html',false,false);
           	return;
 			
 		}

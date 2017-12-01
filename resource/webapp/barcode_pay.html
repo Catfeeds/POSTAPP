@@ -15,7 +15,9 @@
 	<link rel="stylesheet" href="css/public.css?ver=1" />
 	<script src="js/font-size.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
-	
+	<script src="js/zepto.js"></script>
+	<script src="js/print.js"></script>
+
 	<script type="text/javascript">
 
 		
@@ -40,8 +42,105 @@
 			},false);
 			var shop = localStorage.getItem("shop");
 			$(".logo")[0].innerHTML = shop;
+			
+			$("#submitBtn").on("click",function(){
+				var pay_type = $("#pay_type").val();
+				var total = document.getElementById('total-text').innerHTML;
+				console.log(total);
+				if(total <= 0){
+					plus.nativeUI.alert('请输入金额');
+					return false;
+				}
+				plus.storage.removeItem("pay_total");
+				plus.storage.setItem("pay_total",total);
+				if(pay_type == 2){
+					clicked('scan_payall_by_fuyou.html',false,false);
+					return;
+				}else{
+//					console.log(PrefixInteger(total*100));
+					cardPay(total);
+					return;
+				}
+			});
 		}
-
+		
+		function cardPay(total){
+			var main = null;
+			var Intent = plus.android.importClass("android.content.Intent");
+			var ComponentName = plus.android.importClass("android.content.ComponentName");
+			var intent = new Intent();
+			var flag = false;
+			var total_fee = PrefixInteger(total*100);
+			var account = localStorage.getItem("account");
+			var audioPlay = localStorage.getItem(account+"audioPlay");
+			intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.MainActivity"));
+			intent.putExtra("transName", "消费");
+			intent.putExtra("amount", total_fee);
+//			intent.putExtra("orderNumber", "123435346");
+			intent.putExtra("version", "1.0.7");
+			main = plus.android.runtimeMainActivity();
+	        main.onActivityResult = function(requestCode, resultCode, data) {
+	        	if(flag){
+	        		return false;
+	        	}
+	        	flag = true;
+	        	console.log(flag);
+	        	console.log(resultCode);
+	        	plus.android.importClass(data);
+		        var bundle       = data.getExtras();
+		        plus.android.importClass(bundle);
+	        	if(resultCode == -1){
+		        	var amount       = bundle.getString("amount");
+		        	var traceNo      = bundle.getString("traceNo");
+		        	var batchNo      = bundle.getString("batchNo");
+		        	var referenceNo  = bundle.getString("referenceNo");
+		        	var cardNo       = bundle.getString("cardNo");
+		        	var type         = bundle.getString("type");
+		        	var issue        = bundle.getString("issue");
+		        	var date         = bundle.getString("date");
+		        	var time         = bundle.getString("time");
+		        	var orderNumber  = bundle.getString("orderNumber");
+		        	var terminalId   = bundle.getString("terminalId");
+		        	var merchantId   = bundle.getString("merchantId");
+		        	var merchantName = bundle.getString("merchantName");
+					console.log("traceNo = " + traceNo);	
+					console.log("cardNo = " + cardNo);
+					if(audioPlay == 1){
+			    		startPlay('_www/audio/transsucc.mp3');
+				    	window.setTimeout(function(){
+//						    getToUrl(1);
+					    	return false;
+						},2000);
+			    	}else{
+//			    		getToUrl(1);
+					    return false;
+			    	}
+				}else{
+					var reason = bundle.getString("reason");
+					console.log("reason = " + reason);	
+					plus.nativeUI.alert(reason);
+					if(audioPlay == 1){
+				    	startPlay('_www/audio/transfail.mp3');
+				    }
+				}
+				
+	        };
+	        main.startActivityForResult(intent, 0);
+		}
+		
+		function PrefixInteger(num) {
+			var length = 12;
+			return (Array(length).join('0') + num).slice(-length);
+		}
+		
+		function startPlay(url){
+			var p = plus.audio.createPlayer(url);
+			p.play(function(){
+				p.stop();
+			}, function(e){
+				plus.nativeUI.alert('播放音频文件失败');
+			});
+		}
 
 		function goBarcodePay(){
 			var pay_type = $("#pay_type").val();
@@ -65,19 +164,16 @@
 		}
 		
 		function changePayType(type){
+
 			$("#pay_type").val(type);
 			if(type == 1){
 				$(".mobile").addClass("active");
 				$(".union").removeClass("active");
 				$(".amount-collected .brand img").attr("src","img/hico4.png");
-//				mui(".mobile").setAttribute("class","mobile pay active");
-//				mui(".union").setAttribute("class","union pay");
 			}else{
 				$(".union").addClass("active");
 				$(".mobile").removeClass("active");
 				$(".amount-collected .brand img").attr("src","img/hico5.png");
-//				mui(".mobile").setAttribute("class","mobile pay");
-//				mui(".union").setAttribute("class","union pay active");
 			}
 		}
 		
@@ -136,7 +232,7 @@
 					<td>4</td>
 					<td>5</td>
 					<td>6</td>
-					<td rowspan="3" class="bg3099ff enter" onclick="goBarcodePay();">
+					<td rowspan="3" class="bg3099ff enter" id="submitBtn">
 						确认<br>
 						收款
 					</td>
@@ -160,7 +256,7 @@
 		<a href="#" class="center money active"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
 		<a href="#" onclick="clicked('pay_record.html',false,false)" class="set hhh"><div class="pic"></div><div class="text">记录</div></a>
 	</footer>
-	<script src="js/zepto.js"></script>
+	
 	<script src="js/event.js"></script>
 	<script src="js/touch.js"></script>
 	<script src="js/js.js"></script>

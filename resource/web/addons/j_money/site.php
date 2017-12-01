@@ -1736,6 +1736,7 @@ class J_moneyModuleSite extends WeModuleSite
 				die(json_encode(array("success" => false,'wait'=>false, "msg" => "没有绑定POS机")));
 			}
 			$ds = strtotime(date("Y-m-d") . " 00:00:00");
+			$ds = strtotime('-1 day',$ds);
 			$de = strtotime(date("Y-m-d") . " 23:59:59");
 			$where = " and createtime>=" . $ds . " and createtime<=" . $de;
 			$order = pdo_fetch('select * from '.tablename('j_money_print_log').' where uniacid=:uniacid and shopid=:shopid and isprint=0 '.$where,array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
@@ -1771,6 +1772,36 @@ class J_moneyModuleSite extends WeModuleSite
 			$printer = pdo_fetchall('select * from '.tablename('j_money_printer'));
 			$order = pdo_fetchall('select * from '.tablename('j_money_print_log').' where uniacid=:uniacid and shopid=:shopid'.$where,array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
 			var_dump($order);
+		}else if($operation == 'card_pay_all'){
+			$fee = $_GPC["fee"] ? $_GPC["fee"] : 1;
+			$deviceinfo = intval($_GPC["islogin"]);
+			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			if (!$user) {
+				die(json_encode(array("success" => false, "msg" => "请先登录")));
+			}
+			
+			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
+			load()->func('communication');
+			
+			$fee=$fee*100;
+			
+			$totalfee = intval(strval($fee));
+			
+			if (!$totalfee) {
+				die(json_encode(array("success" => false, "msg" => "金额不能为空")));
+			}
+
+				
+			// $userinfo = $this->authcode2openid($qrcode, $deviceinfo);
+			// $market = $this->MarketingTest($totalfee, $shop['id'], $deviceinfo, $userinfo['openid']);
+			// $coupon_fee = $market['coupon_fee'];
+			
+			$coupon_fee = 0;
+			// $marketid = $market['marketid'];
+			$data = array("weid" => $_W['uniacid'], "userid" => $deviceinfo, "groupid" => $user['pcate'], "attach" => 'MOBILE', "out_trade_no" => TIMESTAMP . mt_rand(100, 999), "order_fee" => $totalfee,  "total_fee" => $totalfee - $coupon_fee, "discount_fee" => $coupon_fee,"cash_fee" => $totalfee - $coupon_fee, "createtime" => TIMESTAMP, "createdate" => date('Y-m-d'), "old_trade_no" => $_GPC['old_trade_no']);
+
+			$result = pdo_insert("j_money_trade", $data);
+			die(json_encode($result));
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')
