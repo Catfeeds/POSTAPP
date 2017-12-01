@@ -112,7 +112,7 @@
 					async: true,
 					dataType: "json",
 					success: function(data) {
-//						console.log(data);
+						console.log(JSON.stringify(data));
 						var list = data.list;
 						if(data.success == true){
 							var list = data.list;
@@ -142,10 +142,12 @@
 								var total = list.length;
 								var str = "";
 								var cardnum = "";
+								
 								for(var i in list){
 									var thumb = "";
 									var title = "";
 									var out_trade_no = list[i]["out_trade_no"];
+									var carnumber = list[i]["carnumber"];
 									out_trade = out_trade_no.substr(out_trade_no.length-4);
 									if(list[i]['paytype'] == 0){
 										//微信支付
@@ -161,7 +163,7 @@
 										//刷卡
 										thumb = "img/hico4.png";
 										title = "刷卡收款";
-										cardnum = "<span>"+out_trade_no.substr(0,4)+"*******"+out_trade+"</span>";
+										cardnum = "<span>"+carnumber.substr(0,4)+"*******"+carnumber.substr(carnumber.length-4)+"</span>";
 									}
 
 									var status = "";

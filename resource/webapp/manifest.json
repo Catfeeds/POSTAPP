@@ -7,7 +7,7 @@
 	"id": "H5BBED553",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "万车通收银台",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.4.5",/*应用版本名称*/
+		"name": "1.4.6",/*应用版本名称*/
 		"code": ""
 	},
 	"description": "",/*应用描述信息*/
@@ -266,7 +266,8 @@
 					"login.html",
 					"scan_payall_by_fuyou.html",
 					"scan_refund_by_fuyou.html",
-					"pay_wait.html"
+					"pay_wait.html",
+					"card_payall_by_fuyou.html"
 				],
 				"priority": 0
 			},

@@ -1798,10 +1798,28 @@ class J_moneyModuleSite extends WeModuleSite
 			
 			$coupon_fee = 0;
 			// $marketid = $market['marketid'];
-			$data = array("weid" => $_W['uniacid'], "userid" => $deviceinfo, "groupid" => $user['pcate'], "attach" => 'MOBILE', "out_trade_no" => TIMESTAMP . mt_rand(100, 999), "order_fee" => $totalfee,  "total_fee" => $totalfee - $coupon_fee, "discount_fee" => $coupon_fee,"cash_fee" => $totalfee - $coupon_fee, "createtime" => TIMESTAMP, "createdate" => date('Y-m-d'), "old_trade_no" => $_GPC['old_trade_no']);
+			$data = array(
+				"weid"         => $_W['uniacid'], 
+				"userid"       => $deviceinfo, 
+				"groupid"      => $user['pcate'],
+				"attach"       => 'MOBILE',
+				"out_trade_no" => TIMESTAMP . mt_rand(100, 999),
+				"order_fee"    => $totalfee, 
+				"total_fee"    => $totalfee - $coupon_fee,
+				"discount_fee" => $coupon_fee,
+				"cash_fee"     => $totalfee - $coupon_fee,
+				"createtime"   => TIMESTAMP,
+				"createdate"   => date('Y-m-d'), 
+				"old_trade_no" => $_GPC['old_trade_no'],
+				"bank_type"    => $_GPC['issue'],
+				"paytype"      => 3,
+				"status"       => 1,
+				"carnumber"    => $_GPC['cardNo'],
+			);
 
 			$result = pdo_insert("j_money_trade", $data);
-			die(json_encode($result));
+
+			die(json_encode(array('success'=>true,'out_trade_no'=>$data['out_trade_no'])));
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')

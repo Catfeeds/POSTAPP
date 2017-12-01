@@ -21,7 +21,8 @@
       "login.html",
       "scan_payall_by_fuyou.html",
       "scan_refund_by_fuyou.html",
-      "pay_wait.html"
+      "pay_wait.html",
+      "card_payall_by_fuyou.html"
     ],
     "resources": [
       "card_pay.html",
