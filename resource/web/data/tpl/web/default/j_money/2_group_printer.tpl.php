@@ -29,6 +29,9 @@ require(['bootstrap'],function($){
                 <label class="radio-inline">
                   <input type="radio" name="ptype" value="1" <?php  if($printerItem['ptype'] == 1) { ?> checked<?php  } ?> />
                   飞鹅</label>
+                   <label class="radio-inline">
+                  <input type="radio" name="ptype" value="2" <?php  if($printerItem['ptype'] == 2) { ?> checked<?php  } ?> />
+                  POS机</label>
                 <div class="help-block"></div>
               </div>
             </div>
@@ -39,8 +42,8 @@ require(['bootstrap'],function($){
                 <div class="help-block"></div>
               </div>
             </div>
-			
-			 <div class="form-group">
+			<?php  if(empty($printerItem) || $printerItem['ptype'] == 1 ) { ?>
+			 <div class="form-group type-hide">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">飞鹅账号</label>
               <div class="col-sm-9 col-xs-12">
                 <input type="text" name="account" class="form-control" value="<?php  echo $printerItem['apiaccount'];?>" />
@@ -48,14 +51,14 @@ require(['bootstrap'],function($){
               </div>
             </div>
 			
-			 <div class="form-group">
+			 <div class="form-group type-hide">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">飞鹅Ukey</label>
               <div class="col-sm-9 col-xs-12">
                 <input type="text" name="ukey" class="form-control" value="<?php  echo $printerItem['apiukey'];?>" />
                 <div class="help-block"></div>
               </div>
             </div>
-			
+			<?php  } ?>
 			 <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">打印机编号</label>
               <div class="col-sm-9 col-xs-12">
@@ -63,15 +66,15 @@ require(['bootstrap'],function($){
                 <div class="help-block"></div>
               </div>
             </div>
-			
-			 <div class="form-group">
+			<?php  if(empty($printerItem) || $printerItem['ptype'] == 1 ) { ?>
+			 <div class="form-group type-hide">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">流量卡号码</label>
               <div class="col-sm-9 col-xs-12">
                 <input type="text" name="mobile" class="form-control" value="<?php  echo $printerItem['mobile'];?>" />
                 <div class="help-block"></div>
               </div>
             </div>
-			
+			<?php  } ?>
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否默认打印机</label>
               <div class="col-sm-9">
@@ -101,6 +104,19 @@ require(['bootstrap'],function($){
     </div>
   </form>
 </div>
+<script>
+  $(function(){
+    $("input[name='ptype']").on('click',function(){
+      var type = $(this).val();
+      console.log(type);
+      if(type == 1){
+        $(".type-hide").show();
+      }else if(type == 2){
+        $(".type-hide").hide()
+      }
+    });
+  })
+</script>
 <?php  } else if($domore == 'list') { ?>
 <div class="main">
   <div class="category">
@@ -114,7 +130,10 @@ require(['bootstrap'],function($){
                 <th>打印机名称</th>
                 <th>类型</th>
                 <th>账号</th>
+                <th>打印机编号</th>
+                <th>是否默认</th>
                 <th>添加时间</th>
+                
                 <th style="text-align:right">操作</th>
               </tr>
             </thead>
@@ -124,8 +143,10 @@ require(['bootstrap'],function($){
             <tr>
               <td></td>
               <td><?php  echo $row['title'];?></td>
-              <td>飞鹅云</td>
+              <td><?php  if($row['ptype'] == 1) { ?>飞鹅云<?php  } else if($row['ptype'] == 2) { ?>POS机<?php  } ?></td>
               <td><?php  echo $row['apiaccount'];?></td>
+              <td><?php  echo $row['printsn'];?></td>
+              <td><?php  if($row['isdef'] == 1) { ?>是<?php  } else { ?>否<?php  } ?></td>
               <td><?php  echo date('Y-m-d', $row['addtime'])?></td>
               <td style="text-align:right;overflow:visible">
               <div class="btn-group">

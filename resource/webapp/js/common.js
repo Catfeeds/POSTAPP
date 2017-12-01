@@ -14,6 +14,12 @@ function plusReady(){
 	plus.key.addEventListener('backbutton',function(){
 //		back();
 	},false);
+//	plus.key.addEventListener('menubutton',function(){
+//
+//	},false);
+//	plus.key.addEventListener('searchbutton',function(){
+//
+//	},false);
 	compatibleAdjust();
 }
 if(w.plus){

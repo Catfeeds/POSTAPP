@@ -25,6 +25,9 @@
 				}
 			});
 			$.plusReady(function() {
+				plus.key.addEventListener('backbutton',function(){
+					return false;
+				},false);
 				var out_trade_no = localStorage.getItem("pay_wait_trade_no");
 				doc.getElementById("J_second").innerHTML = 90;
 				var second = 90;

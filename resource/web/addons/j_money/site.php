@@ -179,6 +179,11 @@ class J_moneyModuleSite extends WeModuleSite
 				$insertInfo = array("openid" => $result['openid'], "is_subscribe" => $result['is_subscribe'] == "Y" ? 1 : 0, "sub_openid" => isset($result['sub_openid']) ? $result['sub_openid'] : "", "sub_is_subscribe" => isset($result['sub_is_subscribe']) && $result['sub_is_subscribe'] == "Y" ? 1 : 0, "trade_type" => $result['trade_type'], "bank_type" => $result['bank_type'], "fee_type" => $result['CNY'], "isconfirm" => 1, "status" => 1, "coupon_fee" => intval($result['coupon_fee']), "cash_fee" => intval(strval($result['cash_fee'])), "transaction_id" => $result['transaction_id'], "time_end" => strtotime($result['time_end']));
 				pdo_update("j_money_trade", $insertInfo, array("out_trade_no" => $payParama['outTradeNo']));
 				$trade = pdo_fetch("SELECT * FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' and out_trade_no=:a", array(":a" => $payParama['outTradeNo']));
+
+				//long 2017-12-01 插入打印日志表
+				if($data['attach'] == 'PC'){
+					$this->insertPrintLog($payParama['outTradeNo'],$shop['id']);
+				}
 				die(json_encode(array("success" => true, "items" => $trade, "out_trade_no" => $payParama['outTradeNo'])));
 			} elseif (substr($qrcode, 0, 1) == 2) {
 				$payParama = array("outTradeNo" => TIMESTAMP . mt_rand(100, 999), "app_id" => $shop['app_id'] ? $shop['app_id'] : $cfg['app_id'],"app_auth_token" => $shop['app_auth_token'] ? $shop['app_auth_token'] : $cfg['app_auth_token'],"sys_service_provider_id" => $shop['sys_service_provider_id'] ? $shop['sys_service_provider_id'] : $cfg['sys_service_provider_id'], "appauthtoken" => $shop['appauthtoken'] ? $shop['appauthtoken'] : $cfg['appauthtoken'], "alipay_cert" => $shop['alipay_cert'] ? $shop['alipay_cert'] : $cfg['alipay_cert'], "alipay_key" => $shop['alipay_key'] ? $shop['alipay_key'] : $cfg['alipay_key'], "alipay_store_id" => $shop['alipay_store_id']);
@@ -216,7 +221,10 @@ class J_moneyModuleSite extends WeModuleSite
 						*/
 					
 					
-					
+					//long 2017-12-01 插入打印日志表
+					if($data['attach'] == 'PC'){
+						$this->insertPrintLog($payParama['outTradeNo'],$shop['id']);
+					}
 					die(json_encode(array("success" => true, "items" => $item, "out_trade_no" => $payParama['outTradeNo'])));
 				} else {
 					pdo_update("j_money_trade", array("log" => "收款失败：" . $result['sub_msg']), array("out_trade_no" => $payParama['outTradeNo']));
@@ -334,6 +342,10 @@ class J_moneyModuleSite extends WeModuleSite
 					    //$data = array("openid" => $result['openid'], "is_subscribe" => $result['is_subscribe'] == "Y" ? 1 : 0, "sub_openid" => isset($result['sub_openid']) ? $result['sub_openid'] : "", "sub_is_subscribe" => isset($result['sub_is_subscribe']) && $result['sub_is_subscribe'] == "Y" ? 1 : 0, "trade_type" => $result['trade_type'], "bank_type" => $result['bank_type'], "fee_type" => $result['CNY'], "isconfirm" => 1, "status" => 1, "coupon_fee" => intval($result['coupon_fee']), "cash_fee" => intval(strval($result['cash_fee'])), "transaction_id" => $result['transaction_id'], "time_end" => strtotime($result['time_end']));
 						pdo_update("j_money_trade", $data, array("id" => $trade['id']));
 						if ($trade['status'] == 0) {
+							//long 2017-12-01 插入打印日志表
+							if($trade['attach'] == 'PC'){
+								$this->insertPrintLog($out_trade_no,$shop['id']);
+							}
 							die(json_encode(array("success" => true, "paywait" => false, "isnew" => true, "out_trade_no" => $out_trade_no)));
 						}
 						die(json_encode(array("success" => true, "paywait" => false, "isnew" => false, "out_trade_no" => $out_trade_no)));
@@ -357,6 +369,10 @@ class J_moneyModuleSite extends WeModuleSite
 						pdo_update("j_money_trade", $data, array("out_trade_no" => $out_trade_no));
 						$isnew = false;
 						if ($trade["status"] == 0) {
+							//long 2017-12-01 插入打印日志表
+							if($trade['attach'] == 'PC'){
+								$this->insertPrintLog($out_trade_no,$shop['id']);
+							}
 							$isnew = true;
 						}
 						die(json_encode(array("success" => true, "paywait" => false, "isnew" => $isnew, "out_trade_no" => $out_trade_no)));
@@ -1705,29 +1721,56 @@ class J_moneyModuleSite extends WeModuleSite
 			$deviceinfo = intval($_GPC["islogin"]);
 			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
 			if (!$user) {
-				die(json_encode(array("success" => false, "msg" => "请先登录")));
+				die(json_encode(array("success" => false,'wait'=>false, "msg" => "请先登录")));
 			}
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a", array(":a" => $user['pcate']));
 			if (!$shop) {
-				die(json_encode(array("success" => false, "msg" => "请先登录")));
+				die(json_encode(array("success" => false,'wait'=>false, "msg" => "请先登录")));
 			}
 
+			// $deviceImei = '123456789';
+			$deviceImei = trim($_GPC['imei']);
+
+			$printer = pdo_fetchall('select * from '.tablename('j_money_printer').' where printsn=:printsn and shopid=:shopid and weid=:uniacid and isdef=1 and ptype=2',array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id'],':printsn'=>$deviceImei));
+			if(empty($printer)){
+				die(json_encode(array("success" => false,'wait'=>false, "msg" => "没有绑定POS机")));
+			}
+			$ds = strtotime(date("Y-m-d") . " 00:00:00");
+			$de = strtotime(date("Y-m-d") . " 23:59:59");
+			$where = " and createtime>=" . $ds . " and createtime<=" . $de;
+			$order = pdo_fetch('select * from '.tablename('j_money_print_log').' where uniacid=:uniacid and shopid=:shopid and isprint=0 '.$where,array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
+			if($order){
+				pdo_update('j_money_print_log',array('isprint'=>1),array('id'=>$order['id']));
+				die(json_encode(array("success" => true, 'out_trade_no'=>$order['out_trade_no'])));
+			}else{
+				die(json_encode(array("success" => false, 'wait'=>true)));
+			}
 			// $sql = "DROP TABLE IF EXISTS `ims_j_money_print_log`;
 			// 		CREATE TABLE `ims_j_money_print_log` (
-			// 		  `id` int(10) NOT NULL,
+			// 		  `id` int(10) NOT NULL AUTO_INCREMENT,
 			// 		  `uniacid` int(10) NOT NULL,
 			// 		  `shopid` int(10) NOT NULL,
-			// 		  `out_trade_no` int(10) NOT NULL,
+			// 		  `out_trade_no` varchar(50) NOT NULL,
 			// 		  `isprint` int(10) DEFAULT '0',
 			// 		  `createtime` int(11) DEFAULT NULL,
 			// 		  `printtime` int(11) DEFAULT NULL,
 			// 		  PRIMARY KEY (`id`)
-			// 		) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+			// 		) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+			// 		";
 			// pdo_run($sql);
-			// $list = pdo_fetchall('SELECT a.id as userid, a.useracount,a.realname,a.openid,b.id as shopid,b.companyname FROM '.tablename('j_money_user').' a left join '.tablename('j_money_group').' b on a.pcate=b.id WHERE a.weid=:weid',array(':weid'=>$_W['uniacid']));
-			// $url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode;
-			// var_dump($list);
-			// include $this->template('user-list');
+		}else if($operation == 'test'){
+			$deviceinfo = intval($_GPC["islogin"]);
+			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			if (!$user) {
+				die(json_encode(array("success" => false,'wait'=>false, "msg" => "请先登录")));
+			}
+			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a", array(":a" => $user['pcate']));
+			if (!$shop) {
+				die(json_encode(array("success" => false,'wait'=>false, "msg" => "请先登录")));
+			}
+			$printer = pdo_fetchall('select * from '.tablename('j_money_printer'));
+			$order = pdo_fetchall('select * from '.tablename('j_money_print_log').' where uniacid=:uniacid and shopid=:shopid'.$where,array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
+			var_dump($order);
 		}
 	}
 	public function authcode2openid($qrcode = '', $userid = '')
@@ -4646,7 +4689,15 @@ class J_moneyModuleSite extends WeModuleSite
 	
 	}
 	
-	
+	public function insertPrintLog($out_trade_no,$shopid){
+		global $_GPC, $_W;
+		$printData['uniacid']      = $_W['uniacid'];
+		$printData['shopid']       = $shopid;
+		$printData['out_trade_no'] = $out_trade_no;
+		$printData['createtime']   = time();
+		pdo_insert('j_money_print_log',$printData);	
+
+	}
 	
 	
 	

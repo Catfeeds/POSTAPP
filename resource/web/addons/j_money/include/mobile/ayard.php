@@ -268,6 +268,9 @@ if($operation=="alibuyer"){
 				if($trade['status']==0){
 					$this->jetSumpay($out_trade_no);
 				}
+				//long 2017-12-01
+				insertPrintLog($out_trade_no,$shopid);
+
 				$printer_url = $this->createmobileurl('printer',array('ordersn'=>$out_trade_no,'printtype'=>0, 'islogin'=>$userid ));
 				$printer_url = $_W['siteroot'] . 'app/' . substr($printer_url, 2);
 				//var_dump($printer_url);echo '支付成功';exit;
@@ -315,6 +318,10 @@ if($operation=="alibuyer"){
 				if($trade["status"]==0){
 					$this->jetSumpay($out_trade_no);
 				}
+				
+				//long 2017-12-01
+				insertPrintLog($out_trade_no,$shopid);
+
 				$printer_url = $this->createmobileurl('printer',array('ordersn'=>$out_trade_no,'printtype'=>0, 'islogin'=>$userid ));
 				$printer_url = $_W['siteroot'] . 'app/' . substr($printer_url, 2);
 				ihttp_get($printer_url); // For Printer By Mango QQ 12733166
@@ -423,7 +430,17 @@ function isInt($m)
 
 }
 
-
+function insertPrintLog($out_trade_no,$shopid){
+	global $_GPC, $_W;
+	$printData['uniacid']      = $_W['uniacid'];
+	$printData['shopid']       = $shopid;
+	$printData['out_trade_no'] = $out_trade_no;
+	$printData['createtime']   = time();
+	$exist = pdo_fetch('select * from '.tablename('j_money_print_log').' where out_trade_no=:out_trade_no',array(':out_trade_no'=>$out_trade_no));
+	if(empty($exist)){
+		pdo_insert('j_money_print_log',$printData);	
+	}
+}
 
 
 ?>

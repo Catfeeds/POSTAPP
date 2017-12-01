@@ -18,7 +18,7 @@
 	
 	<script type="text/javascript">
 
-
+		
 		document.addEventListener('plusready',plusReady,false);
 
 		function plusReady(){
@@ -30,14 +30,16 @@
 					plus.nativeUI.toast('再按一次退出应用');
 					setTimeout(function() {
 						first = null;
-					}, 1000);
+					}, 3000);
 					
 				} else {
-					if (new Date().getTime() - first < 1000) {
+					if (new Date().getTime() - first < 3000) {
 						plus.runtime.quit();
 					}
 				}
 			},false);
+			var shop = localStorage.getItem("shop");
+			$(".logo")[0].innerHTML = shop;
 		}
 
 
@@ -78,6 +80,7 @@
 //				mui(".union").setAttribute("class","union pay active");
 			}
 		}
+		
 	</script>
 </head>
 <body class="bgf0f0f0">
@@ -85,7 +88,8 @@
 		<div class="left-nav vv" onclick="clicked('pay_record.html',false,false)">
 			<a href="#">记录</a>
 		</div>
-		<div class="logo"><a href="#"><img src="img/hico3.png" alt=""></a></div>
+		<!--<div class="logo"><a href="#"><img src="img/hico3.png" alt=""></a></div>-->
+		<div class="logo" style="font-size: .26rem;color: #FFF;font-weight: 600;">收银台</div>
 		<div class="right-nav set" style="height: 0.3rem;width: 0.3rem;" onclick="clicked('setting.html',false,false)">
 			<a href="#" style="height: 0.3rem;"></a>
 		</div>
