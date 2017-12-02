@@ -29,8 +29,8 @@
 					return false;
 				},false);
 				var out_trade_no = localStorage.getItem("pay_wait_trade_no");
-				doc.getElementById("J_second").innerHTML = 90;
-				var second = 90;
+				doc.getElementById("J_second").innerHTML = 60;
+				var second = 60;
 				var timer = null;
 				var account = localStorage.getItem("account");
 				var audioPlay = localStorage.getItem(account+"audioPlay");
@@ -181,7 +181,7 @@
 								if(data.paywait == true){
 			    					var interval = window.setTimeout(function(){
 			    						payWait(out_trade_no);
-			    					},2000);
+			    					},1000);
 			    					return;
 								}
 								//支付成功

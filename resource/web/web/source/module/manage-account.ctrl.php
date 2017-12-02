@@ -105,7 +105,7 @@ if($do == 'display') {
 	if(empty($module)) {
 		itoast('抱歉，你操作的模块不能被访问！', '', '');
 	}
-
+	var_dump($module);
 	if(!permission_check_account_user_module($modulename.'_settings', $modulename)) {
 		itoast('您没有权限进行该操作', '', '');
 	}
