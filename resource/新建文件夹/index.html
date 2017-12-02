@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>出售</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
+	</head>
+
+	<body>
+
+		<style>
+			.star{
+				color:red;
+			}
+			h5{
+				padding-top: 20px;
+			}
+		</style>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">出售信息[加*为必填项]</h1>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item" href="#item1mobile">
+						出售
+					</a>
+					<a class="mui-control-item" href="#item2mobile">
+						出租
+					</a>
+					<a class="mui-control-item" href="#item3mobile">
+						求购
+					</a>
+					<a class="mui-control-item" href="#item3mobile">
+						求租
+					</a>
+				</div>
+			</div>
+			<form class="mui-input-group">
+				<div class="mui-content-padded" style="margin: 5px;">
+					<h5 class="mui-content-padded">联系方式</h5>
+					<div class="mui-card">
+						<div class="mui-input-row">
+							<label>姓名<span class="star">*</span>：</label>
+							<input type="text" class="mui-input-clear" placeholder="请输入姓名">
+						</div>
+						<div class="mui-input-row">
+							<label>手机<span class="star">*</span>：</label>
+							<input type="text" class="mui-input-clear" placeholder="请输入手机">
+						</div>
+						<div class="mui-input-row mui-radio">
+							<label style="padding: 11px 15px;width: 35%;">性别：</label>
+
+							<input name="radio1" style="position: initial;float: initial;" type="radio" checked>男
+							<input name="radio1" style="position: initial;float: initial;" type="radio" checked>女
+						</div>
+						
+						<div class="mui-input-row">
+							<label>验证码：</label>
+							<div style="width: 30%;float: right;height: 40px;">2342</div>
+							<input type="text" style="width: 35%;" class="mui-input-clear" placeholder="">
+						</div>
+					</div>
+				</div>
+
+				<div class="mui-content-padded" style="margin: 5px;">
+					<h5 class="mui-content-padded">房屋基本情况</h5>
+					<div class="mui-card">
+						<div class="mui-input-row">
+							<label>详细地址<span class="star">*</span></label>
+							<input type="text" class="mui-input-clear" placeholder="请输入姓名">
+						</div>
+						<div class="mui-input-row">
+							<label>房源类型<span class="star">*</span></label>
+							<select name="" id="">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="mui-input-row">
+							<label>售价<span class="star">*</span>：</label>
+							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">万元人民币</div>
+							<input type="text" style="width: 35%;" class="mui-input-clear" placeholder="">
+						</div>
+						<div class="mui-input-row">
+							<label>面积(M2)<span class="star">*</span></label>
+							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">平方</div>
+							<input type="text" style="width: 35%;" class="mui-input-clear" placeholder="">
+						</div>
+						<div class="mui-input-row">
+							<label style="width: 25%">户型<span class="star">*</span></label>
+
+							<select name="" id="" style="width: 7%;float: left;">
+								<option value="">1</option>
+							</select>
+							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">室</div>
+
+							<select name="" id="" style="width: 7%;float: left;">
+								<option value="">2</option>
+							</select>
+							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">厅</div>
+
+							<select name="" id="" style="width: 7%;float: left;">
+								<option value="">3</option>
+							</select>
+							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">卫</div>
+
+							<select name="" id="" style="width: 7%;float: left;">
+								<option value="">4</option>
+							</select>
+							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">厨</div>
+
+							<select name="" id="" style="width: 7%;float: left;">
+								<option value="">5</option>
+							</select>
+							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">阳台</div>
+						</div>
+
+						<div class="mui-input-row">
+							<label>楼层：</label>
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
+							<input type="text" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">第</div>
+						</div>
+						<div class="mui-input-row">
+							<label>总楼层：</label>
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
+							<input type="text" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">总共</div>
+						</div>
+						<div class="mui-input-row">
+							<label>装修程度<span class="star">*</span></label>
+							<select name="" id="">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="mui-input-row">
+							<label>建筑年代<span class="star">*</span></label>
+							<select name="" id="">
+								<option value=""></option>
+							</select>
+						</div>
+						<div class="mui-input-row">
+							<label>重要说明<span class="star">*</span></label>
+							<div style="width: 40%;float: right;height: 40px;line-height: 40px;font-size: 12px">《房屋出售委托书》</div>
+							<select name="" id="" style="width: 25%;">
+								<option selected value="1">未阅读</option>
+								<option value="2">已阅读</option>
+							</select>
+						</div>
+						
+					</div>
+
+					<input style="background: #007aff;margin-top: 20px;width: 40%;margin-left: 30%;" type="submit" value="提交信息">
+
+					<div class="mui-input-row">
+					</div>
+				</div>
+			</form>
+		</div>
+			
+		<script src="mui.min.js"></script>
+		
+		
+	</body>
+
+</html>
