@@ -149,34 +149,38 @@
 									var out_trade_no = list[i]["out_trade_no"];
 									var carnumber = list[i]["carnumber"];
 									out_trade = out_trade_no.substr(out_trade_no.length-4);
+									var print_out_trade_no = "";
 									if(list[i]['paytype'] == 0){
 										//微信支付
 										thumb = "img/zx3.png";
 										title = "微信收款";
 										cardnum = "<span>订单后四位：</span><i>"+out_trade+"</i>";
+										print_out_trade_no = list[i]['out_trade_no'];
 									}else if(list[i]['paytype'] == 1){
 										//支付宝
 										thumb = "img/zx4.png";
 										title = "支付宝收款";
 										cardnum = "<span>订单后四位：</span><i>"+out_trade+"</i>";
+										print_out_trade_no = list[i]['out_trade_no'];
 									}else if(list[i]['paytype'] == 3){
 										//刷卡
 										thumb = "img/hico4.png";
 										title = "刷卡收款";
 										cardnum = "<span>"+carnumber.substr(0,4)+"*******"+carnumber.substr(carnumber.length-4)+"</span>";
+										print_out_trade_no = list[i]['transaction_id'];
 									}
 
 									var status = "";
 									var print = "";
 									if(list[i]['status'] == 1){
 										status = "<span>支付成功</span>";
-										print = "<h2 data-type=\"print\" data-tradeno=\""+list[i]['out_trade_no']+"\"><span>打<br>印</span></h2>";
+										print = "<h2 data-type=\"print\" data-paytype=\""+list[i]['paytype']+"\" data-tradeno=\""+print_out_trade_no+"\"><span>打<br>印</span></h2>";
 									}else if(list[i]['status'] == 0){
 										status = "<span style='color:red;'>支付失败</span>";
-										print = "<h2 data-type=\"refresh\" data-tradeno=\""+list[i]['out_trade_no']+"\" class=\"wl7\"><a href=\"#\"><span>刷<br>新</span></a></h2>";
+										print = "<h2 data-type=\"refresh\" data-tradeno=\""+print_out_trade_no+"\" class=\"wl7\"><a href=\"#\"><span>刷<br>新</span></a></h2>";
 									}else if(list[i]['status'] == 2){
 										status = "<span style='color:red;'>已退款</span>";
-										print = "<h2 data-type=\"print\" data-tradeno=\""+list[i]['out_trade_no']+"\"><span>打<br>印</span></h2>";
+										print = "<h2 data-type=\"print\" data-paytype=\""+list[i]['paytype']+"\" data-tradeno=\""+print_out_trade_no+"\"><span>打<br>印</span></h2>";
 									}
 				
 									str += "<li>";
@@ -255,7 +259,13 @@
 										})
 									}else{
 										//打印
-										printOrder(out_trade_no);
+										var pay_type = this.getAttribute("data-paytype");
+										if(pay_type == 3){
+											printByfuyou(out_trade_no);
+										}else{
+											printOrder(out_trade_no);
+										}
+										
 										mui('.zx-record-m ul li .wrap').each(function(){
 											this.setAttribute("class","wrap");
 										});

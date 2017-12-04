@@ -39,7 +39,8 @@
       "modif_password.html",
       "nfc.html",
       "embed.html",
-      "pay_wait.html"
+      "pay_wait.html",
+      "login_scan.html"
     ],
     "resources": []
   },

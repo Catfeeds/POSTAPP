@@ -26,6 +26,7 @@ require(['bootstrap'],function($){
           <li><a href="#tab4" data-toggle="tab">支付宝参数</a></li>
           <li><a href="#tab5" data-toggle="tab">打印参数</a></li>
           <li><a href="#tab6" data-toggle="tab">积分会员设置</a></li>
+          <li><a href="#tab8" data-toggle="tab">POS机设置</a></li>
           <li><a href="#tab7" data-toggle="tab">其他</a></li>
         </ul>
         <div class="tab-content">
@@ -37,91 +38,84 @@ require(['bootstrap'],function($){
                 <div class="help-block"></div>
               </div>
             </div>
-			
-			
-			 <div class="form-group">
+
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">转账支付地址</label>
               <div class="col-sm-9 col-xs-12">
                 <input type="text" name="transferUrl" class="form-control" value="{$category['transferUrl']}" />
                 <div class="help-block"></div>
               </div>
             </div>
-			
-			 <div class="form-group">
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">支付成功后跳转地址</label>
               <div class="col-sm-9 col-xs-12">
                 <input type="text" name="successUrl" class="form-control" value="{$category['successUrl']}" />
                 <div class="help-block"></div>
               </div>
             </div>
-			
-			
-			 <div class="form-group">
+
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">消费额度</label>
               <div class="col-sm-6 col-xs-12">
-              	   <div class="input-group"> 
-				  	 <span class="input-group-addon">单日消费</span>
-                	  <input type="text" name="freelimit" class="form-control" value="{$category['freelimit']}" />
-               		  <span class="input-group-addon">元，以下免服务费</span>
-			   		</div> 	
-				<div class="help-block">单日消费多少元以下免服务费</div>
+                <div class="input-group"> 
+                  <span class="input-group-addon">单日消费</span>
+                  <input type="text" name="freelimit" class="form-control" value="{$category['freelimit']}" />
+                  <span class="input-group-addon">元，以下免服务费</span>
+                </div> 	
+                <div class="help-block">单日消费多少元以下免服务费</div>
               </div>
             </div>
-			
-			<div class="form-group">
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">服务费</label>
               <div class="col-sm-6 col-xs-12">
-              	   <div class="input-group"> 
-				  	 <span class="input-group-addon">超出部分按照</span>
-                	  <input type="text" name="servermoney" class="form-control" value="{$category['servermoney']}" />
-               		  <span class="input-group-addon">千分之几，收取服务费</span>
-			   		</div> 	
-				<div class="help-block"></div>
+                <div class="input-group"> 
+                  <span class="input-group-addon">超出部分按照</span>
+                  <input type="text" name="servermoney" class="form-control" value="{$category['servermoney']}" />
+                  <span class="input-group-addon">千分之几，收取服务费</span>
+                </div> 	
+                <div class="help-block"></div>
               </div>
             </div>
-			
-			
-			<div class="form-group">
+
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">服务类型配置</label>
               <div class="col-sm-6 col-xs-12">
-              	   <div class="input-group"> 
-				  	 <span class="input-group-addon">保养维修</span>
-                	  
-               		  <span class="input-group-addon"><input type="radio" name="serverTypes[0]"  {if empty($serverTypes[0])}checked{/if}    value="0">可选</span>
-			   		  <span class="input-group-addon"><input type="radio" name="serverTypes[0]" {if !empty($serverTypes[0])}checked{/if} value="1">必填</span>
-					</div> 
-					<br>
-					 <div class="input-group"> 
-				  	 <span class="input-group-addon">新车定金</span>
-                	  
-               		  <span class="input-group-addon"><input type="radio" name="serverTypes[1]" {if empty($serverTypes[1])}checked{/if} value="0">可选</span>
-			   		  <span class="input-group-addon"><input type="radio" name="serverTypes[1]" {if !empty($serverTypes[1])}checked{/if} value="1">必填</span>
-					</div> 	
-					<br>
-					 <div class="input-group"> 
-				  	 <span class="input-group-addon">保险续保</span>
-                	  
-               		  <span class="input-group-addon"><input type="radio" name="serverTypes[2]" {if empty($serverTypes[2])}checked{/if} value="0">可选</span>
-			   		  <span class="input-group-addon"><input type="radio" name="serverTypes[2]" {if !empty($serverTypes[2])}checked{/if} value="1">必填</span>
-					</div> 	
-					<br>
-					 <div class="input-group"> 
-				  	 <span class="input-group-addon">其他服务</span>
-                	  
-               		  <span class="input-group-addon"><input type="radio" name="serverTypes[3]" {if empty($serverTypes[3])}checked{/if} value="0">可选</span>
-			   		  <span class="input-group-addon"><input type="radio" name="serverTypes[3]" {if !empty($serverTypes[3])}checked{/if} value="1">必填</span>
-					</div> 	
-						
-				<div class="help-block"></div>
+                <div class="input-group"> 
+                  <span class="input-group-addon">保养维修</span>
+
+                  <span class="input-group-addon"><input type="radio" name="serverTypes[0]"  {if empty($serverTypes[0])}checked{/if}    value="0">可选</span>
+                  <span class="input-group-addon"><input type="radio" name="serverTypes[0]" {if !empty($serverTypes[0])}checked{/if} value="1">必填</span>
+                </div> 
+                <br>
+                <div class="input-group"> 
+                  <span class="input-group-addon">新车定金</span>
+
+                  <span class="input-group-addon"><input type="radio" name="serverTypes[1]" {if empty($serverTypes[1])}checked{/if} value="0">可选</span>
+                  <span class="input-group-addon"><input type="radio" name="serverTypes[1]" {if !empty($serverTypes[1])}checked{/if} value="1">必填</span>
+                </div> 	
+                <br>
+                <div class="input-group"> 
+                  <span class="input-group-addon">保险续保</span>
+
+                  <span class="input-group-addon"><input type="radio" name="serverTypes[2]" {if empty($serverTypes[2])}checked{/if} value="0">可选</span>
+                  <span class="input-group-addon"><input type="radio" name="serverTypes[2]" {if !empty($serverTypes[2])}checked{/if} value="1">必填</span>
+                </div> 	
+                <br>
+                <div class="input-group"> 
+                  <span class="input-group-addon">其他服务</span>
+
+                  <span class="input-group-addon"><input type="radio" name="serverTypes[3]" {if empty($serverTypes[3])}checked{/if} value="0">可选</span>
+                  <span class="input-group-addon"><input type="radio" name="serverTypes[3]" {if !empty($serverTypes[3])}checked{/if} value="1">必填</span>
+                </div> 	
+
+                <div class="help-block"></div>
               </div>
             </div>
-			
-			
-			
-			
-			
-			
-			
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">备注</label>
               <div class="col-sm-9 col-xs-12">
@@ -142,6 +136,10 @@ require(['bootstrap'],function($){
               </div>
             </div>
           </div>
+
+
+
+
           <div class="tab-pane" id="tab2">
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">退款管理员</label>
@@ -158,6 +156,7 @@ require(['bootstrap'],function($){
               </div>
             </div>
           </div>
+
           <div class="tab-pane" id="tab3">
             <div class="form-group" >
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">AppId</label>
@@ -234,6 +233,7 @@ require(['bootstrap'],function($){
               </div>
             </div>
           </div>
+
           <div class="tab-pane" id="tab4">
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">app_id</label>
@@ -282,6 +282,7 @@ require(['bootstrap'],function($){
               </div>
             </div>
           </div>
+
           <div class="tab-pane" id="tab5">
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">小票打印数量</label>
@@ -297,6 +298,7 @@ require(['bootstrap'],function($){
               </div>
             </div>
           </div>
+
           <div class="tab-pane" id="tab6">
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">积分类型</label>
@@ -349,90 +351,92 @@ require(['bootstrap'],function($){
               </div>
             </div>
           </div>
+
           <div class="tab-pane" id="tab7">
           	
-			
-		    <div class="form-group">
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">消息通知</label>
               <div class="col-sm-9">
                 <input type="text" class='form-control' name='infoshow' value='{$category["infoshow"]}'/>
                 <div class="help-block"></div>
               </div>
             </div>
-			
-			 <div class="form-group">
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">baner一</label>
               <div class="col-sm-9"> {php echo tpl_form_field_image('zfbbaner1', $category['zfbbaner1']);}
                 <div class="help-block">支付宝扫二维码进入页面 banenr图   </div>
               </div>
             </div>
-			
-			 <div class="form-group">
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">baner二</label>
               <div class="col-sm-9"> {php echo tpl_form_field_image('zfbbaner2', $category['zfbbaner2']);}
                 <div class="help-block">支付宝扫二维码进入页面 banenr图   </div>
               </div>
             </div>
-			
-			 <div class="form-group">
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">baner三</label>
               <div class="col-sm-9"> {php echo tpl_form_field_image('zfbbaner3', $category['zfbbaner3']);}
                 <div class="help-block">支付宝扫二维码进入页面 banenr图   </div>
               </div>
             </div>
-			
-			
-		
-			
-			 <div class="form-group">
+
+
+
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">logo图</label>
               <div class="col-sm-9"> {php echo tpl_form_field_image('zfblogo', $category['zfblogo']);}
                 <div class="help-block">支付宝扫二维码进入页面 logo图   </div>
               </div>
             </div>
-			
-			
-			 <div class="form-group">
+
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">标题</label>
               <div class="col-sm-9">
                 <input type="text" class='form-control' name='logotitle' value='{$category["logotitle"]}'/>
                 <div class="help-block">支付宝扫二维码进入页面 logo图 旁边的标题</div>
               </div>
             </div>
-				
-				
-			
-			 <div class="form-group">
+
+
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">小图</label>
               <div class="col-sm-9"> {php echo tpl_form_field_image('zfblogox', $category['zfblogox']);}
                 <div class="help-block">支付宝扫二维码进入页面 logo图  右边的小图 </div>
               </div>
             </div>	
-				
-			
-			 <div class="form-group">
+
+
+            <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">说明</label>
               <div class="col-sm-9">
                 <input type="text" class='form-control' name='logomes' value='{$category["logomes"]}'/>
                 <div class="help-block">支付宝扫二维码进入页面 logo图 旁边的说明</div>
               </div>
             </div>
-			
-			
-			
-			
+
+
+
+
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启输入台号/单号</label>
               <div class="col-sm-9">
                 <label class="radio-inline">
                   <input type="radio" name="needtable" value="0" {if $category['needtable'] == 0} checked{/if} />
-                  关闭</label>
+                关闭</label>
                 <label class="radio-inline">
                   <input type="radio" name="needtable" value="1" {if $category['needtable'] == 1} checked{/if} />
-                  开启</label>
+                开启</label>
                 <div class="help-block">在收款时，要求输入台号/单号，方便原收银系统或者其他平台在数据上对接</div>
               </div>
             </div>
+
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">备注</label>
               <div class="col-sm-9 col-xs-12"> {php echo tpl_ueditor('info', $category['info']);}
@@ -440,6 +444,34 @@ require(['bootstrap'],function($){
               </div>
             </div>
           </div>
+          
+          <div class="tab-pane" id="tab8">
+
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启POS机刷卡功能</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="serverTypes[4]" value="0" {if $serverTypes[4] == 0} checked{/if} />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="serverTypes[4]" value="1" {if $serverTypes[4] == 1} checked{/if} />
+                  开启</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启POS机会员功能</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="serverTypes[5]" value="0" {if $serverTypes[5] == 0} checked{/if} />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="serverTypes[5]" value="1" {if $serverTypes[5] == 1} checked{/if} />
+                  开启</label>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

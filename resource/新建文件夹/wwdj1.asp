@@ -8,9 +8,9 @@ if request.QueryString("action")="addok" then
 	if Session("Admin_GetCode")="" then
 		call back("你登录时间过长，请重新返回登录页面进行登录。\n\n")
 	end if
-	if yz<>CStr(Session("Admin_GetCode")) then
-		call back("您输入的确认码和系统产生的不一致，请重新输入。\n\n")
-	end if
+	'if yz<>CStr(Session("Admin_GetCode")) then
+		'call back("您输入的确认码和系统产生的不一致，请重新输入。\n\n")
+	'end if
 	fyly=request.Form("fyly") '房源来源
 	if fyly<>1 and fyly<>2 then call show_go("非法参数","index.asp") end if
 	fzxm=cutsql(trim(request.Form("fzxm"))) '房主姓名
@@ -191,11 +191,11 @@ function checkfabucs(obj)
 		obj.csmjj.focus();
 		return false;
 	}
-	if (obj.yz.value==""){
-		alert("请填写验证码");
-		obj.yz.focus();
-		return false;
-	}
+	//if (obj.yz.value==""){
+		//alert("请填写验证码");
+		//obj.yz.focus();
+		//return false;
+	//}
 	return true;
 }
 </script>
@@ -206,7 +206,7 @@ function checkfabucs(obj)
 		<div class="mui-content">
 			<div id="slider" class="mui-slider">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item" href="wwdj1.asp">
+					<a class="mui-control-item" style="border-bottom:2px solid #007aff;color:#007aff;" href="wwdj1.asp">
 						出售
 					</a>
 					<a class="mui-control-item" href="wwdj2.asp">
@@ -223,7 +223,8 @@ function checkfabucs(obj)
 			
 		</div>
 		<form class="mui-input-group" id="fabucs" name="fabucs" method="post" action="?action=addok" onsubmit="return checkfabucs(this);">
-				<div class="mui-content-padded" style="margin: 5px;">
+				<input name="fyly" type="hidden" value="2" />
+				<div class="mui-content-padded" style="margin: 5px;margin-top:-10px;">
 					<h5 class="mui-content-padded">联系方式</h5>
 					<div class="mui-card">
 						<div class="mui-input-row">
@@ -234,7 +235,7 @@ function checkfabucs(obj)
 							<label>手机<span class="star">*</span>：</label>
 							<input type="text" name="fzsj" id="fzsj" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" maxlength="12" class="mui-input-clear" placeholder="请输入手机">
 						</div>
-						<div class="mui-input-row mui-radio">
+						<!--<div class="mui-input-row mui-radio">
 							<label style="padding: 11px 15px;width: 35%;">性别：</label>
 
 							<input name="fzxb" style="position: initial;float: initial;" value="男" checked="checked" type="radio">男
@@ -245,7 +246,7 @@ function checkfabucs(obj)
 							<label>验证码：</label>
 							<div style="width: 30%;float: right;height: 40px;"><img src="../flying_func/Code.asp" width="60" height="30"></div>
 							<input type="text" name="yz" id="yz" size="8" maxlength="4" style="width: 35%;" class="mui-input-clear" placeholder="">
-						</div>
+						</div>-->
 					</div>
 				</div>
 
@@ -254,7 +255,7 @@ function checkfabucs(obj)
 					<div class="mui-card">
 						<div class="mui-input-row">
 							<label>详细地址<span class="star">*</span></label>
-							<input type="text" name="wzdz" width="320" class="mui-input-clear" placeholder="请输入详细地址">
+							<input type="text" name="wzdz" id="wzdz" width="320" class="mui-input-clear" placeholder="请输入详细地址">
 						</div>
 						<div class="mui-input-row">
 							<label>房源类型<span class="star">*</span></label>
@@ -277,16 +278,16 @@ function checkfabucs(obj)
 						<div class="mui-input-row">
 							<label>售价<span class="star">*</span>：</label>
 							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">万元人民币</div>
-							<input type="text" name="cssj" id="cssj" size="8" maxlength="12" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57)&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<input placeholder="请输入售价" type="text" name="cssj" id="cssj" size="8" maxlength="12" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57)&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
 						</div>
 						<div class="mui-input-row">
 							<label>面积(M2)<span class="star">*</span></label>
 							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">平方</div>
-							<input type="text" name="csmjj" id="csmjj" maxlength="16" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57 )&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<input type="text" placeholder="请输入面积" name="csmjj" id="csmjj" maxlength="16" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57 )&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
 						</div>
 						<div class="mui-input-row">
-							<label style="width: 25%">户型</label>
-							<select name="cshxs" id="cshxs" style="width: 7%;float: left;">
+							<label>户型：</label>
+							<select name="cshxs" id="cshxs" style="width: 17%;float: left;">
 								<option value="0">0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -297,8 +298,8 @@ function checkfabucs(obj)
 								<option value="7">7</option>
 								<option value="8">8</option>
 							</select>
-							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">室</div>
-
+							<div style="width: 17%;float: left;height: 40px;line-height: 40px;">室</div>
+							<!--
 							<select name="cshxt" id="cshxt" style="width: 7%;float: left;">
 								<option value="0">0</option>
 								<option value="1">1</option>
@@ -334,22 +335,25 @@ function checkfabucs(obj)
 								<option value="4">4</option>
 							</select>
 							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">阳台</div>
+							-->
 						</div>
 
 						<div class="mui-input-row">
 							<label>楼层：</label>
 							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
-							<input type="text" name="cslcj" id="cslcj" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<input placeholder="请输入楼层" type="text" name="cslcj" id="cslcj" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
 							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">第</div>
 						</div>
+						<!--
 						<div class="mui-input-row">
 							<label>总楼层：</label>
 							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
-							<input name="cslcz" type="text" id="cslcz" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<input placeholder="请输入总楼层" name="cslcz" type="text" id="cslcz" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
 							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">总共</div>
 						</div>
+						-->
 						<div class="mui-input-row">
-							<label>装修程度</label>
+							<label>装修程度：</label>
 							<select name="cszx"  id="cszx">
 								<option value="0">请选择装修程度</option>
 											<%
@@ -367,7 +371,7 @@ function checkfabucs(obj)
 							</select>
 						</div>
 						<div class="mui-input-row">
-							<label>建筑年代</label>
+							<label>建筑年代：</label>
 							<select name="csnd"  id="csnd">
 								<option value="0">请选择建筑年代</option>
 								<%
@@ -379,11 +383,11 @@ function checkfabucs(obj)
 							</select>
 						</div>
 						<div class="mui-input-row">
-							<label>重要说明</label>
+							<label>重要说明：</label>
 							<div style="width: 40%;float: right;height: 40px;line-height: 40px;font-size: 12px"><a onclick="javascript:window.open('/wts-cs.asp', 'newwindow', 'height=440, width=400, toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=no')" >《房屋出售委托书》</a></div>
 							<select size="1" name="tyqbox" style="width: 25%;">
-								<option selected value="1">未阅读</option>
-								<option value="2">已阅读</option>
+								<option value="1">未阅读</option>
+								<option selected value="2" >已阅读</option>
 							</select>
 						</div>
 						

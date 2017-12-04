@@ -87,11 +87,19 @@ class J_moneyModuleSite extends WeModuleSite
 			}
 			//long 2017-11-13
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $item['pcate']));
+
+			//long 2017-12-03
+
+				/*配置*/
+			$serverTypes=json_decode($shop["servertypes"],true);
+			$settings['card_pay_switch']   = $serverTypes[4];
+			$settings['pos_member_switch'] = $serverTypes[5];
+
 			isetcookie('islogin', $item['id'], 36000 * $cfg['cookiehold']);
 			isetcookie('siteuniacid', $_W['uniacid'], 36000 * $cfg['cookiehold']);
 			pdo_update("j_money_user", array('lasttime' => TIMESTAMP), array('id' => $item['id']));
 			//long 2017-11-22 添加返回user
-			die(json_encode(array("success" => true,'shop'=>$shop,'user'=>$item)));
+			die(json_encode(array("success" => true,'shop'=>$shop,'user'=>$item,'settings'=>$settings)));
 		} elseif ($operation == "logout") {
 			isetcookie('islogin', '', -1);
 			isetcookie('siteuniacid', '', -1);
@@ -118,7 +126,12 @@ class J_moneyModuleSite extends WeModuleSite
 			pdo_update("j_money_user", array('lasttime' => TIMESTAMP), array('id' => $user['id']));
 			//long 2017-11-22 添加返回user,$shop
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
-			die(json_encode(array("success" => true,'shop'=>$shop,'user'=>$user)));
+			//long 2017-12-03
+			$serverTypes=json_decode($shop["servertypes"],true);
+			$settings['card_pay_switch']   = $serverTypes[4];
+			$settings['pos_member_switch'] = $serverTypes[5];
+
+			die(json_encode(array("success" => true,'shop'=>$shop,'user'=>$user,'settings'=>$settings)));
 		} elseif ($operation == "pay_all") {
 			$qrcode = $_GPC["qrcode"];
 			$fee = $_GPC["fee"] ? $_GPC["fee"] : 1;
@@ -823,6 +836,7 @@ class J_moneyModuleSite extends WeModuleSite
 						 "carnumber" => $row['carnumber'],
 						 "userbak" => $row['userbak'],
 						 "isprint"=>$row['isprint'],
+						 "transaction_id"=>$row['transaction_id'],
 				);
 				$outPutAry[] = $temp;
 			}
@@ -1769,9 +1783,11 @@ class J_moneyModuleSite extends WeModuleSite
 			if (!$shop) {
 				die(json_encode(array("success" => false,'wait'=>false, "msg" => "请先登录")));
 			}
-			$printer = pdo_fetchall('select * from '.tablename('j_money_printer'));
-			$order = pdo_fetchall('select * from '.tablename('j_money_print_log').' where uniacid=:uniacid and shopid=:shopid'.$where,array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
-			var_dump($order);
+			// $printer = pdo_fetchall('select * from '.tablename('j_money_printer'));
+			// $order = pdo_fetchall('select * from '.tablename('j_money_print_log').' where uniacid=:uniacid and shopid=:shopid'.$where,array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
+			$setting = pdo_fetchcolumn('select settings from '.tablename('uni_account_modules').' where uniacid=:uniacid and module=:module',array(':uniacid'=>$_W['uniacid'],':module'=>'j_money'));
+			$setting = unserialize($setting);
+			var_dump($setting);
 		}else if($operation == 'card_pay_all'){
 			$fee = $_GPC["fee"] ? $_GPC["fee"] : 1;
 			$deviceinfo = intval($_GPC["islogin"]);
@@ -1799,22 +1815,23 @@ class J_moneyModuleSite extends WeModuleSite
 			$coupon_fee = 0;
 			// $marketid = $market['marketid'];
 			$data = array(
-				"weid"         => $_W['uniacid'], 
-				"userid"       => $deviceinfo, 
-				"groupid"      => $user['pcate'],
-				"attach"       => 'MOBILE',
-				"out_trade_no" => TIMESTAMP . mt_rand(100, 999),
-				"order_fee"    => $totalfee, 
-				"total_fee"    => $totalfee - $coupon_fee,
-				"discount_fee" => $coupon_fee,
-				"cash_fee"     => $totalfee - $coupon_fee,
-				"createtime"   => TIMESTAMP,
-				"createdate"   => date('Y-m-d'), 
-				"old_trade_no" => $_GPC['old_trade_no'],
-				"bank_type"    => $_GPC['issue'],
-				"paytype"      => 3,
-				"status"       => 1,
-				"carnumber"    => $_GPC['cardNo'],
+				"weid"           => $_W['uniacid'], 
+				"userid"         => $deviceinfo, 
+				"groupid"        => $user['pcate'],
+				"attach"         => 'MOBILE',
+				"out_trade_no"   => TIMESTAMP . mt_rand(100, 999),
+				"order_fee"      => $totalfee, 
+				"total_fee"      => $totalfee - $coupon_fee,
+				"discount_fee"   => $coupon_fee,
+				"cash_fee"       => $totalfee - $coupon_fee,
+				"createtime"     => TIMESTAMP,
+				"createdate"     => date('Y-m-d'), 
+				"old_trade_no"   => $_GPC['old_trade_no'],
+				"bank_type"      => $_GPC['issue'],
+				"paytype"        => 3,
+				"status"         => 1,
+				"carnumber"      => $_GPC['cardNo'],
+				"transaction_id" => $_GPC['traceNo'],
 			);
 
 			$result = pdo_insert("j_money_trade", $data);

@@ -8,9 +8,9 @@ if request.QueryString("action")="addok" then
 	if Session("Admin_GetCode")="" then
 		call back("你登录时间过长，请重新返回登录页面进行登录。\n\n")
 	end if
-	if yz<>CStr(Session("Admin_GetCode")) then
-		call back("您输入的确认码和系统产生的不一致，请重新输入。\n\n")
-	end if
+	'if yz<>CStr(Session("Admin_GetCode")) then
+		'call back("您输入的确认码和系统产生的不一致，请重新输入。\n\n")
+	'end if
 	fyly=request.Form("fyly") '房源来源
 	if fyly<>1 and fyly<>2 then call show_go("非法参数","index.asp") end if
 	fzxm=cutsql(trim(request.Form("fzxm"))) '房主姓名
@@ -191,173 +191,198 @@ function checkfabucz(obj)
 		obj.csmj.focus();
 		return false;
 	}
-	if (obj.yz.value==""){
-		alert("请填写验证码");
-		obj.yz.focus();
-		return false;
-	}
+	//if (obj.yz.value==""){
+	//	alert("请填写验证码");
+	//	obj.yz.focus();
+	//	return false;
+	//}
 	return true;
 }
 </script>
-<table width="904" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#F3F3F3" class="table_huise">
-<form id="fabucz" name="fabucz" method="post" action="?action=addok" onsubmit="return checkfabucz(this);">
-  <tr class="toptd1">
-    <td height="26" colspan="4" background="images/tit_bg3.gif">&nbsp;&nbsp;<span class="wenzi_baise12c">发布出租信息[加*为必填项]</span></td>
-    </tr>
-  <tr class="table_lanse_tit">
-    <td height="26" colspan="4" >&nbsp;&nbsp;<span class="wenzi_heise12c">&#22996;&#25176;&#31867;&#22411;</span></td>
-  </tr>
-  <tr>
-    <td height="26" bgcolor="#FFFFFF" >　<span class="yellow12c">
-      <input name="fyly" type="radio" value="2" />
-    </span>&#20986;&#21806;</td>
-    <td height="26" bgcolor="#FFFFFF" ><input name="fyly" type="radio" value="2" checked="checked" />      
-    <span class="wenzi_hongse12">&#20986;&#31199;</span></td>
-    <td height="26" bgcolor="#FFFFFF" >　<span class="yellow12c">
-      <input name="fyly" type="radio" value="2" />
-    </span>&#27714;&#36141;</td>
-    <td height="26" bgcolor="#FFFFFF" ><span class="yellow12c">
-      <input name="fyly" type="radio" value="2" />
-    </span><span class="wenzi_hongse12">&#27714;&#31199;</span></td>
-  </tr>
-  <tr class="table_lanse_tit">
-    <td height="26" colspan="4" >&nbsp;&nbsp;<span class="wenzi_heise12c">联系方式</span></td>
-  </tr>
-  <tr class="td_gray">
-    <td width="72" height="26" align="right" bgcolor="#FFFFFF">姓&nbsp;名：</td>
-    <td width="421" height="26" bgcolor="#FFFFFF"><input name="fzxm" type="text" class="button_huise" id="fzxm" maxlength="4" />
-      <span class="wenzi_hongse12">*</span></td>
-    <td width="407" height="26" align="right" bgcolor="#FFFFFF">性&nbsp;别：</td>
-    <td width="407" height="26" bgcolor="#FFFFFF"><input name="fzxb" type="radio" value="男" checked="checked" />
-      男
-        <input type="radio" name="fzxb" value="女" />
-    女</td>
-  </tr>
-  <tr class="td_gray">
-    <td height="26" align="right" bgcolor="#FFFFFF">手&nbsp;机：</td>
-    <td height="26" bgcolor="#FFFFFF"><input name="fzsj" type="text" class="button_huise" id="fzsj" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" maxlength="12"/>
-      <span class="wenzi_hongse12"> *</span></td>
-    <td height="26" align="right" bgcolor="#FFFFFF">&#39564;&#35777;&#30721;：</td>
-    <td height="26" bgcolor="#FFFFFF"><input name="yz" type="text" class="search_label" id="yz" size="8" maxlength="4" />
-&nbsp;&nbsp;<img src="flying_func/Code.asp" width="40" height="10"></td>
-  </tr>
-  <tr class="table_lanse_tit">
-    <td height="26" colspan="4">&nbsp;&nbsp;<span class="wenzi_heise12c">房屋基本情况</span></td>
-  </tr>
-  <tr class="td_white">
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">发布出租信息[加*为必填项]</h1>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item" href="wwdj1.asp">
+						出售
+					</a>
+					<a class="mui-control-item" style="border-bottom:2px solid #007aff;color:#007aff;" href="wwdj2.asp">
+						出租
+					</a>
+					<a class="mui-control-item" href="wwdj3.asp">
+						求购
+					</a>
+					<a class="mui-control-item" href="wwdj4.asp">
+						求租
+					</a>
+				</div>
+			</div>
+			
+		</div>
+			<form class="mui-input-group" id="fabucs" name="fabucs" method="post" action="?action=addok" onsubmit="return checkfabucs(this);">
+				<input name="fyly" type="hidden" value="2" />
+				<div class="mui-content-padded" style="margin: 5px;margin-top:-10px;">
+					<h5 class="mui-content-padded">联系方式</h5>
+					<div class="mui-card">
+						<div class="mui-input-row">
+							<label>姓名<span class="star">*</span>：</label>
+							<input type="text" name="fzxm" id="fzxm" maxlength="4" class="mui-input-clear" placeholder="请输入姓名">
+						</div>
+						<div class="mui-input-row">
+							<label>手机<span class="star">*</span>：</label>
+							<input type="text" name="fzsj" id="fzsj" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" maxlength="12" class="mui-input-clear" placeholder="请输入手机">
+						</div>
+						<!--<div class="mui-input-row mui-radio">
+							<label style="padding: 11px 15px;width: 35%;">性别：</label>
 
-    <td height="26" align="right" bgcolor="#FFFFFF">详细地址：</td>
-    <td height="26" colspan="3" bgcolor="#FFFFFF"><input name="wzdz" width="320" type="text" class="button_huise" id="wzdz" />      <span class="wenzi_hongse12">*</span><span class="yellow12c">（对外保密）</span></td>
-  </tr>
-  <tr class="td_gray">
-    <td height="26" align="right" bgcolor="#FFFFFF">房源类型：</td>
-    <td height="26" bgcolor="#FFFFFF"><select name="csyt" class="button_huise" id="csyt">
-	<option value="0">请选择房源类型</option>
-    <%
-		'读房源类型记录
-		set ytrs=server.CreateObject("adodb.recordset")
-		ytsql="select * from housecs_yt order by xh"
-		ytrs.open ytsql,conn,1,1
-		while not ytrs.eof
-			response.Write("<option value="""&ytrs("id")&""">"&ytrs("yt")&"</option>")
-			ytrs.movenext
-		wend
-		ytrs.close
-		set ytrs=nothing
-	%>
-	</select>
-      <span class="wenzi_hongse12">*</span></td>
-    <td height="26" align="right" bgcolor="#FFFFFF">户型：</td>
-    <td height="26" bgcolor="#FFFFFF">
-      <select name="cshxs" class="button_huise" id="cshxs">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        </select>
-      室
-      <select name="cshxt" class="button_huise" id="cshxt">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        </select>
-      厅
-      <select name="cshxw" class="button_huise" id="cshxw">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        </select>
-      卫
-      <select name="cshxc" class="button_huise" id="cshxc">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-      厨
-      <select name="cshxy" class="button_huise" id="cshxy">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        </select>
-      阳台</td>
-  </tr>
-  <tr class="td_gray">
-    <td height="26" align="right" bgcolor="#FFFFFF">租金：</td>
-    <td height="26" bgcolor="#FFFFFF"><input name="zj" type="text" class="button_huise" id="zj" size="8" maxlength="12" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57)&&(event.keyCode!=46)) event.returnValue = false;"/>
-元/月<span class="wenzi_hongse12">*</span></td>
-    <td height="26" align="right" bgcolor="#FFFFFF">面积(M2)：</td>
-    <td height="26" bgcolor="#FFFFFF"><input name="csmj" type="text" class="button_huise" id="csmj" size="8" maxlength="16" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57 )&&(event.keyCode!=46)) event.returnValue = false;"/>
-      <span class="wenzi_hongse12">*</span></td>
-  </tr>
-  <tr class="td_gray">
-    <td height="26" align="right" bgcolor="#FFFFFF">楼层：</td>
-    <td height="26" bgcolor="#FFFFFF">第
-      <input name="cslcj" type="text" id="cslcj" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;"/>
-层,总
-      <input name="cslcz" type="text" id="cslcz" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;"/>
-层</td>
-    <td height="26" align="right" bgcolor="#FFFFFF">装修程度：</td>
-    <td height="26" bgcolor="#FFFFFF"><select name="cszx" class="button_huise" id="cszx">
-        <option value="0">请选择装修程度</option>
-        <%
-		'读装修程度记录
-		set zxrs=server.CreateObject("adodb.recordset")
-		zxsql="select * from housecs_zx order by xh"
-		zxrs.open zxsql,conn,1,1
-		while not zxrs.eof
-			response.Write("<option value="""&zxrs("id")&""">"&zxrs("zx")&"</option>")
-			zxrs.movenext
-		wend
-		zxrs.close
-		set zxrs=nothing
-	%>
-    </select></td>
-  </tr>
-  <tr bgcolor="#FFFFFF" >
-    <td height="26" align="right">&nbsp;</td>
-    <td height="26" width="421">&nbsp;</td>
-    <td height="26" colspan="2" width="407">
-		重要说明：<select size="1" name="tyqbox">
-		<option selected value="1">未阅读</option>
-		<option value="2">已阅读</option>
-		</select>
-      <a onclick="javascript:window.open('/wts-cz.asp', 'newwindow', 'height=440, width=400, toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=no')" >《房屋出租委托书》</a></td>
-  </tr>
-  <tr class="td_white">
-    <td height="40" colspan="4" align="center" valign="middle" bgcolor="#FFFFFF"><input name="Submit" type="submit" class="search_label" value="提交信息" /></td>
-  </tr>
-</form>
-</table>
+							<input name="fzxb" style="position: initial;float: initial;" value="男" checked="checked" type="radio">男
+							<input name="fzxb" style="position: initial;float: initial;" value="女" type="radio" checked>女
+						</div>
+						
+						<div class="mui-input-row">
+							<label>验证码：</label>
+							<div style="width: 30%;float: right;height: 40px;"><img src="../flying_func/Code.asp" width="60" height="30"></div>
+							<input type="text" name="yz" id="yz" size="8" maxlength="4" style="width: 35%;" class="mui-input-clear" placeholder="">
+						</div>-->
+					</div>
+				</div>
+
+				<div class="mui-content-padded" style="margin: 5px;">
+					<h5 class="mui-content-padded">房屋基本情况</h5>
+					<div class="mui-card">
+						<div class="mui-input-row">
+							<label>详细地址<span class="star">*</span></label>
+							<input type="text" name="wzdz" id="wzdz" width="320" class="mui-input-clear" placeholder="请输入详细地址">
+						</div>
+						<div class="mui-input-row">
+							<label>房源类型<span class="star">*</span></label>
+							<select name="csyt" id="csyt">
+								<option value="0">请选择房源类型</option>
+								<%
+								'读房源类型记录
+								set ytrs=server.CreateObject("adodb.recordset")
+								ytsql="select * from housecs_yt order by xh"
+								ytrs.open ytsql,conn,1,1
+								while not ytrs.eof
+									response.Write("<option value="""&ytrs("id")&""">"&ytrs("yt")&"</option>")
+									ytrs.movenext
+								wend
+								ytrs.close
+								set ytrs=nothing
+								%>
+							</select>
+						</div>
+						<div class="mui-input-row">
+							<label>租金<span class="star">*</span>：</label>
+							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">元/月</div>
+							<input placeholder="请输入租金" type="text" name="zj" id="zj" size="8" maxlength="12" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57)&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+						</div>
+						<div class="mui-input-row">
+							<label>面积(M2)<span class="star">*</span></label>
+							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">平方</div>
+							<input placeholder="请输入面积" type="text" name="csmjj" id="csmjj" maxlength="16" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57 )&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+						</div>
+						<div class="mui-input-row">
+							<label>户型：</label>
+							<select name="cshxs" id="cshxs" style="width: 17%;float: left;">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+							</select>
+							<div style="width: 17%;float: left;height: 40px;line-height: 40px;">室</div>
+							<!--
+							<select name="cshxt" id="cshxt" style="width: 7%;float: left;">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">厅</div>
+
+							<select name="cshxw" id="cshxw" style="width: 7%;float: left;">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">卫</div>
+
+							<select name="cshxc" id="cshxc" style="width: 7%;float: left;">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">厨</div>
+
+							<select name="cshxy" id="cshxy" style="width: 7%;float: left;">
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">阳台</div>
+							-->
+						</div>
+
+						<div class="mui-input-row">
+							<label>楼层：</label>
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
+							<input  placeholder="请输入楼层" type="text" name="cslcj" id="cslcj" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">第</div>
+						</div>
+						<!--
+						<div class="mui-input-row">
+							<label>总楼层：</label>
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
+							<input placeholder="请输入总楼层 name="cslcz" type="text" id="cslcz" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">总共</div>
+						</div>
+						-->
+						<div class="mui-input-row">
+							<label>装修程度：</label>
+							<select name="cszx"  id="cszx">
+								<option value="0">请选择装修程度</option>
+											<%
+								'读装修程度记录
+								set zxrs=server.CreateObject("adodb.recordset")
+								zxsql="select * from housecs_zx order by xh"
+								zxrs.open zxsql,conn,1,1
+								while not zxrs.eof
+									response.Write("<option value="""&zxrs("id")&""">"&zxrs("zx")&"</option>")
+									zxrs.movenext
+								wend
+								zxrs.close
+								set zxrs=nothing
+								%>
+							</select>
+						</div>
+
+						<div class="mui-input-row">
+							<label>重要说明：</label>
+							<div style="width: 40%;float: right;height: 40px;line-height: 40px;font-size: 12px"><a onclick="javascript:window.open('/wts-cz.asp', 'newwindow', 'height=440, width=400, toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=no')" >《房屋出租委托书》</a></div>
+							<select size="1" name="tyqbox" style="width: 25%;">
+								<option  value="1">未阅读</option>
+								<option selected value="2">已阅读</option>
+							</select>
+						</div>
+						
+					</div>
+
+					<input name="Submit" style="background: #007aff;margin-top: 20px;width: 40%;margin-left: 30%;" type="submit" value="提交信息">
+					<div class="mui-input-row">
+					</div>
+				</div>
+			</form>

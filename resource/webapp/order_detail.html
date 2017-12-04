@@ -41,13 +41,32 @@
 						success: function(data) {
 							console.log(JSON.stringify(data));
 							if(data.success = true){
-								var order = data.trade;
-								var status = order.status;
-								var paytype = order.paytype;
-								var tradeUser = data.tradeUser;
-								var str = "";
-								var statusStr = "";
-								var menuStr = "";
+								var order      = data.trade;
+								var status     = order.status;
+								var paytype    = order.paytype;
+								var tradeUser  = data.tradeUser;
+								var str        = "";
+								var statusStr  = "";
+								var menuStr    = "";
+								
+								var paytypeStr = "";
+								var cardPayStr = "";
+
+								var print_out_trade_no = "";
+								if(paytype == 0){
+									//微信支付
+									paytypeStr = "<span><img src=\"img/ico_3.png\" alt=\"微信支付\">微信支付</span>";
+									print_out_trade_no = out_trade_no;
+								}else if(paytype == 1){
+									//支付宝
+									paytypeStr = "<span><img src=\"img/ico_4.png\" alt=\"支付宝支付\">支付宝支付</span>";
+									print_out_trade_no = out_trade_no;
+								}else if(paytype == 3){
+									//刷卡
+									paytypeStr = "<span><img src=\"img/hico4.png\" alt=\"刷卡支付\">刷卡支付</span>";
+									cardPayStr = "<li>银行卡号<span>"+order.carnumber+"</span></li>";
+									print_out_trade_no = order.transaction_id;
+								}
 
 								if(status == 0){
 									//失败
@@ -64,7 +83,7 @@
 									statusStr += "<img src=\"img/pic_3.png\" alt=\"收款成功\">";
 									statusStr +="<strong>收款成功</strong>";
 									menuStr += "<div class=\"fixed-menu\">";
-									menuStr += "<a href=\"#\" id='print' data-ordersn='"+out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
+									menuStr += "<a href=\"#\" id='print' data-paytype=\""+paytype+"\" data-ordersn='"+print_out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
 									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
 									menuStr += "</div>";
 
@@ -73,24 +92,12 @@
 									statusStr += "<img src=\"img/pic_3.png\" alt=\"已退款\">";
 									statusStr +="<strong>已退款</strong>";
 									menuStr += "<div class=\"fixed-menu\">";
-									menuStr += "<a href=\"#\" id='print' data-ordersn='"+out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
+									menuStr += "<a href=\"#\" id='print' data-paytype=\""+paytype+"\" data-ordersn='"+print_out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
 									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('pay_record.html',false,false);\">确认</a>";
 									menuStr += "</div>";
 								}
 
-								var paytypeStr = "";
-								var cardPayStr = "";
-								if(paytype == 0){
-									//微信支付
-									paytypeStr = "<span><img src=\"img/ico_3.png\" alt=\"微信支付\">微信支付</span>";
-								}else if(paytype == 1){
-									//支付宝
-									paytypeStr = "<span><img src=\"img/ico_4.png\" alt=\"支付宝支付\">支付宝支付</span>";
-								}else if(paytype == 3){
-									//刷卡
-									paytypeStr = "<span><img src=\"img/hico4.png\" alt=\"刷卡支付\">刷卡支付</span>";
-									cardPayStr = "<li>银行卡号<span>"+order.carnumber+"</span></li>";
-								}
+								
 								str += "<div class=\"money\">";
 								str += statusStr;
 								str += "<span>￥"+order.order_fee+"</span>";
@@ -128,8 +135,14 @@
 								
 								mui(".fixed-menu").on("click","#print",function(){
 									var out_trade_no = this.getAttribute("data-ordersn");
+									var paytype = this.getAttribute("data-paytype");
 									console.log(out_trade_no);
-									printOrder(out_trade_no);
+									if(paytype == 3){
+										printByfuyou(out_trade_no);
+									}else{
+										printOrder(out_trade_no);
+									}
+									
 								})
 								
 								mui(".fixed-menu").on("click","#refresh",function(){

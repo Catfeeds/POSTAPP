@@ -81,10 +81,13 @@
 											}
 										}else{
 											var user = data.user;
+											var settings = data.settings;
 											localStorage.setItem( "islogin", user.id);
 											localStorage.setItem( "shop", data.shop.companyname);
 											localStorage.setItem( "realname", user.realname);
 											localStorage.setItem( "account", user.useracount);
+											localStorage.setItem( "card_pay_switch", settings.card_pay_switch);
+											localStorage.setItem( "pos_member_switch", settings.card_pay_switch);
 											console.log(user.realname);
 											console.log(user.useracount);
 											clicked("barcode_pay.html",false,false);

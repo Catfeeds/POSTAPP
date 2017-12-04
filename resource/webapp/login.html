@@ -278,12 +278,17 @@
 							async:true,
 							dataType:"json",
 							success:function(data){
+								console.log(JSON.stringify(data));
 								if(data.success == true){
 									var user = data.user;
+									var settings = data.settings;
 									plus.nativeUI.toast("登录成功");
 									localStorage.setItem( "islogin", user.id);
 									localStorage.setItem( "account", username);
 									localStorage.setItem( "password", pwd);
+									localStorage.setItem( "realname", user.realname);
+									localStorage.setItem( "card_pay_switch", settings.card_pay_switch);
+									localStorage.setItem( "pos_member_switch", settings.card_pay_switch);
 									localStorage.setItem( "realname", user.realname);
 									console.log("islogin = "+localStorage.getItem("islogin"));
 									console.log(user.realname);

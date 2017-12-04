@@ -56,7 +56,13 @@
 					clicked('scan_payall_by_fuyou.html',false,false);
 					return;
 				}else{
-					clicked('card_payall_by_fuyou.html',false,false);
+					var card_pay_switch = localStorage.getItem("card_pay_switch");
+					if(card_pay_switch == 1){
+						clicked('card_payall_by_fuyou.html',false,false);
+					}else{
+						plus.nativeUI.alert('未开通刷卡功能');
+					}
+					
 					return;
 				}
 			});
@@ -151,7 +157,7 @@
 		</div>
 	</main>
 	<div class="footer-none"></div>
-	<footer class="footer footer-nav pc">
+	<footer class="footer footer-nav pc" style="z-index: 99999;">
 		<a href="#" onclick="clicked('member.html',false,false)" class="vip"><div class="pic"></div><div class="text">会员</div></a>
 		<a href="#" class="center money active"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
 		<a href="#" onclick="clicked('pay_record.html',false,false)" class="set hhh"><div class="pic"></div><div class="text">记录</div></a>

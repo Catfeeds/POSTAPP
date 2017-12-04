@@ -14,6 +14,23 @@
 	<script src="js/font-size.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/mui.min.js"></script>
+	<script type="text/javascript">
+		(function($, doc) {
+			$.init({
+				statusBarBackground: '#f7f7f7'
+			});
+			$.plusReady(function() {
+				var pos_member_switch = localStorage.getItem("pos_member_switch");
+				if(pos_member_switch == 1){
+					
+				}else{
+					plus.nativeUI.alert( "未开通会员功能!", function(){
+						clicked('barcode_pay.html',false,false);
+					}, "提示", "确定" );
+				}
+			})
+		}(mui, document));
+	</script>
 </head>
 <body class="bgf7f7f7">
 	<div class="zx-setup-t">
