@@ -11,13 +11,13 @@ if request.QueryString("action")="addok" then
 	'if yz<>CStr(Session("Admin_GetCode")) then
 		'call back("您输入的确认码和系统产生的不一致，请重新输入。\n\n")
 	'end if
-	fyly=request.Form("fyly") '房源来源
-	if fyly<>1 and fyly<>2 then call show_go("非法参数","index.asp") end if
+	fyly=2 '房源来源
+	if fyly<>1 and fyly<>2 then call show_go("非法参数","wwdj1.asp") end if
 	fzxm=cutsql(trim(request.Form("fzxm"))) '房主姓名
 	fzxb=request.Form("fzxb") '房主性别
-	if fzxb<>"男" and fzxb<>"女" then call show_go("非法参数","index.asp") end if
+	'if fzxb<>"男" and fzxb<>"女" then call show_go("非法参数","wwdj1.asp") end if
 	fzsj=request.Form("fzsj") '房主手机"
-	if not isint(fzsj) then call show_go("非法参数","index.asp") end if
+	if not isint(fzsj) then call show_go("非法参数","wwdj1.asp") end if
 	fzdh1=cutsql(trim(request.Form("fzdh1"))) '房主电话
 	fzdh2=cutsql(trim(request.Form("fzdh2")))
 	if fzdh1<>"" then
@@ -27,17 +27,17 @@ if request.QueryString("action")="addok" then
 	end if
 	fzyx=cutsql(request.Form("fzyx")) '房主电子邮箱
 	wzcs=request.Form("wzcs") '房源城市
-	'if (not isint(wzcs)) or wzcs<0 then call show_go("非法参数","index.asp") end if
+	'if (not isint(wzcs)) or wzcs<0 then call show_go("非法参数","wwdj1.asp") end if
 	wzpq=request.Form("wzpq") '房源片区
-	'if (not isint(wzpq)) or wzpq<0 then call show_go("非法参数","index.asp") end if
+	'if (not isint(wzpq)) or wzpq<0 then call show_go("非法参数","wwdj1.asp") end if
 	wzxq=cutsql(trim(request.Form("wzxq"))) '房源小区
 	wzxq1=cutsql(trim(request.Form("wzxq1"))) '手工房源小区
-	'if wzxq="" and wzxq1=""  then call show_go("非法参数","index.asp") end if
+	'if wzxq="" and wzxq1=""  then call show_go("非法参数","wwdj1.asp") end if
 	'if wzxq="0" then wzxq=wzxq1 end if
 	wzdz=cutsql(trim(request.Form("wzdz"))) '详细地址
-	if wzdz="" then call show_go("非法参数","index.asp") end if
+	if wzdz="" then call show_go("非法参数","wwdj1.asp") end if
 	csyt=request.Form("csyt") '房源用途
-	if (not isint(csyt)) or csyt<0 then call show_go("非法参数","index.asp") end if
+	if (not isint(csyt)) or csyt<0 then call show_go("非法参数","wwdj1.asp") end if
 	cshxt=cutsql(trim(request.Form("cshxt")))
 	cshxs=cutsql(trim(request.Form("cshxs")))
 	cshxw=cutsql(trim(request.Form("cshxw")))
@@ -135,12 +135,12 @@ if request.QueryString("action")="addok" then
 		set rs=nothing
 		call connclose()
 		if fyly=2 then
-			call show_go("成功发布\n\n牢记你的房源编号："&bh&"\n\n你的维护密码："&yz,"index.asp")
+			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","wwdj1.asp")
 		else
-			call show_go("发布成功\n\n专业经纪人将尽快和你联系","index.asp")
+			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","wwdj1.asp")
 		end if
 	else
-		call show_go("系统中已有此房源\n\n同源编号为"&tyid,"index.asp")
+		call show_go("系统中已有此房源\n\n同源编号为"&tyid,"wwdj1.asp")
 	end if
 end if
 %>
@@ -201,7 +201,7 @@ function checkfabucs(obj)
 </script>
 
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">出售信息[加*为必填项]</h1>
+			<h1 class="mui-title">登记出售房源信息[加*为必填项]</h1>
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider">
@@ -339,10 +339,10 @@ function checkfabucs(obj)
 						</div>
 
 						<div class="mui-input-row">
-							<label>楼层：</label>
+							<label>所在楼层：</label>
 							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
 							<input placeholder="请输入楼层" type="text" name="cslcj" id="cslcj" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
-							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">第</div>
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;"></div>
 						</div>
 						<!--
 						<div class="mui-input-row">

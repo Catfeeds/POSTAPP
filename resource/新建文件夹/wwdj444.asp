@@ -1,6 +1,5 @@
 <!--#include file="topwap.asp"-->
 <!--#include file="../flying_func/md5.asp"-->
-<!--#include file="../flying_func/config.asp"-->
 <%
 if request.QueryString("action")="addok" then
 '提取表单数据
@@ -9,7 +8,7 @@ if request.QueryString("action")="addok" then
 		call back("你登录时间过长，请重新返回登录页面进行登录。\n\n")
 	end if
 	'if yz<>CStr(Session("Admin_GetCode")) then
-		'call back("您输入的确认码和系统产生的不一致，请重新输入。\n\n")
+	'	call back("您输入的确认码和系统产生的不一致，请重新输入。\n\n")
 	'end if
 	fyly=request.Form("fyly") '房源来源
 	if fyly<>1 and fyly<>2 then call show_go("非法参数","index.asp") end if
@@ -26,40 +25,35 @@ if request.QueryString("action")="addok" then
 		fzdh=fzdh2
 	end if
 	fzyx=cutsql(request.Form("fzyx")) '房主电子邮箱
+	
 	wzcs=request.Form("wzcs") '房源城市
-	'if (not isint(wzcs)) or wzcs<0 then call show_go("非法参数","index.asp") end if
+	if (not isint(wzcs)) or wzcs<0 then call show_go("非法参数","index.asp") end if
 	wzpq=request.Form("wzpq") '房源片区
-	'if (not isint(wzpq)) or wzpq<0 then call show_go("非法参数","index.asp") end if
+	if not isint(wzpq) then call show_go("非法参数","index.asp") end if
 	wzxq=cutsql(trim(request.Form("wzxq"))) '房源小区
 	wzxq1=cutsql(trim(request.Form("wzxq1"))) '手工房源小区
-	'if wzxq="" and wzxq1=""  then call show_go("非法参数","index.asp") end if
 	if wzxq="0" then wzxq=wzxq1 end if
-	wzdz=cutsql(trim(request.Form("wzdz"))) '详细地址
-	'if wzdz="" then call show_go("非法参数","index.asp") end if
 	csyt=request.Form("csyt") '房源用途
 	if (not isint(csyt)) or csyt<0 then call show_go("非法参数","index.asp") end if
-	cshxs=cutsql(trim(request.Form("cshxs")))
 	cshxt=cutsql(trim(request.Form("cshxt")))  '房源户型
+	cshxs=cutsql(trim(request.Form("cshxs")))
 	cshxw=cutsql(trim(request.Form("cshxw")))
 	cshxy=cutsql(trim(request.Form("cshxy")))
 	cshxc=cutsql(trim(request.Form("cshxc")))
-	zj=cutsql(trim(request.Form("zj"))) '售价
-	csmj=cutsql(trim(request.Form("csmj"))) '面积
-	cslcz=cutsql(trim(request.Form("cslcz"))) '楼层
-	cslcj=cutsql(trim(request.Form("cslcj"))) 
-	cszx=cutsql(trim(request.Form("cszx"))) '装修程度
-	fzfs=cutsql(trim(request.Form("fzfs"))) '付租方式
+	zj1=cutsql(trim(request.Form("zj1"))) '租金
+	zj2=cutsql(trim(request.Form("zj2"))) '租金
+	csmj1=cutsql(trim(request.Form("csmj1"))) '面积
+	csmj2=cutsql(trim(request.Form("csmj2"))) '面积
+	cslc1=cutsql(trim(request.Form("cslc1"))) '楼层
+	cslc2=cutsql(trim(request.Form("cslc2"))) 
 	zdzq=cutsql(trim(request.Form("zdzq"))) '最短租期
-	yzzf=cutsql(trim(request.Form("yzzf"))) '业主支付
-	cspt=cutsql(trim(request.Form("cspt"))) '配套设施
+	cszx=cutsql(trim(request.Form("cszx"))) '装修程度
+	cspt=cutsql(request.Form("cspt")) '配套设施
 	csbz=left(cutsql(trim(request.Form("csbz"))),200) '备注信息
-	ditux=request.Form("ezmarker.x")
-	dituy=request.Form("ezmarker.y")
-	dituz=request.Form("ezmarker.z")
 '写入数据库	
 	'判断是否相同房源
 	set tyrs=server.CreateObject("adodb.recordset")
-	tysql="select * from housexx_cz where fzxm='"&fzxm&"' and fzsj='"&fzsj&"' and csmj="&csmj&" and zj="&zj&" and wzcs="&wzcs&" and wzpq="&wzpq&" and csyt="&csyt
+	tysql="select * from housexx_qz where fzxm='"&fzxm&"' and fzsj='"&fzsj&"' and wzcs="&wzcs&" and wzpq="&wzpq&" and csyt="&csyt
 	tyrs.open tysql,conn,1,3
 	tynum=0
 	if not tyrs.eof then
@@ -74,73 +68,70 @@ if request.QueryString("action")="addok" then
 	end if
 	tyrs.close
 	set tyrs=nothing
+	'写入数据库
 	if tynum=0 then '没有同源
 		set rs=server.CreateObject("adodb.recordset")
-		sql="select  * from housexx_cz where 1=0"
-		rs.open sql,conn,1,3
-		rs.addnew
-		rs("fzxm")=fzxm '房主姓名，字符型,*
-		rs("fzsj")=fzsj	'房主手机，字符型,*
-		rs("fzdh")=fzdh	'房主电话，字符型
-		rs("fzyx")=fzyx	'房主电邮，字符型
-		rs("fzxb")=fzxb '房主性别，字符型
-		rs("sjfb")=now()	'发布时间，日期型
-		rs("sjyxq")=30 '有效期，数值型
-		if fyly=2  then
-			if grsh="false" then '如果不用审核
-				rs("sjzx")=now()
-				rs("sjxx")=now()+30
-				rs("zt")=1
-			else
-				rs("zt")=2
-			end if
-		end if
-		if fyly=1 then
-			rs("zt")=3 
-		end if
-		rs("wzcs")=cint(wzcs)   '城市id，数值型,*
-		rs("wzpq")=cint(wzpq)   '片区id，数值型,*
-		rs("wzxq")=wzxq   '小区名称，字符型,*
-		rs("wzdz")=wzdz	'详细地址，字符型,*
-		rs("csyt")=cint(csyt) 	'房源用途id，数值型
-		rs("cshxs")=cint(cshxs)  '户型几室，数值型
-		rs("cshxt")=cint(cshxt)   '户型几厅，数值型
-		rs("cshxw")=cint(cshxw)  '户型几卫，数值型
-		rs("cshxy")=cint(cshxy)   '户型几阳台，数值型
-		rs("cshxc")=cint(cshxc)   '户型几阳台，数值型
-		rs("cslcz")=cint(cslcz)  '总几层，数值型
-		rs("cslcj")=cint(cslcj)   '第几层，数值型
-		rs("csmj")=cdbl(csmj)   '建筑面积，数值型,*
-		rs("zj")=cdbl(zj)    '售价，数值型,*
-		rs("cszx")=cint(cszx)	 '装修程度，数值型
-		rs("zdzq")=zdzq '最短租期
-		rs("fzfs")=fzfs '付租方式
-		rs("yzzf")=yzzf '业主支付
-		rs("cspt")=cspt	 '配套设施，字符型
-		rs("csbz")=csbz    '特色介绍，备注型
-		rs("fyly")=fyly  '房源来源，数值型
-		if tynum<>0 then rs("tyid")=tyid end if '同源房源
-		if fyly=2 then rs("modipass")=md5(yz) end if
-		rs("ditux")=ditux
-		rs("dituy")=dituy
-		rs("dituz")=dituz
-		bh=cstr(rs("id"))
-		lenbh=8-len(bh)
-		for x=1 to lenbh
-			bh="0"&bh
-		next
-		rs("bh")=bh
-		rs.update
-		rs.close
-		set rs=nothing
-		call connclose()
-		if fyly=2 then
-			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","wwdj2.asp")
+	sql="select top 1 * from housexx_qz"
+	rs.open sql,conn,1,3
+	rs.addnew
+	rs("fzxm")=fzxm '房主姓名，字符型,*
+	rs("fzsj")=fzsj	'房主手机，字符型,*
+	rs("fzdh")=fzdh	'房主电话，字符型
+	rs("fzyx")=fzyx	'房主电邮，字符型
+	rs("fzxb")=fzxb '房主性别，字符型
+	rs("sjfb")=now()	'发布时间，日期型
+	rs("sjyxq")=30 '有效期，数值型
+	if fyly=2  then
+		if grsh="false" then '如果不用审核
+			rs("sjzx")=now()
+			rs("sjxx")=now()+30
+			rs("zt")=1
 		else
-			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","wwdj2.asp")
+			rs("zt")=2
 		end if
+	end if
+	if fyly=1 then
+		rs("zt")=3 
+	end if
+	rs("wzcs")=cint(wzcs)   '城市id，数值型,*
+	rs("wzpq")=cint(wzpq)   '片区id，数值型,*
+	rs("wzxq")=wzxq   '小区名称，字符型,*
+	rs("csyt")=cint(csyt) 	'房源用途id，数值型
+	rs("cshxs")=cint(cshxs)  '户型几室，数值型
+	rs("cshxt")=cint(cshxt)   '户型几厅，数值型
+	rs("cshxw")=cint(cshxw)  '户型几卫，数值型
+	rs("cshxy")=cint(cshxy)   '户型几阳台，数值型
+	rs("cshxc")=cint(cshxc)   '户型几阳台，数值型
+	rs("cslc1")=cint(cslc1)  '楼层，数值型
+	rs("cslc2")=cint(cslc2)   '楼层，数值型
+	rs("csmj1")=cdbl(csmj1)   '面积，数值型,*
+	rs("csmj2")=cdbl(csmj2)   '面积，数值型,*
+	rs("zj1")=cdbl(zj1)    '租金，数值型,*
+	rs("zj2")=cdbl(zj2)    '租金，数值型,*
+	rs("zdzq")=cint(zdzq)    '最短租期，数值型
+	rs("cszx")=cint(cszx)	 '装修程度，数值型
+	rs("cspt")=cspt  '配套设施
+	rs("csbz")=csbz    '特色介绍，备注型
+	rs("fyly")=fyly  '房源来源，数值型
+	if tynum<>0 then rs("tyid")=tyid end if '同源房源
+	if fyly=2 then rs("modipass")=md5(yz) end if
+	bh=cstr(rs("id"))
+	lenbh=8-len(bh)
+	for x=1 to lenbh
+		bh="0"&bh
+	next
+	rs("bh")=bh
+	rs.update
+	rs.close
+	set rs=nothing
+	call connclose()
+	if fyly=2 then
+		call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","index.asp")
 	else
-		call show_go("系统中已有此房源\n\n同源编号为"&tyid,"wwdj2.asp")
+		call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","index.asp")
+	end if
+	else
+		call show_go("系统中已有此房源\n\n同源编号为"&tyid,"index.asp")
 	end if
 end if
 %>
@@ -151,7 +142,7 @@ function OpenWindowAndSetValue(Url,Width,Height,WindowObj,SetObj)
 	SetObj.value=ReturnStr;
 	return ReturnStr;
 }
-function checkfabucz(obj)
+function checkfabuqz(obj)
 {
 	if (trimstr(obj.fzxm.value)==""){
 		alert("请填写姓名");
@@ -163,17 +154,9 @@ function checkfabucz(obj)
 		obj.fzsj.focus();
 		return false;
 	}
-
-
-		if (obj.tyqbox.value=="1"){
-		alert("请阅读说明");
-		obj.tyqbox.focus();
-		return false;
-	}
-
-	if (trimstr(obj.wzdz.value)==""){
-		alert("请填写房源所在详细地址");
-		obj.wzdz.focus();
+	if (obj.wzcs.value=="0"){
+		alert("请选择房源所在城市");
+		obj.wzcs.focus();
 		return false;
 	}
 	if (obj.csyt.value=="0"){
@@ -181,14 +164,39 @@ function checkfabucz(obj)
 		obj.csyt.focus();
 		return false;
 	}
-	if (trimstr(obj.zj.value)==""){
-		alert("请填写租金");
-		obj.zj.focus();
+	if (trimstr(obj.zj1.value)==""){
+		alert("请填写最低租金预算");
+		obj.zj1.focus();
 		return false;
 	}
-	if (trimstr(obj.csmj.value)==""){
-		alert("请填写面积");
-		obj.csmj.focus();
+	if (trimstr(obj.zj2.value)==""){
+		alert("请填写最高租金预算");
+		obj.zj2.focus();
+		return false;
+	}
+	if (parseFloat(trimstr(obj.zj1.value))>parseFloat(trimstr(obj.zj2.value))){
+		alert("请从低到高填写租金");
+		obj.zj1.focus();
+		return false;
+	}
+	if (trimstr(obj.csmj1.value)==""){
+		alert("请填写最低预租面积");
+		obj.csmj1.focus();
+		return false;
+	}
+		if (obj.tyqbox.value=="1"){
+		alert("请阅读说明");
+		obj.tyqbox.focus();
+		return false;
+	}
+	if (trimstr(obj.csmj2.value)==""){
+		alert("请填写最高预租面积");
+		obj.csmj2.focus();
+		return false;
+	}
+	if (parseFloat(trimstr(obj.csmj1.value))>parseFloat(trimstr(obj.csmj2.value))){
+		alert("请从低到高填写预租面积");
+		obj.csmj1.focus();
 		return false;
 	}
 	//if (obj.yz.value==""){
@@ -199,8 +207,9 @@ function checkfabucz(obj)
 	return true;
 }
 </script>
+
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">登记出租房源[加*为必填项]</h1>
+			<h1 class="mui-title">发布求租信息[加*为必填项]</h1>
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider">
@@ -208,23 +217,23 @@ function checkfabucz(obj)
 					<a class="mui-control-item" href="wwdj1.asp">
 						出售
 					</a>
-					<a class="mui-control-item" style="border-bottom:2px solid #007aff;color:#007aff;" href="wwdj2.asp">
+					<a class="mui-control-item" href="wwdj2.asp">
 						出租
 					</a>
 					<a class="mui-control-item" href="wwdj3.asp">
 						求购
 					</a>
-					<a class="mui-control-item" href="wwdj4.asp">
+					<a class="mui-control-item" style="border-bottom:2px solid #007aff;color:#007aff;" href="wwdj4.asp">
 						求租
 					</a>
 				</div>
 			</div>
-			
 		</div>
-			<form class="mui-input-group" id="fabucs" name="fabucs" method="post" action="?action=addok" onsubmit="return checkfabucz(this);">
+
+			<form class="mui-input-group" id="fabucs" name="fabucs" method="post" action="?action=addok" onsubmit="return checkfabucs(this);">
 				<input name="fyly" type="hidden" value="2" />
 				<div class="mui-content-padded" style="margin: 5px;margin-top:-10px;">
-					<h5 class="mui-content-padded">联系方式</h5>
+					<h5 class="mui-content-padded">求租者联系方式</h5>
 					<div class="mui-card">
 						<div class="mui-input-row">
 							<label>姓名<span class="star">*</span>：</label>
@@ -253,9 +262,64 @@ function checkfabucz(obj)
 					<h5 class="mui-content-padded">房屋基本情况</h5>
 					<div class="mui-card">
 						<div class="mui-input-row">
-							<label>详细地址<span class="star">*</span></label>
-							<input type="text" name="wzdz" id="wzdz" width="320" class="mui-input-clear" placeholder="请输入详细地址">
+							<label>城市：<span class="star">*</span></label>
+							<select name="wzcs" id="wzcs"  onChange="changepq(document.fabuqg.wzpq,document.fabuqg.wzcs.options[document.fabuqg.wzcs.selectedIndex].value)">
+								<option value="2">简阳市</option>
+								<%
+								for i=0 to csnum-1
+										response.Write "<option value='" & trim(csarr(0,i)) & "'>" & trim(csarr(1,i)) & "</option>"
+								next
+								%>
+							</select>
 						</div>
+						<div class="mui-input-row">
+							<label>片区：</label>
+							<select style="width:55%;float:left;" name="wzpq" id="wzpq" onChange="changexq(document.fabuqg.wzxq,document.fabuqg.wzpq.options[document.fabuqg.wzpq.selectedIndex].value)">
+								<option value="0">片区不限</option>
+							</select>
+							<div style="width:10%;float:left;height:40px;line-height:40px;">或</div>
+						</div>
+						<div class="mui-input-row">
+							<input type="text" name="wzpqa" id="wzpqa" class="mui-input-clear" placeholder="手动输入片区">
+						</div>
+						<div class="mui-input-row">
+							<label>小区：</label>
+							<select style="width:55%;float:left;" name="wzxq" id="wzxq">
+							  <option value="0">小区不限</option>
+							</select>
+							<div style="width:10%;float:left;height:40px;line-height:40px;">或</div>
+						</div>
+						<div class="mui-input-row">
+							<input type="text" name="wzxq1" id="wzxq1" class="mui-input-clear" placeholder="手动输入小区名称">
+						</div>
+						
+						<div class="mui-input-row">
+							<label>租金预算<span class="star">*</span>：</label>
+							<div style="width:7%;height:40px;line-height:40px;float:left;">从</div>
+							<input name="zj1" style="width:19%;float:left;" type="text" id="zj1" size="8" maxlength="12" onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57)&amp;&amp;(event.keyCode!=46)) event.returnValue = false;"/>
+							<div style="width:7%;height:40px;line-height:40px;float:left;">到</div>
+							<input name="zj2" style="width:19%;float:left;" type="text" id="zj2" size="8" maxlength="12" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57)&&(event.keyCode!=46)) event.returnValue = false;"/>
+							<div style="width:12%;height:40px;line-height:40px;float:left;">元/月</div>
+						</div>
+						
+						<div class="mui-input-row">
+							<label>面积<span class="star">*</span>：</label>
+							<div style="width:7%;height:40px;line-height:40px;float:left;">从</div>
+							<input name="csmj1" type="text" style="width:19%;float:left;" id="csmj1" size="8" maxlength="16" onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )&amp;&amp;(event.keyCode!=46)) event.returnValue = false;"/>
+							<div style="width:7%;height:40px;line-height:40px;float:left;">到</div>
+							<input name="csmj2" type="text" style="width:19%;float:left;" id="csmj2" size="8" maxlength="16" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57 )&&(event.keyCode!=46)) event.returnValue = false;"/>
+							<div style="width:12%;height:40px;line-height:40px;float:left;">平米</div>
+						</div>
+						
+						<div class="mui-input-row">
+							<label>楼层：</label>
+							<div style="width:8%;height:40px;line-height:40px;float:left;">从</div>
+							<input name="cslc1" type="text" id="cslc1" size="6" style="width:19%;float:left;"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;"/>
+							<div style="width:8%;height:40px;line-height:40px;float:left;">到</div>
+							<input name="cslc2" type="text" id="cslc2" size="6" style="width:19%;float:left;"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;"/>
+							<div style="width:8%;height:40px;line-height:40px;float:left;">层</div>
+						</div>
+						
 						<div class="mui-input-row">
 							<label>房源类型<span class="star">*</span></label>
 							<select name="csyt" id="csyt">
@@ -274,16 +338,7 @@ function checkfabucz(obj)
 								%>
 							</select>
 						</div>
-						<div class="mui-input-row">
-							<label>租金<span class="star">*</span>：</label>
-							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">元/月</div>
-							<input placeholder="请输入租金" type="text" name="zj" id="zj" size="8" maxlength="12" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57)&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
-						</div>
-						<div class="mui-input-row">
-							<label>面积(M2)<span class="star">*</span></label>
-							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">平方</div>
-							<input placeholder="请输入面积" type="text" name="csmjj" id="csmjj" maxlength="16" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57 )&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
-						</div>
+						
 						<div class="mui-input-row">
 							<label>户型：</label>
 							<select name="cshxs" id="cshxs" style="width: 17%;float: left;">
@@ -336,21 +391,7 @@ function checkfabucz(obj)
 							<div style="width: 7%;float: left;height: 40px;line-height: 40px;">阳台</div>
 							-->
 						</div>
-
-						<div class="mui-input-row">
-							<label>所在楼层：</label>
-							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
-							<input  placeholder="请输入楼层" type="text" name="cslcj" id="cslcj" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
-							<div style="width: 15%;float: right;height: 40px;line-height: 40px;"></div>
-						</div>
-						<!--
-						<div class="mui-input-row">
-							<label>总楼层：</label>
-							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
-							<input placeholder="请输入总楼层 name="cslcz" type="text" id="cslcz" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
-							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">总共</div>
-						</div>
-						-->
+						
 						<div class="mui-input-row">
 							<label>装修程度：</label>
 							<select name="cszx"  id="cszx">
@@ -369,10 +410,14 @@ function checkfabucz(obj)
 								%>
 							</select>
 						</div>
-
+						<div class="mui-input-row" style="height:125px;">
+							<label>租房要求：</label>
+							<textarea id="textarea" rows="5" name="csbz" placeholder="请填写购房要求"></textarea>
+						</div
+						
 						<div class="mui-input-row">
 							<label>重要说明：</label>
-							<div style="width: 40%;float: right;height: 40px;line-height: 40px;font-size: 12px"><a onclick="javascript:window.open('/wts-cz.asp', 'newwindow', 'height=440, width=400, toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=no')" >《房屋出租委托书》</a></div>
+							<div style="width: 40%;float: right;height: 40px;line-height: 40px;font-size: 12px"><a onclick="javascript:window.open('/wts-qz.asp', 'newwindow', 'height=440, width=400, toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=no')" >《房屋承租委托书》</a></div>
 							<select size="1" name="tyqbox" style="width: 25%;">
 								<option  value="1">未阅读</option>
 								<option selected value="2">已阅读</option>

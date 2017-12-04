@@ -15,9 +15,9 @@ if request.QueryString("action")="addok" then
 	if fyly<>1 and fyly<>2 then call show_go("非法参数","index.asp") end if
 	fzxm=cutsql(trim(request.Form("fzxm"))) '房主姓名
 	fzxb=request.Form("fzxb") '房主性别
-	if fzxb<>"男" and fzxb<>"女" then call show_go("非法参数","index.asp") end if
+	'if fzxb<>"男" and fzxb<>"女" then call show_go("非法参数","index.asp") end if
 	fzsj=request.Form("fzsj") '房主手机"
-	if not isint(fzsj) then call show_go("非法参数","index.asp") end if
+	'if not isint(fzsj) then call show_go("非法参数","index.asp") end if
 	fzdh1=cutsql(trim(request.Form("fzdh1"))) '房主电话
 	fzdh2=cutsql(trim(request.Form("fzdh2")))
 	if fzdh1<>"" then
@@ -37,7 +37,7 @@ if request.QueryString("action")="addok" then
 	wzdz=cutsql(trim(request.Form("wzdz"))) '详细地址
 	'if wzdz="" then call show_go("非法参数","index.asp") end if
 	csyt=request.Form("csyt") '房源用途
-	if (not isint(csyt)) or csyt<0 then call show_go("非法参数","index.asp") end if
+	'if (not isint(csyt)) or csyt<0 then call show_go("非法参数","index.asp") end if
 	cshxs=cutsql(trim(request.Form("cshxs")))
 	cshxt=cutsql(trim(request.Form("cshxt")))  '房源户型
 	cshxw=cutsql(trim(request.Form("cshxw")))
@@ -135,12 +135,12 @@ if request.QueryString("action")="addok" then
 		set rs=nothing
 		call connclose()
 		if fyly=2 then
-			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","wwdj2.asp")
+			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","index.asp")
 		else
-			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","wwdj2.asp")
+			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","index.asp")
 		end if
 	else
-		call show_go("系统中已有此房源\n\n同源编号为"&tyid,"wwdj2.asp")
+		call show_go("系统中已有此房源\n\n同源编号为"&tyid,"index.asp")
 	end if
 end if
 %>
@@ -200,7 +200,7 @@ function checkfabucz(obj)
 }
 </script>
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">登记出租房源[加*为必填项]</h1>
+			<h1 class="mui-title">发布出租信息[加*为必填项]</h1>
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider">
@@ -221,7 +221,7 @@ function checkfabucz(obj)
 			</div>
 			
 		</div>
-			<form class="mui-input-group" id="fabucs" name="fabucs" method="post" action="?action=addok" onsubmit="return checkfabucz(this);">
+			<form class="mui-input-group" id="fabucs" name="fabucs" method="post" action="?action=addok" onsubmit="return checkfabucs(this);">
 				<input name="fyly" type="hidden" value="2" />
 				<div class="mui-content-padded" style="margin: 5px;margin-top:-10px;">
 					<h5 class="mui-content-padded">联系方式</h5>
@@ -338,10 +338,10 @@ function checkfabucz(obj)
 						</div>
 
 						<div class="mui-input-row">
-							<label>所在楼层：</label>
+							<label>楼层：</label>
 							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
 							<input  placeholder="请输入楼层" type="text" name="cslcj" id="cslcj" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
-							<div style="width: 15%;float: right;height: 40px;line-height: 40px;"></div>
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">第</div>
 						</div>
 						<!--
 						<div class="mui-input-row">

@@ -33,24 +33,24 @@ if request.QueryString("action")="addok" then
 	wzxq=cutsql(trim(request.Form("wzxq"))) '房源小区
 	wzxq1=cutsql(trim(request.Form("wzxq1"))) '手工房源小区
 	'if wzxq="" and wzxq1=""  then call show_go("非法参数","index.asp") end if
-	if wzxq="0" then wzxq=wzxq1 end if
+	'if wzxq="0" then wzxq=wzxq1 end if
 	wzdz=cutsql(trim(request.Form("wzdz"))) '详细地址
-	'if wzdz="" then call show_go("非法参数","index.asp") end if
+	if wzdz="" then call show_go("非法参数","index.asp") end if
 	csyt=request.Form("csyt") '房源用途
 	if (not isint(csyt)) or csyt<0 then call show_go("非法参数","index.asp") end if
+	cshxt=cutsql(trim(request.Form("cshxt")))
 	cshxs=cutsql(trim(request.Form("cshxs")))
-	cshxt=cutsql(trim(request.Form("cshxt")))  '房源户型
 	cshxw=cutsql(trim(request.Form("cshxw")))
 	cshxy=cutsql(trim(request.Form("cshxy")))
 	cshxc=cutsql(trim(request.Form("cshxc")))
-	zj=cutsql(trim(request.Form("zj"))) '售价
-	csmj=cutsql(trim(request.Form("csmj"))) '面积
+	cssj=cutsql(trim(request.Form("cssj"))) '售价
+	csmjj=cutsql(trim(request.Form("csmjj"))) '面积
 	cslcz=cutsql(trim(request.Form("cslcz"))) '楼层
 	cslcj=cutsql(trim(request.Form("cslcj"))) 
+	csnd=cutsql(trim(request.Form("csnd"))) '建筑年代
+	csqs=cutsql(trim(request.Form("csqs"))) '权属
 	cszx=cutsql(trim(request.Form("cszx"))) '装修程度
-	fzfs=cutsql(trim(request.Form("fzfs"))) '付租方式
-	zdzq=cutsql(trim(request.Form("zdzq"))) '最短租期
-	yzzf=cutsql(trim(request.Form("yzzf"))) '业主支付
+	csjg=cutsql(trim(request.Form("csjg"))) '建筑结构
 	cspt=cutsql(trim(request.Form("cspt"))) '配套设施
 	csbz=left(cutsql(trim(request.Form("csbz"))),200) '备注信息
 	ditux=request.Form("ezmarker.x")
@@ -59,7 +59,7 @@ if request.QueryString("action")="addok" then
 '写入数据库	
 	'判断是否相同房源
 	set tyrs=server.CreateObject("adodb.recordset")
-	tysql="select * from housexx_cz where fzxm='"&fzxm&"' and fzsj='"&fzsj&"' and csmj="&csmj&" and zj="&zj&" and wzcs="&wzcs&" and wzpq="&wzpq&" and csyt="&csyt
+	tysql="select * from housexx_cs where fzxm='"&fzxm&"' and fzsj='"&fzsj&"' and csmjj="&csmjj&" and cssj="&cssj&" and wzcs="&wzcs&" and wzpq="&wzpq&" and csyt="&csyt
 	tyrs.open tysql,conn,1,3
 	tynum=0
 	if not tyrs.eof then
@@ -76,7 +76,7 @@ if request.QueryString("action")="addok" then
 	set tyrs=nothing
 	if tynum=0 then '没有同源
 		set rs=server.CreateObject("adodb.recordset")
-		sql="select  * from housexx_cz where 1=0"
+		sql="select top 1 * from housexx_cs"
 		rs.open sql,conn,1,3
 		rs.addnew
 		rs("fzxm")=fzxm '房主姓名，字符型,*
@@ -85,11 +85,11 @@ if request.QueryString("action")="addok" then
 		rs("fzyx")=fzyx	'房主电邮，字符型
 		rs("fzxb")=fzxb '房主性别，字符型
 		rs("sjfb")=now()	'发布时间，日期型
-		rs("sjyxq")=30 '有效期，数值型
+		rs("sjyxq")=90 '有效期，数值型
 		if fyly=2  then
 			if grsh="false" then '如果不用审核
 				rs("sjzx")=now()
-				rs("sjxx")=now()+30
+				rs("sjxx")=now()+90
 				rs("zt")=1
 			else
 				rs("zt")=2
@@ -110,12 +110,12 @@ if request.QueryString("action")="addok" then
 		rs("cshxc")=cint(cshxc)   '户型几阳台，数值型
 		rs("cslcz")=cint(cslcz)  '总几层，数值型
 		rs("cslcj")=cint(cslcj)   '第几层，数值型
-		rs("csmj")=cdbl(csmj)   '建筑面积，数值型,*
-		rs("zj")=cdbl(zj)    '售价，数值型,*
+		rs("csmjj")=cdbl(csmjj)   '建筑面积，数值型,*
+		rs("cssj")=cdbl(cssj)    '售价，数值型,*
+		rs("csnd")=cint(csnd)    '建筑年代，数值型
+		rs("csqs")=cint(csqs)    '权属，数值型
 		rs("cszx")=cint(cszx)	 '装修程度，数值型
-		rs("zdzq")=zdzq '最短租期
-		rs("fzfs")=fzfs '付租方式
-		rs("yzzf")=yzzf '业主支付
+		rs("csjg")=cint(csjg) 	 '建筑结构，数值型
 		rs("cspt")=cspt	 '配套设施，字符型
 		rs("csbz")=csbz    '特色介绍，备注型
 		rs("fyly")=fyly  '房源来源，数值型
@@ -135,12 +135,12 @@ if request.QueryString("action")="addok" then
 		set rs=nothing
 		call connclose()
 		if fyly=2 then
-			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","wwdj2.asp")
+			call show_go("成功发布\n\n牢记你的房源编号："&bh&"\n\n你的维护密码："&yz,"index.asp")
 		else
-			call show_go("发布成功\n\n牢记你的房源编号："&bh&"\n\n专业经纪人将尽快和你联系","wwdj2.asp")
+			call show_go("发布成功\n\n专业经纪人将尽快和你联系","index.asp")
 		end if
 	else
-		call show_go("系统中已有此房源\n\n同源编号为"&tyid,"wwdj2.asp")
+		call show_go("系统中已有此房源\n\n同源编号为"&tyid,"index.asp")
 	end if
 end if
 %>
@@ -151,7 +151,7 @@ function OpenWindowAndSetValue(Url,Width,Height,WindowObj,SetObj)
 	SetObj.value=ReturnStr;
 	return ReturnStr;
 }
-function checkfabucz(obj)
+function checkfabucs(obj)
 {
 	if (trimstr(obj.fzxm.value)==""){
 		alert("请填写姓名");
@@ -164,12 +164,12 @@ function checkfabucz(obj)
 		return false;
 	}
 
-
 		if (obj.tyqbox.value=="1"){
 		alert("请阅读说明");
 		obj.tyqbox.focus();
 		return false;
 	}
+
 
 	if (trimstr(obj.wzdz.value)==""){
 		alert("请填写房源所在详细地址");
@@ -181,34 +181,35 @@ function checkfabucz(obj)
 		obj.csyt.focus();
 		return false;
 	}
-	if (trimstr(obj.zj.value)==""){
-		alert("请填写租金");
-		obj.zj.focus();
+	if (trimstr(obj.cssj.value)==""){
+		alert("请填写售价");
+		obj.cssj.focus();
 		return false;
 	}
-	if (trimstr(obj.csmj.value)==""){
+	if (trimstr(obj.csmjj.value)==""){
 		alert("请填写面积");
-		obj.csmj.focus();
+		obj.csmjj.focus();
 		return false;
 	}
 	//if (obj.yz.value==""){
-	//	alert("请填写验证码");
-	//	obj.yz.focus();
-	//	return false;
+		//alert("请填写验证码");
+		//obj.yz.focus();
+		//return false;
 	//}
 	return true;
 }
 </script>
+
 		<header class="mui-bar mui-bar-nav">
-			<h1 class="mui-title">登记出租房源[加*为必填项]</h1>
+			<h1 class="mui-title">出售信息[加*为必填项]</h1>
 		</header>
 		<div class="mui-content">
 			<div id="slider" class="mui-slider">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item" href="wwdj1.asp">
+					<a class="mui-control-item" style="border-bottom:2px solid #007aff;color:#007aff;" href="wwdj1.asp">
 						出售
 					</a>
-					<a class="mui-control-item" style="border-bottom:2px solid #007aff;color:#007aff;" href="wwdj2.asp">
+					<a class="mui-control-item" href="wwdj2.asp">
 						出租
 					</a>
 					<a class="mui-control-item" href="wwdj3.asp">
@@ -221,7 +222,7 @@ function checkfabucz(obj)
 			</div>
 			
 		</div>
-			<form class="mui-input-group" id="fabucs" name="fabucs" method="post" action="?action=addok" onsubmit="return checkfabucz(this);">
+		<form class="mui-input-group" id="fabucs" name="fabucs" method="post" action="?action=addok" onsubmit="return checkfabucs(this);">
 				<input name="fyly" type="hidden" value="2" />
 				<div class="mui-content-padded" style="margin: 5px;margin-top:-10px;">
 					<h5 class="mui-content-padded">联系方式</h5>
@@ -260,7 +261,7 @@ function checkfabucz(obj)
 							<label>房源类型<span class="star">*</span></label>
 							<select name="csyt" id="csyt">
 								<option value="0">请选择房源类型</option>
-								<%
+														<%
 								'读房源类型记录
 								set ytrs=server.CreateObject("adodb.recordset")
 								ytsql="select * from housecs_yt order by xh"
@@ -275,14 +276,14 @@ function checkfabucz(obj)
 							</select>
 						</div>
 						<div class="mui-input-row">
-							<label>租金<span class="star">*</span>：</label>
-							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">元/月</div>
-							<input placeholder="请输入租金" type="text" name="zj" id="zj" size="8" maxlength="12" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57)&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<label>售价<span class="star">*</span>：</label>
+							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">万元人民币</div>
+							<input placeholder="请输入售价" type="text" name="cssj" id="cssj" size="8" maxlength="12" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57)&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
 						</div>
 						<div class="mui-input-row">
 							<label>面积(M2)<span class="star">*</span></label>
 							<div style="width: 30%;float: right;height: 40px;line-height: 40px;">平方</div>
-							<input placeholder="请输入面积" type="text" name="csmjj" id="csmjj" maxlength="16" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57 )&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<input type="text" placeholder="请输入面积" name="csmjj" id="csmjj" maxlength="16" onKeyPress="if ((event.keyCode < 48 || event.keyCode > 57 )&&(event.keyCode!=46)) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
 						</div>
 						<div class="mui-input-row">
 							<label>户型：</label>
@@ -338,16 +339,16 @@ function checkfabucz(obj)
 						</div>
 
 						<div class="mui-input-row">
-							<label>所在楼层：</label>
+							<label>楼层：</label>
 							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
-							<input  placeholder="请输入楼层" type="text" name="cslcj" id="cslcj" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
-							<div style="width: 15%;float: right;height: 40px;line-height: 40px;"></div>
+							<input placeholder="请输入楼层" type="text" name="cslcj" id="cslcj" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">第</div>
 						</div>
 						<!--
 						<div class="mui-input-row">
 							<label>总楼层：</label>
 							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">层</div>
-							<input placeholder="请输入总楼层 name="cslcz" type="text" id="cslcz" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
+							<input placeholder="请输入总楼层" name="cslcz" type="text" id="cslcz" size="6"  onkeypress="if ((event.keyCode &lt; 48 || event.keyCode &gt; 57 )) event.returnValue = false;" style="width: 35%;" class="mui-input-clear" placeholder="">
 							<div style="width: 15%;float: right;height: 40px;line-height: 40px;">总共</div>
 						</div>
 						-->
@@ -369,13 +370,24 @@ function checkfabucz(obj)
 								%>
 							</select>
 						</div>
-
+						<div class="mui-input-row">
+							<label>建筑年代：</label>
+							<select name="csnd"  id="csnd">
+								<option value="0">请选择建筑年代</option>
+								<%
+								nd=year(now())
+								for ndid=nd to 1980 step -1
+									%>
+									<option value="<%=ndid%>"><%=ndid%></option>
+									<%next%>
+							</select>
+						</div>
 						<div class="mui-input-row">
 							<label>重要说明：</label>
-							<div style="width: 40%;float: right;height: 40px;line-height: 40px;font-size: 12px"><a onclick="javascript:window.open('/wts-cz.asp', 'newwindow', 'height=440, width=400, toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=no')" >《房屋出租委托书》</a></div>
+							<div style="width: 40%;float: right;height: 40px;line-height: 40px;font-size: 12px"><a onclick="javascript:window.open('/wts-cs.asp', 'newwindow', 'height=440, width=400, toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=no')" >《房屋出售委托书》</a></div>
 							<select size="1" name="tyqbox" style="width: 25%;">
-								<option  value="1">未阅读</option>
-								<option selected value="2">已阅读</option>
+								<option value="1">未阅读</option>
+								<option selected value="2" >已阅读</option>
 							</select>
 						</div>
 						
@@ -386,3 +398,4 @@ function checkfabucz(obj)
 					</div>
 				</div>
 			</form>
+
