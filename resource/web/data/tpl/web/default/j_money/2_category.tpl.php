@@ -451,10 +451,10 @@ require(['bootstrap'],function($){
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启POS机刷卡功能</label>
               <div class="col-sm-9">
                 <label class="radio-inline">
-                  <input type="radio" name="serverTypes[4]" value="0" <?php  if($serverTypes['4'] == 0) { ?> checked<?php  } ?> />
+                  <input type="radio" name="serverTypes[4]" value="0" <?php  if(empty($serverTypes['4'])) { ?> checked<?php  } ?> />
                   关闭</label>
                 <label class="radio-inline">
-                  <input type="radio" name="serverTypes[4]" value="1" <?php  if($serverTypes['4'] == 1) { ?> checked<?php  } ?> />
+                  <input type="radio" name="serverTypes[4]" value="1" <?php  if(!empty($serverTypes['4'])) { ?> checked<?php  } ?> />
                   开启</label>
               </div>
             </div>
@@ -463,10 +463,10 @@ require(['bootstrap'],function($){
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启POS机会员功能</label>
               <div class="col-sm-9">
                 <label class="radio-inline">
-                  <input type="radio" name="serverTypes[5]" value="0" <?php  if($serverTypes['5'] == 0) { ?> checked<?php  } ?> />
+                  <input type="radio" name="serverTypes[5]" value="0" <?php  if(empty($serverTypes['5'])) { ?> checked<?php  } ?> />
                   关闭</label>
                 <label class="radio-inline">
-                  <input type="radio" name="serverTypes[5]" value="1" <?php  if($serverTypes['5'] == 1) { ?> checked<?php  } ?> />
+                  <input type="radio" name="serverTypes[5]" value="1" <?php  if(!empty($serverTypes['5'])) { ?> checked<?php  } ?> />
                   开启</label>
               </div>
             </div>

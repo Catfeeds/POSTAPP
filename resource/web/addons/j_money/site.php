@@ -606,6 +606,8 @@ class J_moneyModuleSite extends WeModuleSite
 		} elseif ($operation == "refundorder") {
 			$orderid = $_GPC["orderid"];
 			$reason = $_GPC["reason"];
+			$refund_log_id = $_GPC["refund_log_id"];
+			pdo_update('j_money_refund_log',array('out_trade_no'=>$orderid),array('id'=>$refund_log_id));
 			$userOpenid = intval($_GPC['islogin']);
 			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:id ", array(":id" => $userOpenid));
 			if (!$user) {
@@ -1774,20 +1776,21 @@ class J_moneyModuleSite extends WeModuleSite
 			// 		";
 			// pdo_run($sql);
 		}else if($operation == 'test'){
-			$deviceinfo = intval($_GPC["islogin"]);
-			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
-			if (!$user) {
-				die(json_encode(array("success" => false,'wait'=>false, "msg" => "请先登录")));
-			}
-			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a", array(":a" => $user['pcate']));
-			if (!$shop) {
-				die(json_encode(array("success" => false,'wait'=>false, "msg" => "请先登录")));
-			}
+			// $deviceinfo = intval($_GPC["islogin"]);
+			// $user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			// if (!$user) {
+			// 	die(json_encode(array("success" => false,'wait'=>false, "msg" => "请先登录")));
+			// }
+			// $shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a", array(":a" => $user['pcate']));
+			// if (!$shop) {
+			// 	die(json_encode(array("success" => false,'wait'=>false, "msg" => "请先登录")));
+			// }
 			// $printer = pdo_fetchall('select * from '.tablename('j_money_printer'));
 			// $order = pdo_fetchall('select * from '.tablename('j_money_print_log').' where uniacid=:uniacid and shopid=:shopid'.$where,array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
-			$setting = pdo_fetchcolumn('select settings from '.tablename('uni_account_modules').' where uniacid=:uniacid and module=:module',array(':uniacid'=>$_W['uniacid'],':module'=>'j_money'));
-			$setting = unserialize($setting);
-			var_dump($setting);
+			// $setting = pdo_fetchcolumn('select settings from '.tablename('uni_account_modules').' where uniacid=:uniacid and module=:module',array(':uniacid'=>$_W['uniacid'],':module'=>'j_money'));
+			// $setting = unserialize($setting);
+			$item = pdo_fetchall("SELECT * FROM " . tablename('j_money_refund_log'));
+			var_dump($item);die;
 		}else if($operation == 'card_pay_all'){
 			$fee = $_GPC["fee"] ? $_GPC["fee"] : 1;
 			$deviceinfo = intval($_GPC["islogin"]);
@@ -1837,8 +1840,117 @@ class J_moneyModuleSite extends WeModuleSite
 			$result = pdo_insert("j_money_trade", $data);
 
 			die(json_encode(array('success'=>true,'out_trade_no'=>$data['out_trade_no'])));
+		}else if($operation == 'getRefoundConfirmUrl'){
+			$deviceinfo = intval($_GPC["islogin"]);
+			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			if (!$user) {
+				die(json_encode(array("success" => false, "msg" => "请先登录")));
+			}
+			
+			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
+			$qrcode = TIMESTAMP;
+			$data = array(
+				"uniacid" => $_W['uniacid'], 
+				"sncode" => $qrcode,
+				"createtime" => TIMESTAMP,
+				'login_userid' => $user['id'],
+				'shopid' => $shop['id'],
+
+			);
+			pdo_insert("j_money_refund_log", $data);
+			isetcookie('qrcodes', $qrcode, 300);
+			
+			$url = urlencode($_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=refundconfirm&m=j_money&qrcode=" . $qrcode);
+			echo $url;
+		}else if($operation == 'checkRefoudConfirm'){
+
+			// $sql = "DROP TABLE IF EXISTS `ims_j_money_refund_log`;
+			// 		CREATE TABLE `ims_j_money_refund_log` (
+			// 		  `id` int(11) NOT NULL AUTO_INCREMENT,
+			// 		  `uniacid` int(11) NOT NULL,
+			// 		  `sncode` varchar(30) DEFAULT NULL,
+			// 		  `login_userid` int(11) DEFAULT NULL,
+			// 		  `shopid` int(11) DEFAULT NULL,
+			// 		  `userid` int(11) DEFAULT NULL,
+			// 		  `openid` varchar(100) DEFAULT NULL,
+			// 		  `out_trade_no` varchar(30) DEFAULT NULL,
+			// 		  `log` varchar(255) DEFAULT NULL,
+			// 		  `createtime` int(11) DEFAULT NULL,
+			// 		  `status` tinyint(4) DEFAULT '0',
+			// 		  PRIMARY KEY (`id`)
+			// 		) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+			// pdo_run($sql);
+
+
+			$qrcode = $_GPC['qrcodes'];
+
+			$item = pdo_fetch("SELECT * FROM " . tablename('j_money_refund_log') . " WHERE uniacid='{$_W['uniacid']}' and sncode=:a ", array(":a" => $qrcode));
+
+			if (!$qrcode || TIMESTAMP - $item['createtime'] > 90 ) {
+				die(json_encode(array("success" => false, "reload" => true)));
+			}
+			// var_dump($item);
+			if ($item['status'] == 0) {
+				die(json_encode(array("success" => false, "reload" => false)));
+			}
+			
+			die(json_encode(array("success" => true,"msg"=>"确认","refund_log_id"=>$item['id'])));
 		}
 	}
+
+	public function doMobileRefundconfirm(){
+		global $_W, $_GPC;
+		$qrcode = strval($_GPC['qrcode']);
+
+		$callback = urlencode($_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=oauthrefundconfirm&m=j_money&qrcode=" . $qrcode);
+		$forward = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $_W['account']['key'] . "&redirect_uri={$callback}&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+		header('location:' . $forward);
+		die;
+	}
+
+	public function doMobileOauthrefundconfirm()
+	{
+		global $_W, $_GPC;
+		$code = $_GPC['code'];
+		$qrcode = intval($_GPC['qrcode']);
+		$cfg = $this->module['config'];
+		if (!empty($code)) {
+			load()->func('communication');
+			$url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" . $_W['account']['key'] . "&secret=" . $_W['account']['secret'] . "&code={$code}&grant_type=authorization_code";
+			$ret = ihttp_get($url);
+			if (!is_error($ret)) {
+				$auth = @json_decode($ret['content'], true);
+				if (is_array($auth) && !empty($auth['openid'])) {
+					$openid = $auth['openid'];
+					$item = pdo_fetch("SELECT * FROM " . tablename('j_money_refund_log') . " WHERE sncode=:a and status=0", array(':a' => $qrcode));
+					// $item = pdo_fetchall("SELECT * FROM " . tablename('j_money_refund_log'));
+					// var_dump($item);die;
+					if (!$item) {
+						message("抱歉，该二维码已过期！");
+					}
+					if (TIMESTAMP - $item['createtime'] > 60 * 5) {
+						message("抱歉，该二维码已过期！");
+					}
+
+					$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and pcate=:shopid and openid=:a ", array(":a" => $openid,':shopid'=>$item['shopid']));
+					if (!$user) {
+						message("您没权使用该功能！");
+					}
+					
+					pdo_update('j_money_refund_log', array("status" => 1, "openid" => $openid, "userid" => $user['id']), array("id" => $item['id']));
+					message("确认成功");
+					die;
+				} else {
+					die('抱歉，微信授权失败');
+				}
+			} else {
+				die('微信授权失败');
+			}
+		}
+		die('微信授权失败');
+	}
+
+
 	public function authcode2openid($qrcode = '', $userid = '')
 	{
 		global $_GPC, $_W;

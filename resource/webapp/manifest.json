@@ -302,7 +302,8 @@
 					"order_detail.html",
 					"member.html",
 					"setting.html",
-					"scan_refund_by_fuyou.html"
+					"scan_refund_by_fuyou.html",
+					"refund_confirm.html"
 				],
 				"priority": 0
 			},
@@ -416,6 +417,15 @@
 				"refer": [
 					"order_detail.html",
 					"pay_order_detail.html"
+				],
+				"priority": 0
+			},
+			"refund_confirm.html": {
+				"resources": [],
+				"refer": [
+					"login_scan.html",
+					"barcode_pay.html",
+					"scan_refund_by_fuyou.html"
 				],
 				"priority": 0
 			}

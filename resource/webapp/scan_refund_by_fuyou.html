@@ -19,6 +19,7 @@
 					var ComponentName = plus.android.importClass("android.content.ComponentName");
 					var intent = new Intent();
 					var flag = false;
+					var refund_log_id = localStorage.getItem("refund_log_id");
 					intent.setComponent(new ComponentName("com.fuyousf.android.fuious","com.fuyousf.android.fuious.NewSetScanCodeActivity"));
 					intent.putExtra("flag","true");
 					main = plus.android.runtimeMainActivity();
@@ -40,6 +41,7 @@
 								url: postUrl,
 								data: {
 									orderid: orderid,
+									refund_log_id:refund_log_id
 								},
 								async: true,
 								dataType: "json",
