@@ -59,10 +59,20 @@ var openw=null,waiting=null;
  * @param {boolean} ns : 是否不自动显示
  * @param {JSON} ws : Webview窗口属性
  */
+var open_flag = false;
 w.clicked=function(id,wa,ns,ws){
 	if(openw){//避免多次打开同一个页面
 		return null;
 	}
+	
+	if(open_flag){
+		return null;
+	}
+	open_flag = true;
+	
+	setTimeout(function() {
+		open_flag = false;
+	}, 2000);
 	
 	if(w.plus){
 		wa&&(waiting=plus.nativeUI.showWaiting());

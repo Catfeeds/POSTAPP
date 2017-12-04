@@ -84,6 +84,13 @@
 		}
 		
 	</script>
+	<style>
+		.main .amount-collected .money::before {
+		    font-size: 0.45rem;
+		    line-height: 1;
+		    content: attr(data-before);
+		}
+	</style>
 </head>
 <body class="bgf0f0f0">
 	<header class="header">
@@ -117,7 +124,7 @@
 				<div class="text">输入收款金额：</div>
 			</div>
 			<div class="row">
-				<div class="money" data-before="￥"><span class="text">0.00</span><span  class="cursor"></span></div>
+				<div class="money" data-before="￥"><span class="text" style="font-size: .32rem;font-weight: 500;">0.00</span><span  class="cursor"></span></div>
 			</div>
 			<div class="row" style="display: none;">
 				<div class="total">

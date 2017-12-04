@@ -1,1 +1,1 @@
-{"title":"万车通收银台","version":"1.4.9","packages":"H5BBED553_1204004251.apk"}
+{"title":"万车通收银台","version":"1.5.0","packages":"H5BBED553_1204141850.apk"}
