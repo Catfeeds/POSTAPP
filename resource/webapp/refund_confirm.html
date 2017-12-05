@@ -36,17 +36,18 @@
 	<div class="logo">
 		<img src="img/s0.png" alt="">
 	</div>
-	<div class="code-login auto tabs-box0">
+	<div class="code-login auto tabs-box0" style="display: block;">
 		<strong>微信扫描确认</strong>
 		<div class="ch-obj"></div>
 		<div class="er-code" id="qr_pic">
 			<img src="img/s2.png" alt="">
 		</div>
 		<p>请打开微信扫一扫</p>
+		
 	</div>
-
-	<div class="mui-content-padded">
-		<button id='barcode' class="mui-btn mui-btn-block mui-btn-primary">取消</button>
+	
+	<div class="code-login" style="display: block;background-color: initial;margin-top: 0;width: initial;">
+		<button id="submitBtn" id='barcode'>取消</button>
 	</div>
 
 </body>
@@ -92,9 +93,9 @@
 										},3000);
 									}else{
 										window.clearTimeout(interval);
-										plus.nativeUI.alert( "二维码已过期!", function(){
-											clicked('pay_record.html',false,false);
-										}, "提示", "确定" );
+//										plus.nativeUI.alert( "二维码已过期!", function(){
+//											clicked('pay_record.html',false,false);
+//										}, "提示", "确定" );
 
 									}
 								}else{
@@ -110,7 +111,7 @@
 				}
 			})
 
-			mui(".mui-content-padded").on("click","#barcode",function(){
+			mui(".code-login").on("click","#barcode",function(){
 				window.clearTimeout(interval);
 				clicked('barcode_pay.html',false,false);
 			});

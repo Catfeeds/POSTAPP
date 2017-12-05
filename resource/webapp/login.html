@@ -19,11 +19,11 @@
 	<div class="logo">
 		<img src="img/s0.png" alt="">
 	</div>
-	<div class="code-login auto tabs-box0" >
+	<div class="code-login auto tabs-box0" style="display: block;">
 		<strong>扫码二维码登录</strong>
-		<div class="ch-obj" onclick="cg_code0();"><img src="img/s1.png" alt=""></div>
+		<div class="ch-obj"><img src="img/s1.png" alt=""></div>
 		<div class="er-code" id="qr_pic">
-
+			<!--<img src="img/s2.png" alt="">-->
 		</div>
 		<p>请打开微信扫一扫</p>
 	</div>
@@ -85,8 +85,9 @@
 										},3000);
 									}else{
 										window.clearTimeout(interval);
-										plus.nativeUI.alert(data.msg);
-										clicked("login_scan.html",false,false);
+//										plus.nativeUI.alert( data.msg, function(){
+//											history.go(0);
+//										}, "提示", "刷新" );
 										return;
 									}
 								}else{
@@ -98,6 +99,7 @@
 									localStorage.setItem( "account", user.useracount);
 									localStorage.setItem( "card_pay_switch", settings.card_pay_switch);
 									localStorage.setItem( "pos_member_switch", settings.card_pay_switch);
+									localStorage.setItem( "pos_servermoney_switch", settings.pos_servermoney_switch);
 									console.log(user.realname);
 									console.log(user.useracount);
 									window.clearTimeout(interval);
@@ -147,6 +149,10 @@
 							localStorage.setItem( "realname", user.realname);
 							localStorage.setItem( "card_pay_switch", settings.card_pay_switch);
 							localStorage.setItem( "pos_member_switch", settings.card_pay_switch);
+							localStorage.setItem( "pos_servermoney_switch", settings.pos_servermoney_switch);
+							localStorage.setItem( "freelimit", settings.freelimit);
+							localStorage.setItem( "servermoney", settings.servermoney);
+							
 							localStorage.setItem( "realname", user.realname);
 							console.log("islogin = "+localStorage.getItem("islogin"));
 							console.log(user.realname);
@@ -158,19 +164,24 @@
 					}
 				});
 			});
+			
+			mui(".tabs-box0").on("tap",".ch-obj",function(){
+				mui(".tabs-box0")[0].setAttribute("style","display: none;");
+				mui(".tabs-box1")[0].setAttribute("style","display: block;");
+			});
+			mui(".tabs-box1").on("tap",".ch-obj",function(){
+				mui(".tabs-box1")[0].setAttribute("style","display: none;");
+				mui(".tabs-box0")[0].setAttribute("style","display: block;");
+			});
 
 		})
 
-		function cg_code0(){
-			$(".tabs-box0")[].hide();
-			$(".tabs-box1")[].show();
-		}
-
-
-		function cg_code1(){
-			$(".tabs-box0")[].show();
-			$(".tabs-box1")[].hide();
-		}
+//
+//
+//		function cg_code1(){
+//			$(".tabs-box0")[].show();
+//			$(".tabs-box1")[].hide();
+//		}
 
 	}(mui, document));
 </script>

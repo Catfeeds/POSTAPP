@@ -42,6 +42,12 @@
 			var shop = localStorage.getItem("shop");
 			$(".logo")[0].innerHTML = shop;
 			
+			var pos_servermoney_switch = localStorage.getItem("pos_servermoney_switch");
+			var freelimit = localStorage.getItem("freelimit");
+			var servermoney = localStorage.getItem("servermoney");
+			if(pos_servermoney_switch == 1){
+				
+			}
 			$("#submitBtn").on("click",function(){
 				var pay_type = $("#pay_type").val();
 				var total = document.getElementById('total-text').innerHTML;
@@ -98,7 +104,7 @@
 			<a href="#">记录</a>
 		</div>
 		<!--<div class="logo"><a href="#"><img src="img/hico3.png" alt=""></a></div>-->
-		<div class="logo" style="font-size: .26rem;color: #FFF;font-weight: 600;">收银台</div>
+		<div class="logo" style="font-size: .26rem;color: #FFF;font-weight: 600;margin-top:0;">收银台</div>
 		<div class="right-nav set" style="height: 0.3rem;width: 0.3rem;" onclick="clicked('setting.html',false,false)">
 			<a href="#" style="height: 0.3rem;"></a>
 		</div>
@@ -116,6 +122,9 @@
 			</div>
 		</div>
 		<input type="hidden" name="pay_type" id="pay_type" value="2" />
+		<input type="hidden" name="pos_servermoney_switch" id="pos_servermoney_switch" value="0" />
+		<input type="hidden" name="freelimit" id="freelimit" value="0" />
+		<input type="hidden" name="servermoney" id="servermoney" value="0" />
 		<div class="amount-collected">
 			<div class="row title">
 				<div class="brand">
@@ -124,7 +133,10 @@
 				<div class="text">输入收款金额：</div>
 			</div>
 			<div class="row">
-				<div class="money" data-before="￥"><span class="text" style="font-size: .32rem;font-weight: 500;">0.00</span><span  class="cursor"></span></div>
+				<div class="money" data-before="￥">
+					<span class="text" style="font-size: .32rem;font-weight: 500;">0.00</span>
+					<span  class="cursor"></span>
+				</div>
 			</div>
 			<div class="row" style="display: none;">
 				<div class="total">

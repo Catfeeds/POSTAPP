@@ -92,8 +92,11 @@ class J_moneyModuleSite extends WeModuleSite
 
 				/*配置*/
 			$serverTypes=json_decode($shop["servertypes"],true);
-			$settings['card_pay_switch']   = $serverTypes[4];
-			$settings['pos_member_switch'] = $serverTypes[5];
+			$settings['card_pay_switch']        = $serverTypes[4];//刷卡支付
+			$settings['pos_member_switch']      = $serverTypes[5];//会员卡
+			$settings['pos_servermoney_switch'] = $serverTypes[6];//手续费
+			$settings['freelimit']              = $shop['freelimit'];
+			$settings['servermoney']            = $shop['servermoney'];
 
 			isetcookie('islogin', $item['id'], 36000 * $cfg['cookiehold']);
 			isetcookie('siteuniacid', $_W['uniacid'], 36000 * $cfg['cookiehold']);
@@ -128,8 +131,11 @@ class J_moneyModuleSite extends WeModuleSite
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
 			//long 2017-12-03
 			$serverTypes=json_decode($shop["servertypes"],true);
-			$settings['card_pay_switch']   = $serverTypes[4];
-			$settings['pos_member_switch'] = $serverTypes[5];
+			$settings['card_pay_switch']        = $serverTypes[4];//刷卡支付
+			$settings['pos_member_switch']      = $serverTypes[5];//会员卡
+			$settings['pos_servermoney_switch'] = $serverTypes[6];//手续费
+			$settings['freelimit']              = $shop['freelimit'];
+			$settings['servermoney']            = $shop['servermoney'];
 
 			die(json_encode(array("success" => true,'shop'=>$shop,'user'=>$user,'settings'=>$settings)));
 		} elseif ($operation == "pay_all") {
@@ -1858,7 +1864,7 @@ class J_moneyModuleSite extends WeModuleSite
 
 			);
 			pdo_insert("j_money_refund_log", $data);
-			isetcookie('qrcodes', $qrcode, 300);
+			isetcookie('qrcodess', $qrcode, 300);
 			
 			$url = urlencode($_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=refundconfirm&m=j_money&qrcode=" . $qrcode);
 			echo $url;
@@ -1882,7 +1888,7 @@ class J_moneyModuleSite extends WeModuleSite
 			// pdo_run($sql);
 
 
-			$qrcode = $_GPC['qrcodes'];
+			$qrcode = $_GPC['qrcodess'];
 
 			$item = pdo_fetch("SELECT * FROM " . tablename('j_money_refund_log') . " WHERE uniacid='{$_W['uniacid']}' and sncode=:a ", array(":a" => $qrcode));
 

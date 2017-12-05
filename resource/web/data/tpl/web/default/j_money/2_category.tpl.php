@@ -470,6 +470,20 @@ require(['bootstrap'],function($){
                   开启</label>
               </div>
             </div>
+
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启POS手续费功能</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="serverTypes[6]" value="0" <?php  if(empty($serverTypes['6'])) { ?> checked<?php  } ?> />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="serverTypes[6]" value="1" <?php  if(!empty($serverTypes['6'])) { ?> checked<?php  } ?> />
+                  开启</label>
+              </div>
+            </div>
+
+
           </div>
 
         </div>
