@@ -19,16 +19,16 @@
 	<div class="logo">
 		<img src="img/s0.png" alt="">
 	</div>
-	<div class="code-login auto tabs-box0">
+	<div class="code-login auto tabs-box0" >
 		<strong>扫码二维码登录</strong>
 		<div class="ch-obj" onclick="cg_code0();"><img src="img/s1.png" alt=""></div>
-		<div class="er-code">
-			<img src="img/s2.png" alt="">
+		<div class="er-code" id="qr_pic">
+
 		</div>
 		<p>请打开微信扫一扫</p>
 	</div>
 
-	<div class="code-login auto tabs-box1">
+	<div class="code-login auto tabs-box1" style="display:none ">
 		<strong>账号密码登录</strong>
 		<div class="ch-obj" onclick="cg_code1();"><img src="img/s1-1.png" alt=""></div>
 		<ul>
@@ -109,14 +109,14 @@
 					}
 				}
 			})
-			
+
 		})
 	}(mui, document));
 </script>
 
 
 
-<script src="js/jquery-3.1.0.min.js"></script>
+<!-- <script src="js/jquery-3.1.0.min.js"></script> -->
 <script>
 	cg_code1();
 	
