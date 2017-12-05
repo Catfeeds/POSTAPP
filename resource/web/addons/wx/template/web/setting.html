@@ -1,0 +1,1415 @@
+{template 'common/header'}
+
+<style>
+
+.multi-img-details .multi-item img{max-width: 130px;}
+
+</style>
+
+<div class="main">
+
+	<form class="form-horizontal form" id="setting_form" action="" method="post" enctype="multipart/form-data">
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				基本参数
+
+			</div>
+
+			<div class="panel-body">
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">微信模式</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<div class="input-group">
+
+							<label class="radio-inline">
+
+								<input type="radio" name="base[wechat]" value="1" {if $this->module['config']['base']['wechat']}checked{/if}> 开启
+
+							</label>
+
+							<label class="radio-inline">
+
+								<input type="radio" name="base[wechat]" value="0" {if !$this->module['config']['base']['wechat']}checked{/if}> 关闭
+
+							</label>
+
+						</div>
+
+						<span class="help-block">开启微信模式后，积分商城将只能在微信中打开，避免使用浏览器打开浏览</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">调试模式</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<div class="input-group">
+
+							<label class="radio-inline">
+
+								<input type="radio" name="base[debug]" value="1" {if $this->module['config']['base']['debug']}checked{/if}> 开启
+
+							</label>
+
+							<label class="radio-inline">
+
+								<input type="radio" name="base[debug]" value="0" {if !$this->module['config']['base']['debug']}checked{/if}> 关闭
+
+							</label>
+
+						</div>
+
+						<span class="help-block">开启调试模式后，前台手机端将无法使用积分商城功能，将提示自定义信息，可设置调试账号UID，调试账号访问将不受限制</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">提示信息</label>
+
+					<div class="col-sm-9">
+
+						<textarea class="form-control" name="base[debug_message]">{php echo $this->module['config']['base']['debug_message']}</textarea>
+
+						<span class="help-block">模块未开启时，前台手机端访问提示信息</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">付款成功通知</label>
+
+                    <div class="col-sm-9 col-xs-12">
+
+                       
+
+
+
+                        <div class='input-group'>
+
+                            <input type="text" id='salers' name="salers" maxlength="30" value="{loop $salers $saler} {$saler['nickname']}; {/loop}" class="form-control" readonly />
+
+                            <div class='input-group-btn'>
+
+                                <button class="btn btn-default" type="button" onclick="popwin = $('#modal-module-menus').modal();">选择通知人</button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="input-group multi-img-details" id='saler_container'>
+
+                            {loop $salers $saler}
+
+                            <div class="multi-item saler-item" openid='{$saler['openid']}'>
+
+                                 <img class="img-responsive img-thumbnail" src='{$saler['avatar']}' onerror="this.src='./resource/images/nopic.jpg'; this.title='图片未找到.'">
+
+                                 <div class='img-nickname'>{$saler['nickname']}</div>
+
+                                <input type="hidden" value="{$saler['openid']}" name="openids[]">
+
+                                <em onclick="remove_member(this)"  class="close">×</em>
+
+                            </div>
+
+                            {/loop}
+
+                        </div>
+
+                        <span class='help-block'>付款成功后客服通知，可以制定多个人，如果不填写则不通知</span>
+
+                        <div id="modal-module-menus"  class="modal fade" tabindex="-1">
+
+                            <div class="modal-dialog" style='width: 920px;'>
+
+                                <div class="modal-content">
+
+                                    <div class="modal-header"><button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button><h3>选择通知人</h3></div>
+
+                                    <div class="modal-body" >
+
+                                        <div class="row">
+
+                                            <div class="input-group">
+
+                                                <input type="text" class="form-control" name="keyword" value="" id="search-kwd" placeholder="请输入粉丝昵称/姓名/手机号" />
+
+                                                <span class='input-group-btn'><button type="button" class="btn btn-default" onclick="search_members();">搜索</button></span>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div id="module-menus" style="padding-top:5px;"></div>
+
+                                    </div>
+
+                                    <div class="modal-footer"><a href="#" class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</a></div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                        
+
+                    </div>
+
+                </div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">调试账号UID</label>
+
+					<div class="col-sm-9">
+
+						<textarea class="form-control" name="base[debug_uids]">{if $this->module['config']['base']['debug_uids']}{php echo implode(',', $this->module['config']['base']['debug_uids'])}{/if}</textarea>
+
+						<span class="help-block">多个账号UID之间使用英文半角逗号分隔"," <a href="{php echo url('mc/member')}" target="_blank">查找账号UID</a></span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">积分排行榜</label>
+
+					<div class="col-sm-9">
+
+						<select class="form-control" name="base[creditrank_type][]" multiple>
+							
+							{php $creditrank_type=$this->module['config']['base']['creditrank_type'];}
+							{loop $credits $key $item}
+
+							{if $item['enabled']}
+								
+								
+							<option value="{$key}" {if $creditrank_type&& in_array($key,$creditrank_type)}selected{/if} > {$item['title']}({$key})</option>
+
+							{/if}
+
+							{/loop}
+
+						</select>
+
+						<span class="help-block">设置积分排行榜积分类型，可多选，默认为：credit1类型</span>
+
+						<span class="help-block">选择多个积分类型时，积分排行榜右上角将出现 "积分类型" 选项，可选择不同积分查看排行榜</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">积分排行榜展示名数</label>
+
+					<div class="col-sm-9">
+
+						<input type="number" min="1" class="form-control" name="base[rank_num]" value="{php echo $this->module['config']['base']['rank_num']}">
+
+						<span class="help-block">前台积分排行榜展示人数，为空时默认展示10名</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">开启微信右上角菜单</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<div class="input-group">
+
+							<label class="radio-inline">
+
+								<input type="radio" name="base[weixin_menu]" value="1" {if $this->module['config']['base']['weixin_menu']}checked{/if}> 开启
+
+							</label>
+
+							<label class="radio-inline">
+
+								<input type="radio" name="base[weixin_menu]" value="0" {if !$this->module['config']['base']['weixin_menu']}checked{/if}> 关闭
+
+							</label>
+
+						</div>
+
+						<span class="help-block">开启后进入积分商城页面时，微信右上角菜单包含分享、复制链接等操作，关闭后将不显示相关操作按钮</span>
+
+					</div>
+
+				</div>
+
+<div class="form-group">
+
+
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">远程商品获取接口</label>
+
+
+
+					<div class="col-sm-9">
+
+
+
+						<input type="text" class="form-control" name="base[goods_url]" value="{php echo $this->module['config']['base']['goods_url']}">
+
+
+
+						<span class="help-block">远程获取商品地址，例如：http://baode.leancare.net:9092/lcapi/custom/weixin/boutique-item/6.json</span>
+
+
+
+					</div>
+
+
+
+				</div>
+
+				<div class="form-group">
+
+
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">七牛云地址</label>
+
+
+
+					<div class="col-sm-9">
+
+
+
+						<input type="text" class="form-control" name="base[qiniu_url]" value="{php echo $this->module['config']['base']['qiniu_url']}">
+
+
+
+						<span class="help-block">远程商品图片七牛云地址,例如：http://7xqdua.com2.z0.glb.qiniucdn.com/</span>
+
+
+
+					</div>
+
+
+
+				</div>
+
+				
+
+				<div class="form-group">
+
+
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">API接口地址</label>
+
+
+
+					<div class="col-sm-9">
+
+
+
+						<input type="text" class="form-control" name="base[apihost]" value="{php echo $this->module['config']['base']['apihost']}">
+
+
+
+						<span class="help-block">回调API接口 例如 http://baode.leancare.net:9092/lcapi/custom/weixin/wxpay-exchange-boutique</span>
+
+
+
+					</div>
+
+
+
+				</div>
+
+
+
+				
+
+
+
+				<div class="form-group">
+
+
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">下单后回调站点ID</label>
+
+
+
+					<div class="col-sm-9">
+
+
+
+						<input type="text" class="form-control" name="base[order_siteid]" value="{php echo $this->module['config']['base']['order_siteid']}">
+
+
+
+						<span class="help-block">下单后返回的回调地址端口,例如 122</span>
+
+
+
+					</div>
+
+
+
+				</div>
+
+				<div class="form-group">
+
+
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">非会员回调车架号</label>
+
+
+
+					<div class="col-sm-9">
+
+
+
+						<input type="text" class="form-control" name="base[vincode]" value="{php echo $this->module['config']['base']['vincode']}">
+
+
+
+						<span class="help-block">非会员回调车架号,A123456</span>
+
+
+
+					</div>
+
+
+
+				</div>
+
+				<div class="form-group">
+
+
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">会员资料获取接口</label>
+
+
+
+					<div class="col-sm-9">
+
+
+
+						<input type="text" class="form-control" name="base[user_url]" value="{php echo $this->module['config']['base']['user_url']}">
+
+
+
+						<span class="help-block">远程获取会员资料,例如 http://baode.leancare.net:9092/lcapi/custom/weixin/card/contact/</span>
+
+
+
+					</div>
+
+
+
+				</div>
+
+				<div class="form-group">
+
+
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">汽车资料获取接口</label>
+
+
+
+					<div class="col-sm-9">
+
+
+
+						<input type="text" class="form-control" name="base[car_url]" value="{php echo $this->module['config']['base']['car_url']}">
+
+
+
+						<span class="help-block">远程获取汽车资料,例如 http://baode.leancare.net:9092/lcapi/custom/weixin/car/</span>
+
+
+
+					</div>
+
+
+
+				</div>
+
+				<div class="form-group">
+
+
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">会员绑定跳转接口</label>
+
+
+
+					<div class="col-sm-9">
+
+
+
+						<input type="text" class="form-control" name="base[bind_url]" value="{php echo $this->module['config']['base']['bind_url']}">
+
+
+
+						<span class="help-block">用户绑定接口,例如 http://nv.autostreet.cn/app/index.php?i=10&c=entry&do=home&m=rlong_car</span>
+
+
+
+					</div>
+
+
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				模板消息参数
+
+			</div>
+
+			<div class="panel-body">
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">订单提交消息ID</label>
+
+					<div class="col-sm-9">
+
+						<input type="text" class="form-control" name="template_message[order_submit_id]" value="{php echo $this->module['config']['template_message']['order_submit_id']}">
+
+						<span class="help-block">登录公众号后台=》模板库搜索“订单提交成功通知”，编号“OPENTM201994376”，行业“IT科技 - IT软件与服务”</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">订单提交消息</label>
+
+					<div class="col-sm-9">
+
+						<textarea rows="5" class="form-control" name="template_message[order_submit_content]">{php echo $this->module['config']['template_message']['order_submit_content']}</textarea>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">订单支付消息ID</label>
+
+					<div class="col-sm-9">
+
+						<input type="text" class="form-control" name="template_message[order_pay_id]" value="{php echo $this->module['config']['template_message']['order_pay_id']}">
+
+						<span class="help-block">登录公众号后台=》模板库搜索“订单支付成功通知”，编号“OPENTM201490080”，行业“IT科技 - IT软件与服务”</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">订单支付消息</label>
+
+					<div class="col-sm-9">
+
+						<textarea rows="5" class="form-control" name="template_message[order_pay_content]">{php echo $this->module['config']['template_message']['order_pay_content']}</textarea>
+
+					</div>
+
+				</div>
+				
+				
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">赠送项目或者优惠券通知</label>
+
+					<div class="col-sm-9">
+
+						<input type="text" class="form-control" name="template_message[sendquan_id]" value="{php echo $this->module['config']['template_message']['sendquan_id']}">
+
+						<span class="help-block">登录公众号后台=》模板库搜索“赠送项目或者优惠券通知”，编号“OPENTM207522138”，行业“IT科技 -互联网|电子商务”</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">赠送项目或者优惠消息</label>
+
+					<div class="col-sm-9">
+
+						<textarea rows="5" class="form-control" name="template_message[sendquan_content]">{php echo $this->module['config']['template_message']['sendquan_content']}</textarea>
+
+					</div>
+
+				</div>
+
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">竞拍成功消息ID</label>
+
+					<div class="col-sm-9">
+
+						<input type="text" class="form-control" name="template_message[auction_success_id]" value="{php echo $this->module['config']['template_message']['auction_success_id']}">
+
+						<span class="help-block">登录公众号后台=》模板库搜索“竞拍成功通知”，编号“OPENTM202440123”，行业“IT科技 - IT软件与服务”</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">竞拍成功消息</label>
+
+					<div class="col-sm-9">
+
+						<textarea rows="5" class="form-control" name="template_message[auction_success_content]">{php echo $this->module['config']['template_message']['auction_success_content']}</textarea>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				微信支付参数
+
+			</div>
+
+			<div class="panel-body">
+
+				<div class="alert alert-warning">
+
+					请先下载微信支付API证书，下载证书之后按照对应的文件名上传即可，<a target="_blank" href="{SUPERMAN_CREDITMALL_MANUAL}">如何下载证书请查看文档常见问题</a>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">微信公众号APPID</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<input type="text" class="form-control" name="wxpay[mch_appid]" value="{php echo $this->module['config']['wxpay']['mch_appid']}" />
+
+						<span class="help-block">微信公众号appid参数（默认加载第一个子公众号的数据，如有多个子公众号，请手动修改）</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">微信支付商户号</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<input type="text" class="form-control" name="wxpay[mchid]" value="{php echo $this->module['config']['wxpay']['mchid']}" />
+
+						<span class="help-block">开通微信支付时，由微信支付系统提供的商户号</span>
+
+					</div>
+
+				</div>
+                
+                
+                	<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">子商户微信公众号APPID</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<input type="text" class="form-control" name="wxpay[sub_appid]" value="{php echo $this->module['config']['wxpay']['sub_appid']}" />
+
+						<span class="help-block">微信公众号appid参数（默认加载第一个子公众号的数据，如有多个子公众号，请手动修改）</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">子商户微信支付商户号</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<input type="text" class="form-control" name="wxpay[sub_mch_id]" value="{php echo $this->module['config']['wxpay']['sub_mch_id']}" />
+
+						<span class="help-block">开通微信支付时，由微信支付系统提供的商户号</span>
+
+					</div>
+
+				</div>
+
+                
+                
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">微信支付证书</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<input type="file" name="wxpay[apiclient_cert]" value="{php echo $this->module['config']['wxpay']['apiclient_cert']}">
+
+						<span class="help-block">证书下载解压后，默认文件名为：apiclient_cert.pem</span>
+
+						<span class="help-block">
+
+							{if $this->module['config']['wxpay']['apiclient_cert']!=''}
+
+							<a href="{php echo tomedia($this->module['config']['wxpay']['apiclient_cert'])}" target="_blank">点击下载</a><br/>
+
+							<label class="checkbox-inline">
+
+								<input type="checkbox" name="wxpay[del_apiclient_cert]"> <span style="color: #f00">删除</span>
+
+							</label>
+
+							{/if}
+
+						</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">微信支付证书密钥</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<input type="file" name="wxpay[apiclient_key]" value="{php echo $this->module['config']['wxpay']['apiclient_key']}">
+
+						<span class="help-block">证书下载解压后，默认文件名为：apiclient_key.pem</span>
+
+						<span class="help-block">
+
+							{if $this->module['config']['wxpay']['apiclient_key']!=''}
+
+							<a href="{php echo tomedia($this->module['config']['wxpay']['apiclient_key'])}" target="_blank">点击下载</a><br/>
+
+							<label class="checkbox-inline">
+
+								<input type="checkbox" name="wxpay[del_apiclient_key]"> <span style="color: #f00">删除</span>
+
+							</label>
+
+							{/if}
+
+						</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">微信支付CA证书</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<input type="file" name="wxpay[rootca]" value="{php echo $this->module['config']['wxpay']['rootca']}">
+
+						<span class="help-block">证书下载解压后，默认文件名为：rootca.pem</span>
+
+						<span class="help-block">
+
+							{if $this->module['config']['wxpay']['rootca']!=''}
+
+							<a href="{php echo tomedia($this->module['config']['wxpay']['rootca'])}" target="_blank">点击下载</a><br/>
+
+							<label class="checkbox-inline">
+
+								<input type="checkbox" name="wxpay[del_rootca]"> <span style="color: #f00">删除</span>
+
+							</label>
+
+							{/if}
+
+						</span>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				分享参数
+
+			</div>
+
+			<div class="panel-body">
+
+				<div class="alert alert-danger">
+
+					已认证公众号可以设置以下分享参数，否则没有权限调用分享接口，或者可以借用其它公众号权限
+
+					<a href="{php echo url('profile/jsauth')}" target="_blank">去借一下</a>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">分享标题</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<input type="text" class="form-control" name="share[title]" value="{php echo $this->module['config']['share']['title']}" />
+
+						<span class="help-block"></span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">分享图片</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						{php echo tpl_form_field_image('share[imgurl]', $this->module['config']['share']['imgurl'])}
+
+						<span class="help-block"></span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">分享内容</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<textarea name="share[desc]" class="form-control">{php echo $this->module['config']['share']['desc']}</textarea>
+
+						<span class="help-block"></span>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				红包设置
+
+			</div>
+
+			<div class="panel-body">
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">常见问题</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						{php echo tpl_ueditor('redpack[help]', $this->module['config']['redpack']['help'])}
+
+						<span class="help-block">红包页右上角展示的常见问题</span>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				积分使用帮助
+
+			</div>
+
+			<div class="panel-body">
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">预览</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<a href="javascript:;" onclick="preview_help();return false;" class="btn btn-default">预览</a>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">积分说明</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						{php echo tpl_ueditor('help[base]', $this->module['config']['help']['base'])}
+
+						<span class="help-block">不填写，前台将不展示内容（包括顶部标签）</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">如何使用</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						{php echo tpl_ueditor('help[use]', $this->module['config']['help']['use'])}
+
+						<span class="help-block">不填写，前台将不展示内容（包括顶部标签）</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">如何获得</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						{php echo tpl_ueditor('help[get]', $this->module['config']['help']['get'])}
+
+						<span class="help-block">不填写，前台将不展示内容（包括顶部标签）</span>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				客服中心
+
+			</div>
+
+			<div class="panel-body">
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">详细内容</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						{php echo tpl_ueditor('service[content]', $this->module['config']['service']['content'])}
+
+						<span class="help-block">查看方式：个人中心=》我的订单=》客服</span>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				新增配置
+			</div>
+			<div class="panel-body">
+					<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">同步商品价格</label>
+					<div class="col-sm-6 col-md-8 col-xs-12">
+						<div class="input-group">
+							    <span class="input-group-addon" id="basic-addon1">实付价格比例</span>
+								<input type="text" class="form-control" name="newset[sfprice]" placeholder="100" value="{php echo $this->module['config']['newset']['sfprice']}" />
+							    <span class="input-group-addon" id="basic-addon1">%</span>
+						</div>
+						
+						<span class="help-block">原积分同步  对于商品的实付价格比例默认100%实付</span>
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">同步积分兑换商品</label>
+					<div class="col-sm-6 col-md-8 col-xs-12">
+						<div class="input-group">
+							    <span class="input-group-addon" id="basic-addon1">接口</span>
+								<input type="text" class="form-control" name="newset[updata]" placeholder="完整的接口地址" value="{php echo $this->module['config']['newset']['updata']}" />
+							   
+						</div>
+						
+						<span class="help-block">通过（查询积分兑换基础项目）接口获取 积分兑换项目  把获取的结果载入秒杀分类中</span>
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">积分兑换记录</label>
+					<div class="col-sm-6 col-md-8 col-xs-12">
+						<div class="input-group">
+							    <span class="input-group-addon" id="basic-addon1">接口</span>
+								<input type="text" class="form-control" name="newset[logs]" placeholder="完整的接口地址" value="{php echo $this->module['config']['newset']['logs']}" />
+							   
+						</div>
+						
+						<span class="help-block">请填入word文档9 接口地址 不带参数 例如 http://baode.leancare.net:9092/lcapi/card/save-credit-exchange-record.json</span>
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">默认图片</label>
+					<div class="col-sm-6 col-md-8 col-xs-12">
+						{php echo tpl_form_field_image('newset[imgurl]', $this->module['config']['newset']['imgurl'])}
+						<span class="help-block">同步积分兑换项目的商品 默认图片</span>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">默认配送方式id</label>
+					<div class="col-sm-6 col-md-8 col-xs-12">
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1">配送方式id</span>
+							<input type="text" class="form-control" name="newset[dispatchid]" placeholder="" value="{php echo $this->module['config']['newset']['dispatchid']}" />
+						</div>
+						<span class="help-block">同步积分兑换项目的商品 默认配送方式</span>
+						
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">默认库存量</label>
+					<div class="col-sm-6 col-md-8 col-xs-12">
+						<div class="input-group">
+							    <span class="input-group-addon" id="basic-addon1">默认库存</span>
+								<input type="text" class="form-control" name="newset[kcnum]" placeholder="100" value="{php echo $this->module['config']['newset']['kcnum']}" />
+							   
+						</div>
+						
+						<span class="help-block">通过（查询积分兑换基础项目）接口获取 积分兑换项目 默认的库存量</span>
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">会员信息接口地址</label>
+					<div class="col-sm-6 col-md-8 col-xs-12">
+						<div class="input-group">
+							    <span class="input-group-addon" id="basic-addon1">接口</span>
+								<input type="text" class="form-control" name="newset[apiurl]" placeholder="" value="{php echo $this->module['config']['newset']['apiurl']}" />
+							   
+						</div>
+						<span class="help-block">会员相关操作的接口， 这里填写接口基础地址</span>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">账户名称</label>
+					<div class="col-sm-6 col-md-8 col-xs-12">
+								<input type="text" class="form-control" name="newset[apiusername]" placeholder="" value="{php echo $this->module['config']['newset']['apiusername']}" />
+						<span class="help-block">会员相关操作的接口， 账户名称</span>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 control-label">账户密码</label>
+					<div class="col-sm-6 col-md-8 col-xs-12">
+								<input type="text" class="form-control" name="newset[apipassword]" placeholder="" value="{php echo $this->module['config']['newset']['apipassword']}" />
+						<span class="help-block">会员相关操作的接口， 账户密码</span>
+					</div>
+				</div>
+			
+				<div class="form-group">
+
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">积分商品付款成功通知</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <div class='input-group'>
+                            <input type="text" id='salers2' name="salers2" maxlength="30" value="{loop $salersList $useritem} {$useritem['nickname']}; {/loop}" class="form-control" readonly />
+                            <div class='input-group-btn'>
+                                <button class="btn btn-default" type="button" onclick="popwin = $('#modal-module-menus2').modal();">选择通知人</button>
+                            </div>
+                        </div>
+                        <div class="input-group multi-img-details" id='saler_container2'>
+                            {loop $salersList $useritem}
+							
+                            <div class="multi-item saler-item" openid2='{$useritem['openid']}'>
+                                 <img class="img-responsive img-thumbnail" src='{$useritem['avatar']}' onerror="this.src='./resource/images/nopic.jpg'; this.title='图片未找到.'">
+                                 <div class='img-nickname'>{$useritem['nickname']}</div>
+                                <input type="hidden" value="{$useritem['openid']}" name="openids2[]">
+                                <em onclick="remove_member2(this)"  class="close">×</em>
+                            </div>
+                            {/loop}
+                        </div>
+                        <span class='help-block'>付款成功后客服通知，可以制定多个人，如果不填写则不通知</span>
+                        <div id="modal-module-menus2"  class="modal fade" tabindex="-1">
+                            <div class="modal-dialog" style='width: 920px;'>
+                                <div class="modal-content">
+                                    <div class="modal-header"><button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button><h3>选择通知人</h3></div>
+                                    <div class="modal-body" >
+                                        <div class="row">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="keyword2" value="" id="search-kwd2" placeholder="请输入粉丝昵称/姓名/手机号" />
+                                                <span class='input-group-btn'><button type="button" class="btn btn-default" onclick="search_members2();">搜索</button></span>
+                                            </div>
+                                        </div>
+                                        <div id="module-menus2" style="padding-top:5px;"></div>
+                                    </div>
+                                    <div class="modal-footer"><a href="#" class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			<script language='javascript'>
+
+                function search_members2() {
+
+                    if ($.trim($('#search-kwd2').val()) == '') {
+
+                        Tip.focus('#search-kwd2', '请输入关键词');
+
+                        return;
+
+                    }
+
+                    $("#module-menus2").html("正在搜索....");
+
+                    $.get('{php echo $this->createWebUrl('query',array('type'=>2));}', { 
+
+                        keyword: $.trim($('#search-kwd2').val())
+
+                    }, function (dat) {
+
+                        $('#module-menus2').html(dat);
+
+                    });
+
+                }
+
+                function select_member2(o) {
+
+
+
+                    if ($('.multi-item[openid2="' + o.openid + '"]').length > 0) {
+
+                        return;
+
+                    }
+
+                    var html = '<div class="multi-item" openid2="' + o.openid + '">';
+
+                    html += '<img class="img-responsive img-thumbnail" src="' + o.avatar + '" onerror="this.src=\'./resource/images/nopic.jpg\'; this.title=\'图片未找到.\'">';
+
+                    html += '<div class="img-nickname">' + o.nickname + '</div>';
+
+                    html += '<input type="hidden" value="' + o.openid + '" name="openids2[]">';
+
+                    html += '<em onclick="remove_member2(this)"  class="close">×</em>';
+
+                    html += '</div>';
+
+                    $("#saler_container2").append(html);
+
+                    refresh_members2();
+
+                }
+
+
+
+                function remove_member2(obj) {
+
+                    $(obj).parent().remove();
+
+                    refresh_members2();
+
+                }
+
+                function refresh_members2() {
+
+                    var nickname = "";
+
+                    $('#saler_container2 .multi-item').each(function () {
+
+                        nickname += " " + $(this).find('.img-nickname').html() + "; ";
+
+                    });
+
+                    $('#salers2').val(nickname);
+
+                }
+
+
+
+            </script>
+				
+				
+
+
+			</div>
+		</div>	
+			
+		
+		
+
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+
+				引导关注
+
+			</div>
+
+			<div class="panel-body">
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">未关注兑换</label>
+
+					<div class="col-sm-6 col-md-8 col-xs-12">
+
+						<div class="input-group">
+
+							<label class="radio-inline">
+
+								<input type="radio" name="subscribe[check]" value="0" {if !$this->module['config']['subscribe']['check']}checked{/if}> 允许
+
+							</label>
+
+							<label class="radio-inline">
+
+								<input type="radio" name="subscribe[check]" value="1" {if $this->module['config']['subscribe']['check']}checked{/if}> 不允许
+
+							</label>
+
+						</div>
+
+						<span class="help-block">粉丝未关注公众号时，设置是否允许积分兑换，不允许为强制性，即不关注公众号不能兑换</span>
+
+						<span class="help-block" style="color: red">
+
+							注意：设置为不允许时，必须设置 <strong>引导关注素材</strong>&nbsp;&nbsp;
+
+							<a href="{php echo wurl('account/post', array('uniacid' => $_W['uniacid']))}" target="_blank">点击查看</a>
+
+						</span>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">未关注温馨提示</label>
+
+					<div class="col-sm-8 col-md-8 col-xs-12">
+
+						<input type="text" class="form-control" placeholder="关注公众号，兑换更多礼品！" name="subscribe[tips]" value="{php echo $this->module['config']['subscribe']['tips']}">
+
+						<span class="help-block">未关注温馨提示框内容设置，不填写时默认为：关注公众号，兑换更多礼品！</span>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="form-group col-sm-12">
+
+			<input name="token" type="hidden" value="{$_W['token']}" />
+
+			<input type="submit" class="btn btn-primary" name="submit" value="提交" />
+
+			<input type="submit" onclick="return confirm('恢复默认设置后，将覆盖当前已设置参数，确认吗？'); return false;" class="btn btn-danger" name="reset_submit" value="重置参数为默认设置" style="margin-left: 50px;"/>
+
+		</div>
+
+	</form>
+
+</div>
+
+<script type="text/javascript">
+
+	require(['jquery', 'util', 'filestyle'], function($){
+
+		$(".form-group").find(':file').filestyle({buttonText: '上传文件'});
+
+		$('#setting_form').submit(function(){
+
+			var creditrank_type = $('select[name="base[creditrank_type][]"]');
+
+			if (!creditrank_type.val()) {
+
+				util.message('请选择积分排行榜积分类型');
+
+				return false;
+
+			}
+
+			return true;
+
+		});
+
+	});
+
+</script>
+
+ <script language='javascript'>
+
+                function search_members() {
+
+                    if ($.trim($('#search-kwd').val()) == '') {
+
+                        Tip.focus('#search-kwd', '请输入关键词');
+
+                        return;
+
+                    }
+
+                    $("#module-menus").html("正在搜索....");
+
+                    $.get('{php echo $this->createWebUrl('query')}', { 
+
+                        keyword: $.trim($('#search-kwd').val())
+
+                    }, function (dat) {
+
+                        $('#module-menus').html(dat);
+
+                    });
+
+                }
+
+                function select_member(o) {
+
+
+
+                    if ($('.multi-item[openid="' + o.openid + '"]').length > 0) {
+
+                        return;
+
+                    }
+
+                    var html = '<div class="multi-item" openid="' + o.openid + '">';
+
+                    html += '<img class="img-responsive img-thumbnail" src="' + o.avatar + '" onerror="this.src=\'./resource/images/nopic.jpg\'; this.title=\'图片未找到.\'">';
+
+                    html += '<div class="img-nickname">' + o.nickname + '</div>';
+
+                    html += '<input type="hidden" value="' + o.openid + '" name="openids[]">';
+
+                    html += '<em onclick="remove_member(this)"  class="close">×</em>';
+
+                    html += '</div>';
+
+                    $("#saler_container").append(html);
+
+                    refresh_members();
+
+                }
+
+
+
+                function remove_member(obj) {
+
+                    $(obj).parent().remove();
+
+                    refresh_members();
+
+                }
+
+                function refresh_members() {
+
+                    var nickname = "";
+
+                    $('#saler_container .multi-item').each(function () {
+
+                        nickname += " " + $(this).find('.img-nickname').html() + "; ";
+
+                    });
+
+                    $('#salers').val(nickname);
+
+                }
+
+
+
+            </script>
+
+<script type="text/javascript">
+
+	function preview_help() {
+
+		var url = '{$_W["siteroot"]}app/{php echo $this->createMobileUrl("profile", array("act" => "help"))}';
+
+		var content = '<iframe width="320" scrolling="yes" height="480" frameborder="0" src="about:blank"></iframe>';
+
+		var footer = '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+
+		var dialog = util.dialog('预览使用帮助', content, footer);
+
+		dialog.find('iframe').attr('src', url);
+
+		dialog.find('.modal-dialog').css({'width': '322px'});
+
+		dialog.find('.modal-body').css({'padding': '0', 'height': '480px'});
+
+		dialog.modal('show');
+
+	}
+
+</script>
+
+{template 'common/footer'}

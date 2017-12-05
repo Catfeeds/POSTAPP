@@ -4,9 +4,9 @@
 if request.QueryString("action")="addok" then
 '提取表单数据
 	yz=cutsql(trim(Request("yz"))) '验证码
-	if Session("Admin_GetCode")="" then
-		call back("你登录时间过长，请重新返回登录页面进行登录。\n\n")
-	end if
+	'if Session("Admin_GetCode")="" then
+	'	call back("你登录时间过长，请重新返回登录页面进行登录。\n\n")
+	'end if
 	'if yz<>CStr(Session("Admin_GetCode")) then
 		'call back("您输入的确认码和系统产生的不一致，请重新输入。\n\n")
 	'end if
@@ -217,12 +217,12 @@ function checkfabuqg(obj)
 					<h5 class="mui-content-padded">联系方式</h5>
 					<div class="mui-card">
 						<div class="mui-input-row">
-							<label>姓名<span class="star">*</span>：</label>
-							<input type="text" name="fzxm" id="fzxm" maxlength="4" class="mui-input-clear" placeholder="请输入姓名">
+							<label>您的姓名：<span class="star">*</span></label>
+							<input type="text" name="fzxm" id="fzxm" maxlength="4" class="mui-input-clear" placeholder="请输入">
 						</div>
 						<div class="mui-input-row">
-							<label>手机<span class="star">*</span>：</label>
-							<input type="text" name="fzsj" id="fzsj" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" maxlength="12" class="mui-input-clear" placeholder="请输入手机">
+							<label>您的手机：<span class="star">*</span></label>
+							<input type="text" name="fzsj" id="fzsj" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" maxlength="12" class="mui-input-clear" placeholder="请输入">
 						</div>
 						<!--<div class="mui-input-row mui-radio">
 							<label style="padding: 11px 15px;width: 35%;">性别：</label>
@@ -243,7 +243,7 @@ function checkfabuqg(obj)
 					<h5 class="mui-content-padded">基本要求</h5>
 					<div class="mui-card">
 						<div class="mui-input-row">
-							<label>城市：<span class="star">*</span></label>
+							<label>预购城市：<span class="star"></span></label>
 							<select name="wzcs" id="wzcs"  onChange="changepq(document.fabuqg.wzpq,document.fabuqg.wzcs.options[document.fabuqg.wzcs.selectedIndex].value)">
 								<option value="2">简阳市</option>
 								
@@ -255,9 +255,10 @@ function checkfabuqg(obj)
 							</select>
 						</div>
 						<div class="mui-input-row">
-							<label style="width:25%">片区：</label>
-							<select style="width:32%;float:left;" name="wzpq" id="wzpq" onChange="changexq(document.fabuqg.wzxq,document.fabuqg.wzpq.options[document.fabuqg.wzpq.selectedIndex].value)">
-								<option value="0">片区不限</option>
+							<label style="width:38%">预购片区：</label>
+							<select style="width:27%;float:left;" name="wzpq" id="wzpq" onChange="changexq(document.fabuqg.wzxq,document.fabuqg.wzpq.options[document.fabuqg.wzpq.selectedIndex].value)">
+								<option value="0">请选择</option>
+                                <option value="0">片区不限</option>
 								<option value="3">城中片区</option>
 								<option value="4">城东片区</option>
 								<option value="5">城北片区</option>
@@ -267,10 +268,11 @@ function checkfabuqg(obj)
 								<option value="9">其他地区</option>
 								<option value="11">东溪镇</option>
 							</select>
-							<div style="width:10%;float:left;height:40px;line-height:40px;">或</div>
+							<div style="width:7%;float:left;height:40px;line-height:40px;">或</div>
 						
-							<select style="width:33%;float:left;" name="wzpqa" id="wzpqa" onChange="changexq(document.fabuqg.wzxqa,document.fabuqg.wzpqa.options[document.fabuqg.wzpqa.selectedIndex].value)">
-								<option value="0">片区不限</option>
+							<select style="width:28%;float:left;" name="wzpqa" id="wzpqa" onChange="changexq(document.fabuqg.wzxqa,document.fabuqg.wzpqa.options[document.fabuqg.wzpqa.selectedIndex].value)">
+								<option value="0">请选择</option>
+                                <option value="0">片区不限</option>
 								<option value="3">城中片区</option>
 								<option value="4">城东片区</option>
 								<option value="5">城北片区</option>
@@ -321,9 +323,9 @@ function checkfabuqg(obj)
 						</div>-->
 						
 						<div class="mui-input-row">
-							<label>房源类型<span class="star">*</span></label>
+							<label>购买类型：<span class="star">*</span></label>
 							<select name="csyt" id="csyt">
-								<option value="0">请选择房源类型</option>
+								<option value="0">请选择</option>
 								<%
 								'读房源类型记录
 								set ytrs=server.CreateObject("adodb.recordset")
@@ -340,9 +342,9 @@ function checkfabuqg(obj)
 						</div>
 						
 						<div class="mui-input-row">
-							<label>户型：</label>
-							<select name="cshxs" id="cshxs" style="width: 17%;float: left;">
-								<option value="0">0</option>
+							<label>购买户型：</label>
+							<select name="cshxs" id="cshxs" style="width: 20%;float: left;">
+								<option value="0">请选择</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
@@ -443,17 +445,19 @@ function checkfabuqg(obj)
 						</div>
 						
 						<div class="mui-input-row" style="height:125px;">
-							<label>其他要求：</label>
-							<textarea id="textarea" rows="5" name="csbz" placeholder="请填写其他要求"></textarea>
+							<label>购房要求：</label>
+							<textarea id="textarea" rows="5" name="csbz" placeholder="请填写"></textarea>
 						</div>
 
-						<div class="mui-input-row">
-							<label>重要说明：</label>
+						<div class="mui-input-row  mui-checkbox">
+							<label style="padding-right:0;width:35%;">委 托 书：</label>
 							<div style="width: 40%;float: right;height: 40px;line-height: 40px;font-size: 12px"><a onclick="javascript:window.open('/wts-qg.asp', 'newwindow', 'height=440, width=400, toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=no')" >《房屋求购委托书》</a></div>
-							<select size="1" name="tyqbox" style="width: 25%;">
-								<option  value="1">未阅读</option>
-								<option selected value="2">已阅读</option>
-							</select>
+							<!--<select size="1" name="tyqbox" style="width: 25%;">
+								<option value="1">未阅读</option>
+								<option tyqbox value="2" >已阅读</option>
+							</select>-->
+							<div  style="float: right;height: 40px;line-height: 40px;font-size: 12px">已阅读</div>
+							<input name="tyqbox" value="1" type="checkbox" style="right:initial;">
 						</div>
 						
 					</div>
@@ -463,3 +467,13 @@ function checkfabuqg(obj)
 					</div>
 				</div>
 			</form>
+			<script>
+	$(".mui-checkbox").on("change",'input',function(){
+		var value = this.checked?true:false;
+		if(value == true){
+			this.value = 2;
+		}else{
+			this.value = 1;
+		}
+	});
+</script>

@@ -23,7 +23,7 @@ var _hmt = _hmt || [];
 <title><%=sitename%>—专业房产中介,简阳二手房 商品房 购房 租房 买房 出租 出售 求租 求购房屋中介 房地产经纪公司</title>
 <link href="../flying_func/css1.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="../ajax/js.js" type="text/javascript"></script>
-
+<script language="javascript" src="js/jquery-3.1.0.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="css/mui.min.css">
 <script language="javascript">
 function OpenWindowAndSetValue(Url,Width,Height,WindowObj,SetObj)
@@ -120,11 +120,6 @@ for (i=0;i<sstr.length;i++)
 return icount;
 }
 </script>
-</head>
-
-<body>
-<br />
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["weixin","qzone","sqq","mshare","tsina","tqq","tqf","tieba","copy","mail","ty"],"bdPic":"","bdStyle":"1","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"0"},"image":{"viewList":["weixin","sqq","qzone","tqq","tsina","renren","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["weixin","sqq","qzone","tqq","tsina","renren","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 <style> 
 #nav { width:100px; height: 20px; border: 0px solid #D4CD49; position:fixed;right:0;top:95% } 
 .star{
@@ -140,4 +135,15 @@ return icount;
 				border-bottom:2px solid #007aff;
 				color:#007aff;
 			}
+			.mui-input-row label{
+				font-size:15px;
+				width:40%;
+			}
+			.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea {width:60%;}
 </style> 
+</head>
+
+<body>
+<br />
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["weixin","qzone","sqq","mshare","tsina","tqq","tqf","tieba","copy","mail","ty"],"bdPic":"","bdStyle":"1","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"0"},"image":{"viewList":["weixin","sqq","qzone","tqq","tsina","renren","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["weixin","sqq","qzone","tqq","tsina","renren","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
