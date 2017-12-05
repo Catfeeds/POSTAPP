@@ -192,14 +192,14 @@
 				async: true,
 				dataType: "json",
 				success: function(data) {
-					
+					console.log(JSON.stringify(data));
 				}
 
 			})
 			plus.storage.removeItem("islogin");
 			plus.storage.removeItem("account");
 			plus.storage.removeItem("password");
-			clicked('login_scan.html',false,false);
+			clicked('login.html',false,false);
           	return;
 			
 		}
