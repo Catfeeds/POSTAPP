@@ -28,20 +28,20 @@
 		<p>请打开微信扫一扫</p>
 	</div>
 
-	<div class="code-login auto tabs-box1" style="display:none ">
+	<div class="code-login auto tabs-box1" style="display:none; ">
 		<strong>账号密码登录</strong>
 		<div class="ch-obj" onclick="cg_code1();"><img src="img/s1-1.png" alt=""></div>
 		<ul>
 			<li>
 				<span class="ico-user"></span>
-				<input type="text" placeholder="请输入账号">
+				<input id="account" type="text" placeholder="请输入账号">
 			</li>
 			<li>
 				<span class="ico-pass"></span>
-				<input type="password" placeholder="请输入密码">
+				<input id="password" type="password" placeholder="请输入密码">
 			</li>
 		</ul>
-		<button>登录</button>
+		<button id="submitBtn">登录</button>
 	</div>
 
 </body>
@@ -110,29 +110,69 @@
 				}
 			})
 
+			$(".tabs-box1").on("click","#submitBtn",function(){
+				var accountBox  = doc.getElementById('account');
+				var passwordBox = doc.getElementById('password');
+				var username    = accountBox.value;
+				var pwd         = passwordBox.value;
+
+				if(username == null || username.length == 0){
+					plus.nativeUI.toast("请输入账号");
+					return false;
+				}
+				if(pwd == null || pwd.length < 6){
+					plus.nativeUI.toast("请输入密码");
+					return false;
+				}
+				console.log(username);
+
+				var baseUrl = plus.storage.getItem("baseUrl");
+				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=login";
+				console.log(postUrl);
+				$.ajax({
+					type:"post",
+					url:postUrl,
+					data:{userid:username,pwd:pwd},
+					async:true,
+					dataType:"json",
+					success:function(data){
+						console.log(JSON.stringify(data));
+						if(data.success == true){
+							var user = data.user;
+							var settings = data.settings;
+							plus.nativeUI.toast("登录成功");
+							localStorage.setItem( "islogin", user.id);
+							localStorage.setItem( "account", username);
+							localStorage.setItem( "password", pwd);
+							localStorage.setItem( "realname", user.realname);
+							localStorage.setItem( "card_pay_switch", settings.card_pay_switch);
+							localStorage.setItem( "pos_member_switch", settings.card_pay_switch);
+							localStorage.setItem( "realname", user.realname);
+							console.log("islogin = "+localStorage.getItem("islogin"));
+							console.log(user.realname);
+							localStorage.setItem( "shop", data.shop.companyname);
+							clicked('barcode_pay.html',false,false);
+						}else{
+							plus.nativeUI.toast(data.msg);
+						}
+					}
+				});
+			});
+
 		})
+
+		function cg_code0(){
+			$(".tabs-box0")[].hide();
+			$(".tabs-box1")[].show();
+		}
+
+
+		function cg_code1(){
+			$(".tabs-box0")[].show();
+			$(".tabs-box1")[].hide();
+		}
+
 	}(mui, document));
-</script>
-
-
-
-<!-- <script src="js/jquery-3.1.0.min.js"></script> -->
-<script>
-	cg_code1();
-	
-	function cg_code0(){
-		$(".tabs-box0").hide();
-		$(".tabs-box1").show();
-	}
-
-
-	function cg_code1(){
-		$(".tabs-box0").show();
-		$(".tabs-box1").hide();
-	}
-
-
-	
 </script>
 </html>
 
