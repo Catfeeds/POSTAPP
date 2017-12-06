@@ -1286,7 +1286,7 @@ class J_moneyModuleSite extends WeModuleSite
 			$groupid = pdo_fetchcolumn("SELECT groupid FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' and out_trade_no=:a ", array(":a" => $orderid));
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $groupid));
 			$payParama = array("appid" => $shop['appid'] ? $shop['appid'] : $cfg['appid'], "pay_mchid" => strval($shop['pay_mchid']) ? strval($shop['pay_mchid']) : strval($cfg['pay_mchid']), "pay_signkey" => $shop['pay_signkey'] ? $shop['pay_signkey'] : $cfg['pay_signkey'], "outTradeNo" => strval(date("YmdHis")), "pay_ip" => $shop['pay_ip'] ? $shop['pay_ip'] : $cfg['pay_ip'], "sub_appid" => $shop['sub_appid'] ? $shop['sub_appid'] : $cfg['sub_appid'], "sub_mch_id" => $shop['sub_mch_id'] ? $shop['sub_mch_id'] : $cfg['sub_mch_id']);
-			$pageparama = array("appid" => $payParama['appid'], "mch_id" => $payParama['pay_mchid'], "out_trade_no" => $orderid, "nonce_str" => getNonceStr());
+			$pageparama = array("appid" => $payParama['appid'], "mch_id" => $payParama['pay_mchid'], "out_trade_no" => $orderid, "nonce_str" => getNonceStr(),'sub_mch_id'=>$payParama['sub_mch_id']);
 			$sign = MakeSign($pageparama, $payParama['pay_signkey']);
 			$pageparama['sign'] = $sign;
 			$xml = ToXml($pageparama);
@@ -1294,7 +1294,7 @@ class J_moneyModuleSite extends WeModuleSite
 			$result = FromXml($response);
 			if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
 				pdo_update("j_money_trade", array("log" => "取消订单："), array("out_trade_no" => $orderid));
-				die(json_encode(array("success" => true, "orderid" => $outTradeNo)));
+				die(json_encode(array("success" => true, "orderid" => $orderid)));
 			}
 			pdo_update("j_money_trade", array("log" => "取消订单失败：" . $result['return_msg']), array("out_trade_no" => $orderid));
 			die(json_encode(array("success" => false, "msg" => $result['return_msg'])));

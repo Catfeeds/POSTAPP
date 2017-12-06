@@ -22,6 +22,9 @@
 			});
 			$.plusReady(function() {
 				closeWaiting();
+				mui.back = function(){
+					clicked("barcode_pay.html",false,false);
+				}
 				var out_trade_no = localStorage.getItem("out_trade_no");
 				
 				if (out_trade_no == null || out_trade_no == undefined) {

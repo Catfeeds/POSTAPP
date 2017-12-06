@@ -95,7 +95,7 @@
 				} else {
 					if (new Date().getTime() - first < 3000) {
 						plus.runtime.quit();
-						plus.storage.removeItem("islogin");
+						localStorage.removeItem("islogin");
 					}
 				}
 			}
@@ -166,6 +166,8 @@
 									localStorage.setItem( "card_pay_switch", settings.card_pay_switch);
 									localStorage.setItem( "pos_member_switch", settings.card_pay_switch);
 									localStorage.setItem( "pos_servermoney_switch", settings.pos_servermoney_switch);
+									localStorage.setItem( "freelimit", settings.freelimit);
+									localStorage.setItem( "servermoney", settings.servermoney);
 									console.log(user.realname);
 									console.log(user.useracount);
 									window.clearTimeout(interval);
