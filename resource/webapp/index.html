@@ -46,11 +46,11 @@
 								
 							}
 						}else{
-							if(data.msg == '请先登录'){
-								plus.nativeUI.toast("请先登录");
-								clicked('login.html',false,false);
-								return;
-							}
+//							if(data.msg == '请先登录'){
+//								plus.nativeUI.toast("请先登录");
+//								clicked('login.html',false,false);
+//								return;
+//							}
 						}
 					}
 				})
@@ -94,6 +94,7 @@
 	   			console.log(islogin);
 	   			console.log(plus.storage.getItem("baseUrl"));
 	   			console.log(localStorage.getItem("shop"));
+//	   			clicked('login.html',false,false);
 	   			if(islogin == null){
 	          		clicked('login.html',false,false);
 	          		return;

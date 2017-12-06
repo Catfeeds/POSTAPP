@@ -29,9 +29,10 @@
 					return false;
 				},false);
 				var out_trade_no = localStorage.getItem("pay_wait_trade_no");
-				doc.getElementById("J_second").innerHTML = 75;
-				var second = 75;
+				doc.getElementById("J_second").innerHTML = 80;
+				var second = 80;
 				var timer = null;
+				var interval = null;
 				var account = localStorage.getItem("account");
 				var audioPlay = localStorage.getItem(account+"audioPlay");
 				timer = setInterval(function(){
@@ -180,7 +181,7 @@
 				    			}
 							}else{
 								if(data.paywait == true){
-			    					var interval = window.setTimeout(function(){
+			    					interval = window.setTimeout(function(){
 			    						payWait(out_trade_no);
 			    					},1000);
 			    					return;
@@ -204,6 +205,7 @@
 	    			})
 	    		}
 				function getToUrl(is_print){
+					window.clearTimeout(interval);
 				    if(out_trade_no != null && out_trade_no !=0){
 				    				//打印
 				    	if(is_print == 1){
@@ -230,6 +232,7 @@
 							console.log(JSON.stringify(data));
 						}
 					})
+					startPlay('_www/audio/transfail.mp3');
 					getToUrl(0);
 				}
 				    		// 开始播放

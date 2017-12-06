@@ -15,6 +15,7 @@
 				var baseUrl       = plus.storage.getItem("baseUrl");
 				var postUrl       = baseUrl + "&c=entry&m=j_money&do=ajax&op=pay_all";
 				var fee           = plus.storage.getItem("pay_total");
+				var pay_servermoney = plus.storage.getItem("pay_servermoney");
 				var main          = null;
 				var account       = localStorage.getItem("account");
 				var audioPlay     = localStorage.getItem(account+"audioPlay");
@@ -48,6 +49,7 @@
 							url: postUrl,
 							data: {
 								fee: fee,
+								pay_servermoney:pay_servermoney,
 								qrcode: qrcode,
 								password: password,
 								old_trade_no: old_trade_no,

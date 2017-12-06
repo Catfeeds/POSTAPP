@@ -36,6 +36,7 @@
 				} else {
 					if (new Date().getTime() - first < 3000) {
 						plus.runtime.quit();
+						plus.storage.removeItem("islogin");
 					}
 				}
 			},false);
@@ -43,25 +44,39 @@
 			$(".logo")[0].innerHTML = shop;
 			
 			var pos_servermoney_switch = localStorage.getItem("pos_servermoney_switch");
+			var pos_servermoney_switch1 = localStorage.getItem("pos_servermoney_switch");
 			var freelimit = localStorage.getItem("freelimit");
 			var servermoney = localStorage.getItem("servermoney");
 			if(pos_servermoney_switch == 1){
-				
+				$("#servermoney_box").show();
+				$("#pos_servermoney_switch").val(pos_servermoney_switch);
+				$("#pos_servermoney_switch1").val(pos_servermoney_switch1);
+				$("#freelimit").val(freelimit);
+				$("#servermoney").val(servermoney);
+				$(".money").attr("data-after","手续费￥0.00");
 			}
+			console.log(freelimit);
+			
 			$("#submitBtn").on("click",function(){
 				var pay_type = $("#pay_type").val();
 				var total = document.getElementById('total-text').innerHTML;
-				console.log(total);
+				var pay_servermoney = $("#pay_servermoney").val();
+				console.log("total = " + total);
+				console.log("pay_servermoney = " + pay_servermoney);
 				if(total <= 0){
 					plus.nativeUI.alert('请输入金额');
 					return false;
 				}
 				plus.storage.removeItem("pay_total");
 				plus.storage.setItem("pay_total",total);
+				plus.storage.removeItem("pay_servermoney");
+				plus.storage.setItem("pay_servermoney",pay_servermoney);
 				if(pay_type == 2){
+					
 					clicked('scan_payall_by_fuyou.html',false,false);
 					return;
 				}else{
+					
 					var card_pay_switch = localStorage.getItem("card_pay_switch");
 					if(card_pay_switch == 1){
 						clicked('card_payall_by_fuyou.html',false,false);
@@ -72,6 +87,18 @@
 					return;
 				}
 			});
+			
+			var a = false;
+			$(".clicked").on("click",function(){
+				var page = $(this).data("page");
+				if(a){
+					clicked(page,false,false);
+				}
+			});
+			setTimeout(function() {
+					a = true;
+				}, 2000);
+			
 		}
 		
 		
@@ -79,10 +106,25 @@
 
 			$("#pay_type").val(type);
 			if(type == 1){
+				$(".money").attr("data-after","");
+				$("#servermoney_box").hide();
+				$("#pos_servermoney_switch").val(0);
+
 				$(".mobile").addClass("active");
 				$(".union").removeClass("active");
 				$(".amount-collected .brand img").attr("src","img/hico4.png");
 			}else{
+				var pos_servermoney_switch1 = $("#pos_servermoney_switch1").val();
+				console.log(pos_servermoney_switch1);
+				if(pos_servermoney_switch1 == 1){
+					$("#servermoney_box").show();
+					$("#pos_servermoney_switch").val(pos_servermoney_switch1);
+				}
+				
+
+				var pay_servermoney = $("#pay_servermoney").val();
+				$(".money").attr("data-after","手续费￥"+pay_servermoney);
+					
 				$(".union").addClass("active");
 				$(".mobile").removeClass("active");
 				$(".amount-collected .brand img").attr("src","img/hico5.png");
@@ -123,8 +165,10 @@
 		</div>
 		<input type="hidden" name="pay_type" id="pay_type" value="2" />
 		<input type="hidden" name="pos_servermoney_switch" id="pos_servermoney_switch" value="0" />
+		<input type="hidden" name="pos_servermoney_switch1" id="pos_servermoney_switch1" value="0" />
 		<input type="hidden" name="freelimit" id="freelimit" value="0" />
 		<input type="hidden" name="servermoney" id="servermoney" value="0" />
+		<input type="hidden" name="pay_servermoney" id="pay_servermoney" value="0" />
 		<div class="amount-collected">
 			<div class="row title">
 				<div class="brand">
@@ -135,10 +179,10 @@
 			<div class="row">
 				<div class="money" data-before="￥">
 					<span class="text" style="font-size: .32rem;font-weight: 500;">0.00</span>
-					<span  class="cursor"></span>
+					<span class="cursor"></span>
 				</div>
 			</div>
-			<div class="row" style="display: none;">
+			<div class="row" id="servermoney_box" style="display: none;">
 				<div class="total">
 					<div class="text">总金额:</div>
 					<div class="text">￥<span class="total-text" id="total-text">0.00</span></div>
@@ -177,9 +221,9 @@
 	</main>
 	<div class="footer-none"></div>
 	<footer class="footer footer-nav pc" style="z-index: 99999;">
-		<a href="#" onclick="clicked('member.html',false,false)" class="vip"><div class="pic"></div><div class="text">会员</div></a>
+		<a href="#" class="vip clicked" data-page="member.html"><div class="pic"></div><div class="text">会员</div></a>
 		<a href="#" class="center money active"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
-		<a href="#" onclick="clicked('pay_record.html',false,false)" class="set hhh"><div class="pic"></div><div class="text">记录</div></a>
+		<a href="#" class="set hhh clicked" data-page="pay_record.html"><div class="pic"></div><div class="text">记录</div></a>
 	</footer>
 	
 	<script src="js/event.js"></script>

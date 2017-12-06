@@ -14,6 +14,32 @@
 	<script src="js/font-size.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script src="js/mui.min.js"></script>
+	<style type="text/css">
+	.shade{
+		background: rgba(0, 0, 0, 0.75);
+		z-index: 9999;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+	}
+	.shade h4{
+		margin:60px 0;
+		text-align: center;
+		color: #FFFFFF;
+	}
+	.shade div{
+		width: 50%;
+		margin:5px 25%;
+		background: #3099ff;
+		height: 30px;
+		line-height: 30px;
+		color: #fff;
+		text-align: center;
+	}
+	</style>
 </head>
 <body class="back1">
 	<div class="logo">
@@ -26,6 +52,11 @@
 			<!--<img src="img/s2.png" alt="">-->
 		</div>
 		<p>请打开微信扫一扫</p>
+		<div class="shade">
+			<h4>二维码过期</h4>
+			<div id="btn">刷新</div>
+		
+		</div>
 	</div>
 
 	<div class="code-login auto tabs-box1" style="display:none; ">
@@ -51,6 +82,40 @@
 			statusBarBackground: '#f7f7f7'
 		});
 		$.plusReady(function() {
+			var first = null;
+			mui.back = function(){
+				console.log('backbutton');
+				if (!first) {
+					first = new Date().getTime();
+					plus.nativeUI.toast('再按一次退出应用');
+					setTimeout(function() {
+						first = null;
+					}, 3000);
+					
+				} else {
+					if (new Date().getTime() - first < 3000) {
+						plus.runtime.quit();
+						plus.storage.removeItem("islogin");
+					}
+				}
+			}
+//			plus.key.addEventListener('backbutton',function(){
+//				console.log('backbutton');
+//				if (!first) {
+//					first = new Date().getTime();
+//					plus.nativeUI.toast('再按一次退出应用');
+//					setTimeout(function() {
+//						first = null;
+//					}, 3000);
+//					
+//				} else {
+//					if (new Date().getTime() - first < 3000) {
+//						plus.runtime.quit();
+//					}
+//				}
+//			},false);
+			
+			
 			var baseUrl = plus.storage.getItem("baseUrl");
 			var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=getLoginUrl";
 			console.log(postUrl);					
@@ -85,6 +150,7 @@
 										},3000);
 									}else{
 										window.clearTimeout(interval);
+										mui(".shade")[0].setAttribute("style","display: block;");
 //										plus.nativeUI.alert( data.msg, function(){
 //											history.go(0);
 //										}, "提示", "刷新" );
@@ -140,6 +206,7 @@
 					success:function(data){
 						console.log(JSON.stringify(data));
 						if(data.success == true){
+							window.clearTimeout(interval);
 							var user = data.user;
 							var settings = data.settings;
 							plus.nativeUI.toast("登录成功");
@@ -166,12 +233,17 @@
 			});
 			
 			mui(".tabs-box0").on("tap",".ch-obj",function(){
+				
 				mui(".tabs-box0")[0].setAttribute("style","display: none;");
 				mui(".tabs-box1")[0].setAttribute("style","display: block;");
 			});
 			mui(".tabs-box1").on("tap",".ch-obj",function(){
+				
 				mui(".tabs-box1")[0].setAttribute("style","display: none;");
 				mui(".tabs-box0")[0].setAttribute("style","display: block;");
+			});
+			mui(".shade").on("tap","#btn",function(){
+				history.go(0);
 			});
 
 		})

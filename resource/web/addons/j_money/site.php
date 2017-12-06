@@ -106,6 +106,7 @@ class J_moneyModuleSite extends WeModuleSite
 		} elseif ($operation == "logout") {
 			isetcookie('islogin', '', -1);
 			isetcookie('siteuniacid', '', -1);
+			isetcookie('qrcodes', '', -1);
 			die(json_encode(array("success" => true)));
 		} elseif ($operation == "checklogin") {
 			$qrcode = $_GPC['qrcodes'];
@@ -141,6 +142,7 @@ class J_moneyModuleSite extends WeModuleSite
 		} elseif ($operation == "pay_all") {
 			$qrcode = $_GPC["qrcode"];
 			$fee = $_GPC["fee"] ? $_GPC["fee"] : 1;
+			$servermoney = $_GPC["servermoney"] ? $_GPC["servermoney"] : 0;
 			$deviceinfo = intval($_GPC["islogin"]);
 			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
 			if (!$user) {
@@ -152,8 +154,10 @@ class J_moneyModuleSite extends WeModuleSite
 			load()->func('communication');
 			
 			$fee=$fee*100;
+			$servermoney=$servermoney*100;
 			
 			$fee = intval(strval($fee));
+			$servermoney = intval(strval($servermoney));
 			
 			//die(json_encode(array("success" => false, "msg" => strval($fee))));
 			
@@ -179,7 +183,7 @@ class J_moneyModuleSite extends WeModuleSite
 				if ($payParama['sub_mch_id']) {
 					$pageparama['sub_mch_id'] = $payParama['sub_mch_id'];
 				}
-				$data = array("weid" => $_W['uniacid'], "userid" => $deviceinfo, "groupid" => $user['pcate'], "attach" => $_GPC['attach'] ? $_GPC['attach'] : 'PC', "out_trade_no" => $payParama['outTradeNo'], "order_fee" => $totalfee, "total_fee" => $totalfee - $coupon_fee, "discount_fee" => $coupon_fee,"cash_fee" => $totalfee - $coupon_fee, "marketing" => $marketid, "createtime" => TIMESTAMP, "createdate" => date('Y-m-d'), "old_trade_no" => $_GPC['old_trade_no']);
+				$data = array("weid" => $_W['uniacid'], "userid" => $deviceinfo, "groupid" => $user['pcate'], "attach" => $_GPC['attach'] ? $_GPC['attach'] : 'PC', "out_trade_no" => $payParama['outTradeNo'], "order_fee" => $totalfee, "total_fee" => $totalfee - $coupon_fee, "discount_fee" => $coupon_fee,"cash_fee" => $totalfee - $coupon_fee, "marketing" => $marketid, "createtime" => TIMESTAMP, "createdate" => date('Y-m-d'), "old_trade_no" => $_GPC['old_trade_no'],'servermoney'=>$servermoney);
 				if ($marketid) {
 					$data['marketing_log'] = $marketing['description'];
 				}
@@ -209,7 +213,7 @@ class J_moneyModuleSite extends WeModuleSite
 				$auth_code = trim($qrcode);
 				$total_amount = $fee;
 				$subject = "支付宝收款";
-				$data = array("weid" => $_W['uniacid'], "userid" => $deviceinfo, "groupid" => $user['pcate'], "attach" => $_GPC['attach'] ? $_GPC['attach'] : "PC", "paytype" => 1, "out_trade_no" => $payParama['outTradeNo'], "order_fee" => $totalfee, "total_fee" => $totalfee - $coupon_fee, "discount_fee" => $coupon_fee, "cash_fee" => $totalfee - $coupon_fee, "createtime" => TIMESTAMP, "createdate" => date('Y-m-d'), "marketing" => $marketid, "old_trade_no" => $_GPC['old_trade_no']);
+				$data = array("weid" => $_W['uniacid'], "userid" => $deviceinfo, "groupid" => $user['pcate'], "attach" => $_GPC['attach'] ? $_GPC['attach'] : "PC", "paytype" => 1, "out_trade_no" => $payParama['outTradeNo'], "order_fee" => $totalfee, "total_fee" => $totalfee - $coupon_fee, "discount_fee" => $coupon_fee, "cash_fee" => $totalfee - $coupon_fee, "createtime" => TIMESTAMP, "createdate" => date('Y-m-d'), "marketing" => $marketid, "old_trade_no" => $_GPC['old_trade_no'],'servermoney'=>$servermoney);
 
 				
 				if ($marketid) {
@@ -1799,6 +1803,7 @@ class J_moneyModuleSite extends WeModuleSite
 			var_dump($item);die;
 		}else if($operation == 'card_pay_all'){
 			$fee = $_GPC["fee"] ? $_GPC["fee"] : 1;
+			$pay_servermoney = $_GPC["pay_servermoney"] ? $_GPC["pay_servermoney"] : 0;
 			$deviceinfo = intval($_GPC["islogin"]);
 			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
 			if (!$user) {
@@ -1809,8 +1814,10 @@ class J_moneyModuleSite extends WeModuleSite
 			load()->func('communication');
 			
 			$fee=$fee*100;
+			$pay_servermoney=$pay_servermoney*100;
 			
 			$totalfee = intval(strval($fee));
+			$pay_servermoney = intval(strval($pay_servermoney));
 			
 			if (!$totalfee) {
 				die(json_encode(array("success" => false, "msg" => "金额不能为空")));
@@ -1892,7 +1899,7 @@ class J_moneyModuleSite extends WeModuleSite
 
 			$item = pdo_fetch("SELECT * FROM " . tablename('j_money_refund_log') . " WHERE uniacid='{$_W['uniacid']}' and sncode=:a ", array(":a" => $qrcode));
 
-			if (!$qrcode || TIMESTAMP - $item['createtime'] > 90 ) {
+			if (!$qrcode) {
 				die(json_encode(array("success" => false, "reload" => true)));
 			}
 			// var_dump($item);
@@ -1932,10 +1939,10 @@ class J_moneyModuleSite extends WeModuleSite
 					// $item = pdo_fetchall("SELECT * FROM " . tablename('j_money_refund_log'));
 					// var_dump($item);die;
 					if (!$item) {
-						message("抱歉，该二维码已过期！");
+						message("抱歉，该二维码已过期1！");
 					}
 					if (TIMESTAMP - $item['createtime'] > 60 * 5) {
-						message("抱歉，该二维码已过期！");
+						message("抱歉，该二维码已过期2！");
 					}
 
 					$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and pcate=:shopid and openid=:a ", array(":a" => $openid,':shopid'=>$item['shopid']));
@@ -1944,7 +1951,10 @@ class J_moneyModuleSite extends WeModuleSite
 					}
 					
 					pdo_update('j_money_refund_log', array("status" => 1, "openid" => $openid, "userid" => $user['id']), array("id" => $item['id']));
-					message("确认成功");
+					//long 2017-11-13
+					$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $item['shopid']));
+					$serverTypes=json_decode($shop["servertypes"],true);
+					message("确认成功",$serverTypes[7]);
 					die;
 				} else {
 					die('抱歉，微信授权失败');
@@ -3027,7 +3037,10 @@ class J_moneyModuleSite extends WeModuleSite
 			message("抱歉，该二维码已过期！");
 		}
 		pdo_update('j_money_qrlogin', array("status" => 1, "openid" => $openid, "userid" => $user['id']), array("id" => $item['id']));
-		message("登陆成功",'success');
+		//long 2017-11-13
+		$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
+		$serverTypes=json_decode($shop["servertypes"],true);
+		message("登陆成功",$serverTypes[7]);
 	}
 
 	public function doMobileLogin()

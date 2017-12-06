@@ -86,7 +86,31 @@ $('.input-control.normal').on(window.a, 'td', function(e) {
 		// alert($('.input-control.normal .number')[0].number);
 	}
 	$('.main .amount-collected .money .text').text(str);
-	$('.main .total-text').text(str);
+	
+	var pos_servermoney_switch = $("#pos_servermoney_switch").val();
+	var server = 0;
+	if(pos_servermoney_switch == 1){
+		var freelimit = $("#freelimit").val();
+		var servermoney = $("#servermoney").val();
+		var multi = parseFloat(str) - parseFloat(freelimit);
+		console.log("multi = " + multi);
+		if(multi > 0){
+			server = multi * parseFloat(servermoney) * 0.001;
+			server = server.toFixed(2);
+		}
+		if(isNaN(multi)){
+			server = 0;
+		}
+		if(isNaN(str)){
+			str = 0;
+		}
+		server = parseFloat(server);
+		console.log("server = " + server);
+		$(".money").attr("data-after","手续费￥"+server);
+	}
+	$("#pay_servermoney").val(server);
+	var total = parseFloat(str) + server;
+	$('.main .total-text').text(total.toFixed(2));
 });
 
 
@@ -96,9 +120,35 @@ $('.input-control.normal .enter').on(window.a, function() {
 $('.input-control.normal .back').on(window.a, function() {
 	$('.input-control.normal .number')[0].number = '';
 	var str = $('.main .amount-collected .money .text').text();
-	$('.main .amount-collected .money .text').text(str.slice(0, str.length - 1));
-	$('.main .total-text').text(str.slice(0, str.length - 1));
-	console.log(str.slice(0, str.length - 1));
+	var money = parseFloat(str.slice(0, str.length - 1));
+	
+	if(isNaN(money)){
+		money = "";
+	}
+	$('.main .amount-collected .money .text').text(money);
+	console.log("money" + money);
+	var pos_servermoney_switch = $("#pos_servermoney_switch").val();
+	var server = 0;
+	if(pos_servermoney_switch == 1){
+		var freelimit = $("#freelimit").val();
+		var servermoney = $("#servermoney").val();
+		var multi = money - parseFloat(freelimit);
+		console.log("multi = " + multi);
+		if(multi > 0){
+			server = multi * parseFloat(servermoney) * 0.001;
+			server = server.toFixed(2);
+		}
+		server = parseFloat(server);
+		$(".money").attr("data-after","手续费￥"+server);
+		console.log("server = " + server);
+	}
+	$("#pay_servermoney").val(server);
+	var total = money + server;
+	if(total > 0){
+		total.toFixed(2);
+	}
+	$('.main .total-text').text(total);
+	console.log(total);
 });
 
 

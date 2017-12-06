@@ -483,6 +483,15 @@ require(['bootstrap'],function($){
               </div>
             </div>
 
+             <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">手机扫码跳转URL</label>
+              <div class="col-sm-9">
+                <input type="text" class='form-control' name='serverTypes[7]' value='<?php  echo $serverTypes['7'];?>'/>
+                <div class="help-block">微信扫码登陆，退款权限身份确认后跳转的URL</div>
+              </div>
+            </div>
+
+
 
           </div>
 
