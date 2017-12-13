@@ -82,7 +82,8 @@
 									var newVer = version.version;
 									console.log(version.packages);
 									if(wgtVer&&newVer&&wgtVer!=newVer){
-										downWgt(version.packages);
+										//downWgt(version.packages);
+										plus.nativeUI.alert("有新版本更新,请联系管理员手工更新!");
 									}else{
 										plus.nativeUI.toast("当前是最新版本");
 									}

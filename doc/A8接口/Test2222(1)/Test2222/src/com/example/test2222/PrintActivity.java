@@ -85,52 +85,52 @@ public class PrintActivity extends Activity {
 			String print = data.getStringExtra("reason");//打印成功返回数据
 			Log.w("TAG", "成功返回值--reason--返回值："+print);
 			
-			String b = data.getStringExtra("batchNo");//批次号
-			String c = data.getStringExtra("traceNo");//流水号
-			String d = data.getStringExtra("cardNo");//卡号
+			String b                  = data.getStringExtra("batchNo");//批次号
+			String c                  = data.getStringExtra("traceNo");//流水号
+			String d                  = data.getStringExtra("cardNo");//卡号
 			
-			String e = data.getStringExtra("merchantId");//商户号
-			String f = data.getStringExtra("terminalId");//终端号
+			String e                  = data.getStringExtra("merchantId");//商户号
+			String f                  = data.getStringExtra("terminalId");//终端号
 			
-			String g = data.getStringExtra("referenceNo");//参考号
-			String h = data.getStringExtra("issue");//发卡行
-			String i = data.getStringExtra("type");//卡类型
-			String j = data.getStringExtra("date");//日期
-			String k = data.getStringExtra("time");//时间
+			String g                  = data.getStringExtra("referenceNo");//参考号
+			String h                  = data.getStringExtra("issue");//发卡行
+			String i                  = data.getStringExtra("type");//卡类型
+			String j                  = data.getStringExtra("date");//日期
+			String k                  = data.getStringExtra("time");//时间
 			
-			String l = data.getStringExtra("wireless.apn");//apn
-			String m = data.getStringExtra("wireless.username");//用户名
-			String n = data.getStringExtra("wireless.password");//密码
-			String o = data.getStringExtra("wireless.apnEnabled");//Apn是否开启
-			String p = data.getStringExtra("merchantName");//商户名
+			String l                  = data.getStringExtra("wireless.apn");//apn
+			String m                  = data.getStringExtra("wireless.username");//用户名
+			String n                  = data.getStringExtra("wireless.password");//密码
+			String o                  = data.getStringExtra("wireless.apnEnabled");//Apn是否开启
+			String p                  = data.getStringExtra("merchantName");//商户名
 			
-			String r = data.getStringExtra("oldReferenceNo");//原参考号
+			String r                  = data.getStringExtra("oldReferenceNo");//原参考号
 			
-			String t = data.getStringExtra("orderNumber");
-			String tzfb = data.getStringExtra("zfbOrderNumber");
-			String twx = data.getStringExtra("wxOrderNumber");
+			String t                  = data.getStringExtra("orderNumber");
+			String tzfb               = data.getStringExtra("zfbOrderNumber");
+			String twx                = data.getStringExtra("wxOrderNumber");
 			
-			String u = data.getStringExtra("oldOrderNumber");
-			String sWx = data.getStringExtra("wxOldOrderNumber");
-			String sZfb = data.getStringExtra("zfbOldOrderNumber");
+			String u                  = data.getStringExtra("oldOrderNumber");
+			String sWx                = data.getStringExtra("wxOldOrderNumber");
+			String sZfb               = data.getStringExtra("zfbOldOrderNumber");
 			
-			String wMb = data.getStringExtra("zfbMbOldOrderNumber");
-			String zMb = data.getStringExtra("wxMbOldOrderNumber");
+			String wMb                = data.getStringExtra("zfbMbOldOrderNumber");
+			String zMb                = data.getStringExtra("wxMbOldOrderNumber");
 			
-			String tui = data.getStringExtra("tuiOldOrderNumber");
+			String tui                = data.getStringExtra("tuiOldOrderNumber");
 			
-			String settleData = data.getStringExtra("settleJson");
-			String json = data.getStringExtra("json");
+			String settleData         = data.getStringExtra("settleJson");
+			String json               = data.getStringExtra("json");
 			
-			String return_Code = data.getStringExtra("return_txt");//扫码返回数据
+			String return_Code        = data.getStringExtra("return_txt");//扫码返回数据
 			
-			String authorizationCode = data.getStringExtra("authorizationCode");//预授权 授权码
+			String authorizationCode  = data.getStringExtra("authorizationCode");//预授权 授权码
 			
 			String backOldReferenceNo = data.getStringExtra("backOldReferenceNo");//退货的原参考号
 			
-			String anyTransOrderNo =data.getStringExtra("anyTransOrderNo");//打印任意一笔的订单号
-
-			JSONObject jsO = new JSONObject();
+			String anyTransOrderNo    = data.getStringExtra("anyTransOrderNo");//打印任意一笔的订单号
+			
+			JSONObject jsO            = new JSONObject();
 			try {
 				jsO.put("batchNo", b);//批次号
 				jsO.put("traceNo", c);//流水号

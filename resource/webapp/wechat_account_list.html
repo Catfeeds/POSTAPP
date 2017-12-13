@@ -7,7 +7,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<script type="text/javascript" src="js/common.js"></script>
-		<script src="js/zepto.js"></script>
+		<!--<script src="js/zepto.js"></script>-->
+		<script src="js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript">
 			document.addEventListener('plusready',plusReady,false);
 
@@ -45,7 +46,7 @@
 									var time = new Date().getTime();
 									str += "<li class=\"mui-table-view-cell mui-media\" data-name=\""+list[i]['name']+"\" data-acid=\""+list[i]['uniacid']+"\">";
 									str += "<a class=\"mui-navigate-right\">";
-									str += "<img class=\"mui-media-object mui-pull-left\" src=\"http://4sscrm.com/attachment/headimg_"+list[i]['uniacid']+".jpg?time="+time+"\">";
+									str += "<img class=\"mui-media-object mui-pull-left\" src=\""+list[i]['avatar']+"\">";
 									str += "<div class=\"mui-media-body\">";
 									str += list[i]['name'];
 									str += "<p class='mui-ellipsis'>"+list[i]['signature']+"</p>";
@@ -54,6 +55,24 @@
 									str += "</li>";
 								}
 								$("#list-box").html(str);
+								$(".mui-table-view-cell").on("click",function(){
+									var acid = $(this).data("acid");
+									var name = $(this).data("name");
+									console.log("Close confirm: "+acid);
+									plus.nativeUI.confirm(
+										"确定选择" + name + "?",
+										function(e){
+											
+											if(e.index == 0){
+												localStorage.setItem("uniacid", acid);
+												clicked("index.html",false,false);
+												
+											}
+										}, {"title":"选择公众号",
+											"buttons":["确定","取消"],
+											"verticalAlign":"center"}
+									);
+								});
 							}
 						}else{
 							plus.nativeUI.alert( data.msg, function(){
@@ -64,21 +83,7 @@
 					}
 				});
 
-				$(".mui-table-view-cell").on("clicke",function(){
-					var acid = $(this).data("acid");
-					var name = $(this).data("name");
-					plus.nativeUI.confirm(
-						"确定选择" + name + "?",
-						function(e){
-							console.log("Close confirm: "+e.index);
-							if(e.index == 0){
-								cliced("index.html",false,false);
-							}
-						}, {"title":"选择公众号",
-							"buttons":["确定","取消"],
-							"verticalAlign":"center"}
-					);
-				});
+				
 			}
 		</script>
 		<style>
@@ -96,9 +101,7 @@
 			<h1 class="mui-title">公众号列表</h1>
 		</header>
 		<div class="mui-content">
-			<div class="title">
-				
-			</div>
+			
 			<ul class="mui-table-view mui-table-view-chevron" id="list-box">
 				
 				

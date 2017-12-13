@@ -13,13 +13,24 @@
 				statusBarBackground: '#f7f7f7'
 			});
 			$.plusReady(function() {
+				
+				var uniacid = localStorage.getItem("uniacid");
+				if(uniacid == null){
+					clicked('wechat_account_list.html',false,false);
+	          		return;
+				}
+				console.log("uniacid="+uniacid);
+				
+				var baseUrl = "http://4sscrm.com/app/index.php?i=" + uniacid;
+	   			plus.storage.setItem("baseUrl", baseUrl);
+				//localStorage.setItem("baseUrl", baseUrl);
 				var wgtVer = null;
 				plus.runtime.getProperty(plus.runtime.appid,function(inf){
 					wgtVer = inf.version;
 					console.log("当前应用版本："+wgtVer);
 				});
 
-				var baseUrl = plus.storage.getItem("baseUrl");
+				//var baseUrl = plus.storage.getItem("baseUrl");
 				var versionUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=checkVersion";
 				mui.ajax({
 					type: "post",
@@ -33,17 +44,17 @@
 							var newVer = version.version;
 
 							if(wgtVer&&newVer&&wgtVer!=newVer){
-								plus.nativeUI.confirm("有新版本更新,确定更新?", function(e){
-									console.log("Close confirm: "+e.index);
-									if(e.index == 0){
-										downWgt(version.packages);
-									}
-
-								}, {"title":"系统更新",
-									"buttons":["更新","取消"],
-									"verticalAlign":"center"
-								});
-								
+//								plus.nativeUI.confirm("有新版本更新,确定更新?", function(e){
+//									console.log("Close confirm: "+e.index);
+//									if(e.index == 0){
+//										downWgt(version.packages);
+//									}
+//
+//								}, {"title":"系统更新",
+//									"buttons":["更新","取消"],
+//									"verticalAlign":"center"
+//								});
+								plus.nativeUI.alert("有新版本更新,请联系管理员手工更新!");
 							}
 						}else{
 //							if(data.msg == '请先登录'){
@@ -86,17 +97,11 @@
 				}
 				
 
-				var uniacid = localStorage.getItem("uniacid");
-				if(uniacid == null){
-					clicked('wechat_account_list.html',false,false);
-	          		return;
-				}
+				
 				
 				var islogin = localStorage.getItem("islogin");
 	   			var shop = localStorage.getItem("shop");
-	   			var baseUrl = "http://4sscrm.com/app/index.php?i=" + uniacid;
-	// 			var baseUrl = "http://demo.flyinc.cn/app/index.php?i=2";
-	   			plus.storage.setItem("baseUrl", baseUrl);
+	   			
 	   			console.log(islogin);
 	   			console.log(plus.storage.getItem("baseUrl"));
 	   			console.log(localStorage.getItem("shop"));

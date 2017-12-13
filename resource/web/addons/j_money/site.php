@@ -1916,6 +1916,9 @@ class J_moneyModuleSite extends WeModuleSite
 			if(empty($list)){
 				die(json_encode(array("success" => false, "msg" => "没有公众号")));
 			}else{
+				foreach($list as &$row){
+					$row['avatar'] = $_W['attachurl'].'headimg_'.$row['acid'].'.jpg?time='.$_W['timestamp'];
+				}
 				die(json_encode(array("success" => true, 'list'=>$list)));
 			}
 		}

@@ -3,7 +3,8 @@
     "refer": [
       "barcode_pay.html",
       "barcode_refundorder.html",
-      "login.html"
+      "login.html",
+      "wechat_account_list.html"
     ],
     "resources": []
   },
@@ -170,6 +171,11 @@
       "login_scan.html",
       "barcode_pay.html",
       "scan_refund_by_fuyou.html"
+    ]
+  },
+  "wechat_account_list.html": {
+    "refer": [
+      "index.html"
     ]
   }
 }
