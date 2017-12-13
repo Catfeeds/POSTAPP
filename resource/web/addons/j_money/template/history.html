@@ -86,7 +86,11 @@ require(['bootstrap'],function($){
               <span class="label label-danger">￥{php echo sprintf('%.2f',($row['poundage']))}</span></td>
               <td><span class="label label-danger">￥{php echo sprintf('%.2f',($row['cash_fee']-$row['poundage'*100])*0.01)}</span></td>
               <td>
+                {if $row['paytype']==0}
               <img src="{MODULE_URL}template/img/wechart.gif" width="21"/> 
+              {else if $row['paytype']==1}
+                <img src="{MODULE_URL}template/img/alipay.gif" width="21"/> 
+              {/if}
               {if $row['status']==1} <span class="label label-success"><i class="fa fa-check"/></i></span>
               {elseif $row['status']==2}<span class="label label-danger" data-toggle="popover" data-placement="top" data-content="已退款"><i class="fa fa-recycle"/></i></span>
               {else}<span class="label label-danger" data-toggle="popover" data-placement="top" data-content="{$row['log']}"><i class="fa fa-times"/></i></span>{/if} </td>
