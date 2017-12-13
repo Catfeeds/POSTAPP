@@ -11,8 +11,10 @@
 	</div>
 	<div class="btn-group we7-btn-group we7-padding-bottom">
 		<a href="<?php  echo url('user/profile/base', array('uid' => $user['uid'], 'user_type' => PERSONAL_BASE_TYPE))?>" class="btn btn-default <?php  if($user_type == '' || $user_type == PERSONAL_BASE_TYPE) { ?>active<?php  } ?>">基础信息</a>
+		<?php  if($_W['role'] != ACCOUNT_MANAGE_NAME_CLERK) { ?>
 		<a href="<?php  echo url('user/profile/base', array('uid' => $user['uid'], 'user_type' => PERSONAL_AUTH_TYPE))?>" class="btn btn-default <?php  if($user_type == PERSONAL_AUTH_TYPE) { ?>active<?php  } ?>">应用模板权限</a>
 		<a href="<?php  echo url('user/profile/base', array('uid' => $user['uid'], 'user_type' => PERSONAL_LIST_TYPE))?>" class="btn btn-default <?php  if($user_type == PERSONAL_LIST_TYPE) { ?>active<?php  } ?>">使用账号列表</a>
+		<?php  } ?>
 	</div>
 	<?php  } ?>
 	<?php  if($user_type=='' || $user_type == PERSONAL_BASE_TYPE) { ?>
@@ -157,11 +159,13 @@
 					<td ng-bind="user.joindate"></td>
 					<td></td>
 				</tr>
+			<?php  if($_W['isfounder'] && !user_is_vice_founder()) { ?>
 				<tr>
 					<td class="table-label">备注</td>
 					<td ng-bind="user.remark"></td>
 					<td><div class="link-group"><a href="javascript:;" data-toggle="modal" data-target="#remark" ng-click="editInfo('remark', user.remark)">修改</a></div></td>
 				</tr>
+			<?php  } ?>
 		</table>
 		<div class="modal fade" id="realname" role="dialog">
 			<div class="we7-modal-dialog modal-dialog">

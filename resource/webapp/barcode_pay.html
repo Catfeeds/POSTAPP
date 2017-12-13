@@ -35,8 +35,9 @@
 					
 				} else {
 					if (new Date().getTime() - first < 3000) {
-						plus.runtime.quit();
 						localStorage.removeItem("islogin");
+						plus.runtime.quit();
+						
 					}
 				}
 			},false);

@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/common.js"></script>
+		<script src="js/zepto.js"></script>
+		<script type="text/javascript">
+			document.addEventListener('plusready',plusReady,false);
+
+			function plusReady(){
+				var first = null;
+				plus.key.addEventListener('backbutton',function(){
+					console.log('backbutton');
+					if (!first) {
+						first = new Date().getTime();
+						plus.nativeUI.toast('再按一次退出应用');
+						setTimeout(function() {
+							first = null;
+						}, 3000);
+						
+					} else {
+						if (new Date().getTime() - first < 3000) {
+							localStorage.removeItem("islogin");
+							plus.runtime.quit();
+							
+						}
+					}
+				},false);
+				
+				$.ajax({
+					url:"http://4sscrm.com/app/index.php?i=10&c=entry&m=j_money&do=ajax&op=getWechatAccounts",
+					type:"get",
+					dataType:"json",
+					success:function(data){
+						console.log(JSON.stringify(data));
+						if(data.success){
+							var list = data.list;
+							var str = "";
+							if(list.length > 0){
+								for(var i in list){
+									var time = new Date().getTime();
+									str += "<li class=\"mui-table-view-cell mui-media\" data-name=\""+list[i]['name']+"\" data-acid=\""+list[i]['uniacid']+"\">";
+									str += "<a class=\"mui-navigate-right\">";
+									str += "<img class=\"mui-media-object mui-pull-left\" src=\"http://4sscrm.com/attachment/headimg_"+list[i]['uniacid']+".jpg?time="+time+"\">";
+									str += "<div class=\"mui-media-body\">";
+									str += list[i]['name'];
+									str += "<p class='mui-ellipsis'>"+list[i]['signature']+"</p>";
+									str += "</div>";
+									str += "</a>";
+									str += "</li>";
+								}
+								$("#list-box").html(str);
+							}
+						}else{
+							plus.nativeUI.alert( data.msg, function(){
+								plus.runtime.quit();
+							}, "提示", "确定" );
+						}
+						
+					}
+				});
+
+				$(".mui-table-view-cell").on("clicke",function(){
+					var acid = $(this).data("acid");
+					var name = $(this).data("name");
+					plus.nativeUI.confirm(
+						"确定选择" + name + "?",
+						function(e){
+							console.log("Close confirm: "+e.index);
+							if(e.index == 0){
+								cliced("index.html",false,false);
+							}
+						}, {"title":"选择公众号",
+							"buttons":["确定","取消"],
+							"verticalAlign":"center"}
+					);
+				});
+			}
+		</script>
+		<style>
+			.title {
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<h1 class="mui-title">公众号列表</h1>
+		</header>
+		<div class="mui-content">
+			<div class="title">
+				
+			</div>
+			<ul class="mui-table-view mui-table-view-chevron" id="list-box">
+				
+				
+			</ul>
+		</div>
+		<!-- <script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script> -->
+	</body>
+
+</html>

@@ -85,10 +85,16 @@
 					});
 				}
 				
+
+				var uniacid = localStorage.getItem("uniacid");
+				if(uniacid == null){
+					clicked('wechat_account_list.html',false,false);
+	          		return;
+				}
 				
 				var islogin = localStorage.getItem("islogin");
 	   			var shop = localStorage.getItem("shop");
-	   			var baseUrl = "http://4sscrm.com/app/index.php?i=10";
+	   			var baseUrl = "http://4sscrm.com/app/index.php?i=" + uniacid;
 	// 			var baseUrl = "http://demo.flyinc.cn/app/index.php?i=2";
 	   			plus.storage.setItem("baseUrl", baseUrl);
 	   			console.log(islogin);

@@ -1908,6 +1908,16 @@ class J_moneyModuleSite extends WeModuleSite
 			}
 			
 			die(json_encode(array("success" => true,"msg"=>"确认","refund_log_id"=>$item['id'])));
+		}else if($operation == 'getWechatAccounts'){
+			// $user = pdo_fetchall('select * from '.tablename('users'));
+			// var_dump($user);
+			//test2 uid 143
+			$list = pdo_fetchall('select * from '.tablename('account_wechats').' a left join '.tablename('uni_account_users').' b on a.uniacid=b.uniacid where b.uid=:uid',array(':uid'=>143));
+			if(empty($list)){
+				die(json_encode(array("success" => false, "msg" => "没有公众号")));
+			}else{
+				die(json_encode(array("success" => true, 'list'=>$list)));
+			}
 		}
 	}
 
