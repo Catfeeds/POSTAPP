@@ -4048,7 +4048,7 @@ class J_moneyModuleSite extends WeModuleSite
 					$userList[$row['id']]['name'] = $row['useracount'] . '(' . $row['realname'] . ')';
 					$userList[$row['id']]['group'] = $groupids[$row['pcate']];
 				}
-				$tableheader = array('单号', '原单号', '时间', '支付方式', '收银员', '所在店铺', '订单金额', '优惠金额', '实际支付', '优惠方案', '状态', '备注');
+				$tableheader = array('单号', '原单号', '时间', '支付方式', '收银员', '所在店铺', '订单金额', '优惠金额','手续费', '实际支付', '优惠方案', '状态', '备注');
 				foreach ($parama as $index => $row) {
 					array_push($tableheader, $index);
 				}
@@ -4078,6 +4078,7 @@ class J_moneyModuleSite extends WeModuleSite
 					$html .= addslashes($userList[$row['userid']]['group']) . "\t ,";
 					$html .= addslashes("￥" . sprintf('%.2f', $row['total_fee'] / 100)) . "\t ,";
 					$html .= addslashes("￥" . sprintf('%.2f', $row['coupon_fee'] / 100)) . "\t ,";
+					$html .= addslashes("￥" . sprintf('%.2f', $row['servermoney'] / 100)) . "\t ,";
 					$html .= addslashes("￥" . sprintf('%.2f', $row['cash_fee'] / 100)) . "\t ,";
 					$html .= addslashes($row['marketing_log']) . "\t ,";
 					$html .= ($row['status'] ? $row['status'] == 1 ? "成功" : "已退款" : "失败") . "\t ,";
