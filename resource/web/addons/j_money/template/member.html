@@ -119,6 +119,15 @@ require(['bootstrap'],function($){
             <div class="help-block">请在粉丝列表中查找-<a href="./index.php?c=mc&a=fans">粉丝列表</a></div>
           </div>
         </div>
+
+         <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信二维码绑定</label>
+          <div class="col-sm-9 col-xs-12">
+            <img src="http://qr.liantu.com/api.php?text={php echo urlencode($_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=bindwechat&m=j_money&uid=" . $_GPC['id'])}" alt="微信二维码">
+            <div class="help-block">打开微信扫一扫</div>
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="col-xs-12 col-sm-3 col-md-2 control-label">姓名</label>
           <div class="col-sm-9 col-xs-12">
@@ -158,6 +167,9 @@ require(['bootstrap'],function($){
             <div class="help-block"></div>
           </div>
         </div>
+
+      
+
       </div>
     </div>
     <div class="form-group col-xs-12">

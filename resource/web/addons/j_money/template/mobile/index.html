@@ -980,9 +980,11 @@ function history_search(){
 					temp+='<img src="{MODULE_URL}template/img/pay_0.png" width="21"/>';
 				}else if(paytype==1){
 					temp+='<img src="{MODULE_URL}template/img/pay_1.png" width="21"/>';
-				}else {
+				}else if(paytype == 4) {
 					temp+='<img src="{MODULE_URL}template/img/pay_4.png" width="21"/>';
-				}
+				}else if(paytype == 3) {
+          temp+='<img src="{MODULE_URL}template/img/pay_3.png" width="21"/>';
+        }
 				temp+=' ';
 				if(status==0){
 					temp+='<span class="label label-danger"><i class="fa fa-times"/></i></span>';
@@ -1063,9 +1065,11 @@ function history_page(num){
 					temp+='<img src="{MODULE_URL}template/img/pay_0.png" width="21"/>';
 				}else if(paytype==1){
 					temp+='<img src="{MODULE_URL}template/img/pay_1.png" width="21"/>';
-				}else {
+				}else if(paytype == 4) {
 					temp+='<img src="{MODULE_URL}template/img/pay_4.png" width="21"/>';
-				}
+				}else if(paytype == 3) {
+          temp+='<img src="{MODULE_URL}template/img/pay_3.png" width="21"/>';
+        }
 				temp+=' ';
 				if(status==0){
 					temp+='<span class="label label-danger"><i class="fa fa-times"/></i></span>';
@@ -1377,13 +1381,13 @@ function charge_search(){
 				temp+='<td>'+list[i].fee+'</td>';
 				temp+='<td>';
 				if(paytype==0){
-					temp+='<img src="{MODULE_URL}template/img/pay_2.png" width="21"/>';
-				}else if(paytype==1){
-					temp+='<img src="{MODULE_URL}template/img/pay_3.png" width="21"/>';
-				}else if(paytype==2){
 					temp+='<img src="{MODULE_URL}template/img/pay_0.png" width="21"/>';
-				}else {
+				}else if(paytype==1){
 					temp+='<img src="{MODULE_URL}template/img/pay_1.png" width="21"/>';
+				}else if(paytype==3){
+					temp+='<img src="{MODULE_URL}template/img/pay_3.png" width="21"/>';
+				}else if(paytype==4){
+					temp+='<img src="{MODULE_URL}template/img/pay_4.png" width="21"/>';
 				}
 				temp+='</td>';
 				temp+='<td><span class="label label-info">'+list[i].cardno+'</span></td>';

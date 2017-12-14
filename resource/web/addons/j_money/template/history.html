@@ -30,34 +30,80 @@ require(['bootstrap'],function($){
       <input type="hidden" name="a" value="entry" />
       <input type="hidden" name="m" value="j_money" />
       <input type="hidden" name="do" value="history" />
+      <input type="hidden" name="op" value="post" />
       <input type="hidden" name="token" value="{$_W['token']}" />
       <div class="panel panel-info">
       <div class="panel-heading">{$shop['companyname']}总记录</div>
       <div class="panel-body table-responsive">
-        <div class="form-group">
-          <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
-          <div class="col-sm-9 form-inline">
-            <div class="input-group"> 
-              <span class="input-group-addon">筛选</span> <span class="input-group-btn">
-              <select name="shopid" id="shopid"  class="form-control" onChange="changeGroup(1)">
-                <option value="0">全部团队</option>
-                  {loop $grouplist $row}
-                <option value="{$row['id']}" {if $row['id']==$_GPC['shopid']}selected{/if}>{$row['companyname']}</option>
-                  {/loop}
-              </select>
-              </span>
-              <span class="input-group-btn">
-              <input type="text" name="date" value="2016-12-28" placeholder="请选择日期时间" readonly="readonly" class="datetimepicker form-control" style="padding-left:12px;">
-              </span>
+
+            <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+            <div class="col-sm-9 form-inline">
+              <div class="input-group"> 
+                <span class="input-group-addon">筛选</span> <span class="input-group-btn">
+                <select name="shopid" id="shopid"  class="form-control" onChange="changeGroup(1)">
+                  <option value="0">全部团队</option>
+                    {loop $grouplist $row}
+                  <option value="{$row['id']}" {if $row['id']==$_GPC['shopid']}selected{/if}>{$row['companyname']}</option>
+                    {/loop}
+                </select>
+                </span>
+                <span class="input-group-btn">
+                <select name="userid" id="userid" class="form-control" onChange="changeGroup(2)">
+                  <option value="0">全部人员</option>
+                    {loop $userList $id $val}
+                  <option value="{$id}" {if $id==$_GPC['userid']}selected{/if}>{$val}</option>
+                    {/loop}
+                </select>
+                </span> 
+                <span class="input-group-btn">
+                
+                {php echo tpl_form_field_daterange('gametime', array('start' =>$starttime,'end'=>$endtime),true)}
+                </span>
+              </div>
+              
             </div>
-          </div>
-           </div>
+            </div>
           <div class="form-group">
             <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
             <div class="col-sm-9 form-inline">
               <input type="submit" class="btn btn-danger" onClick="$('#isexplode').val(1)" name="explode" value="导出数据"/>
+               <input type="submit" class="btn btn-info" value="搜索记录"/>
             </div>
           </div>
+        
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>类型</th>
+                <th>实际支付总金额</th>
+                <th>返佣</th>
+                <th>结算</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>微信</td>
+                <td>￥{php echo sprintf('%.2f',($totalFee['wxpay_total']/100))}元 | {php echo $totalFee['wxpay_count']}笔</td>
+                <td>￥{php echo sprintf('%.2f',($totalFee['wxpay_rate_total']/100))}元 </td>
+                <td>￥{php echo sprintf('%.2f',($totalFee['wxpay_total']/100-$totalFee['wxpay_rate_total']/100))}元 | {php echo $totalFee['wxpay_count']}笔</td>
+              </tr>
+              <tr>
+                <td>支付宝</td>
+                <td>￥{php echo sprintf('%.2f',($totalFee['alipay_total']/100))}元 | {php echo $totalFee['alipay_count']}笔</td>
+                <td>￥{php echo sprintf('%.2f',($totalFee['alipay_rate_total']/100))}元 </td>
+                <td>￥{php echo sprintf('%.2f',($totalFee['alipay_total']/100-$totalFee['alipay_rate_total']/100))}元 | {php echo $totalFee['alipay_count']}笔</td>
+              </tr>
+              <tr>
+                <td><strong>合计</strong></td>
+                <td style="color:#F00">￥{php echo sprintf('%.2f',($totalFee['wxpay_total']/100+$totalFee['alipay_total']/100))}元 | {php echo $totalFee['wxpay_count']+$totalFee['alipay_count']}笔</td>
+                <td style="color:#F00">￥{php echo sprintf('%.2f',(($totalFee['wxpay_rate_total']+$totalFee['alipay_rate_total'])/100))}元</td>
+                <td style="color:#F00">￥{php echo sprintf('%.2f',(($totalFee['wxpay_total']+$totalFee['alipay_total']-$totalFee['wxpay_rate_total']-$totalFee['alipay_rate_total'])/100))}元 |  {php echo $totalFee['wxpay_count']+$totalFee['alipay_count']}笔</td>
+              </tr>
+            </tbody>
+          </table>
+
+
         </div>
       </div>
       <div class="panel panel-info">
@@ -68,7 +114,7 @@ require(['bootstrap'],function($){
                 <th style="width:140px;">单号</th>
                 <th>订单金额</th>
                 <th>实际支付</th>
-                <th>扣点</th>
+                <th>返佣</th>
                 <th>结算</th>
                 <th>状态</th>
               </tr>
@@ -82,14 +128,18 @@ require(['bootstrap'],function($){
                 </td>
               <td>￥{php echo sprintf('%.2f',($row['total_fee']/100))}</td>
               <td>￥{php echo sprintf('%.2f',($row['cash_fee']/100))}</td>
-              <td><p><span class="label label-success">{php echo sprintf('%.2f',($row['rate']))}%</span> </p>
-              <span class="label label-danger">￥{php echo sprintf('%.2f',($row['poundage']))}</span></td>
-              <td><span class="label label-danger">￥{php echo sprintf('%.2f',($row['cash_fee']-$row['poundage'*100])*0.01)}</span></td>
+              <td><p><span class="label label-success">{php echo $row['paytype'] == 0 ? sprintf('%.2f',$rate['wxpay_rate']) : sprintf('%.2f',$rate['alipay_rate']);}%</span> </p>
+              <span class="label label-danger">￥{php echo sprintf('%.2f',$row['cash_fee']*($row['paytype'] == 0 ? sprintf('%.2f',$rate['wxpay_rate']) : sprintf('%.2f',$rate['alipay_rate']))/10000);}</span></td>
+              <td><span class="label label-danger">￥{php echo sprintf('%.2f',($row['cash_fee']/100))-sprintf('%.2f',$row['cash_fee']*($row['paytype'] == 0 ? sprintf('%.2f',$rate['wxpay_rate']) : sprintf('%.2f',$rate['alipay_rate']))/10000);}</span></td>
               <td>
-                {if $row['paytype']==0}
+              {if $row['paytype']==0}
               <img src="{MODULE_URL}template/img/wechart.gif" width="21"/> 
               {else if $row['paytype']==1}
                 <img src="{MODULE_URL}template/img/alipay.gif" width="21"/> 
+              {else if $row['paytype']==3}
+                <img src="{MODULE_URL}template/img/credit.gif" width="21"/> 
+              {else if $row['paytype']==2}
+                <img src="{MODULE_URL}template/img/cash.gif" width="21"/> 
               {/if}
               {if $row['status']==1} <span class="label label-success"><i class="fa fa-check"/></i></span>
               {elseif $row['status']==2}<span class="label label-danger" data-toggle="popover" data-placement="top" data-content="已退款"><i class="fa fa-recycle"/></i></span>

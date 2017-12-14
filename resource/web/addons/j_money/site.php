@@ -3066,6 +3066,53 @@ class J_moneyModuleSite extends WeModuleSite
 		header('location:' . $forward);
 		die;
 	}
+	public function doMobileBindwechat()
+	{
+		global $_W, $_GPC;
+		$uid = strval($_GPC['uid']);
+		$reply = pdo_fetchcolumn("SELECT * FROM " . tablename('account_wechats') . " WHERE uniacid=:a ", array(':a' => $_W['uniacid']));
+		$callback = urlencode($_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=oauthbindwechat&m=j_money&uid=" . $uid);
+		$forward = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $_W['account']['key'] . "&redirect_uri={$callback}&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+		header('location:' . $forward);
+		die;
+	}
+
+	public function doMobileOauthbindwechat()
+	{
+		global $_W, $_GPC;
+		$code = $_GPC['code'];
+		$uid = intval($_GPC['uid']);
+		$cfg = $this->module['config'];
+		if (!empty($code)) {
+			load()->func('communication');
+			$url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" . $_W['account']['key'] . "&secret=" . $_W['account']['secret'] . "&code={$code}&grant_type=authorization_code";
+			$ret = ihttp_get($url);
+			if (!is_error($ret)) {
+				$auth = @json_decode($ret['content'], true);
+				if (is_array($auth) && !empty($auth['openid'])) {
+					$openid = $auth['openid'];
+
+					$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $uid));
+					if(empty($user)){
+						message("抱歉，没有这个用户！","error");
+					}
+					$res = pdo_update('j_money_user',array('openid'=>$openid),array('id'=>$uid));
+					if($res){
+						message("绑定成功");
+					}else{
+						message("抱歉，绑定失败！","error");
+					}
+					message("绑定成功");
+					die;
+				} else {
+					die('抱歉，微信授权失败');
+				}
+			} else {
+				die('微信授权失败');
+			}
+		}
+		die('微信授权失败');
+	}
 	public function doMobileGame()
 	{
 		global $_GPC, $_W;
@@ -4028,8 +4075,9 @@ class J_moneyModuleSite extends WeModuleSite
 			if ($_GPC['userid']) {
 				$where2 .= " and userid='" . $_GPC['userid'] . "'";
 			}
-			$starttime = $_GPC["gametime"]["start"] ? $_GPC["gametime"]["start"] : date("Y-m-d H:i:s");
-			$endtime = $_GPC["gametime"]["end"] ? $_GPC["gametime"]["end"] : date("Y-m-d H:i:s");
+			$starttime = $_GPC["gametime"]["start"] ? $_GPC["gametime"]["start"] : date("Y-m-d").' 0:0:0';
+			$endtime = $_GPC["gametime"]["end"] ? $_GPC["gametime"]["end"] : date("Y-m-d").' 23:59:59';
+
 			$where .= " and createtime>='" . strtotime($starttime) . "' and createtime<='" . strtotime($endtime) . "' ";
 			if ($_GPC['shopid']) {
 				$where2 .= " and groupid='" . $_GPC['shopid'] . "' ";
@@ -4167,8 +4215,19 @@ class J_moneyModuleSite extends WeModuleSite
 			$data = array("COUPON"=>"支付宝红包","ALIPAYACCOUNT"=>"支付宝余额","FINANCEACCOUNT"=>"余额宝","CFT" => "零钱包", "ICBC_DEBIT" => "工商银行(借记卡)", "ICBC_CREDIT" => "工商银行(信用卡)", "ABC_DEBIT" => "农业银行(借记卡)", "ABC_CREDIT" => "农业银行(信用卡)", "PSBC_DEBIT" => "邮政储蓄银行(借记卡)", "PSBC_CREDIT" => "邮政储蓄银行(信用卡)", "CCB_DEBIT" => "建设银行(借记卡)", "CCB_CREDIT" => "建设银行(信用卡)", "CMB_DEBIT" => "招商银行(借记卡)", "CMB_CREDIT" => "招商银行(信用卡)", "BOC_DEBIT" => "中国银行(借记卡)", "BOC_CREDIT" => "中国银行(信用卡)", "COMM_DEBIT" => "交通银行(借记卡)", "SPDB_DEBIT" => "浦发银行(借记卡)", "SPDB_CREDIT" => "浦发银行(信用卡)", "GDB_DEBIT" => "广发银行(借记卡)", "GDB_CREDIT" => "广发银行(信用卡)", "CMBC_DEBIT" => "民生银行(借记卡)", "CMBC_CREDIT" => "民生银行(信用卡)", "PAB_DEBIT" => "平安银行(借记卡)", "PAB_CREDIT" => "平安银行(信用卡)", "CEB_DEBIT" => "光大银行(借记卡)", "CEB_CREDIT" => "光大银行(信用卡)", "CIB_DEBIT" => "兴业银行(借记卡)", "CIB_CREDIT" => "兴业银行(信用卡)", "CITIC_DEBIT" => "中信银行(借记卡)", "CITIC_CREDIT" => "中信银行(信用卡)", "BOSH_DEBIT" => "上海银行(借记卡)", "BOSH_CREDIT" => "上海银行(信用卡)", "CRB_DEBIT" => "华润银行(借记卡)", "HZB_DEBIT" => "杭州银行(借记卡)", "HZB_CREDIT" => "杭州银行(信用卡)", "BSB_DEBIT" => "包商银行(借记卡)", "BSB_CREDIT" => "包商银行(信用卡)", "CQB_DEBIT" => "重庆银行(借记卡)", "SDEB_DEBIT" => "顺德农商行(借记卡)", "SZRCB_DEBIT" => "深圳农商银行(借记卡)", "HRBB_DEBIT" => "哈尔滨银行(借记卡)", "BOCD_DEBIT" => "成都银行(借记卡)", "GDNYB_DEBIT" => "南粤银行(借记卡)", "GDNYB_CREDIT" => "南粤银行(信用卡)", "GZCB_DEBIT" => "广州银行(借记卡)", "GZCB_CREDIT" => "广州银行(信用卡)", "JSB_DEBIT" => "江苏银行(借记卡)", "JSB_CREDIT" => "江苏银行(信用卡)", "NBCB_DEBIT" => "宁波银行(借记卡)", "NBCB_CREDIT" => "宁波银行(信用卡)", "NJCB_DEBIT" => "南京银行(借记卡)", "JZB_DEBIT" => "晋中银行(借记卡)", "KRCB_DEBIT" => "昆山农商(借记卡)", "LJB_DEBIT" => "龙江银行(借记卡)", "LNNX_DEBIT" => "辽宁农信(借记卡)", "LZB_DEBIT" => "兰州银行(借记卡)", "WRCB_DEBIT" => "无锡农商(借记卡)", "ZYB_DEBIT" => "中原银行(借记卡)", "ZJRCUB_DEBIT" => "浙江农信(借记卡)", "WZB_DEBIT" => "温州银行(借记卡)", "XAB_DEBIT" => "西安银行(借记卡)", "JXNXB_DEBIT" => "江西农信(借记卡)", "NCB_DEBIT" => "宁波通商银行(借记卡)", "NYCCB_DEBIT" => "南阳村镇银行(借记卡)", "NMGNX_DEBIT" => "内蒙古农信(借记卡)", "SXXH_DEBIT" => "陕西信合(借记卡)", "SRCB_CREDIT" => "上海农商银行(信用卡)", "SJB_DEBIT" => "盛京银行(借记卡)", "SDRCU_DEBIT" => "山东农信(借记卡)", "SRCB_DEBIT" => "上海农商银行(借记卡)", "SCNX_DEBIT" => "四川农信(借记卡)", "QLB_DEBIT" => "齐鲁银行(借记卡)", "QDCCB_DEBIT" => "青岛银行(借记卡)", "PZHCCB_DEBIT" => "攀枝花银行(借记卡)", "ZJTLCB_DEBIT" => "浙江泰隆银行(借记卡)", "TJBHB_DEBIT" => "天津滨海农商行(借记卡)", "WEB_DEBIT" => "微众银行(借记卡)", "YNRCCB_DEBIT" => "云南农信(借记卡)", "WFB_DEBIT" => "潍坊银行(借记卡)", "WHRC_DEBIT" => "武汉农商行(借记卡)", "ORDOSB_DEBIT" => "鄂尔多斯银行(借记卡)", "XJRCCB_DEBIT" => "新疆农信银行(借记卡)", "ORDOSB_CREDIT" => "鄂尔多斯银行(信用卡)", "CSRCB_DEBIT" => "常熟农商银行(借记卡)", "JSNX_DEBIT" => "江苏农商行(借记卡)", "GRCB_CREDIT" => "广州农商银行(信用卡)", "GLB_DEBIT" => "桂林银行(借记卡)", "GDRCU_DEBIT" => "广东农信银行(借记卡)", "GDHX_DEBIT" => "广东华兴银行(借记卡)", "FJNX_DEBIT" => "福建农信银行(借记卡)", "DYCCB_DEBIT" => "德阳银行(借记卡)", "DRCB_DEBIT" => "东莞农商行(借记卡)", "CZCB_DEBIT" => "稠州银行(借记卡)", "CZB_DEBIT" => "浙商银行(借记卡)", "CZB_CREDIT" => "浙商银行(信用卡)", "GRCB_DEBIT" => "广州农商银行(借记卡)", "CSCB_DEBIT" => "长沙银行(借记卡)", "CQRCB_DEBIT" => "重庆农商银行(借记卡)", "CBHB_DEBIT" => "渤海银行(借记卡)", "BOIMCB_DEBIT" => "内蒙古银行(借记卡)", "BOD_DEBIT" => "东莞银行(借记卡)", "BOD_CREDIT" => "东莞银行(信用卡)", "BOB_DEBIT" => "北京银行(借记卡)", "BNC_DEBIT" => "江西银行(借记卡)", "BJRCB_DEBIT" => "北京农商行(借记卡)", "AE_CREDIT" => "AE(信用卡)", "GYCB_CREDIT" => "贵阳银行(信用卡)", "JSHB_DEBIT" => "晋商银行(借记卡)", "JRCB_DEBIT" => "江阴农商行(借记卡)", "JNRCB_DEBIT" => "江南农商(借记卡)", "JLNX_DEBIT" => "吉林农信(借记卡)", "JLB_DEBIT" => "吉林银行(借记卡)", "JJCCB_DEBIT" => "九江银行(借记卡)", "HXB_DEBIT" => "华夏银行(借记卡)", "HXB_CREDIT" => "华夏银行(信用卡)", "HUNNX_DEBIT" => "湖南农信(借记卡)", "HSB_DEBIT" => "徽商银行(借记卡)", "HSBC_DEBIT" => "恒生银行(借记卡)", "HRXJB_DEBIT" => "华融湘江银行(借记卡)", "HNNX_DEBIT" => "河南农信(借记卡)", "HKBEA_DEBIT" => "东亚银行(借记卡)", "HEBNX_DEBIT" => "河北农信(借记卡)", "HBNX_DEBIT" => "湖北农信(借记卡)", "HBNX_CREDIT" => "湖北农信(信用卡)", "GYCB_DEBIT" => "贵阳银行(借记卡)", "GSNX_DEBIT" => "甘肃农信(借记卡)", "JCB_CREDIT" => "JCB(信用卡)", "MASTERCARD_CREDIT" => "MASTERCARD(信用卡)", "VISA_CREDIT" => "VISA(信用卡)");
 			
 		} elseif ($operation == 'post') {
+			$setting = pdo_fetchcolumn('select settings from '.tablename('uni_account_modules').' where uniacid=:uniacid and module=:module',array(':uniacid'=>$_W['uniacid'],':module'=>'j_money'));
+			$setting = unserialize($setting);
+			$rate = $setting['rate'];
+			// var_dump($rate);
 			$where = $where2 = "";
-			$where .= " and a.paytype=0 ";
+			// $where .= " and a.paytype=0 ";
+			if ($_GPC['userid']) {
+				$where2 .= " and a.userid='" . $_GPC['userid'] . "'";
+			}
+			$starttime = $_GPC["gametime"]["start"] ? $_GPC["gametime"]["start"] : date("Y-m-d").' 0:0:0';
+			$endtime = $_GPC["gametime"]["end"] ? $_GPC["gametime"]["end"] : date("Y-m-d").' 23:59:59';
+			$where .= " and a.createtime>='" . strtotime($starttime) . "' and a.createtime<='" . strtotime($endtime) . "' ";
+
 			if ($_GPC['shopid']) {
 				$where2 .= " and a.groupid='" . $_GPC['shopid'] . "')";
 			}
@@ -4176,8 +4235,46 @@ class J_moneyModuleSite extends WeModuleSite
 			$psize = 10;
 			$start = ($pindex - 1) * $psize;
 			$list = pdo_fetchall("SELECT a.*,b.poundage,b.rate,(b.refund_status) as rstatus,(b.refund_fee) as rfee FROM " . tablename('j_money_trade') . " a LEFT JOIN " . tablename('j_money_statements') . " b ON a.out_trade_no=b.out_trade_no WHERE a.weid='{$_W['uniacid']}' {$where} {$where2} order by a.id desc LIMIT " . $start . "," . $psize);
+
+
 			$total = pdo_fetchcolumn("SELECT count(*) FROM " . tablename('j_money_trade') . " a LEFT JOIN " . tablename('j_money_statements') . " b ON a.out_trade_no=b.out_trade_no WHERE a.weid='{$_W['uniacid']}' {$where} {$where2}");
+
+			$where2 = " and a.status=1";
+
+			$allList = pdo_fetchall("SELECT a.*,b.poundage,b.rate,(b.refund_status) as rstatus,(b.refund_fee) as rfee FROM " . tablename('j_money_trade') . " a LEFT JOIN " . tablename('j_money_statements') . " b ON a.out_trade_no=b.out_trade_no WHERE a.weid='{$_W['uniacid']}' {$where} {$where2} ");
+
+			$totalFee['total']             = 0;
+			$totalFee['wxpay_total']       = 0;
+			$totalFee['alipay_total']      = 0;
+			$totalFee['wxpay_rate_total']  = 0;
+			$totalFee['alipay_rate_total'] = 0;
+			$totalFee['wxpay_count'] = 0;
+			$totalFee['alipay_count'] = 0;
+			foreach($allList as &$row){
+				$totalFee['total'] += $row['cash_fee'];
+				if($row['paytype'] == 0){
+					$totalFee['wxpay_total'] += $row['cash_fee'];
+					$totalFee['wxpay_count'] ++;
+				}else if($row['paytype'] == 1){
+					$totalFee['alipay_total'] += $row['cash_fee'];
+					$totalFee['alipay_count'] ++;
+				}
+			}
+			unset($row);
+			$totalFee['wxpay_rate_total'] = $totalFee['wxpay_total'] * $rate['wxpay_rate']/100;
+			$totalFee['alipay_rate_total'] = $totalFee['alipay_total'] * $rate['alipay_rate']/100;
+
 			$pager = pagination($total, $pindex, $psize);
+			$user = pdo_fetchall("SELECT id,useracount,realname,pcate FROM " . tablename('j_money_user') . " WHERE weid = '{$_W['uniacid']}' order by id desc ");
+			$userList = array();
+			$groupids = array();
+			$grouplist = pdo_fetchall("SELECT * FROM " . tablename('j_money_group') . " WHERE weid = '{$_W['uniacid']}' order by id asc ");
+			foreach ($grouplist as $row) {
+				$groupids[$row['id']] = $row['companyname'];
+			}
+			foreach ($user as $row) {
+				$userList[$row['id']] = $groupids[$row['pcate']] . "-" . $row['useracount'] . '(' . $row['realname'] . ')';
+			}
 		} elseif ($operation == 'update') {
 			if (checksubmit('submit')) {
 				$id_ary = $_GPC['select'];

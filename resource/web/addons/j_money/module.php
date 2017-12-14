@@ -91,6 +91,7 @@ class J_moneyModule extends WeModule
 			
 				/*会员接口名称*/
 			$cfg["memberApi"]=$_GPC["memberApi"];
+			$cfg["rate"]=$_GPC["rate"];
 			
 			
 			load()->func('file');
