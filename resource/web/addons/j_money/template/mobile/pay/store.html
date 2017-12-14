@@ -13,16 +13,9 @@
 </head>
 <body class="bj1">  
 	<div class="mobile_wrap center bj">
-       <!-- <div class="header">
-      	<i>
-        		<a href="#"><img src="img/ico0.png" alt=""></a>
-        	</i>
-       <h2>店铺</h2>  
-        </div>
-        --> 
          <div class="tip">
          	<div class="wid">
-         		<i><img src="{MODULE_URL}template/mobile/pay/img/ico_6.png" alt=""></i>
+         		<i><img src="{$logoUrl}" alt=""></i>
          		<p>{$shop['infoshow']}</p>
          	</div>
          </div>
@@ -93,9 +86,15 @@
     	<div class="layout">
     		<div class="box">
     			<h2>信用支付注意事项：</h2>
-    			<p>1.支持所有支付宝付款包括花呗,信用卡等.</p>
-                <p>2.超过{php echo isInt($shop['freelimit'])}部分需支付相应手续费 .</p>
-                <p>3.即时到账让付款更方便快捷.</p>
+    			<p>1.支持所有付款方式包括花呗,信用卡等.</p>
+    			<p>2.即时到账让付款更方便快捷.</p>
+    			{if (isInt($shop['freelimit']) != 0 && isInt($shop['servermoney']) != 0)}
+					<p>3.超过{php echo isInt($shop['freelimit'])}部分需支付相应手续费 .</p>
+    			{else if (isInt($shop['freelimit']) == 0 && isInt($shop['servermoney']) != 0)}
+					<p>3.需按照比例支付相应手续费.</p>
+    			{/if}
+                
+               
     		</div>
     		<div class="ok-but">
     			<a class="a2" href="">取消</a>

@@ -1717,15 +1717,17 @@ class J_moneyModuleSite extends WeModuleSite
 			echo $printTemplate;die;
 		}else if($operation == 'checkVersion'){
 			$deviceinfo = intval($_GPC["islogin"]);
+			$cfg = $this->module['config'];
 			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
 			if (!$user) {
-				die(json_encode(array("success" => false, "msg" => "请先登录")));
+				die(json_encode(array("success" => false, "msg" => "请先登录",'cfg'=>$cfg)));
 			}
 			$version = file_get_contents('../addons/j_money/version.txt');
 			if($version){
-				die(json_encode(array("success" => true, "version" => json_decode($version,true))));
+				
+				die(json_encode(array("success" => true, "version" => json_decode($version,true),'cfg'=>$cfg)));
 			}else{
-				die(json_encode(array("success" => false, "msg" => '获取版本失败')));
+				die(json_encode(array("success" => false, "msg" => '获取版本失败','cfg'=>$cfg)));
 			}
 		}else if($operation == 'modifPassword'){
 			$deviceinfo = intval($_GPC["islogin"]);
@@ -1921,6 +1923,22 @@ class J_moneyModuleSite extends WeModuleSite
 				}
 				die(json_encode(array("success" => true, 'list'=>$list)));
 			}
+		}else if($operation == 'checkRefoudConfirmByAccount'){
+			$userid = trim($_GPC['userid']);
+			$pwd = $_GPC['pwd'];
+			if (!$userid || !$pwd) {
+				die(json_encode(array("success" => false, "msg" => "用户名或者密码错误")));
+			}
+			$pwd = md5($_GPC['pwd']);
+			$item = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and useracount=:a and password=:b limit 1", array(":a" => $userid, ":b" => $pwd));
+			if (!$item) {
+				die(json_encode(array("success" => false, "msg" => "用户不存在或者密码错误")));
+			}
+			if (!$item['status']) {
+				die(json_encode(array("success" => false, "msg" => "该用户还没有审核，请联系管理员")));
+			}
+
+			die(json_encode(array('success'=>true,"refund_log_id"=>$item['id'])));
 		}
 	}
 

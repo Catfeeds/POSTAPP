@@ -38,11 +38,19 @@
         -->
         <div class="logo dt">
         	<div class="wid">
-        		<i><img src="{MODULE_URL}template/mobile/pay/img/logo-1.png" alt=""></i>
+        		<i style="height: initial;"><img src="{$logoUrl}" alt=""></i>
         	
 
         		<div class="text">
-        			<p>提示：本店单日消费<span>{php echo isInt($shop['freelimit'])}</span>元以下<span>免手续费</span>，超出部分按千分之<span>{php echo isInt($shop['servermoney']);}</span>收取手续费,您当日已累计支付<span>{$TotalMoney}</span>元。</p>
+					{if (isInt($shop['freelimit']) != 0 && isInt($shop['servermoney']) != 0)}
+						<p>提示：本店单日消费<span>{php echo isInt($shop['freelimit'])}</span>元以下<span>免手续费</span>，超出部分按千分之<span>{php echo isInt($shop['servermoney']);}</span>收取手续费,您当日已累计支付<span>{$TotalMoney}</span>元。</p>
+					{else if (isInt($shop['freelimit']) == 0 && isInt($shop['servermoney']) != 0)}
+						<p>提示：本店手机支付按照消费额的千分之<span>{php echo isInt($shop['servermoney']);}</span>收取手续费。</p>
+					{else if (isInt($shop['freelimit']) == 0 && isInt($shop['servermoney']) == 0)}
+						<p>提示：本店手机支付免收手续费。</p>
+					{/if}
+
+        			
         		</div>
         	</div>
         </div><!-- logo -->
@@ -71,7 +79,7 @@
         		<li class="zhub switch">
         			<p>车牌号：</p>
 					<i>选填</i><i>必填</i>
-        			<input type="text" id="carnumber" placeholder="如沪A12345" value="">
+        			<input type="text" id="carnumber" placeholder="如{$cfg['province']}A12345" value="">
         		</li>
         		<li class="dsb switch hide">
         			<p>备注信息：</p>

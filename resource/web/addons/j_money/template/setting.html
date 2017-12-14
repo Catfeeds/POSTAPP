@@ -90,6 +90,17 @@ require(['bootstrap.switch', 'util'], function($, u){
                   扫描二维码</label>
               </div>
             </div>
+             <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">退款授权方式</label>
+              <div class="col-sm-9 form-inline">
+                <label class="radio-inline">
+                  <input type="radio" name="login_refund_type" value="0" {if $settings['login_refund_type'] == 0 || empty($settings['login_refund_type'])}checked{/if} />
+                  账号密码</label>
+                <label class="radio-inline">
+                  <input type="radio" name="login_refund_type" value="1" {if $settings['login_refund_type'] == 1}checked{/if} />
+                  扫描二维码</label>
+              </div>
+            </div>
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">登陆有效期</label>
               <div class="col-sm-9 form-inline">
@@ -99,6 +110,18 @@ require(['bootstrap.switch', 'util'], function($, u){
                 <div class="help-block">收银员登陆后，多长时间内有效。建议按实际情况修改</div>
               </div>
             </div>
+
+             <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">省份简称</label>
+              <div class="col-sm-9 form-inline">
+                <div class="input-group">
+                  <input type="text" class='form-control' style="width:80px" name='province' value='{php echo $settings["province"]}'/>
+                  </div>
+                <div class="help-block">扫描支付页面车牌号显示</div>
+              </div>
+            </div>
+
+
           </div>
           <div class="tab-pane" id="tab2">
             <div class="form-group">

@@ -7,12 +7,13 @@ $shop=pdo_fetch("SELECT * FROM ".tablename('j_money_group')." WHERE weid='{$_W['
 if(!$shop)message("请确认店铺");
 $cfg = $this->module['config'];
 $payType=checkWebBowser();
-
+$logoUrl = $_W['attachurl'].$cfg['logo'];
 
 if(empty($_GPC['op']))
 {	
 	if($payType==2&& empty($_GPC["alipay_pre"]))	
 	{
+
 		include $this->template("pay/store");die();
 	}
 }

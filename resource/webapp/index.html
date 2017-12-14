@@ -39,10 +39,14 @@
 					dataType: "json",
 					success: function(data) {
 						console.log(JSON.stringify(data));
+						var cfg = data.cfg;
+						console.log("login_pc_type = "+ cfg.login_pc_type)
+						localStorage.setItem("login_pc_type", cfg.login_pc_type);
+						localStorage.setItem("login_refund_type", cfg.login_refund_type);
 						if(data.success == true){
 							var version = data.version;
 							var newVer = version.version;
-
+							
 							if(wgtVer&&newVer&&wgtVer!=newVer){
 //								plus.nativeUI.confirm("有新版本更新,确定更新?", function(e){
 //									console.log("Close confirm: "+e.index);

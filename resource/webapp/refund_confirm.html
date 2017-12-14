@@ -62,7 +62,7 @@
 	</div>
 	<div class="code-login auto tabs-box0" style="display: block;">
 		<strong>退款权限身份确认</strong>
-		<div class="ch-obj"></div>
+		<div class="ch-obj"><img src="img/s1.png" alt=""></div>
 		<div class="er-code" id="qr_pic">
 			<!--<img src="img/s2.png" alt="">-->
 		</div>
@@ -72,6 +72,22 @@
 			<div id="btn">刷新</div>
 		
 		</div>
+	</div>
+	
+	<div class="code-login auto tabs-box1" style="display:none; ">
+		<strong>退款权限身份确认</strong>
+		<div class="ch-obj"><img src="img/s1-1.png" alt=""></div>
+		<ul>
+			<li>
+				<span class="ico-user"></span>
+				<input id="account" type="text" placeholder="请输入账号">
+			</li>
+			<li>
+				<span class="ico-pass"></span>
+				<input id="password" type="password" placeholder="请输入密码">
+			</li>
+		</ul>
+		<button id="submitLoginBtn">登录授权</button>
 	</div>
 	
 	
@@ -88,6 +104,14 @@
 			statusBarBackground: '#f7f7f7'
 		});
 		$.plusReady(function() {
+			var login_refund_type = localStorage.getItem("login_refund_type");
+			if(login_refund_type == 1){
+				mui(".tabs-box0")[0].setAttribute("style","display: block;");
+				mui(".tabs-box1")[0].setAttribute("style","display: none;");
+			}else{
+				mui(".tabs-box0")[0].setAttribute("style","display: none;");
+				mui(".tabs-box1")[0].setAttribute("style","display: block;");
+			}
 			var baseUrl = plus.storage.getItem("baseUrl");
 			var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=getRefoundConfirmUrl";
 			console.log(postUrl);					
@@ -130,6 +154,7 @@
 									}
 								}else{
 									window.clearTimeout(interval);
+									plus.nativeUI.toast("授权成功");
 									var refund_log_id = data.refund_log_id;
 									localStorage.setItem( "refund_log_id", refund_log_id);
 									clicked("scan_refund_by_fuyou.html",false,false);
@@ -140,6 +165,47 @@
 					}
 				}
 			})
+			
+			$(".tabs-box1").on("click","#submitLoginBtn",function(){
+				var accountBox  = doc.getElementById('account');
+				var passwordBox = doc.getElementById('password');
+				var username    = accountBox.value;
+				var pwd         = passwordBox.value;
+
+				if(username == null || username.length == 0){
+					plus.nativeUI.toast("请输入账号");
+					return false;
+				}
+				if(pwd == null || pwd.length < 6){
+					plus.nativeUI.toast("请输入密码");
+					return false;
+				}
+				console.log(username);
+
+				var baseUrl = plus.storage.getItem("baseUrl");
+				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=checkRefoudConfirmByAccount";
+				console.log(postUrl);
+				$.ajax({
+					type:"post",
+					url:postUrl,
+					data:{userid:username,pwd:pwd},
+					async:true,
+					dataType:"json",
+					success:function(data){
+						console.log(JSON.stringify(data));
+						if(data.success == true){
+							
+							plus.nativeUI.toast("授权成功");
+							
+							var refund_log_id = data.refund_log_id;
+							localStorage.setItem( "refund_log_id", refund_log_id);
+							clicked("scan_refund_by_fuyou.html",false,false);
+						}else{
+							plus.nativeUI.toast(data.msg);
+						}
+					}
+				});
+			});
 
 			mui(".code-login").on("click","#submitBtn",function(){
 				window.clearTimeout(interval);
@@ -147,6 +213,17 @@
 			});
 			mui(".shade").on("tap","#btn",function(){
 				history.go(0);
+			});
+			
+			mui(".tabs-box0").on("tap",".ch-obj",function(){
+				
+				mui(".tabs-box0")[0].setAttribute("style","display: none;");
+				mui(".tabs-box1")[0].setAttribute("style","display: block;");
+			});
+			mui(".tabs-box1").on("tap",".ch-obj",function(){
+				
+				mui(".tabs-box1")[0].setAttribute("style","display: none;");
+				mui(".tabs-box0")[0].setAttribute("style","display: block;");
 			});
 
 		})

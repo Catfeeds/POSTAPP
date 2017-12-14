@@ -45,7 +45,7 @@
 	<div class="logo">
 		<img src="img/s0.png" alt="">
 	</div>
-	<div class="code-login auto tabs-box0" style="display: block;">
+	<div class="code-login auto tabs-box0">
 		<strong>扫码二维码登录</strong>
 		<div class="ch-obj"><img src="img/s1.png" alt=""></div>
 		<div class="er-code" id="qr_pic">
@@ -59,7 +59,7 @@
 		</div>
 	</div>
 
-	<div class="code-login auto tabs-box1" style="display:none; ">
+	<div class="code-login auto tabs-box1">
 		<strong>账号密码登录</strong>
 		<div class="ch-obj" onclick="cg_code1();"><img src="img/s1-1.png" alt=""></div>
 		<ul>
@@ -116,7 +116,15 @@
 //				}
 //			},false);
 			
-			
+			var login_pc_type = localStorage.getItem("login_pc_type");
+			console.log("login_pc_type = "+ login_pc_type)
+			if(login_pc_type == 1){
+				mui(".tabs-box0")[0].setAttribute("style","display: block;");
+				mui(".tabs-box1")[0].setAttribute("style","display: none;");
+			}else{
+				mui(".tabs-box0")[0].setAttribute("style","display: none;");
+				mui(".tabs-box1")[0].setAttribute("style","display: block;");
+			}
 			var baseUrl = plus.storage.getItem("baseUrl");
 			var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=getLoginUrl";
 			console.log(postUrl);					
