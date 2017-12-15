@@ -51,7 +51,7 @@
 								var str = "";
 								var statusStr = "";
 								var menuStr = "";
-
+								var refundStr = "";
 								if(status == 0){
 									//失败
 									
@@ -81,6 +81,10 @@
 									menuStr += "<a href=\"#\" id='print' data-ordersn='"+out_trade_no+"'><img src=\"img/ico_5.png\" alt=\"打印\">打印</a>";
 									menuStr += "<a class=\"a1\" href=\"#\" onClick=\"clicked('barcode_pay.html',false,false);\">确认</a>";
 									menuStr += "</div>";
+									var refundUser = order.refund_user;
+									refundStr += "<li>退款收银员<span>"+refundUser.realname+"</span></li>";
+									refundStr += "<li>退款时间<span>"+refundUser.time+"</span></li>";
+									
 								}
 
 								var paytypeStr = "";
@@ -123,6 +127,7 @@
 								str += "交易时间";
 								str += "<span>"+order.time+"</span>";
 								str += "</li>";
+								str += refundStr;
 								str += "</ul>";
 								str += "</div>";
 								str += "<div class=\"null\"></div>";

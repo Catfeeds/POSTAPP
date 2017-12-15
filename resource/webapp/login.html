@@ -131,10 +131,11 @@
 
 			var qrcode = "";
 			var interval = null;
+			var shopid = localStorage.getItem("shopid");
 			$.ajax({
 				type:"post",
 				url:postUrl,
-				data:{qrcode:qrcode},
+				data:{qrcode:qrcode,shopid:shopid},
 				async:true,
 				dataType:"text",
 				success:function(data){
@@ -204,14 +205,14 @@
 					return false;
 				}
 				console.log(username);
-
+				var shopid = localStorage.getItem("shopid");
 				var baseUrl = plus.storage.getItem("baseUrl");
 				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=login";
 				console.log(postUrl);
 				$.ajax({
 					type:"post",
 					url:postUrl,
-					data:{userid:username,pwd:pwd},
+					data:{userid:username,pwd:pwd,shopid:shopid},
 					async:true,
 					dataType:"json",
 					success:function(data){

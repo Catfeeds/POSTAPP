@@ -43,8 +43,7 @@
 							var str = "";
 							if(list.length > 0){
 								for(var i in list){
-									var time = new Date().getTime();
-									str += "<li class=\"mui-table-view-cell mui-media\" data-name=\""+list[i]['name']+"\" data-acid=\""+list[i]['uniacid']+"\">";
+									str += "<li class=\"mui-table-view-cell mui-media acount-list-cell\" data-name=\""+list[i]['name']+"\" data-acid=\""+list[i]['uniacid']+"\">";
 									str += "<a class=\"mui-navigate-right\">";
 									str += "<img class=\"mui-media-object mui-pull-left\" src=\""+list[i]['avatar']+"\">";
 									str += "<div class=\"mui-media-body\">";
@@ -55,23 +54,71 @@
 									str += "</li>";
 								}
 								$("#list-box").html(str);
-								$(".mui-table-view-cell").on("click",function(){
+								$(".acount-list-cell").on("click",function(){
+									$("#list-box").hide();
 									var acid = $(this).data("acid");
 									var name = $(this).data("name");
 									console.log("Close confirm: "+acid);
-									plus.nativeUI.confirm(
-										"确定选择" + name + "?",
-										function(e){
-											
-											if(e.index == 0){
-												localStorage.setItem("uniacid", acid);
-												clicked("index.html",false,false);
-												
+									$.ajax({
+										url:"http://4sscrm.com/app/index.php?i=10&c=entry&m=j_money&do=ajax&op=getWechatShops&weid="+acid,
+										type:"get",
+										dataType:"json",
+										success:function(data){
+											console.log(JSON.stringify(data));
+											if(data.success){
+												var shops = data.list;
+												var strr = "";
+												$("#shop-list-box").html("");
+												if(shops.length > 0){
+													for(var i in shops){
+														strr += "<li class=\"mui-table-view-cell mui-media shop-list-cell\" data-name=\""+shops[i]['companyname']+"\" data-id=\""+shops[i]['id']+"\">";
+														strr += "<a class=\"mui-navigate-right\">";
+														strr += "<img class=\"mui-media-object mui-pull-left\" src=\""+shops[i]['avatar']+"\">";
+														strr += "<div class=\"mui-media-body\">";
+														strr += shops[i]['companyname'];
+														strr += "<p class='mui-ellipsis'>"+shops[i]['logomes']+"</p>";
+														strr += "</div>";
+														strr += "</a>";
+														strr += "</li>";
+													}
+													$(".mui-title").html(name+"的门店列表");
+													$("#shop-list-box").html(strr);
+													$("#shop-list-box").show();
+												}
 											}
-										}, {"title":"选择公众号",
-											"buttons":["确定","取消"],
-											"verticalAlign":"center"}
-									);
+											
+											$(".mui-action-back").on("click",function(){
+												$(".mui-title").html("公众号列表");
+												$("#shop-list-box").hide();
+												$("#list-box").show();
+											});
+											
+											$(".shop-list-cell").on("click",function(){
+
+												var shopid = $(this).data("id");
+												console.log("shopid = " + shopid);
+												var name = $(this).data("name");
+												plus.nativeUI.confirm(
+													"确定选择" + name + "?",
+													function(e){
+														if(e.index == 0){
+															localStorage.setItem("shopid", shopid);
+															localStorage.setItem("uniacid", acid);
+															console.log("uniacid="+acid);
+															console.log("shopid="+shopid);
+															clicked("index.html",false,false);
+															
+														}
+														
+													}, {"title":"选择门店",
+														"buttons":["确定","取消"],
+														"verticalAlign":"center"}
+												);
+												
+											})
+										}
+									})
+
 								});
 							}
 						}else{
@@ -97,7 +144,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">公众号列表</h1>
 		</header>
 		<div class="mui-content">
@@ -106,11 +153,12 @@
 				
 				
 			</ul>
+			
+			<ul class="mui-table-view mui-table-view-chevron" id="shop-list-box" style="display: none;">
+				
+				
+			</ul>
 		</div>
-		<!-- <script src="js/mui.min.js"></script>
-		<script type="text/javascript">
-			mui.init()
-		</script> -->
 	</body>
 
 </html>

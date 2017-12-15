@@ -15,11 +15,13 @@
 			$.plusReady(function() {
 				
 				var uniacid = localStorage.getItem("uniacid");
+				var shopid = localStorage.getItem("shopid");
 				if(uniacid == null){
 					clicked('wechat_account_list.html',false,false);
 	          		return;
 				}
 				console.log("uniacid="+uniacid);
+				console.log("shopid="+shopid);
 				
 				var baseUrl = "http://4sscrm.com/app/index.php?i=" + uniacid;
 	   			plus.storage.setItem("baseUrl", baseUrl);

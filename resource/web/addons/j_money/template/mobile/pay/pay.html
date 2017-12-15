@@ -42,11 +42,11 @@
         	
 
         		<div class="text">
-					{if (isInt($shop['freelimit']) != 0 && isInt($shop['servermoney']) != 0)}
-						<p>提示：本店单日消费<span>{php echo isInt($shop['freelimit'])}</span>元以下<span>免手续费</span>，超出部分按千分之<span>{php echo isInt($shop['servermoney']);}</span>收取手续费,您当日已累计支付<span>{$TotalMoney}</span>元。</p>
-					{else if (isInt($shop['freelimit']) == 0 && isInt($shop['servermoney']) != 0)}
-						<p>提示：本店手机支付按照消费额的千分之<span>{php echo isInt($shop['servermoney']);}</span>收取手续费。</p>
-					{else if (isInt($shop['freelimit']) == 0 && isInt($shop['servermoney']) == 0)}
+					{if ($shop['freelimit'] != 0 && $shop['servermoney'] != 0)}
+						<p>提示：本店单日消费<span>{php echo $shop['freelimit']}</span>元以下<span>免手续费</span>，超出部分按千分之<span>{php echo $shop['servermoney'];}</span>收取手续费,您当日已累计支付<span>{$TotalMoney}</span>元。</p>
+					{else if ($shop['freelimit'] == 0 && $shop['servermoney'] != 0)}
+						<p>提示：本店手机支付按照消费额的千分之<span>{php echo $shop['servermoney'];}</span>收取手续费。</p>
+					{else if ($shop['freelimit'] == 0 && $shop['servermoney'] == 0)}
 						<p>提示：本店手机支付免收手续费。</p>
 					{/if}
 

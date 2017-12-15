@@ -88,9 +88,9 @@
     			<h2>信用支付注意事项：</h2>
     			<p>1.支持所有付款方式包括花呗,信用卡等.</p>
     			<p>2.即时到账让付款更方便快捷.</p>
-    			{if (isInt($shop['freelimit']) != 0 && isInt($shop['servermoney']) != 0)}
-					<p>3.超过{php echo isInt($shop['freelimit'])}部分需支付相应手续费 .</p>
-    			{else if (isInt($shop['freelimit']) == 0 && isInt($shop['servermoney']) != 0)}
+    			{if ($shop['freelimit'] != 0 && $shop['servermoney'] != 0)}
+					<p>3.超过{php echo $shop['freelimit']}部分需支付相应手续费 .</p>
+    			{else if ($shop['freelimit'] == 0 && $shop['servermoney'] != 0)}
 					<p>3.需按照比例支付相应手续费.</p>
     			{/if}
                 
