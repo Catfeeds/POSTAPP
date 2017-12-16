@@ -3647,7 +3647,6 @@ class J_moneyModuleSite extends WeModuleSite
 				
 				$data["freelimit"]=trim($_GPC["freelimit"]);
 				$data["servermoney"]=trim($_GPC["servermoney"]);
-				
 				/*配置*/
 				
 				$serverTypes=$_GPC["serverTypes"];
