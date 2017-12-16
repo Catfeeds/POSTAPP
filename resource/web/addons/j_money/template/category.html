@@ -158,6 +158,19 @@ require(['bootstrap'],function($){
           </div>
 
           <div class="tab-pane" id="tab3">
+
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启微信支付</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="switch[wxpay_switch]" value="0" {if $switch['wxpay_switch'] == 0}checked{/if} />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="switch[wxpay_switch]" value="1" {if $switch['wxpay_switch'] == 1}checked{/if} />
+                  开启</label>
+              </div>
+            </div>
+
             <div class="form-group" >
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">AppId</label>
               <div class="col-sm-9">
@@ -235,6 +248,19 @@ require(['bootstrap'],function($){
           </div>
 
           <div class="tab-pane" id="tab4">
+            
+             <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启支付宝支付</label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                  <input type="radio" name="switch[alipay_switch]" value="0" {if $switch['alipay_switch'] == 0}checked{/if} />
+                  关闭</label>
+                <label class="radio-inline">
+                  <input type="radio" name="switch[alipay_switch]" value="1" {if $switch['alipay_switch'] == 1}checked{/if} />
+                  开启</label>
+              </div>
+            </div>
+
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">app_id</label>
               <div class="col-sm-9">
