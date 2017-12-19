@@ -1,4 +1,12 @@
 {template 'common/header'} 
+<style>
+	header{ display:none !important;}
+	.main{ margin-left:0px !important;}
+	#aside{ display:none !important;}
+	.section_main{ margin-left:0px !important;}
+
+
+</style>
 <script language="javascript" src="../addons/j_money/template/js/highcharts.js"></script> 
 <script language="javascript" src="../addons/j_money/template/js/bootstrap-tooltip.js"></script> 
 <script language="javascript" src="../addons/j_money/template/js/bootstrap-popover.js"></script> 
@@ -31,6 +39,7 @@ require(['bootstrap'],function($){
       <input type="hidden" name="m" value="j_money" />
       <input type="hidden" name="do" value="history" />
       <input type="hidden" name="op" value="post" />
+      <input type="hidden" name="isexplode" id="isexplode" value="0" />
       <input type="hidden" name="token" value="{$_W['token']}" />
       <div class="panel panel-info">
       <div class="panel-heading">{$shop['companyname']}总记录</div>
@@ -68,7 +77,7 @@ require(['bootstrap'],function($){
             <!-- <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label> -->
             <div class="col-sm-9 form-inline">
               <input type="submit" class="btn btn-danger" onClick="$('#isexplode').val(1)" name="explode" value="导出数据"/>
-               <input type="submit" class="btn btn-info" value="搜索记录"/>
+               <input type="submit" class="btn btn-info" onClick="$('#isexplode').val(0)" value="搜索记录"/>
             </div>
           </div>
         
@@ -94,11 +103,18 @@ require(['bootstrap'],function($){
                 <td>￥{php echo sprintf('%.2f',($totalFee['alipay_rate_total']/100))}元 </td>
                 <td>￥{php echo sprintf('%.2f',($totalFee['alipay_total']/100-$totalFee['alipay_rate_total']/100))}元 | {php echo $totalFee['alipay_count']}笔</td>
               </tr>
+
+               <tr>
+                <td>银行卡</td>
+                <td>￥{php echo sprintf('%.2f',($totalFee['cardpay_total']/100))}元 | {php echo $totalFee['cardpay_count']}笔</td>
+                <td>￥{php echo sprintf('%.2f',($totalFee['cardpay_rate_total']/100))}元 </td>
+                <td>￥{php echo sprintf('%.2f',($totalFee['cardpay_total']/100-$totalFee['cardpay_rate_total']/100))}元 | {php echo $totalFee['cardpay_count']}笔</td>
+              </tr>
               <tr>
                 <td><strong>合计</strong></td>
-                <td style="color:#F00">￥{php echo sprintf('%.2f',($totalFee['wxpay_total']/100+$totalFee['alipay_total']/100))}元 | {php echo $totalFee['wxpay_count']+$totalFee['alipay_count']}笔</td>
-                <td style="color:#F00">￥{php echo sprintf('%.2f',(($totalFee['wxpay_rate_total']+$totalFee['alipay_rate_total'])/100))}元</td>
-                <td style="color:#F00">￥{php echo sprintf('%.2f',(($totalFee['wxpay_total']+$totalFee['alipay_total']-$totalFee['wxpay_rate_total']-$totalFee['alipay_rate_total'])/100))}元 |  {php echo $totalFee['wxpay_count']+$totalFee['alipay_count']}笔</td>
+                <td style="color:#F00">￥{php echo sprintf('%.2f',($totalFee['wxpay_total']/100+$totalFee['cardpay_total']/100+$totalFee['alipay_total']/100))}元 | {php echo $totalFee['wxpay_count']+$totalFee['cardpay_count']+$totalFee['alipay_count']}笔</td>
+                <td style="color:#F00">￥{php echo sprintf('%.2f',(($totalFee['wxpay_rate_total']+$totalFee['cardpay_rate_total']+$totalFee['alipay_rate_total'])/100))}元</td>
+                <td style="color:#F00">￥{php echo sprintf('%.2f',(($totalFee['wxpay_total']+$totalFee['cardpay_total']+$totalFee['alipay_total']-$totalFee['wxpay_rate_total']-$totalFee['alipay_rate_total']-$totalFee['cardpay_rate_total'])/100))}元 |  {php echo $totalFee['wxpay_count']+$totalFee['alipay_count']}笔</td>
               </tr>
             </tbody>
           </table>
@@ -174,6 +190,8 @@ require(["datetimepicker"], function(){
 });
 </script>
 {elseif $operation == 'display'}
+
+
 <div class="main">
   <div class="category">
     <form action="" class="form-horizontal form">
@@ -252,7 +270,7 @@ require(["datetimepicker"], function(){
               <!-- <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label> -->
               <div class="col-sm-9 form-inline">
                 <input type="submit" class="btn btn-danger" onClick="$('#isexplode').val(1)" name="explode" value="导出数据"/>
-                <input type="submit" class="btn btn-info" value="搜索记录"/>
+                <input type="submit" class="btn btn-info" onClick="$('#isexplode').val(0)" value="搜索记录"/>
               </div>
             </div>
           
@@ -278,11 +296,17 @@ require(["datetimepicker"], function(){
                 <td>￥{php echo sprintf('%.2f',($payAry['alipay']['coupon']/100))}元 | {php echo $payAry['alipay']['coupon-count']}笔</td>
                 <td>￥{php echo sprintf('%.2f',($payAry['alipay']['cash_fee']/100))}元 | {php echo $payAry['alipay']['cash_fee-count']}笔</td>
               </tr>
+               <tr>
+                <td>银行卡</td>
+                <td>￥{php echo sprintf('%.2f',($payAry['cardpay']['all']/100))}元 | {php echo $payAry['cardpay']['all-count']}笔</td>
+                <td>￥{php echo sprintf('%.2f',($payAry['cardpay']['coupon']/100))}元 | {php echo $payAry['cardpay']['coupon-count']}笔</td>
+                <td>￥{php echo sprintf('%.2f',($payAry['cardpay']['cash_fee']/100))}元 | {php echo $payAry['cardpay']['cash_fee-count']}笔</td>
+              </tr>
               <tr>
                 <td><strong>合计</strong></td>
-                <td style="color:#F00">￥{php echo sprintf('%.2f',(($payAry['alipay']['all']+$payAry['wechart']['all'])/100))}元 | {php echo $payAry['alipay']['all-count']+$payAry['wechart']['all-count']}笔</td>
-                <td style="color:#F00">￥{php echo sprintf('%.2f',(($payAry['alipay']['coupon']+$payAry['wechart']['coupon'])/100))}元 | {php echo $payAry['alipay']['coupon-count']+$payAry['wechart']['coupon-count']}笔</td>
-                <td style="color:#F00">￥{php echo sprintf('%.2f',(($payAry['alipay']['cash_fee']+$payAry['wechart']['cash_fee'])/100))}元 | {php echo $payAry['alipay']['cash_fee-count']+$payAry['wechart']['cash_fee-count']}笔</td>
+                <td style="color:#F00">￥{php echo sprintf('%.2f',(($payAry['alipay']['all']+$payAry['cardpay']['all']+$payAry['wechart']['all'])/100))}元 | {php echo $payAry['alipay']['all-count']+$payAry['cardpay']['all-count']+$payAry['wechart']['all-count']}笔</td>
+                <td style="color:#F00">￥{php echo sprintf('%.2f',(($payAry['alipay']['coupon']+$payAry['cardpay']['coupon']+$payAry['wechart']['coupon'])/100))}元 | {php echo $payAry['alipay']['coupon-count']+$payAry['cardpay']['coupon-count']+$payAry['wechart']['coupon-count']}笔</td>
+                <td style="color:#F00">￥{php echo sprintf('%.2f',(($payAry['alipay']['cash_fee']+$payAry['cardpay']['cash_fee']+$payAry['wechart']['cash_fee'])/100))}元 | {php echo $payAry['alipay']['cash_fee-count']+$payAry['cardpay']['cash_fee-count']+$payAry['wechart']['cash_fee-count']}笔</td>
               </tr>
             </tbody>
           </table>
