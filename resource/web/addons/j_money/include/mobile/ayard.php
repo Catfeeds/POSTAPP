@@ -9,6 +9,18 @@ $cfg = $this->module['config'];
 $payType=checkWebBowser();
 $logoUrl = $_W['attachurl'].$cfg['logo'];
 
+$switch = json_decode($shop['switch'],true);
+if($payType == 1){
+	if(!empty($shop['switch']) && $switch['wxpay_switch'] == 0){
+		message("门店未开通微信支付","","error");
+	}
+}else if($payType == 2){
+	if(!empty($shop['switch']) && $switch['alipay_switch'] == 0){
+		message("门店未开通支付宝支付","","error");
+	}
+}
+
+
 if(empty($_GPC['op']))
 {	
 	if($payType==2&& empty($_GPC["alipay_pre"]))	
