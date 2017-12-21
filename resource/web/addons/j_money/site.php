@@ -1992,6 +1992,18 @@ class J_moneyModuleSite extends WeModuleSite
 				die(json_encode(array("success" => true, 'list'=>$list)));
 			}
 			die(json_encode(array("success" => true, 'list'=>$list)));
+		}else if($operation == 'getUserListByShopid'){
+			$shopid = empty($_GPC['shopid']) ? 0 : intval($_GPC['shopid']);
+			if($shopid){
+				$list = pdo_fetchall('SELECT a.*,b.companyname FROM '.tablename('j_money_user').' a LEFT JOIN '.tablename('j_money_group').' b on a.pcate=b.id where a.weid=:weid and pcate=:pcate',array(':weid'=>$_W['uniacid'],':pcate'=>$shopid));
+			}else{
+				$list = pdo_fetchall('SELECT a.*,b.companyname FROM '.tablename('j_money_user').' a LEFT JOIN '.tablename('j_money_group').' b on a.pcate=b.id where a.weid=:weid',array(':weid'=>$_W['uniacid']));
+			}
+			foreach($list as &$row){
+				$row['name'] = $row['companyname'].'-'.$row['useracount'].'('.$row['realname'].')';
+			}
+			unset($row);
+			die(json_encode(array("success" => true, 'list'=>$list)));
 		}
 	}
 
@@ -4331,7 +4343,11 @@ class J_moneyModuleSite extends WeModuleSite
 					}
 				}
 			}
-			$user = pdo_fetchall("SELECT id,useracount,realname,pcate FROM " . tablename('j_money_user') . " WHERE weid = '{$_W['uniacid']}' order by id desc ");
+			if ($_GPC['shopid']) {
+				$user = pdo_fetchall("SELECT id,useracount,realname,pcate FROM " . tablename('j_money_user') . " WHERE weid = '{$_W['uniacid']}' AND pcate='{$_GPC['shopid']}' order by id desc ");
+			}else{
+				$user = pdo_fetchall("SELECT id,useracount,realname,pcate FROM " . tablename('j_money_user') . " WHERE weid = '{$_W['uniacid']}' order by id desc ");
+			}
 			$userList = array();
 			$groupids = array();
 			$grouplist = pdo_fetchall("SELECT * FROM " . tablename('j_money_group') . " WHERE weid = '{$_W['uniacid']}' order by id asc ");
@@ -4358,7 +4374,7 @@ class J_moneyModuleSite extends WeModuleSite
 			$where .= " and a.createtime>='" . strtotime($starttime) . "' and a.createtime<='" . strtotime($endtime) . "' ";
 
 			if ($_GPC['shopid']) {
-				$where2 .= " and a.groupid='" . $_GPC['shopid'] . "')";
+				$where2 .= " and a.groupid='" . $_GPC['shopid'] . "'";
 			}
 			$pindex = intval($_GPC['page']) ? intval($_GPC['page']) : 1;
 			$psize = 10;
