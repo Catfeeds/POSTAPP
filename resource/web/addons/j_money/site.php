@@ -175,9 +175,14 @@ class J_moneyModuleSite extends WeModuleSite
 			$market = $this->MarketingTest($totalfee, $shop['id'], $deviceinfo, $userinfo['openid']);
 			$coupon_fee = $market['coupon_fee'];
 			
+
+			$switch = json_decode($shop['switch'],true);
 			
 			$marketid = $market['marketid'];
 			if (substr($qrcode, 0, 1) == 1) {
+				if(!empty($shop['switch']) && $switch['wxpay_switch'] == 0){
+					die(json_encode(array("success" => false, "msg" => "门店未开通微信支付")));
+				}
 				$payParama = array("appid" => $shop['appid'] ? $shop['appid'] : $cfg['appid'], "pay_mchid" => strval($shop['pay_mchid']) ? strval($shop['pay_mchid']) : strval($cfg['pay_mchid']), "pay_signkey" => $shop['pay_signkey'] ? $shop['pay_signkey'] : $cfg['pay_signkey'], "outTradeNo" => TIMESTAMP . mt_rand(100, 999), "pay_ip" => $shop['pay_ip'] ? $shop['pay_ip'] : $cfg['pay_ip'], "sub_appid" => $shop['sub_appid'] ? $shop['sub_appid'] : $cfg['sub_appid'], "sub_mch_id" => $shop['sub_mch_id'] ? $shop['sub_mch_id'] : $cfg['sub_mch_id']);
 				$pay_signkey = trim($shop['pay_signkey']) ? trim($shop['pay_signkey']) : trim($cfg['pay_signkey']);
 				$pageparama = array("appid" => $shop['appid'] ? $shop['appid'] : $cfg['appid'], "mch_id" => strval($shop['pay_mchid']) ? strval($shop['pay_mchid']) : strval($cfg['pay_mchid']), "device_info" => $deviceinfo, "nonce_str" => getNonceStr(), "body" => $shop["companyname"], "detail" => "微支付收款", "attach" => $user['id'], "out_trade_no" => $payParama['outTradeNo'], "total_fee" => $totalfee - $coupon_fee, "fee_type" => "CNY", "spbill_create_ip" => $shop['pay_ip'] ? $shop['pay_ip'] : $cfg['pay_ip'], "goods_tag" => "000001", "auth_code" => $qrcode);
@@ -213,6 +218,9 @@ class J_moneyModuleSite extends WeModuleSite
 				}
 				die(json_encode(array("success" => true, "items" => $trade, "out_trade_no" => $payParama['outTradeNo'])));
 			} elseif (substr($qrcode, 0, 1) == 2) {
+				if(!empty($shop['switch']) && $switch['alipay_switch'] == 0){
+					die(json_encode(array("success" => false, "msg" => "门店未开通支付宝支付")));
+				}
 				$payParama = array("outTradeNo" => TIMESTAMP . mt_rand(100, 999), "app_id" => $shop['app_id'] ? $shop['app_id'] : $cfg['app_id'],"app_auth_token" => $shop['app_auth_token'] ? $shop['app_auth_token'] : $cfg['app_auth_token'],"sys_service_provider_id" => $shop['sys_service_provider_id'] ? $shop['sys_service_provider_id'] : $cfg['sys_service_provider_id'], "appauthtoken" => $shop['appauthtoken'] ? $shop['appauthtoken'] : $cfg['appauthtoken'], "alipay_cert" => $shop['alipay_cert'] ? $shop['alipay_cert'] : $cfg['alipay_cert'], "alipay_key" => $shop['alipay_key'] ? $shop['alipay_key'] : $cfg['alipay_key'], "alipay_store_id" => $shop['alipay_store_id']);
 				$auth_code = trim($qrcode);
 				$total_amount = $fee;
@@ -655,6 +663,7 @@ class J_moneyModuleSite extends WeModuleSite
 
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $trade['groupid']));
 			$refund_trade_no = TIMESTAMP;
+			$switch = json_decode($shop['switch'],true);
 			pdo_update("j_money_trade", array("refund_fee" => $trade['cash_fee'], "refund_trade_no" => $refund_trade_no), array("out_trade_no" => $orderid));
 			$isRefunded = false;
 			if ($user['permission'] > 1) {
@@ -668,6 +677,9 @@ class J_moneyModuleSite extends WeModuleSite
 					$pageparama['sub_mch_id'] = $payParama['sub_mch_id'];
 				}
 				if ($trade['paytype'] == 1) {
+					if(!empty($shop['switch']) && $switch['alipay_switch'] == 0){
+						die(json_encode(array("success" => false, "msg" => "门店未开通支付宝支付")));
+					}
 					$postfee = sprintf('%.2f', $trade['cash_fee'] * 0.01);
 					require_once '../addons/j_money/F2fpay.php';
 					$f2fpay = new F2fpay();
@@ -681,6 +693,9 @@ class J_moneyModuleSite extends WeModuleSite
 						die(json_encode(array("success" => false, "msg" => "退款失败:" . $result['sub_msg'])));
 					}
 				} else {
+					if(!empty($shop['switch']) && $switch['wxpay_switch'] == 0){
+						die(json_encode(array("success" => false, "msg" => "门店未开通微信支付")));
+					}
 					unset($pageparama['alipay_cert']);
 					unset($pageparama['appauthtoken']);
 					unset($pageparama['app_id']);
@@ -1816,8 +1831,10 @@ class J_moneyModuleSite extends WeModuleSite
 			// $order = pdo_fetchall('select * from '.tablename('j_money_print_log').' where uniacid=:uniacid and shopid=:shopid'.$where,array(':uniacid'=>$_W['uniacid'],':shopid'=>$shop['id']));
 			// $setting = pdo_fetchcolumn('select settings from '.tablename('uni_account_modules').' where uniacid=:uniacid and module=:module',array(':uniacid'=>$_W['uniacid'],':module'=>'j_money'));
 			// $setting = unserialize($setting);
-			$item = pdo_fetchall("SELECT * FROM " . tablename('j_money_refund_log').' order by createtime desc');
-			var_dump($item);die;
+			// $item = pdo_fetchall("SELECT * FROM " . tablename('j_money_refund_log').' order by createtime desc');
+			// var_dump($item);die;
+			// $sql = 'alter table ims_j_money_group add switch text;';
+			// echo pdo_query("ALTER TABLE ".tablename('j_money_group')." ADD `switch` text  COMMENT '开关';");
 		}else if($operation == 'card_pay_all'){
 			$fee = $_GPC["fee"] ? $_GPC["fee"] : 1;
 			$pay_servermoney = $_GPC["pay_servermoney"] ? $_GPC["pay_servermoney"] : 0;
@@ -3048,8 +3065,16 @@ class J_moneyModuleSite extends WeModuleSite
 					$openid = $auth['openid'];
 
 					$users = pdo_fetchall("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and openid=:a ", array(":a" => $openid));
-					$list = pdo_fetchall('SELECT a.id as userid, a.useracount,a.realname,a.openid,b.id as shopid,b.companyname FROM '.tablename('j_money_user').' a left join '.tablename('j_money_group').' b on a.pcate=b.id WHERE a.weid=:weid and a.openid=:openid and b.id=:shopid',array(':weid'=>$_W['uniacid'],':openid'=>$openid,':shopid'=>$shopid));
-					if(false && count($users) > 1){
+					$where = ' a.weid=:weid and a.openid=:openid';
+					$params[':weid'] = $_W['uniacid'];
+					$params[':openid'] = $openid;
+					if($shopid){
+						$where .= ' and b.id=:shopid';
+						$params[':shopid'] = $shopid;
+					}
+					
+					$list = pdo_fetchall('SELECT a.id as userid, a.useracount,a.realname,a.openid,b.id as shopid,b.companyname FROM '.tablename('j_money_user').' a left join '.tablename('j_money_group').' b on a.pcate=b.id WHERE '.$where,$params);
+					if(empty($shopid) && count($users) > 1){
 						
 						$url = $_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=loginbyuserid&m=j_money&openid=" . $openid."&qrcode=".$qrcode;
 						include $this->template('user-list');
@@ -3623,7 +3648,8 @@ class J_moneyModuleSite extends WeModuleSite
 				$category = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE id = :id ", array(':id' => $id));
 				/*配置*/
 				$serverTypes=empty($category["servertypes"])?array():json_decode($category["servertypes"]);
-				
+				$switch=empty($category["switch"])?array():json_decode($category["switch"],true);
+				// var_dump($switch);
 			} else {
 				if ($cfg['groupnum']) {
 					$allgroup = pdo_fetchcolumn("SELECT count(*) FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}'");
@@ -3647,11 +3673,11 @@ class J_moneyModuleSite extends WeModuleSite
 				
 				$data["freelimit"]=trim($_GPC["freelimit"]);
 				$data["servermoney"]=trim($_GPC["servermoney"]);
-				
 				/*配置*/
 				
 				$serverTypes=$_GPC["serverTypes"];
 				$data["servertypes"]=json_encode($serverTypes);
+				$data["switch"]=json_encode($_GPC['switch']);
 				/*配置*/
 				
 				$data["transferUrl"]=trim($_GPC["transferUrl"]);
@@ -4179,6 +4205,10 @@ class J_moneyModuleSite extends WeModuleSite
 				foreach ($tableheader as $value) {
 					$html .= $value . "\t ,";
 				}
+				$htotal_fee = 0;
+				$hcoupon_fee = 0;
+				$hservermoney = 0;
+				$hcash_fee = 0;
 				$html .= "\n";
 				foreach ($list as $row) {
 					$html .= $row['out_trade_no'] . "\t ,";
@@ -4199,15 +4229,33 @@ class J_moneyModuleSite extends WeModuleSite
 					$html .= $paytype . "\t ,";
 					$html .= addslashes($userList[$row['userid']]['name']) . "\t ,";
 					$html .= addslashes($userList[$row['userid']]['group']) . "\t ,";
-					$html .= addslashes("￥" . sprintf('%.2f', $row['total_fee'] / 100)) . "\t ,";
-					$html .= addslashes("￥" . sprintf('%.2f', $row['coupon_fee'] / 100)) . "\t ,";
-					$html .= addslashes("￥" . sprintf('%.2f', $row['servermoney'] / 100)) . "\t ,";
-					$html .= addslashes("￥" . sprintf('%.2f', $row['cash_fee'] / 100)) . "\t ,";
+					$html .= sprintf('%.2f', $row['total_fee'] / 100) . ",";
+					$html .= sprintf('%.2f', $row['coupon_fee'] / 100) . ",";
+					$html .= sprintf('%.2f', $row['servermoney'] / 100) . ",";
+					$html .= sprintf('%.2f', $row['cash_fee'] / 100) . ",";
 					$html .= addslashes($row['marketing_log']) . "\t ,";
 					$html .= ($row['status'] ? $row['status'] == 1 ? "成功" : "已退款" : "失败") . "\t ,";
 					$html .= addslashes($row['memberno']) . "\t ,";
 					$html .= "\n";
+
+					$htotal_fee   += $row['total_fee'];
+					$hcoupon_fee  += $row['coupon_fee'];
+					$hservermoney += $row['servermoney'];
+					$hcash_fee    += $row['cash_fee'];
 				}
+				// $html .= "\t ,";
+				// $html .= "\t ,";
+				// $html .= "\t ,";
+				// $html .= "\t ,";
+				// $html .= "\t ,";
+				// $html .= "总计:\t ,";
+				// $html .= addslashes(sprintf('%.2f', $htotal_fee / 100)) ."\t ,";
+				// $html .= addslashes(sprintf('%.2f', $hcoupon_fee / 100)) ."\t ,";
+				// $html .= addslashes(sprintf('%.2f', $hservermoney / 100)) ."\t ,";
+				// $html .= addslashes(sprintf('%.2f', $hcash_fee / 100)) ."\t ,";
+				// $html .= "\t ,";
+				// $html .= "\t ,";
+				// $html .= "\t ,";
 				header("Content-type:text/csv");
 				header("Content-Disposition:attachment; filename=收银情况_" . TIMESTAMP . ".csv");
 				echo $html;
@@ -4220,46 +4268,65 @@ class J_moneyModuleSite extends WeModuleSite
 			$total = pdo_fetchcolumn("SELECT count(*) FROM " . tablename('j_money_trade') . " WHERE weid='" . $_W['uniacid'] . "' {$where} {$where2}");
 			$pager = pagination($total, $pindex, $psize);
 			$allItem = pdo_fetchall("SELECT * FROM " . tablename('j_money_trade') . " WHERE weid='{$_W['uniacid']}' {$where} {$where2} ");
-			$payAry = array();
-			$payAry['wechart']['all'] = 0;
-			$payAry['wechart']['all-count'] = 0;
-			$payAry['wechart']['coupon'] = 0;
+
+			$payAry                            = array();
+			$payAry['wechart']['all']          = 0;
+			$payAry['wechart']['all-count']    = 0;
+			$payAry['wechart']['coupon']       = 0;
 			$payAry['wechart']['coupon-count'] = 0;
-			$payAry['wechart']['fee'] = 0;
-			$payAry['wechart']['fee-count'] = 0;
-			$payAry['alipay']['all'] = 0;
-			$payAry['alipay']['all-count'] = 0;
-			$payAry['alipay']['coupon'] = 0;
-			$payAry['alipay']['coupon-count'] = 0;
-			$payAry['alipay']['fee'] = 0;
-			$payAry['alipay']['fee-count'] = 0;
+			$payAry['wechart']['fee']          = 0;
+			$payAry['wechart']['fee-count']    = 0;
+			
+			$payAry['alipay']['all']           = 0;
+			$payAry['alipay']['all-count']     = 0;
+			$payAry['alipay']['coupon']        = 0;
+			$payAry['alipay']['coupon-count']  = 0;
+			$payAry['alipay']['fee']           = 0;
+			$payAry['alipay']['fee-count']     = 0;
+			
+			$payAry['cardpay']['all']          = 0;
+			$payAry['cardpay']['all-count']    = 0;
+			$payAry['cardpay']['coupon']       = 0;
+			$payAry['cardpay']['coupon-count'] = 0;
+			$payAry['cardpay']['fee']          = 0;
+			$payAry['cardpay']['fee-count']    = 0;
+
 			foreach ($allItem as $row) {
 				if ($row['status'] == 1) {
 					if ($row['total_fee']) {
 						if (!$row['paytype']) {
 							$payAry['wechart']['all'] = $payAry['wechart']['all'] + $row['total_fee'];
 							$payAry['wechart']['all-count'] = $payAry['wechart']['all-count'] + 1;
-						} else {
+						} else if($row['paytype'] == 1) {
 							$payAry['alipay']['all'] = $payAry['alipay']['all'] + $row['total_fee'];
 							$payAry['alipay']['all-count'] = $payAry['alipay']['all-count'] + 1;
+						} else if($row['paytype'] == 3){
+							$payAry['cardpay']['all'] = $payAry['cardpay']['all'] + $row['total_fee'];
+							$payAry['cardpay']['all-count'] = $payAry['cardpay']['all-count'] + 1;
 						}
 					}
 					if ($row['coupon_fee']) {
 						if (!$row['paytype']) {
 							$payAry['wechart']['coupon'] = $payAry['wechart']['coupon'] + $row['coupon_fee'];
 							$payAry['wechart']['coupon-count'] = $payAry['wechart']['coupon-count'] + 1;
-						} else {
+						} else if($row['paytype'] == 1) {
 							$payAry['alipay']['coupon'] = $payAry['alipay']['coupon'] + $row['coupon_fee'];
 							$payAry['alipay']['coupon-count'] = $payAry['alipay']['coupon-count'] + 1;
+						} else if($row['paytype'] == 3){
+							$payAry['cardpay']['coupon'] = $payAry['cardpay']['coupon'] + $row['coupon_fee'];
+							$payAry['cardpay']['coupon-count'] = $payAry['cardpay']['coupon-count'] + 1;
 						}
 					}
 					if ($row['cash_fee']) {
 						if (!$row['paytype']) {
 							$payAry['wechart']['cash_fee'] = $payAry['wechart']['cash_fee'] + $row['cash_fee'];
 							$payAry['wechart']['cash_fee-count'] = $payAry['wechart']['cash_fee-count'] + 1;
-						} else {
+						} else if($row['paytype'] == 1) {
 							$payAry['alipay']['cash_fee'] = $payAry['alipay']['cash_fee'] + $row['cash_fee'];
 							$payAry['alipay']['cash_fee-count'] = $payAry['alipay']['cash_fee-count'] + 1;
+						} else if($row['paytype'] == 3){
+							$payAry['cardpay']['cash_fee'] = $payAry['cardpay']['cash_fee'] + $row['cash_fee'];
+							$payAry['cardpay']['cash_fee-count'] = $payAry['cardpay']['cash_fee-count'] + 1;
 						}
 					}
 				}
@@ -4308,10 +4375,13 @@ class J_moneyModuleSite extends WeModuleSite
 			$totalFee['total']             = 0;
 			$totalFee['wxpay_total']       = 0;
 			$totalFee['alipay_total']      = 0;
+			$totalFee['cardpay_total']      = 0;
 			$totalFee['wxpay_rate_total']  = 0;
 			$totalFee['alipay_rate_total'] = 0;
-			$totalFee['wxpay_count'] = 0;
-			$totalFee['alipay_count'] = 0;
+			$totalFee['cardpay_rate_total'] = 0;
+			$totalFee['wxpay_count']       = 0;
+			$totalFee['alipay_count']      = 0;
+			$totalFee['cardpay_count']      = 0;
 			foreach($allList as &$row){
 				$totalFee['total'] += $row['cash_fee'];
 				if($row['paytype'] == 0){
@@ -4320,11 +4390,15 @@ class J_moneyModuleSite extends WeModuleSite
 				}else if($row['paytype'] == 1){
 					$totalFee['alipay_total'] += $row['cash_fee'];
 					$totalFee['alipay_count'] ++;
+				}else if($row['paytype'] == 3){
+					$totalFee['cardpay_total'] += $row['cash_fee'];
+					$totalFee['cardpay_count'] ++;
 				}
 			}
 			unset($row);
 			$totalFee['wxpay_rate_total'] = $totalFee['wxpay_total'] * $rate['wxpay_rate']/100;
 			$totalFee['alipay_rate_total'] = $totalFee['alipay_total'] * $rate['alipay_rate']/100;
+			$totalFee['cardpay_rate_total'] = $totalFee['cardpay_total'] * $rate['cardpay_rate']/100;
 
 			$pager = pagination($total, $pindex, $psize);
 			$user = pdo_fetchall("SELECT id,useracount,realname,pcate FROM " . tablename('j_money_user') . " WHERE weid = '{$_W['uniacid']}' order by id desc ");
@@ -4426,7 +4500,7 @@ class J_moneyModuleSite extends WeModuleSite
 					$html .= addslashes($payTypeAry[$row['paytype']]) . "\t ,";
 					$html .= addslashes($userList[$row['userid']]['name']) . "\t ,";
 					$html .= addslashes($userList[$row['userid']]['group']) . "\t ,";
-					$html .= addslashes("￥" . sprintf('%.2f', $row['cash'] / 100)) . "\t ,";
+					$html .= addslashes(sprintf('%.2f', $row['cash'] / 100)) . "\t ,";
 					$html .= ($row['status'] ? $row['status'] == 1 ? "成功" : "已退款" : "失败") . "\t ,";
 					$html .= "\n";
 				}
