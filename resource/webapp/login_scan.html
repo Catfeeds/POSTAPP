@@ -50,10 +50,11 @@
 
 					var qrcode = "";
 					var interval = null;
+					var shopid = localStorage.getItem("shopid");
 					$.ajax({
 						type:"post",
 						url:postUrl,
-						data:{qrcode:qrcode},
+						data:{qrcode:qrcode,shopid:shopid},
 						async:true,
 						dataType:"text",
 						success:function(data){

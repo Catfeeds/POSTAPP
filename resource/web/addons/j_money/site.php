@@ -1958,13 +1958,18 @@ class J_moneyModuleSite extends WeModuleSite
 				die(json_encode(array("success" => true, 'list'=>$list)));
 			}
 		}else if($operation == 'checkRefoudConfirmByAccount'){
+			$deviceinfo = intval($_GPC["islogin"]);
+			$cuser = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a and status=1", array(":a" => $deviceinfo));
+			if (!$cuser) {
+				die(json_encode(array("success" => false, "msg" => "请先登录",'cfg'=>$cfg)));
+			}
 			$userid = trim($_GPC['userid']);
 			$pwd = $_GPC['pwd'];
 			if (!$userid || !$pwd) {
 				die(json_encode(array("success" => false, "msg" => "用户名或者密码错误")));
 			}
 			$pwd = md5($_GPC['pwd']);
-			$item = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and useracount=:a and password=:b limit 1", array(":a" => $userid, ":b" => $pwd));
+			$item = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and useracount=:a and password=:b and pcate=:pcate limit 1", array(":a" => $userid, ":b" => $pwd,':pcate'=>$cuser['pcate']));
 			if (!$item) {
 				die(json_encode(array("success" => false, "msg" => "用户不存在或者密码错误")));
 			}
@@ -2050,7 +2055,11 @@ class J_moneyModuleSite extends WeModuleSite
 					//long 2017-11-13
 					$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $item['shopid']));
 					$serverTypes=json_decode($shop["servertypes"],true);
-					message("确认成功",$serverTypes[7]);
+					$url = $serverTypes[7];
+					if(empty($serverTypes[7])){
+						$url = $_W['siteroot'].'/app';
+					}
+					message("确认成功",$url);
 					die;
 				} else {
 					die('抱歉，微信授权失败');
@@ -3148,10 +3157,20 @@ class J_moneyModuleSite extends WeModuleSite
 			message("抱歉，该二维码已过期！");
 		}
 		pdo_update('j_money_qrlogin', array("status" => 1, "openid" => $openid, "userid" => $user['id']), array("id" => $item['id']));
+		$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
+		$serverTypes=json_decode($shop["servertypes"],true);
+		$url = $serverTypes[7];
+		if(empty($serverTypes[7])){
+			$url = $_W['siteroot'].'/app';
+		}
 		//long 2017-11-13
 		$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
 		$serverTypes=json_decode($shop["servertypes"],true);
-		message("登陆成功",$serverTypes[7]);
+		$url = $serverTypes[7];
+		if(empty($serverTypes[7])){
+			$url = $_W['siteroot'].'/app';
+		}
+		message("登陆成功",$url);
 	}
 
 	public function doMobileLogin()
@@ -3159,6 +3178,7 @@ class J_moneyModuleSite extends WeModuleSite
 		global $_W, $_GPC;
 		$qrcode = strval($_GPC['qrcode']);
 		$shopid = strval($_GPC['shopid']);
+		// var_dump($shopid);die;
 		$reply = pdo_fetchcolumn("SELECT * FROM " . tablename('account_wechats') . " WHERE uniacid=:a ", array(':a' => $_W['uniacid']));
 		$callback = urlencode($_W['siteroot'] . "app/index.php?i=" . $_W['uniacid'] . "&c=entry&do=oauthlogin&m=j_money&qrcode=" . $qrcode.'&shopid='.$shopid);
 		$forward = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $_W['account']['key'] . "&redirect_uri={$callback}&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
@@ -3196,12 +3216,13 @@ class J_moneyModuleSite extends WeModuleSite
 						message("抱歉，没有这个用户！","error");
 					}
 					$res = pdo_update('j_money_user',array('openid'=>$openid),array('id'=>$uid));
-					if($res){
-						message("绑定成功");
-					}else{
-						message("抱歉，绑定失败！","error");
+					$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
+					$serverTypes=json_decode($shop["servertypes"],true);
+					$url = $serverTypes[7];
+					if(empty($serverTypes[7])){
+						$url = $_W['siteroot'].'/app';
 					}
-					message("绑定成功");
+					message("绑定成功", $url);
 					die;
 				} else {
 					die('抱歉，微信授权失败');

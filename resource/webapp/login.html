@@ -94,27 +94,35 @@
 					
 				} else {
 					if (new Date().getTime() - first < 3000) {
-						localStorage.removeItem("islogin");
+						//logout();
+						//localStorage.removeItem("islogin");
 						plus.runtime.quit();
 						
 					}
 				}
 			}
-//			plus.key.addEventListener('backbutton',function(){
-//				console.log('backbutton');
-//				if (!first) {
-//					first = new Date().getTime();
-//					plus.nativeUI.toast('再按一次退出应用');
-//					setTimeout(function() {
-//						first = null;
-//					}, 3000);
-//					
-//				} else {
-//					if (new Date().getTime() - first < 3000) {
-//						plus.runtime.quit();
-//					}
-//				}
-//			},false);
+			
+			function logout(){
+				var baseUrl = plus.storage.getItem("baseUrl");
+				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=logout";
+				mui.ajax({
+					type: "post",
+					url: postUrl,
+					async: true,
+					dataType: "json",
+					success: function(data) {
+						console.log(JSON.stringify(data));
+					}
+	
+				})
+				localStorage.removeItem("islogin");
+				localStorage.removeItem("account");
+				localStorage.removeItem("password");
+				clicked('login.html',false,false);
+	          	return;
+				
+			}
+
 			
 			var login_pc_type = localStorage.getItem("login_pc_type");
 			console.log("login_pc_type = "+ login_pc_type)

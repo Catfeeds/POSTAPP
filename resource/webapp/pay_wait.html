@@ -29,8 +29,8 @@
 					return false;
 				},false);
 				var out_trade_no = localStorage.getItem("pay_wait_trade_no");
-				doc.getElementById("J_second").innerHTML = 90;
-				var second = 90;
+				doc.getElementById("J_second").innerHTML = 60;
+				var second = 60;
 				var timer = null;
 				var interval = null;
 				var account = localStorage.getItem("account");
@@ -54,6 +54,7 @@
 					clicked("barcode_pay.html",false,false);
 					return;
 				}
+
 				//获取订单详情
 				var baseUrl = plus.storage.getItem("baseUrl");
 				var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=getOrderDetail";
@@ -136,9 +137,37 @@
 							str += "<span>"+order.time+"</span>";
 							str += "</li>";
 							str += "</ul>";
-
+							str += "<div class=\"fixed-menu\">";
+							str += "<a class=\"a1\" href=\"#\" id=\"cancel\" data-ordersn='"+out_trade_no+"' style=\"width: 100%;background-color:#CF2D28;\">取消订单</a></div>";
 
 							doc.querySelector('.open-list').innerHTML = str;
+							mui(".fixed-menu").on("click","#cancel",function(){
+								var out_trade_no = this.getAttribute("data-ordersn");
+								plus.nativeUI.confirm(
+									"是否确定取消当前订单，订单刷新实际支付?",
+									function(e){
+										if(e.index == 0){
+											var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=closeqrcodewechat";
+											mui.ajax({
+												type: "post",
+												url: postUrl,
+												data:{orderid:out_trade_no},
+												async: true,
+												dataType: "json",
+												success: function(data) {
+													console.log(JSON.stringify(data));
+												}
+											})
+											window.clearTimeout(interval);
+											getToUrl(0);
+										}
+
+									}, {"title":"取消当前订单",
+									"buttons":["确定","取消"],
+									"verticalAlign":"center"}
+								);
+
+							})
 							payWait(out_trade_no);
 						}else{
 							if(data.msg == '请先登录'){
@@ -232,6 +261,32 @@
 					}
 				}
 				
+				function cancelOrder(out_trade_no){
+					plus.nativeUI.confirm(
+						"是否确定客户需要取消当前支付?",
+						function(e){
+							if(e.index == 0){
+								var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=closeqrcodewechat";
+								mui.ajax({
+									type: "post",
+									url: postUrl,
+									data:{orderid:out_trade_no},
+									async: true,
+									dataType: "json",
+									success: function(data) {
+										console.log(JSON.stringify(data));
+									}
+								})
+								window.clearTimeout(interval);
+								getToUrl(0);
+							}
+
+						}, {"title":"取消当前订单",
+						"buttons":["确定","取消"],
+						"verticalAlign":"center"}
+					);
+				}
+				
 				//取消订单
 				function closeOrder(out_trade_no){
 					var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=closeqrcodewechat";
@@ -247,7 +302,7 @@
 					})
 					window.clearTimeout(interval);
 					getToUrl(0);
-					startPlay('_www/audio/transfail.mp3');
+					//startPlay('_www/audio/transfail.mp3');
 				}
 				    		// 开始播放
 				    		// 播放文件相关对象
@@ -275,6 +330,7 @@
 		<div class="open-list two">
 			
 		</div>
+		
 	</div>
 </body>
 </html>
