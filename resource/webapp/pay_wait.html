@@ -144,7 +144,7 @@
 							mui(".fixed-menu").on("click","#cancel",function(){
 								var out_trade_no = this.getAttribute("data-ordersn");
 								plus.nativeUI.confirm(
-									"是否确定取消当前订单，订单刷新实际支付?",
+									"是否确定客户需要取消当前支付?",
 									function(e){
 										if(e.index == 0){
 											var postUrl = baseUrl + "&c=entry&m=j_money&do=ajax&op=closeqrcodewechat";
@@ -159,6 +159,7 @@
 												}
 											})
 											window.clearTimeout(interval);
+											localStorage.setItem("pay_error_msg","订单已经取消");
 											getToUrl(0);
 										}
 
