@@ -77,7 +77,12 @@ require(['bootstrap'],function($){
             <!-- <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label> -->
             <div class="col-sm-9 form-inline">
               <input type="submit" class="btn btn-danger" onClick="$('#isexplode').val(1)" name="explode" value="导出数据"/>
-               <input type="submit" class="btn btn-info" onClick="$('#isexplode').val(0)" value="搜索记录"/>
+              <input type="submit" class="btn btn-info" onClick="$('#isexplode').val(0)" value="搜索记录"/>
+              {if clearStart == 1}
+              <input type="button" class="btn btn-info" style="margin-left: 50px;" data-toggle="modal" data-target="#searchModal"value="结算"/>
+              {else}
+                 <input type="button" class="btn btn-white" style="margin-left: 50px;"  value="结算"/>
+              {/if}
             </div>
           </div>
         
@@ -173,6 +178,76 @@ require(['bootstrap'],function($){
     </form>
   </div>
 </div>
+<form action="{php echo $this->createWebUrl('history', array('op' => 'post','ta'=>'clearing'))}" method="post">
+<div class="modal inmodal in" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content animated bounceInRight">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5 style="padding: 10px;text-align: center;">结算</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="panel panel-default">
+            <div class="panel-body" >
+              
+              <table class="table table-hover">
+                <tr>
+                  <td>确认时间</td>
+                  <td colspan="2">{php echo date('Y-m-d H:i:s');}</td>
+                </tr>
+                <tr>
+                  <td>当期金额(元)</td>
+                  <td colspan="2">{$clearTotal}</td>
+                </tr>
+                {php $i=0;}
+                {loop $clearData $key $cd}
+                <tr>
+                  {if $i==0}
+                  <td rowspan="{php echo count($clearData)}">服务奖励(元)</td>
+                  {/if}
+                  <td>{$key}</td>
+                  <td>{$cd['total']}</td>
+                </tr>
+                {php $i++;}
+                {/loop}
+              </table>
+
+
+          <br>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">快递公司</label>
+              <div class="col-sm-9">
+                <input type="text" name="express" class="form-control" required="true" />
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">快递单号</label>
+              <div class="col-sm-9">
+                <input type="text" name="express_sn" class="form-control" required="true" />
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">寄送日期</label>
+              <div class="col-sm-9">
+                {php echo tpl_form_field_date('senddate')}
+              </div>
+            </div>
+            
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-info">提交</button>
+        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
 <script>
 require(["datetimepicker"], function(){
 	$(function(){

@@ -4448,6 +4448,60 @@ class J_moneyModuleSite extends WeModuleSite
 			foreach ($user as $row) {
 				$userList[$row['id']] = $groupids[$row['pcate']] . "-" . $row['useracount'] . '(' . $row['realname'] . ')';
 			}
+
+			// pdo_delete('j_money_clearing');
+			// $hasClearingList = pdo_fetchall('select * from '.tablename('j_money_clearing'));
+
+			// var_dump($hasClearingList);
+			//结算金额计算
+			
+			//判断今天是否是这个月的最后一天或者月初的一周
+			//当月最后一天
+			$cy      = date('Y-m');
+			$xy      = strtotime('+1 month',strtotime(date('Y-m')))-1;
+			$lastDay = date('d',$xy);
+			$nDay    = date('d');
+			if($nDay == $lastDay || $nDay <= 7){
+				$clearStart = 1;
+				$hasClearing = pdo_fetch('select * from '.tablename('j_money_clearing').' order by id desc');
+				$clearingStart = strtotime('+1 month',strtotime($hasClearing['month']));
+				if($nDay == $lastDay){
+					$clearingEnd = $xy;
+				}else{
+					$clearingEnd = strtotime(date('Y-m'))-1;
+				}
+				
+				$clearData = array();
+				$cwher = " and createtime>=:start and createtime<=:end ";
+				$clearList = pdo_fetchall("SELECT createtime, from_unixtime(createtime,'%Y-%m') as cdate,paytype ,sum(cash_fee) as total FROM " . tablename('j_money_trade') . " WHERE weid=:weid and status=1 {$cwher} GROUP BY cdate,paytype ",array(':weid'=>$_W['uniacid'],':start'=>$clearingStart,':end'=>$clearingEnd));
+
+				$clearTotal = 0;
+				foreach($clearList as $key => $value){
+					if($value['paytype'] == 0){
+						$clearData[$value['cdate']]['total'] +=  sprintf('%.2f',$value['total']*$rate['wxpay_rate']/10000);
+					}else if($value['paytype'] == 1){
+						$clearData[$value['cdate']]['total'] +=  sprintf('%.2f',$value['total']*$rate['alipay_rate']/10000);
+					}else if($value['paytype'] == 3){
+						$clearData[$value['cdate']]['total'] +=  sprintf('%.2f',$value['total']*$rate['cardpay_rate']/10000);
+					}
+				}
+				foreach($clearData as $val){
+					$clearTotal += $val['total'];
+				}
+				if ($_GPC['ta'] == 'clearing') {
+					$data['uniacid']    = $_W['uniacid'];
+					$data['express']    = trim($_GPC['express']);
+					$data['express_sn'] = trim($_GPC['express_sn']);
+					$data['senddate']   = trim($_GPC['senddate']);
+					$data['createtime']  = TIMESTAMP;
+					foreach($clearData as $key => $val){
+						$data['month'] = $key;
+						$data['total'] = $val['total'];
+						pdo_insert('j_money_clearing',$data);
+					}
+				}
+			}
+
 		} elseif ($operation == 'update') {
 			if (checksubmit('submit')) {
 				$id_ary = $_GPC['select'];
