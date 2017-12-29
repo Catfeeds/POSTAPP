@@ -78,11 +78,12 @@ require(['bootstrap'],function($){
             <div class="col-sm-9 form-inline">
               <input type="submit" class="btn btn-danger" onClick="$('#isexplode').val(1)" name="explode" value="导出数据"/>
               <input type="submit" class="btn btn-info" onClick="$('#isexplode').val(0)" value="搜索记录"/>
-              {if clearStart == 1}
-              <input type="button" class="btn btn-info" style="margin-left: 50px;" data-toggle="modal" data-target="#searchModal"value="结算"/>
+              {if $clearStart == 1}
+              <input type="button" class="btn btn-info" style="margin-left: 50px;" data-toggle="modal" data-target="#searchModal" value="结算"/>
               {else}
                  <input type="button" class="btn btn-white" style="margin-left: 50px;"  value="结算"/>
               {/if}
+              <a class="btn btn-info" href="{php echo $this->createWebUrl('history', array('op'=>'clearing'))}">结算记录</a>
             </div>
           </div>
         
@@ -213,28 +214,34 @@ require(['bootstrap'],function($){
               </table>
 
 
-          <br>
+          <br><br>
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">快递公司</label>
               <div class="col-sm-9">
                 <input type="text" name="express" class="form-control" required="true" />
               </div>
             </div>
-            <br>
+            <br><br>
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">快递单号</label>
               <div class="col-sm-9">
                 <input type="text" name="express_sn" class="form-control" required="true" />
               </div>
             </div>
-            <br>
+            <br><br>
             <div class="form-group">
               <label class="col-xs-12 col-sm-3 col-md-2 control-label">寄送日期</label>
               <div class="col-sm-9">
                 {php echo tpl_form_field_date('senddate')}
               </div>
             </div>
-            
+            <br><br>
+            <div class="form-group">
+              <div>收件人:{$setting['clearing_contacts']}</div>
+              <div>联系电话:{$setting['clearing_contacts_mobile']}</div>
+              <div>寄送地址:{$setting['clearing_contacts_addr']}</div>
+            </div>
+
 
         </div>
       </div>
@@ -283,6 +290,52 @@ function changeGroup(that){
   });
 }
 </script>
+{elseif $operation == 'clearing'}
+<div class="main">
+  <div class="category">
+    <form action="" class="form-horizontal form">
+      <input type="hidden" name="c" value="site" />
+      <input type="hidden" name="a" value="entry" />
+      <input type="hidden" name="m" value="j_money" />
+      <input type="hidden" name="do" value="history" />
+      <input type="hidden" name="op" value="clearing" />
+      <input type="hidden" name="token" value="{$_W['token']}" />
+
+      <div class="panel panel-info">
+        <div class="panel-body table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>月份</th>
+                <th>金额</th>
+                <th>快递公司</th>
+                <th>快递单号</th>
+                <th>发送日期</th>
+                <th>确定时间</th>
+              </tr>
+            </thead>
+            <tbody>
+            {loop $list $row}
+            <tr>
+              <td>{$row['month']}</td>
+              <td>{$row['total']}</td>
+              <td>{$row['express']}</td>
+              <td>{$row['express_sn']}</td>
+              <td>{$row['senddate']}</td>
+              <td>{php echo date('Y-m-d H:i:s',$row['createtime']);}</td>
+            </tr>
+            {/loop}
+            <tr>
+            <tr>
+              <td colspan="6" style="text-align:center">{$pager}</td>
+            </tr>
+           </tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 {elseif $operation == 'display'}
 
 

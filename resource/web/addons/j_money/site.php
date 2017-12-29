@@ -4461,14 +4461,15 @@ class J_moneyModuleSite extends WeModuleSite
 			$xy      = strtotime('+1 month',strtotime(date('Y-m')))-1;
 			$lastDay = date('d',$xy);
 			$nDay    = date('d');
+			$nDay    = 31;
 			if($nDay == $lastDay || $nDay <= 7){
 				$clearStart = 1;
 				$hasClearing = pdo_fetch('select * from '.tablename('j_money_clearing').' order by id desc');
 				$clearingStart = strtotime('+1 month',strtotime($hasClearing['month']));
 				if($nDay == $lastDay){
-					$clearingEnd = $xy;
+					$clearingEnd = strtotime(date('Y-m')) - 1;
 				}else{
-					$clearingEnd = strtotime(date('Y-m'))-1;
+					$clearingEnd = strtotime('-1 month',strtotime(date('Y-m')))-1;
 				}
 				
 				$clearData = array();
@@ -4501,7 +4502,13 @@ class J_moneyModuleSite extends WeModuleSite
 					}
 				}
 			}
-
+		} elseif ($operation == 'clearing') {
+			$pindex = intval($_GPC['page']) ? intval($_GPC['page']) : 1;
+			$psize = 15;
+			$limit = ' LIMIT ' . ($pindex - 1) * $psize .','.$psize;
+			$list = pdo_fetchall('select * from '.tablename('j_money_clearing').' where uniacid=:uniacid  order by createtime desc '.$limit,array(':uniacid'=>$_W['uniacid']));
+			$total = pdo_fetchcolumn('select count(*) from '.tablename('j_money_clearing').' where uniacid=:uniacid',array(':uniacid'=>$_W['uniacid']));
+			$pager = pagination($total, $pindex, $psize);
 		} elseif ($operation == 'update') {
 			if (checksubmit('submit')) {
 				$id_ary = $_GPC['select'];

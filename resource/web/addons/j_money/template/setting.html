@@ -121,6 +121,28 @@ require(['bootstrap.switch', 'util'], function($, u){
               </div>
             </div>
 
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">寄送联系人</label>
+              <div class="col-sm-9">
+                  <input type="text" class='form-control' name='clearing_contacts' value='{php echo $settings["clearing_contacts"]}'/>
+                <div class="help-block">结算单寄送联系人</div>
+              </div>
+            </div>
+             <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">寄送联系人电话</label>
+              <div class="col-sm-9">
+                  <input type="text" class='form-control' name='clearing_contacts_mobile' value='{php echo $settings["clearing_contacts_mobile"]}'/>
+                <div class="help-block">结算单寄送联系人电话</div>
+              </div>
+            </div>
+             <div class="form-group">
+              <label class="col-xs-12 col-sm-3 col-md-2 control-label">寄送地址</label>
+              <div class="col-sm-9">
+                  <input type="text" class='form-control' name='clearing_contacts_addr' value='{php echo $settings["clearing_contacts_addr"]}'/>
+                <div class="help-block">结算单寄送地址</div>
+              </div>
+            </div>
+
 
           </div>
           <div class="tab-pane" id="tab2">
