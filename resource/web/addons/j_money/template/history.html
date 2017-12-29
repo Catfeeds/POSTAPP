@@ -192,14 +192,11 @@ require(['bootstrap'],function($){
             <div class="panel-body" >
               
               <table class="table table-hover">
-                <tr>
+               <!--  <tr>
                   <td>确认时间</td>
                   <td colspan="2">{php echo date('Y-m-d H:i:s');}</td>
-                </tr>
-                <tr>
-                  <td>当期金额(元)</td>
-                  <td colspan="2">{$clearTotal}</td>
-                </tr>
+                </tr> -->
+               
                 {php $i=0;}
                 {loop $clearData $key $cd}
                 <tr>
@@ -211,6 +208,10 @@ require(['bootstrap'],function($){
                 </tr>
                 {php $i++;}
                 {/loop}
+                 <tr>
+                  <td>当前返佣(元)</td>
+                  <td colspan="2">{$clearTotal}</td>
+                </tr>
               </table>
 
 

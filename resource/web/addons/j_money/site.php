@@ -4461,12 +4461,12 @@ class J_moneyModuleSite extends WeModuleSite
 			$xy      = strtotime('+1 month',strtotime(date('Y-m')))-1;
 			$lastDay = date('d',$xy);
 			$nDay    = date('d');
-			$nDay    = 31;
-			if($nDay == $lastDay || $nDay <= 7){
+			// $nDay    = 31;
+			if(($nDay >= 25 && $nDay <= $lastDay) || $nDay <= 10){
 				$clearStart = 1;
 				$hasClearing = pdo_fetch('select * from '.tablename('j_money_clearing').' order by id desc');
 				$clearingStart = strtotime('+1 month',strtotime($hasClearing['month']));
-				if($nDay == $lastDay){
+				if($nDay >= 25 && $nDay <= $lastDay){
 					$clearingEnd = strtotime(date('Y-m')) - 1;
 				}else{
 					$clearingEnd = strtotime('-1 month',strtotime(date('Y-m')))-1;
