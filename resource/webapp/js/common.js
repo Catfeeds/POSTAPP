@@ -77,13 +77,15 @@ w.clicked=function(id,wa,ns,ws){
 		//plus.webview.close(dd);
 
 		openw=plus.webview.create(pre+id,id,ws);
+		openw.show(as);
+		closeWaiting();
 //		console.log("openw = " + pre+id);
-		ns||openw.addEventListener('loaded',function(){//页面加载完成后才显示
+//		ns||openw.addEventListener('loaded',function(){//页面加载完成后才显示
 //		setTimeout(function(){//延后显示可避免低端机上动画时白屏
-			openw.show(as);
-			closeWaiting();
+//			openw.show(as);
+//			closeWaiting();
 //		},200);
-		},false);
+//		},false);
 		openw.addEventListener('close',function(){//页面关闭后可再次打开
 			openw=null;
 		},false);
