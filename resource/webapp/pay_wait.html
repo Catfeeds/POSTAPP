@@ -205,14 +205,11 @@
 								localStorage.setItem("pay_error_msg",data.msg);
 //								plus.nativeUI.alert(data.msg);
 				    			if(audioPlay == 1){
-				    				if(times < 50){
-				    					startPlay('_www/audio/transfail.mp3');
-				    				}
+				    				
+				    				//startPlay('_www/audio/transfail.mp3');
 				    				getToUrl(0);
 						    		return false;
-//					    			window.setTimeout(function(){
-//							    		
-//							    	},3000);
+
 				    			}else{
 				    				getToUrl(0);
 						    		return false;
@@ -302,8 +299,8 @@
 						}
 					})
 					window.clearTimeout(interval);
+					startPlay('_www/audio/transfail.mp3');
 					getToUrl(0);
-					//startPlay('_www/audio/transfail.mp3');
 				}
 				    		// 开始播放
 				    		// 播放文件相关对象

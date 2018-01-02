@@ -64,16 +64,7 @@ w.clicked=function(id,wa,ns,ws){
 	if(openw){//避免多次打开同一个页面
 		return null;
 	}
-//	console.log(open_flag);
-//	if(open_flag){
-//		return null;
-//	}
-//	open_flag = true;
-//	
-//	setTimeout(function() {
-//		open_flag = false;
-//	}, 5000);
-//	
+
 	if(w.plus){
 		wa&&(waiting=plus.nativeUI.showWaiting());
 		ws=ws||{};
@@ -86,13 +77,15 @@ w.clicked=function(id,wa,ns,ws){
 		//plus.webview.close(dd);
 
 		openw=plus.webview.create(pre+id,id,ws);
+		openw.show(as);
+		closeWaiting();
 //		console.log("openw = " + pre+id);
-		ns||openw.addEventListener('loaded',function(){//页面加载完成后才显示
+//		ns||openw.addEventListener('loaded',function(){//页面加载完成后才显示
 //		setTimeout(function(){//延后显示可避免低端机上动画时白屏
-			openw.show(as);
-			closeWaiting();
+//			openw.show(as);
+//			closeWaiting();
 //		},200);
-		},false);
+//		},false);
 		openw.addEventListener('close',function(){//页面关闭后可再次打开
 			openw=null;
 		},false);

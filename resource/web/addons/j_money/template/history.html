@@ -104,12 +104,14 @@ require(['bootstrap'],function($){
             <div class="col-sm-9 form-inline">
               <input type="submit" class="btn btn-danger" onClick="$('#isexplode').val(1)" name="explode" value="导出数据"/>
               <input type="submit" class="btn btn-info" onClick="$('#isexplode').val(0)" value="搜索记录"/>
+               <a class="btn btn-info" style="margin-left: 50px;" href="{php echo $this->createWebUrl('history', array('op'=>'clearing'))}">结算记录</a>
               {if $clearStart == 1}
-              <input type="button" class="btn btn-info" style="margin-left: 50px;" data-toggle="modal" data-target="#searchModal" value="结算"/>
+              <input type="button" class="btn btn-info" data-toggle="modal" data-target="#searchModal" value="结算"/>
               {else}
-                 <input type="button" class="btn btn-white" style="margin-left: 50px;"  value="结算"/>
+              <input type="button" class="btn btn-white"  value="结算"/>
               {/if}
-              <a class="btn btn-info" href="{php echo $this->createWebUrl('history', array('op'=>'clearing'))}">结算记录</a>
+              <i class="fa fa-question-circle tips"  data-toggle="tooltip" data-placement="right" style="font-size: 20px;" title="每月25日至下月10日开放结算上月移动支付佣金"></i>
+             
             </div>
           </div>
         
@@ -273,9 +275,9 @@ require(['bootstrap'],function($){
             </div>
             <br><br>
             <div class="form-group">
-              <div>收件人:{$setting['clearing_contacts']}</div>
-              <div>联系电话:{$setting['clearing_contacts_mobile']}</div>
-              <div>寄送地址:{$setting['clearing_contacts_addr']}</div>
+              <div>收件人:{php echo $setting['clearing_contacts'] ? $setting['clearing_contacts'] : '陆涵';}</div>
+              <div>联系电话:{php echo $setting['clearing_contacts_mobile'] ? $setting['clearing_contacts_mobile'] : '13671642384';}</div>
+              <div>寄送地址:{php echo $setting['clearing_contacts_addr'] ? $setting['clearing_contacts_addr'] : '上海市浦东新区惠南镇英雄路262号';}</div>
             </div>
 
 
