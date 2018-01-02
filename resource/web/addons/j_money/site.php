@@ -4397,6 +4397,12 @@ class J_moneyModuleSite extends WeModuleSite
 			if ($_GPC['shopid']) {
 				$where2 .= " and a.groupid='" . $_GPC['shopid'] . "'";
 			}
+			if ($_GPC['paytype'] > -1) {
+				$where2 .= " and a.paytype='" . ($_GPC['paytype'] - 1) . "' ";
+			}
+			if ($_GPC['status'] > -1) {
+				$where2 .= " and a.status='" . ($_GPC['status'] - 1) . "' ";
+			}
 			$pindex = intval($_GPC['page']) ? intval($_GPC['page']) : 1;
 			$psize = 10;
 			$start = ($pindex - 1) * $psize;
@@ -4405,7 +4411,7 @@ class J_moneyModuleSite extends WeModuleSite
 
 			$total = pdo_fetchcolumn("SELECT count(*) FROM " . tablename('j_money_trade') . " a LEFT JOIN " . tablename('j_money_statements') . " b ON a.out_trade_no=b.out_trade_no WHERE a.weid='{$_W['uniacid']}' {$where} {$where2}");
 
-			$where2 = " and a.status=1";
+			// $where2 = " and a.status=1";
 
 			$allList = pdo_fetchall("SELECT a.*,b.poundage,b.rate,(b.refund_status) as rstatus,(b.refund_fee) as rfee FROM " . tablename('j_money_trade') . " a LEFT JOIN " . tablename('j_money_statements') . " b ON a.out_trade_no=b.out_trade_no WHERE a.weid='{$_W['uniacid']}' {$where} {$where2} ");
 
@@ -4477,11 +4483,16 @@ class J_moneyModuleSite extends WeModuleSite
 				$clearList = pdo_fetchall("SELECT createtime, from_unixtime(createtime,'%Y-%m') as cdate,paytype ,sum(cash_fee) as total FROM " . tablename('j_money_trade') . " WHERE weid=:weid and status=1 {$cwher} GROUP BY cdate,paytype ",array(':weid'=>$_W['uniacid'],':start'=>$clearingStart,':end'=>$clearingEnd));
 
 				$clearTotal = 0;
+				$clearWxTotal = 0;
+				$clearAliTotal = 0;
+
 				foreach($clearList as $key => $value){
 					if($value['paytype'] == 0){
 						$clearData[$value['cdate']]['total'] +=  sprintf('%.2f',$value['total']*$rate['wxpay_rate']/10000);
+						$clearData[$value['cdate']]['wxtotal'] +=  sprintf('%.2f',$value['total']*$rate['wxpay_rate']/10000);
 					}else if($value['paytype'] == 1){
 						$clearData[$value['cdate']]['total'] +=  sprintf('%.2f',$value['total']*$rate['alipay_rate']/10000);
+						$clearData[$value['cdate']]['alitotal'] +=  sprintf('%.2f',$value['total']*$rate['alipay_rate']/10000);
 					}else if($value['paytype'] == 3){
 						$clearData[$value['cdate']]['total'] +=  sprintf('%.2f',$value['total']*$rate['cardpay_rate']/10000);
 					}

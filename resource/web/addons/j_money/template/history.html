@@ -73,6 +73,32 @@ require(['bootstrap'],function($){
               
             </div>
             </div>
+             <div class="form-group">
+              <!-- <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label> -->
+              <div class="col-sm-9 form-inline">
+                <div class="input-group"> 
+                <span class="input-group-addon">筛选</span> <span class="input-group-btn">
+                <select name="paytype" class="form-control">
+                  <option value="-1">支付方式</option>
+                  <option value="1" {if 1==$_GPC['paytype']}selected{/if}>微信</option>
+                  <option value="2" {if 2==$_GPC['paytype']}selected{/if}>支付宝</option>
+                  <option value="3" {if 3==$_GPC['paytype']}selected{/if}>现金</option>
+                  <option value="4" {if 4==$_GPC['paytype']}selected{/if}>银行卡</option>
+                  <option value="5" {if 5==$_GPC['paytype']}selected{/if}>会员卡</option>
+                  
+                </select>
+                </span>
+                <span class="input-group-btn">
+                <select name="status" class="form-control">
+                  <option value="-1">状态</option>
+                  <option value="2" {if 2==$_GPC['status']}selected{/if}>成功</option>
+                  <option value="1" {if 1==$_GPC['status']}selected{/if}>失败</option>
+                  <option value="3" {if 3==$_GPC['status']}selected{/if}>退款</option>
+                </select>
+                </span> 
+                </div>
+              </div>
+            </div>
           <div class="form-group">
             <!-- <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label> -->
             <div class="col-sm-9 form-inline">
@@ -192,12 +218,24 @@ require(['bootstrap'],function($){
             <div class="panel-body" >
               
               <table class="table table-hover">
-               <!--  <tr>
+                <tr>
                   <td>确认时间</td>
-                  <td colspan="2">{php echo date('Y-m-d H:i:s');}</td>
-                </tr> -->
+                  <td>{php echo date('Y-m-d');}</td>
+                  <td>{php echo date('H:i:s');}</td>
+                </tr>
+                <tr>
+                  <td>应返金额(元)</td>
+                  <td colspan="2">{$clearTotal}</td>
+                </tr>
+
+                {loop $clearData $key $cd}
+                  <td>{$key}</td>
+                  <td>微信：{$cd['wxtotal']}</td>
+                  <td>支付宝：{$cd['alitotal']}</td>
+                {/loop}
+
                
-                {php $i=0;}
+               <!--  {php $i=0;}
                 {loop $clearData $key $cd}
                 <tr>
                   {if $i==0}
@@ -207,11 +245,8 @@ require(['bootstrap'],function($){
                   <td>{$cd['total']}</td>
                 </tr>
                 {php $i++;}
-                {/loop}
-                 <tr>
-                  <td>当前返佣(元)</td>
-                  <td colspan="2">{$clearTotal}</td>
-                </tr>
+                {/loop} -->
+                
               </table>
 
 
