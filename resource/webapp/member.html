@@ -28,7 +28,7 @@
 						clicked('barcode_pay.html',false,false);
 					}, "提示", "确定" );
 				}
-				var a = true;
+				/*var a = true;
 				mui(".footer").on("tap",".clicked",function(){
 					var page = this.getAttribute("data-page");
 					console.log(page);
@@ -38,7 +38,7 @@
 				});
 				setTimeout(function() {
 					a = true;
-				}, 1500);
+				}, 1500);*/
 			})
 			
 			
@@ -88,8 +88,8 @@
 	<div class="footer-none"></div>
 	<footer class="footer footer-nav pc">
 		<a href="#" class="vip active"><div class="pic"></div><div class="text">会员</div></a>
-		<a href="#" data-page="barcode_pay.html" class="center money clicked"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
-		<a href="#" data-page="pay_record.html" class="set hhh clicked"><div class="pic"></div><div class="text">记录</div></a>
+		<a href="#" onclick="clicked('barcode_pay.html',false,false)" data-page="barcode_pay.html" class="center money clicked"><div class="pic"></div><div class="wrap poa"><div class="pic"></div></div><div class="text">收款</div></a>
+		<a href="#" onclick="clicked('pay_record.html',false,false)" data-page="pay_record.html" class="set hhh clicked"><div class="pic"></div><div class="text">记录</div></a>
 		
 	</footer>
 	<script src="js/zepto.js"></script>

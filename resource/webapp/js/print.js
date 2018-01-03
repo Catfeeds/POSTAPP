@@ -41,7 +41,7 @@ function printOrder(out_trade_no){
 					var reason = bundle.getString("reason");
 					console.log(reason);
 					if(reason.indexOf("SUCCESS") != -1){
-						plus.nativeUI.alert("打印成功");
+						//plus.nativeUI.alert("打印成功");
 					}else{
 						var str = reason.split("-")[1];
 						plus.nativeUI.alert(str);
@@ -76,7 +76,7 @@ function printByfuyou(oldTrace){
 		var bundle       = data.getExtras();
 		plus.android.importClass(bundle);
 		if(resultCode == -1){
-			plus.nativeUI.alert("打印成功");
+			//plus.nativeUI.alert("打印成功");
 		}else{
 			var reason = bundle.getString("reason");
 			console.log("reason = " + reason);	

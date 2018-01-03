@@ -102,8 +102,8 @@ class J_moneyModuleSite extends WeModuleSite
 			$settings['freelimit']              = $shop['freelimit'];
 			$settings['servermoney']            = $shop['servermoney'];
 
-			isetcookie('islogin', $item['id'], 36000 * $cfg['cookiehold']);
-			isetcookie('siteuniacid', $_W['uniacid'], 36000 * $cfg['cookiehold']);
+			isetcookie('islogin', $item['id'], 3600 * $cfg['cookiehold']);
+			isetcookie('siteuniacid', $_W['uniacid'], 3600 * $cfg['cookiehold']);
 			pdo_update("j_money_user", array('lasttime' => TIMESTAMP), array('id' => $item['id']));
 			//long 2017-11-22 添加返回user
 			die(json_encode(array("success" => true,'shop'=>$shop,'user'=>$item,'settings'=>$settings)));
@@ -129,8 +129,8 @@ class J_moneyModuleSite extends WeModuleSite
 				die(json_encode(array("success" => false, "msg" => "", "reload" => false)));
 			}
 			$user = pdo_fetch("SELECT * FROM " . tablename('j_money_user') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $item['userid']));
-			isetcookie('islogin', $user['id'], 36000 * $cfg['cookiehold']);
-			isetcookie('siteuniacid', $_W['uniacid'], 36000 * $cfg['cookiehold']);
+			isetcookie('islogin', $user['id'], 3600 * $cfg['cookiehold']);
+			isetcookie('siteuniacid', $_W['uniacid'], 3600 * $cfg['cookiehold']);
 			pdo_update("j_money_user", array('lasttime' => TIMESTAMP), array('id' => $user['id']));
 			//long 2017-11-22 添加返回user,$shop
 			$shop = pdo_fetch("SELECT * FROM " . tablename('j_money_group') . " WHERE weid='{$_W['uniacid']}' and id=:a ", array(":a" => $user['pcate']));
@@ -4426,6 +4426,9 @@ class J_moneyModuleSite extends WeModuleSite
 			$totalFee['alipay_count']      = 0;
 			$totalFee['cardpay_count']      = 0;
 			foreach($allList as &$row){
+				if($row['status'] != 1){
+					continue;
+				}
 				$totalFee['total'] += $row['cash_fee'];
 				if($row['paytype'] == 0){
 					$totalFee['wxpay_total'] += $row['cash_fee'];
